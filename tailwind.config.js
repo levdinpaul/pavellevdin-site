@@ -5,9 +5,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Geist', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Manrope', 'Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Sora', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -32,8 +32,8 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "hsl(var(--ui-accent))",
+          foreground: "hsl(var(--ui-accent-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
