@@ -67,9 +67,9 @@ Full-Stack Разработчик
 Постоянная поддержка проектов
 
 <b>🔗 Ссылки:</b>
-🌐 <a href="https://my.delimes.ru">Сайт</a>
-💼 <a href="https://my.delimes.ru/portfolio">Портфолио</a>
-📧 <a href="https://my.delimes.ru/contact">Связаться</a>
+🌐 <a href="https://pavellevdin.ru">Сайт</a>
+💼 <a href="https://pavellevdin.ru/portfolio">Портфолио</a>
+📧 <a href="https://pavellevdin.ru/contact">Связаться</a>
 
 <b>📬 Подписывайтесь!</b>
 Статьи о веб-разработке, проекты и советы.

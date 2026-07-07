@@ -5,30 +5,10 @@ import { useRef } from 'react';
 import { Zap, Award, UserCheck, Cpu, Star } from 'lucide-react';
 
 const advantages = [
-  {
-    key: 'speed',
-    icon: Zap,
-    color: 'text-yellow-500',
-    bgColor: 'bg-yellow-500/10'
-  },
-  {
-    key: 'quality',
-    icon: Award,
-    color: 'text-blue-500',
-    bgColor: 'bg-blue-500/10'
-  },
-  {
-    key: 'individual',
-    icon: UserCheck,
-    color: 'text-green-500',
-    bgColor: 'bg-green-500/10'
-  },
-  {
-    key: 'tech',
-    icon: Cpu,
-    color: 'text-purple-500',
-    bgColor: 'bg-purple-500/10'
-  }
+  { key: 'speed', icon: Zap, color: 'text-primary', bgColor: 'bg-primary/10' },
+  { key: 'quality', icon: Award, color: 'text-primary', bgColor: 'bg-primary/10' },
+  { key: 'individual', icon: UserCheck, color: 'text-primary', bgColor: 'bg-primary/10' },
+  { key: 'tech', icon: Cpu, color: 'text-primary', bgColor: 'bg-primary/10' }
 ];
 
 export function Advantages() {
@@ -69,7 +49,7 @@ export function Advantages() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="relative p-6 md:p-8 rounded-2xl bg-background border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg text-center h-full">
+                <div className="relative p-6 md:p-8 rounded-xl bg-surface border border-border hover:border-primary/40 transition-all duration-300 hover:shadow-glow-sm hover:-translate-y-0.5 text-center h-full">
                   {/* Icon */}
                   <div className={`w-16 h-16 mx-auto rounded-2xl ${advantage.bgColor} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <advantage.icon className={`w-8 h-8 ${advantage.color}`} />
@@ -84,8 +64,8 @@ export function Advantages() {
                   </p>
 
                   {/* Number Badge */}
-                  <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-medium text-muted-foreground">
-                    {index + 1}
+                  <div className="absolute top-4 right-4 w-7 h-7 rounded-md border border-border bg-surface-2 flex items-center justify-center text-xs font-mono text-faint">
+                    {String(index + 1).padStart(2, '0')}
                   </div>
                 </div>
               </motion.div>

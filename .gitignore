@@ -1,20 +1,34 @@
-# Зависимости
+# dependencies
 node_modules/
+scripts/node_modules/
 
-# Сборка
+# build output
 dist/
-build/
+dist-ssr/
+*.local
 
-# Переменные окружения и секреты
+# env & secrets
 .env
 .env.local
 .env.*.local
 
-# Системные файлы
+# lead data (персональные данные — НЕ в git)
+scripts/data/
+
+# logs
+*.log
+autopost.log
+
+# editor / OS
 .DS_Store
 Thumbs.db
-*.log
-
-# IDE
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 .idea/
+
+# misc
+nul
+
+# Claude Design export (source, not app code)
+PL Digitalbau Design System/
+*.zip

@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const ftp = require('basic-ftp');
+const { generateTurboFeed } = require('./generate-turbo-feed.cjs');
 
 const scriptDir = __dirname;
 const projectRoot = path.join(scriptDir, '..');
@@ -12,10 +13,10 @@ const projectRoot = path.join(scriptDir, '..');
 function loadEnv(filePath) {
   const env = {};
   if (!fs.existsSync(filePath)) return env;
-  fs.readFileSync(filePath, 'utf8').split('\n').forEach(line => {
+  fs.readFileSync(filePath, 'utf8').split(/\r?\n/).forEach(line => {
     if (!line || line.startsWith('#')) return;
     const [key, ...vals] = line.split('=');
-    if (key) env[key.trim()] = vals.join('=').trim();
+    if (key) env[key.trim()] = vals.join('=').trim().replace(/\r$/, '');
   });
   return env;
 }
@@ -31,7 +32,7 @@ const FTP_CONFIG = {
   port: parseInt(env.FTP_PORT || '21', 10)
 };
 
-const REMOTE_ROOT = env.FTP_REMOTE_ROOT || '/my.delimes.ru/htdocs/www/';
+const REMOTE_ROOT = env.FTP_REMOTE_ROOT || '/pavellevdin.ru/htdocs/www/';
 
 console.log('🚀 Starting deployment process...\n');
 
@@ -53,20 +54,40 @@ console.log('📄 Step 2: Generating static HTML for Instant View...');
 generateStaticHtmlForAllArticles(projectRoot);
 console.log('✅ Static HTML generation completed!\n');
 
+// 2b. Генерируем Turbo RSS-фид для Яндекса
+console.log('⚡ Step 2b: Generating Yandex Turbo feed...');
+generateTurboFeed(projectRoot);
+console.log('✅ Turbo feed generated!\n');
+
+// 2c. Пререндер маршрутов — Яндекс/Google/AI получают готовый HTML
+console.log('🧊 Step 2c: Prerendering routes...');
+try {
+  execSync('node scripts/prerender.cjs', { cwd: projectRoot, stdio: 'inherit' });
+} catch (err) {
+  console.warn('⚠️  Prerender пропущен (не критично для деплоя):', err.message);
+}
+console.log('');
+
 // 3. Загружаем на FTP
 console.log('📤 Step 3: Uploading to FTP...');
 
 (async () => {
   try {
-    await uploadToFTP(projectRoot, REMOTE_ROOT);
-    console.log('\n✅ FTP upload completed!');
-
-    // 4. Загружаем серверные файлы (Node.js) в каталог приложения
-    const serverRemoteRoot = env.FTP_SERVER_ROOT || '/my.delimes.ru/project/app/';
-    console.log('\n📤 Step 4: Uploading server files...');
+    // Статику льём ОДИН раз — в каталог приложения (Node отдаёт из projects/app/dist).
+    // Отдельная заливка в htdocs/www убрана: вдвое меньше FTP-трафика → нет таймаутов/killed.
+    const serverRemoteRoot = env.FTP_SERVER_ROOT || '/pavellevdin.ru/projects/app/';
+    console.log(`\n📤 Uploading app files (dist + server) → ${serverRemoteRoot}`);
     await uploadServerFiles(projectRoot, serverRemoteRoot);
     console.log('✅ Server files uploaded!');
-    
+
+    // Рестарт Passenger — иначе Node продолжит крутить старый код
+    console.log('\n↻ Step 5: Restarting Passenger...');
+    try {
+      execSync('node scripts/restart-passenger.cjs', { cwd: projectRoot, stdio: 'inherit' });
+    } catch (e) {
+      console.warn('⚠️ Рестарт не удался:', e.message);
+    }
+
     console.log('\n' + '='.repeat(50));
     console.log('🎉 Deployment successful! Site is updated.');
     console.log('='.repeat(50));
@@ -119,11 +140,15 @@ async function uploadDirRecursive(client, localDir, remoteRoot, baseDir, exclude
       await client.ensureDir(remotePath);
       await uploadDirRecursive(client, localPath, remoteRoot, baseDir, exclude);
     } else {
-      try {
-        await client.uploadFrom(localPath, remotePath);
-        console.log(`  ↑ ${relativePath}`);
-      } catch (err) {
-        console.error(`  ✗ ${relativePath}: ${err.message}`);
+      let done = false;
+      for (let attempt = 1; attempt <= 3 && !done; attempt += 1) {
+        try {
+          await client.uploadFrom(localPath, remotePath);
+          done = true;
+          console.log(`  ↑ ${relativePath}`);
+        } catch (err) {
+          if (attempt === 3) console.error(`  ✗ ${relativePath}: ${err.message} (после 3 попыток)`);
+        }
       }
     }
   }
@@ -168,8 +193,8 @@ function generateStaticHtmlForAllArticles(projectRoot) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="${escapeHtml(article.title)}">
   <meta property="og:description" content="${escapeHtml(article.excerpt)}">
-  <meta property="og:image" content="https://my.delimes.ru${article.meta?.ogImage || article.image || '/og-image.png'}">
-  <meta property="og:url" content="https://my.delimes.ru/${lang}/blog/${slug}">
+  <meta property="og:image" content="https://pavellevdin.ru${article.meta?.ogImage || article.image || '/og-image.png'}">
+  <meta property="og:url" content="https://pavellevdin.ru/${lang}/blog/${slug}">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Delimes">
   <meta property="article:published_time" content="${article.date || new Date().toISOString()}">
@@ -197,7 +222,7 @@ function generateStaticHtmlForAllArticles(projectRoot) {
       ${contentHtml}
     </div>
     <footer style="margin-top:3em;padding-top:2em;border-top:1px solid #eee">
-      <p><a href="https://my.delimes.ru/${lang}/blog/${slug}" style="color:#2F8E92">🔗 ${lang === 'ru' ? 'Открыть полную версию' : lang === 'de' ? 'Vollständige Version öffnen' : 'Open full version'}</a></p>
+      <p><a href="https://pavellevdin.ru/${lang}/blog/${slug}" style="color:#2F8E92">🔗 ${lang === 'ru' ? 'Открыть полную версию' : lang === 'de' ? 'Vollständige Version öffnen' : 'Open full version'}</a></p>
     </footer>
   </article>
 </body>
@@ -249,6 +274,7 @@ function escapeHtml(text) {
 async function uploadServerFiles(projectRoot, serverRemoteRoot) {
   const client = new ftp.Client();
   client.ftp.verbose = false;
+  client.ftp.timeout = 15000; // быстрый фейл на флапающих пассивных соединениях (иначе висит 30с)
 
   const scriptsDir = path.join(projectRoot, 'scripts');
 
@@ -288,6 +314,33 @@ async function uploadServerFiles(projectRoot, serverRemoteRoot) {
     await client.uploadFrom(tmpPkg, serverRemoteRoot + 'package.json');
     fs.unlinkSync(tmpPkg);
     console.log('  ↑ package.json (server entry + dependencies)');
+
+    // Загружаем корневой server.js — точка входа для Passenger (Hostland)
+    const entryJs = `// Точка входа для Phusion Passenger (Hostland)\n// Passenger запускает этот файл из корня каталога приложения\nrequire('./scripts/server.js');\n`;
+    const tmpEntry = path.join(projectRoot, '.tmp-server-entry.js');
+    fs.writeFileSync(tmpEntry, entryJs);
+    await client.uploadFrom(tmpEntry, serverRemoteRoot + 'server.js');
+    fs.unlinkSync(tmpEntry);
+    console.log('  ↑ server.js (Passenger entry point → scripts/server.js)');
+
+    // Загружаем src/content/blog/ — контент статей для API
+    const blogDir = path.join(projectRoot, 'src', 'content', 'blog');
+    if (fs.existsSync(blogDir)) {
+      const blogRemote = serverRemoteRoot + 'src/content/blog/';
+      await client.ensureDir(blogRemote);
+      await uploadDirRecursive(client, blogDir, blogRemote, blogDir);
+      console.log('  ↑ src/content/blog/ (article content)');
+    }
+
+    // Загружаем dist также в каталог приложения — Node отдаёт статику отсюда
+    // (устойчиво к рестарту: не зависит от STATIC_DIR и htdocs/www)
+    const distForApp = path.join(projectRoot, 'dist');
+    if (fs.existsSync(distForApp)) {
+      const distRemote = serverRemoteRoot + 'dist/';
+      await client.ensureDir(distRemote);
+      await uploadDirRecursive(client, distForApp, distRemote, distForApp);
+      console.log('  ↑ dist/ (статика для Node-приложения)');
+    }
 
   } finally {
     client.close();

@@ -19,7 +19,7 @@
     "ogImage": "/blog-images/og-typescript-5-7.jpg",
     "ogType": "article",
     "twitterCard": "summary_large_image",
-    "canonical": "https://my.delimes.ru/ru/blog/typescript-5-7-polnoye-rukovodstvo",
+    "canonical": "https://pavellevdin.ru/ru/blog/typescript-5-7-polnoye-rukovodstvo",
     "articlePublishedTime": "2026-04-02T10:00:00+03:00",
     "articleModifiedTime": "2026-04-02T10:00:00+03:00",
     "articleSection": "Веб-разработка",
@@ -30,15 +30,15 @@
       "Node.js"
     ],
     "authorName": "Pavel Levdin",
-    "authorUrl": "https://my.delimes.ru/ru/about",
+    "authorUrl": "https://pavellevdin.ru/ru/about",
     "breadcrumb": [
       {
         "name": "Блог",
-        "url": "https://my.delimes.ru/ru/blog"
+        "url": "https://pavellevdin.ru/ru/blog"
       },
       {
         "name": "Веб-разработка",
-        "url": "https://my.delimes.ru/ru/blog/category/webdev"
+        "url": "https://pavellevdin.ru/ru/blog/category/webdev"
       }
     ]
   },

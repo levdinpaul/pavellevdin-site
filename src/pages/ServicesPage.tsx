@@ -1,200 +1,176 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { 
-  Globe, 
-  AppWindow, 
-  TrendingUp, 
-  Settings, 
-  Rocket, 
-  HeadphonesIcon,
-  Briefcase,
+import {
+  ArrowRight,
+  Bot,
   Check,
-  ArrowRight
+  Code2,
+  Globe2,
+  KeyRound,
+  LineChart,
+  MapPinned,
+  Megaphone,
+  Search,
+  ShieldCheck,
+  Workflow,
+  type LucideIcon,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
-const services = [
-  {
-    key: 'webdev',
-    icon: Globe,
-    color: 'from-blue-500/20 to-blue-500/5',
-    features: ['responsive', 'clean', 'seo', 'fast']
+type ServicesPageCopy = {
+  title: string;
+  desc: string;
+  h1: string;
+  sub: string;
+  cta: string;
+  fullCycle: string;
+  systemTitle: string;
+  systemText: string;
+  services: [string, string, LucideIcon][];
+};
+
+const copy: Record<'de' | 'en' | 'ru', ServicesPageCopy> = {
+  de: {
+    title: 'Leistungen | PL Innovativ Digitalbau',
+    desc: 'Web Coding, SEO, AI Search, Google Business, Social Media, Analytics, API, CRM und Automatisierung.',
+    h1: 'Digitale Leistungen von Strategie bis Wachstum.',
+    sub: 'Ein Ansprechpartner fuer Design, Entwicklung, Sichtbarkeit, Tracking, API-Verbindungen und Automatisierung.',
+    cta: 'Konfigurator ausfuellen',
+    fullCycle: 'Full-cycle Umsetzung',
+    systemTitle: 'Nicht nur eine Website, sondern eine komplette Online-Infrastruktur.',
+    systemText: 'Positionierung, Website, Google Business, Social Media, SEO, AEO, Analytics, API-Keys, CRM und Promotion arbeiten zusammen.',
+    services: [
+      ['Web Coding', 'Saubere React/Next-Struktur, responsive UI, schnelle Ladezeit und wartbarer Code.', Code2],
+      ['Websites & Landingpages', 'Premium Design, klare Conversion-Struktur, Mehrsprachigkeit, Blog und Formulare.', Globe2],
+      ['SEO + AI Search', 'Keywords, technische Struktur, Schema.org, AEO und Inhalte fuer KI-Antworten.', Search],
+      ['Google Business', 'Profil, Maps, Kategorien, Bewertungen, UTM und lokale Signale.', Megaphone],
+      ['Yandex Business & Local', 'Regionale Sichtbarkeit, Karten, Business-Profile und lokale Landingpages.', MapPinned],
+      ['Social Media Setup', 'Instagram, Facebook, Meta Suite, VK, Telegram und Content-Basis.', Megaphone],
+      ['Analytics & Ads', 'GA4, Tag Manager, Pixel, Events, Ziele, Funnels und Kampagnenbasis.', LineChart],
+      ['API, Keys & Integrationen', 'API-Zugriffe, Webhooks, Messenger, CRM, Mail und Automations sauber verbinden.', KeyRound],
+      ['CRM & Automation', 'Leads erfassen, verteilen, beantworten und in Workflows ueberfuehren.', Workflow],
+      ['Performance & Security', 'Core Web Vitals, optimierte Assets, HTTPS, Backups und Monitoring.', ShieldCheck],
+    ],
   },
-  {
-    key: 'webapp',
-    icon: AppWindow,
-    color: 'from-purple-500/20 to-purple-500/5',
-    features: ['functionality', 'ui', 'scalable', 'api']
+  en: {
+    title: 'Services | PL Innovativ Digitalbau',
+    desc: 'Web coding, SEO, AI Search, Google Business, social media, analytics, API, CRM and automation.',
+    h1: 'Digital services from strategy to growth.',
+    sub: 'One partner for design, development, visibility, tracking, API connections and automation.',
+    cta: 'Open configurator',
+    fullCycle: 'Full-cycle delivery',
+    systemTitle: 'Not just a website, but a complete online business infrastructure.',
+    systemText: 'Positioning, website, Google Business, social media, SEO, AEO, analytics, API keys, CRM and promotion work together.',
+    services: [
+      ['Web coding', 'Clean React/Next structure, responsive UI, fast loading and maintainable code.', Code2],
+      ['Websites & landing pages', 'Premium design, clear conversion structure, multilingual pages, blog and forms.', Globe2],
+      ['SEO + AI Search', 'Keywords, technical structure, Schema.org, AEO and content for AI answers.', Search],
+      ['Google Business', 'Profile, Maps, categories, reviews, UTM and local signals.', Megaphone],
+      ['Yandex Business & local', 'Regional visibility, maps, business profiles and local landing pages.', MapPinned],
+      ['Social media setup', 'Instagram, Facebook, Meta Suite, VK, Telegram and content foundation.', Megaphone],
+      ['Analytics & ads', 'GA4, Tag Manager, pixels, events, goals, funnels and campaign foundation.', LineChart],
+      ['API, keys & integrations', 'API access, webhooks, messengers, CRM, mail and automations connected cleanly.', KeyRound],
+      ['CRM & automation', 'Capture, route, answer and process leads through workflows.', Workflow],
+      ['Performance & security', 'Core Web Vitals, optimized assets, HTTPS, backups and monitoring.', ShieldCheck],
+    ],
   },
-  {
-    key: 'seo',
-    icon: TrendingUp,
-    color: 'from-green-500/20 to-green-500/5',
-    features: ['technical', 'performance', 'vitals', 'analytics']
+  ru: {
+    title: 'Услуги | PL Innovativ Digitalbau',
+    desc: 'Веб-кодинг, SEO, AI Search, Google Business, соцсети, аналитика, API, CRM и автоматизация.',
+    h1: 'Цифровые услуги от стратегии до роста.',
+    sub: 'Один исполнитель для дизайна, разработки, видимости, аналитики, API-подключений, соцсетей и автоматизации.',
+    cta: 'Заполнить конфигуратор',
+    fullCycle: 'Полный цикл запуска',
+    systemTitle: 'Не просто сайт, а полная интернет-инфраструктура бизнеса.',
+    systemText: 'Позиционирование, сайт, Google Business, Яндекс Бизнес, соцсети, SEO, AEO, аналитика, API-ключи, CRM и продвижение работают вместе.',
+    services: [
+      ['Веб-кодинг', 'Чистая структура React/Next, адаптивный интерфейс, быстрая загрузка и поддерживаемый код.', Code2],
+      ['Сайты и лендинги', 'Премиальный дизайн, структура под заявки, мультиязычность, блог, портфолио и формы.', Globe2],
+      ['SEO + AI Search', 'Ключевые запросы, техническая структура, Schema.org, AEO и контент для ИИ-ответов.', Search],
+      ['Google Business', 'Профиль, карты, категории, отзывы, UTM и локальные сигналы.', Megaphone],
+      ['Яндекс Бизнес и карты', 'Профиль, региональная выдача, карты, категории, отзывы и локальные страницы.', MapPinned],
+      ['Настройка соцсетей', 'Instagram, Facebook, Meta Suite, VK, Telegram и база для контента.', Megaphone],
+      ['Метрики и реклама', 'GA4, Google Tag Manager, пиксели, события, цели, воронки и база для рекламы.', LineChart],
+      ['API, ключи и интеграции', 'Получение API-ключей, webhooks, CRM, почта, Telegram-боты и внешние сервисы.', KeyRound],
+      ['CRM и автоматизация', 'Принимать, распределять, обрабатывать заявки и вести пайплайны автоматически.', Workflow],
+      ['Скорость и безопасность', 'Core Web Vitals, оптимизация ассетов, HTTPS, резервные копии и мониторинг.', ShieldCheck],
+    ],
   },
-  {
-    key: 'automation',
-    icon: Settings,
-    color: 'from-orange-500/20 to-orange-500/5',
-    features: ['workflow', 'data', 'integration', 'scripts']
-  },
-  {
-    key: 'mvp',
-    icon: Rocket,
-    color: 'from-red-500/20 to-red-500/5',
-    features: ['prototyping', 'lean', 'validation', 'scalable']
-  },
-  {
-    key: 'support',
-    icon: HeadphonesIcon,
-    color: 'from-cyan-500/20 to-cyan-500/5',
-    features: ['updates', 'bugs', 'monitoring', 'security']
-  }
-];
+};
 
 export function ServicesPage() {
-  const { t, i18n } = useTranslation();
-
-  const titles = {
-    en: 'Services | Pavel Levdin',
-    ru: 'Услуги | Павел Левдин',
-    de: 'Leistungen | Pavel Levdin'
-  };
-
-  const descriptions = {
-    en: 'Web development, web applications, SEO optimization and process automation services.',
-    ru: 'Разработка сайтов, веб-приложения, SEO-оптимизация и автоматизация процессов.',
-    de: 'Webentwicklung, Webanwendungen, SEO-Optimierung und Prozessautomatisierung.'
-  };
+  const { i18n } = useTranslation();
+  const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'de') as keyof typeof copy;
+  const text = copy[lang];
 
   return (
     <>
       <Helmet>
-        <title>{titles[i18n.language as keyof typeof titles] || titles.en}</title>
-        <meta name="description" content={descriptions[i18n.language as keyof typeof descriptions] || descriptions.en} />
-        <link rel="canonical" href="https://pavellevdin.dev/services" />
+        <html lang={lang} />
+        <title>{text.title}</title>
+        <meta name="description" content={text.desc} />
+        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/services`} />
       </Helmet>
-      
-      <div className="pt-24 md:pt-32 pb-20">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-                <Briefcase className="w-4 h-4" />
-                {t('services.title')}
+
+      <main className="min-h-screen bg-slate-950 pt-28 text-white">
+        <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.16),transparent_30%),radial-gradient(circle_at_78%_34%,rgba(245,158,11,.12),transparent_28%)]" />
+          <div className="relative mx-auto max-w-7xl">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl">
+              <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-bold text-cyan-100">
+                <Bot className="h-4 w-4" />
+                PL Innovativ Digitalbau
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                {t('services.subtitle')}
-              </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {t('services.description')}
-              </p>
+              <h1 className="text-4xl font-black leading-tight md:text-6xl">{text.h1}</h1>
+              <p className="mt-5 text-lg leading-8 text-white/68">{text.sub}</p>
             </motion.div>
 
-            {/* Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-              {services.map((service, index) => (
-                <motion.div
-                  key={service.key}
-                  initial={{ opacity: 0, y: 30 }}
+            <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+              {text.services.map(([title, description, Icon], index) => (
+                <motion.article
+                  key={title}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group"
+                  transition={{ delay: index * 0.035 }}
+                  className="group min-h-[245px] rounded-2xl border border-white/10 bg-white/[0.055] p-5 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/35 hover:bg-white/[0.075]"
                 >
-                  <div className={`relative p-6 md:p-8 rounded-2xl bg-gradient-to-br ${service.color} border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg h-full flex flex-col`}>
-                    {/* Icon */}
-                    <div className="w-14 h-14 rounded-xl bg-background/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <service.icon className="w-7 h-7 text-primary" />
-                    </div>
-
-                    {/* Content */}
-                    <h3 className="text-xl font-semibold mb-3">
-                      {t(`services.${service.key}.title`)}
-                    </h3>
-                    <p className="text-muted-foreground mb-6 flex-grow">
-                      {t(`services.${service.key}.description`)}
-                    </p>
-
-                    {/* Features */}
-                    <ul className="space-y-2 mb-6">
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                          {t(`services.${service.key}.features.${feature}`)}
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* CTA */}
-                    <Link to="/contact">
-                      <Button variant="outline" className="w-full group/btn">
-                        {t('services.discuss')}
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
-                    </Link>
+                  <Icon className="mb-5 h-8 w-8 text-cyan-200" />
+                  <h2 className="text-lg font-black">{title}</h2>
+                  <p className="mt-3 text-sm leading-6 text-white/58">{description}</p>
+                  <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-cyan-100">
+                    <Check className="h-4 w-4" />
+                    {text.fullCycle}
                   </div>
-                </motion.div>
+                </motion.article>
               ))}
             </div>
 
-            {/* Process Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative p-8 md:p-12 rounded-3xl bg-muted/50 border border-border/50"
-            >
-              <div className="text-center mb-10">
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">{t('services.process.title')}</h2>
-                <p className="text-muted-foreground">{t('services.process.subtitle')}</p>
+            <div className="mt-12 rounded-3xl border border-cyan-300/16 bg-white/[0.07] p-6 shadow-2xl backdrop-blur md:p-10">
+              <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+                <div>
+                  <h2 className="text-2xl font-black md:text-3xl">{text.systemTitle}</h2>
+                  <p className="mt-3 max-w-3xl text-white/62">{text.systemText}</p>
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Link to={`/${lang}/brief`}>
+                    <Button size="lg" className="h-12 w-full rounded-xl bg-cyan-300 font-black text-slate-950 hover:bg-cyan-200 md:w-auto">
+                      {text.cta}
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                  <Link to={`/${lang}/business-card`}>
+                    <Button size="lg" variant="outline" className="h-12 w-full rounded-xl border-white/20 bg-white/[0.05] text-white hover:bg-white hover:text-slate-950 md:w-auto">
+                      {lang === 'ru' ? 'Онлайн-визитка' : lang === 'de' ? 'Visitenkarte' : 'Business card'}
+                    </Button>
+                  </Link>
+                </div>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { step: '01', key: 'discovery' },
-                  { step: '02', key: 'planning' },
-                  { step: '03', key: 'development' },
-                  { step: '04', key: 'delivery' }
-                ].map((item, index) => (
-                  <div key={index} className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-primary font-bold">{item.step}</span>
-                    </div>
-                    <h3 className="font-semibold mb-1">{t(`services.process.steps.${item.key}.title`)}</h3>
-                    <p className="text-sm text-muted-foreground">{t(`services.process.steps.${item.key}.description`)}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="mt-12 text-center"
-            >
-              <p className="text-muted-foreground mb-4">
-                {t('services.bottomCta')}
-              </p>
-              <Link to="/contact">
-                <Button size="lg">
-                  {t('services.getInTouch')}
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </motion.div>
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

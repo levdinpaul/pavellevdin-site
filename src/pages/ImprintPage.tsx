@@ -26,12 +26,12 @@ export function ImprintPage() {
       <Helmet>
         <title>{t('imprint.seo.title')}</title>
         <meta name="description" content={t('imprint.seo.description')} />
-        <link rel="canonical" href={`https://pavellevdin.dev/${lang}/imprint`} />
+        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/imprint`} />
         
-        <link rel="alternate" hrefLang="de" href="https://pavellevdin.dev/de/imprint" />
-        <link rel="alternate" hrefLang="en" href="https://pavellevdin.dev/en/imprint" />
-        <link rel="alternate" hrefLang="ru" href="https://pavellevdin.dev/ru/imprint" />
-        <link rel="alternate" hrefLang="x-default" href="https://pavellevdin.dev/en/imprint" />
+        <link rel="alternate" hrefLang="de" href="https://pavellevdin.ru/de/imprint" />
+        <link rel="alternate" hrefLang="en" href="https://pavellevdin.ru/en/imprint" />
+        <link rel="alternate" hrefLang="ru" href="https://pavellevdin.ru/ru/imprint" />
+        <link rel="alternate" hrefLang="x-default" href="https://pavellevdin.ru/ru/imprint" />
         
         <html lang={lang} />
       </Helmet>

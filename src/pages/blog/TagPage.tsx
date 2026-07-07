@@ -35,7 +35,7 @@ export function TagPage() {
       <Helmet>
         <title>#{tagName} | {t('blog.title')}</title>
         <meta name="description" content={t('blog.tagDescription', { tag: tagName })} />
-        <link rel="canonical" href={`https://my.delimes.ru/${lang}/blog/tag/${tagSlug}`} />
+        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/blog/tag/${tagSlug}`} />
       </Helmet>
 
       <div className="py-16 md:py-24">

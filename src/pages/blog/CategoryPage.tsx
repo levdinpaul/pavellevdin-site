@@ -47,7 +47,7 @@ export function CategoryPage() {
       <Helmet>
         <title>{category.name} | {t('blog.title')}</title>
         <meta name="description" content={category.description || t('blog.categoryDescription', { name: category.name })} />
-        <link rel="canonical" href={`https://my.delimes.ru/${lang}/blog/category/${category.slug}`} />
+        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/blog/category/${category.slug}`} />
       </Helmet>
 
       <div className="py-16 md:py-24">

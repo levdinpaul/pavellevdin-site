@@ -121,7 +121,7 @@ export function Portfolio() {
                       {project.title}
                     </h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      {t(`portfolio.projects.${project.id}.description`)}
+                      {t(`portfolio.projects.${project.id}.description`, project.description)}
                     </p>
                     
                     {/* Technologies */}

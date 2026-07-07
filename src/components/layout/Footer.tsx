@@ -1,100 +1,114 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { 
-  Send,
-  Instagram, 
-  Facebook, 
-  Mail,
-} from 'lucide-react';
+import { Facebook, Instagram, Mail, Send } from 'lucide-react';
+import { useCookieConsent } from '@/hooks/useCookieConsent';
+
+const labels = {
+  de: {
+    pages: 'Seiten',
+    contact: 'Kontakt',
+    legal: 'Rechtliches',
+    home: 'Start',
+    services: 'Leistungen',
+    portfolio: 'Projekte',
+    brief: 'Konfigurator',
+    card: 'Online-Visitenkarte',
+    blog: 'Blog',
+    imprint: 'Impressum',
+    privacy: 'Datenschutz',
+    cookies: 'Cookie-Einstellungen',
+    tagline: 'Web Coding, SEO, AI Search, Google Business, Social Media, Analytics und Automatisierung fuer Unternehmen.',
+    rights: 'Alle Rechte vorbehalten.',
+  },
+  en: {
+    pages: 'Pages',
+    contact: 'Contact',
+    legal: 'Legal',
+    home: 'Home',
+    services: 'Services',
+    portfolio: 'Work',
+    brief: 'Configurator',
+    card: 'Online business card',
+    blog: 'Blog',
+    imprint: 'Imprint',
+    privacy: 'Privacy',
+    cookies: 'Cookie settings',
+    tagline: 'Web coding, SEO, AI Search, Google Business, social media, analytics and automation for businesses.',
+    rights: 'All rights reserved.',
+  },
+  ru: {
+    pages: 'Страницы',
+    contact: 'Контакты',
+    legal: 'Документы',
+    home: 'Главная',
+    services: 'Услуги',
+    portfolio: 'Портфолио',
+    brief: 'Конфигуратор',
+    card: 'Онлайн-визитка',
+    blog: 'Блог',
+    imprint: 'Реквизиты',
+    privacy: 'Политика конфиденциальности',
+    cookies: 'Настройки cookie',
+    tagline: 'Веб-кодинг, SEO, AI Search, Google Business, соцсети, аналитика и автоматизация для бизнеса.',
+    rights: 'Все права защищены.',
+  },
+};
 
 function VKIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.673 4 8.231c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/>
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.673 4 8.231c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z" />
     </svg>
   );
 }
 
 export function Footer() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const currentYear = new Date().getFullYear();
-  const lang = i18n.language as 'de' | 'en' | 'ru';
-
-  const socialLinks = [
-    { 
-      icon: Send, 
-      href: 'https://t.me/PavelLevdin',
-      label: 'Telegram',
-      color: 'hover:text-[#0088cc] hover:bg-[#0088cc]/10'
-    },
-    { 
-      icon: Instagram, 
-      href: 'https://instagram.com/твой_ник',
-      label: 'Instagram',
-      color: 'hover:text-[#E4405F] hover:bg-[#E4405F]/10'
-    },
-    { 
-      icon: Facebook, 
-      href: 'https://facebook.com/твой_профиль',
-      label: 'Facebook',
-      color: 'hover:text-[#1877F2] hover:bg-[#1877F2]/10'
-    },
-    { 
-      icon: VKIcon, 
-      href: 'https://vk.com/твой_ник',
-      label: 'VKontakte',
-      color: 'hover:text-[#4C75A3] hover:bg-[#4C75A3]/10'
-    },
-    { 
-      icon: Mail, 
-      href: 'mailto:levdin.pavel@yandex.ru', 
-      label: 'Email',
-      color: 'hover:text-primary hover:bg-primary/10'
-    },
-  ];
+  const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru') as keyof typeof labels;
+  const text = labels[lang];
+  const { reset } = useCookieConsent();
 
   const navLinks = [
-    { path: `/${lang}`, label: t('nav.home') },
-    { path: `/${lang}/portfolio`, label: t('nav.portfolio') },
-    { path: `/${lang}/services`, label: t('nav.services') },
-    { path: `/${lang}/blog`, label: t('nav.blog', 'Блог') },
-    { path: `/${lang}/contact`, label: t('nav.contact') },
+    { path: `/${lang}`, label: text.home },
+    { path: `/${lang}/services`, label: text.services },
+    { path: `/${lang}/portfolio`, label: text.portfolio },
+    { path: `/${lang}/brief`, label: text.brief },
+    { path: `/${lang}/business-card`, label: text.card },
+    { path: `/${lang}/blog`, label: text.blog },
   ];
 
-  const legalLinks = [
-    { path: `/${lang}/imprint`, label: t('footer.imprint') },
-    { path: `/${lang}/privacy`, label: t('footer.privacy') },
+  const socialLinks = [
+    { icon: Send, href: 'https://t.me/PavelLevdin', label: 'Telegram' },
+    { icon: Instagram, href: 'https://instagram.com/', label: 'Instagram' },
+    { icon: Facebook, href: 'https://facebook.com/', label: 'Facebook' },
+    { icon: VKIcon, href: 'https://vk.com/', label: 'VKontakte' },
+    { icon: Mail, href: 'mailto:levdin.pavel@yandex.ru', label: 'Email' },
   ];
-
-  const madeWithText = t('footer.madeWith');
 
   return (
-    <footer className="bg-muted/50 border-t">
-      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
-          {/* Brand — ИСПРАВЛЕНО: убран hidden sm:inline, добавлен адаптивный размер шрифта */}
-          <div className="space-y-4 md:col-span-1">
-            <Link to={`/${lang}`} className="flex items-center space-x-3 min-w-0">
-              <img 
-                src="/og-image.png"
-                alt="PL" 
-                className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0"
-              />
-              <span className="text-foreground/80 truncate text-lg md:text-[22px]" style={{ fontWeight: 700 }}>
-                Code & Craft
+    <footer className="border-t border-white/10 bg-slate-950 text-white">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 md:py-16">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_.8fr_.8fr_.8fr]">
+          <div>
+            <Link to={`/${lang}`} className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-xl border border-cyan-300/25 bg-cyan-300/12 font-black text-cyan-100">
+                PL
+              </span>
+              <span>
+                <span className="block font-black">Innovativ Digitalbau</span>
+                <span className="block text-xs text-cyan-100/58">Web Coding · SEO · Automation</span>
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              {t('hero.subtitle')}
-            </p>
-            <div className="flex items-center space-x-2">
+            <p className="mt-5 max-w-sm text-sm leading-6 text-white/55">{text.tagline}</p>
+            <div className="mt-5 flex items-center gap-2">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  target="_blank"
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className={`p-2.5 rounded-full bg-background transition-all duration-300 ${link.color}`}
+                  className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.045] text-white/66 transition hover:border-cyan-300/30 hover:text-cyan-100"
                   aria-label={link.label}
                 >
                   <link.icon className="h-5 w-5" />
@@ -103,18 +117,12 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Navigation */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground/80">
-              {t('footer.navigation', 'Navigation')}
-            </h3>
-            <ul className="space-y-2">
+          <div>
+            <h3 className="text-sm font-black uppercase tracking-wide text-white/82">{text.pages}</h3>
+            <ul className="mt-4 grid gap-2">
               {navLinks.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                  <Link to={link.path} className="text-sm text-white/56 transition hover:text-cyan-100">
                     {link.label}
                   </Link>
                 </li>
@@ -122,65 +130,29 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground/80">
-              {t('contact.title')}
-            </h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a
-                  href="https://t.me/PavelLevdin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#0088cc] transition-colors"
-                >
-                  Telegram: @PavelLevdin
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:levdin.pavel@yandex.ru"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Email: levdin.pavel@yandex.ru
-                </a>
-              </li>
-              <li>
-                <span className="text-foreground/60">WhatsApp: +49 176 43141306</span>
-              </li>
+          <div>
+            <h3 className="text-sm font-black uppercase tracking-wide text-white/82">{text.contact}</h3>
+            <ul className="mt-4 grid gap-2 text-sm text-white/56">
+              <li><a className="hover:text-cyan-100" href="https://t.me/PavelLevdin" target="_blank" rel="noopener noreferrer">Telegram: @PavelLevdin</a></li>
+              <li><a className="hover:text-cyan-100" href="https://wa.me/4917643141306" target="_blank" rel="noopener noreferrer">WhatsApp: +49 176 43141306</a></li>
+              <li><a className="hover:text-cyan-100" href="mailto:levdin.pavel@yandex.ru">levdin.pavel@yandex.ru</a></li>
+              <li>Bremen, Germany</li>
             </ul>
           </div>
 
-          {/* Legal */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground/80">
-              {t('footer.legal', 'Legal')}
-            </h3>
-            <ul className="space-y-2">
-              {legalLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+          <div>
+            <h3 className="text-sm font-black uppercase tracking-wide text-white/82">{text.legal}</h3>
+            <ul className="mt-4 grid gap-2">
+              <li><Link to={`/${lang}/imprint`} className="text-sm text-white/56 hover:text-cyan-100">{text.imprint}</Link></li>
+              <li><Link to={`/${lang}/privacy`} className="text-sm text-white/56 hover:text-cyan-100">{text.privacy}</Link></li>
+              <li><button type="button" onClick={reset} className="text-left text-sm text-white/56 transition hover:text-cyan-100">{text.cookies}</button></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {currentYear} Code & Craft {t('footer.rights', 'All rights reserved')}
-            <Link to={`/${lang}/admin`} className="text-muted-foreground hover:text-muted-foreground" aria-hidden="true">.</Link>
-          </p>
-          <p className="text-sm text-muted-foreground">
-            {madeWithText}
-          </p>
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/42 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {currentYear} PL Innovativ Digitalbau. {text.rights}</p>
+          <Link to={`/${lang}/admin`} className="text-white/18 hover:text-white/30" aria-hidden="true">.</Link>
         </div>
       </div>
     </footer>

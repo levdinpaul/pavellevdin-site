@@ -37,7 +37,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 export function Testimonials() {
   const { t, i18n } = useTranslation();
-  const currentTestimonials = testimonials[i18n.language as keyof typeof testimonials] || testimonials.en;
+  const currentTestimonials = testimonials[i18n.language as keyof typeof testimonials] || testimonials.ru;
+
+  // Секция скрыта, пока нет реальных отзывов (фейковые удалены — риск ФАС + слабое доверие)
+  if (!currentTestimonials.length) return null;
 
   return (
     <section className="py-16 md:py-24 bg-muted/30">

@@ -14,7 +14,7 @@ function getFTPConfig() {
 }
 
 function getRemoteRoot() {
-  return getEnv('FTP_REMOTE_ROOT', '/my.delimes.ru/htdocs/www/');
+  return getEnv('FTP_REMOTE_ROOT', '/pavellevdin.ru/htdocs/www/');
 }
 
 async function uploadDirRecursive(client, localDir, remoteRoot, baseDir) {
@@ -78,7 +78,7 @@ async function uploadSingleFile(localFilePath, remoteRelativePath) {
     await client.uploadFrom(localFilePath, fullRemotePath);
     console.log(`  ↑ ${remoteRelativePath}`);
 
-    const siteUrl = getEnv('SITE_URL', 'https://my.delimes.ru');
+    const siteUrl = getEnv('SITE_URL', 'https://pavellevdin.ru');
     return `${siteUrl}/${remoteRelativePath.replace(/\\/g, '/')}`;
   } finally {
     client.close();

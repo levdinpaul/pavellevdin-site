@@ -12,16 +12,16 @@
     "ogImage": "/blog-images/og-website-creation-2026.jpg",
     "ogType": "article",
     "twitterCard": "summary_large_image",
-    "canonical": "https://my.delimes.ru/de/blog/moderne-website-erstellen-2026",
+    "canonical": "https://pavellevdin.ru/de/blog/moderne-website-erstellen-2026",
     "articlePublishedTime": "2026-03-29T10:00:00+03:00",
     "articleModifiedTime": "2026-03-29T10:00:00+03:00",
     "articleSection": "Webentwicklung",
     "articleTags": ["Website erstellen", "Next.js", "Astro", "SEO"],
     "authorName": "Pavel Levdin",
-    "authorUrl": "https://my.delimes.ru/de/about",
+    "authorUrl": "https://pavellevdin.ru/de/about",
     "breadcrumb": [
-      { "name": "Blog", "url": "https://my.delimes.ru/de/blog" },
-      { "name": "Webentwicklung", "url": "https://my.delimes.ru/de/blog/category/webdev" }
+      { "name": "Blog", "url": "https://pavellevdin.ru/de/blog" },
+      { "name": "Webentwicklung", "url": "https://pavellevdin.ru/de/blog/category/webdev" }
     ]
   },
   "author": {

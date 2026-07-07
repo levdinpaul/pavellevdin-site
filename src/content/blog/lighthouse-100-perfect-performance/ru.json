@@ -21,7 +21,7 @@
     "ogImage": "/blog-images/og-lighthouse-100.jpg",
     "ogType": "article",
     "twitterCard": "summary_large_image",
-    "canonical": "https://my.delimes.ru/ru/blog/lighthouse-100-kak-dostich-idealnoy-proizvoditelnosti",
+    "canonical": "https://pavellevdin.ru/ru/blog/lighthouse-100-kak-dostich-idealnoy-proizvoditelnosti",
     "articlePublishedTime": "2026-03-31T10:00:00+03:00",
     "articleModifiedTime": "2026-03-31T10:00:00+03:00",
     "articleSection": "Веб-разработка",
@@ -32,15 +32,15 @@
       "LCP"
     ],
     "authorName": "Pavel Levdin",
-    "authorUrl": "https://my.delimes.ru/ru/about",
+    "authorUrl": "https://pavellevdin.ru/ru/about",
     "breadcrumb": [
       {
         "name": "Блог",
-        "url": "https://my.delimes.ru/ru/blog"
+        "url": "https://pavellevdin.ru/ru/blog"
       },
       {
         "name": "Веб-разработка",
-        "url": "https://my.delimes.ru/ru/blog/category/webdev"
+        "url": "https://pavellevdin.ru/ru/blog/category/webdev"
       }
     ]
   },

@@ -23,15 +23,15 @@ export function PortfolioPage() {
     : projects.filter(project => project.category === activeCategory);
 
   const titles = {
-    en: 'Portfolio | Pavel Levdin',
-    ru: 'Портфолио | Павел Левдин',
-    de: 'Portfolio | Pavel Levdin'
+    en: 'Portfolio | PL – Innovativ Digitalbau',
+    ru: 'Портфолио | PL – Innovativ Digitalbau',
+    de: 'Portfolio | PL – Innovativ Digitalbau'
   };
 
   const descriptions = {
-    en: 'My recent projects - websites, web applications and landing pages.',
-    ru: 'Мои последние проекты - сайты, веб-приложения и лендинги.',
-    de: 'Meine neuesten Projekte - Websites, Webanwendungen und Landing Pages.'
+    en: 'Selected projects by PL – Innovativ Digitalbau: websites, web applications, SEO, automation and digital business systems.',
+    ru: 'Избранные проекты PL – Innovativ Digitalbau: сайты, веб-приложения, SEO, автоматизация и цифровые системы для бизнеса.',
+    de: 'Ausgewählte Projekte von PL – Innovativ Digitalbau: Websites, Webanwendungen, SEO, Automatisierung und digitale Business-Systeme.'
   };
 
   return (
@@ -39,7 +39,7 @@ export function PortfolioPage() {
       <Helmet>
         <title>{titles[i18n.language as keyof typeof titles] || titles.en}</title>
         <meta name="description" content={descriptions[i18n.language as keyof typeof descriptions] || descriptions.en} />
-        <link rel="canonical" href="https://pavellevdin.dev/portfolio" />
+        <link rel="canonical" href={`https://pavellevdin.ru/${i18n.language}/portfolio`} />
       </Helmet>
       
       <div className="pt-24 md:pt-32 pb-20">

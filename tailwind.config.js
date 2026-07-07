@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Geist', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Manrope', 'Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
@@ -42,6 +43,12 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        surface: {
+          DEFAULT: "hsl(var(--surface))",
+          2: "hsl(var(--surface-2))",
+        },
+        faint: "hsl(var(--faint))",
+        signal: "hsl(var(--signal))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -62,6 +69,15 @@ module.exports = {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        glow: "0 0 0 1px hsl(var(--primary) / 0.35), 0 12px 40px -12px hsl(var(--primary) / 0.45)",
+        "glow-sm": "0 8px 28px -10px hsl(var(--primary) / 0.30)",
+      },
+      backgroundImage: {
+        "dot-grid":
+          "radial-gradient(hsl(var(--foreground) / 0.06) 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        "dot-grid": "28px 28px",
       },
       keyframes: {
         "accordion-down": {

@@ -57,7 +57,7 @@ const FTP_CONFIG = {
   port: parseInt(env.FTP_PORT || '21', 10)
 };
 
-const REMOTE_ROOT = env.FTP_REMOTE_ROOT || '/my.delimes.ru/htdocs/www/';
+const REMOTE_ROOT = env.FTP_REMOTE_ROOT || '/pavellevdin.ru/htdocs/www/';
 
 // 1. Создаём папку статьи
 const articleDir = path.join(projectRoot, 'src', 'content', 'blog', id);
@@ -91,16 +91,16 @@ if (!fs.existsSync(articleDir)) {
       ogImage: image,
       ogType: 'article',
       twitterCard: 'summary_large_image',
-      canonical: `https://my.delimes.ru/${lang}/blog/${translations[lang].slug}`,
+      canonical: `https://pavellevdin.ru/${lang}/blog/${translations[lang].slug}`,
       articlePublishedTime: `${date}T10:00:00+03:00`,
       articleModifiedTime: `${date}T10:00:00+03:00`,
       articleSection: lang === 'ru' ? 'Веб-разработка' : lang === 'de' ? 'Webentwicklung' : 'Web Development',
       articleTags: tags.slice(0, 4),
       authorName: 'Pavel Levdin',
-      authorUrl: `https://my.delimes.ru/${lang}/about`,
+      authorUrl: `https://pavellevdin.ru/${lang}/about`,
       breadcrumb: [
-        { name: lang === 'ru' ? 'Блог' : 'Blog', url: `https://my.delimes.ru/${lang}/blog` },
-        { name: lang === 'ru' ? 'Веб-разработка' : lang === 'de' ? 'Webentwicklung' : 'Web Development', url: `https://my.delimes.ru/${lang}/blog/category/${category}` }
+        { name: lang === 'ru' ? 'Блог' : 'Blog', url: `https://pavellevdin.ru/${lang}/blog` },
+        { name: lang === 'ru' ? 'Веб-разработка' : lang === 'de' ? 'Webentwicklung' : 'Web Development', url: `https://pavellevdin.ru/${lang}/blog/category/${category}` }
       ]
     },
     author: {
@@ -307,19 +307,19 @@ function updateSitemap(projectRoot, id, date, translations) {
   const newEntries = `
   <!-- ✅ AUTO-ADDED: ${id} -->
   <url>
-    <loc>https://my.delimes.ru/de/blog/${translations.de.slug}</loc>
+    <loc>https://pavellevdin.ru/de/blog/${translations.de.slug}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://my.delimes.ru/en/blog/${translations.en.slug}</loc>
+    <loc>https://pavellevdin.ru/en/blog/${translations.en.slug}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://my.delimes.ru/ru/blog/${translations.ru.slug}</loc>
+    <loc>https://pavellevdin.ru/ru/blog/${translations.ru.slug}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -353,8 +353,8 @@ function generateStaticHtml(projectRoot, id, date, image, translations) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="${escapeHtml(article.title)}">
   <meta property="og:description" content="${escapeHtml(article.excerpt)}">
-  <meta property="og:image" content="https://my.delimes.ru${image}">
-  <meta property="og:url" content="https://my.delimes.ru/${lang}/blog/${slug}">
+  <meta property="og:image" content="https://pavellevdin.ru${image}">
+  <meta property="og:url" content="https://pavellevdin.ru/${lang}/blog/${slug}">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Delimes">
   <meta property="article:published_time" content="${date}T10:00:00+03:00">
@@ -382,7 +382,7 @@ function generateStaticHtml(projectRoot, id, date, image, translations) {
       ${contentHtml}
     </div>
     <footer style="margin-top:3em;padding-top:2em;border-top:1px solid #eee">
-      <p><a href="https://my.delimes.ru/${lang}/blog/${slug}" style="color:#2F8E92">🔗 ${lang === 'ru' ? 'Открыть полную версию' : lang === 'de' ? 'Vollständige Version öffnen' : 'Open full version'}</a></p>
+      <p><a href="https://pavellevdin.ru/${lang}/blog/${slug}" style="color:#2F8E92">🔗 ${lang === 'ru' ? 'Открыть полную версию' : lang === 'de' ? 'Vollständige Version öffnen' : 'Open full version'}</a></p>
     </footer>
   </article>
 </body>

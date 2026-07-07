@@ -32,16 +32,16 @@ function createArticleFiles(articleData, root) {
         ogImage: image,
         ogType: 'article',
         twitterCard: 'summary_large_image',
-        canonical: `https://my.delimes.ru/${lang}/blog/${translations[lang].slug}`,
+        canonical: `https://pavellevdin.ru/${lang}/blog/${translations[lang].slug}`,
         articlePublishedTime: `${date}T10:00:00+03:00`,
         articleModifiedTime: `${date}T10:00:00+03:00`,
         articleSection: lang === 'ru' ? 'Веб-разработка' : lang === 'de' ? 'Webentwicklung' : 'Web Development',
         articleTags: tags.slice(0, 4),
         authorName: 'Pavel Levdin',
-        authorUrl: `https://my.delimes.ru/${lang}/about`,
+        authorUrl: `https://pavellevdin.ru/${lang}/about`,
         breadcrumb: [
-          { name: lang === 'ru' ? 'Блог' : 'Blog', url: `https://my.delimes.ru/${lang}/blog` },
-          { name: lang === 'ru' ? 'Веб-разработка' : lang === 'de' ? 'Webentwicklung' : 'Web Development', url: `https://my.delimes.ru/${lang}/blog/category/${category}` }
+          { name: lang === 'ru' ? 'Блог' : 'Blog', url: `https://pavellevdin.ru/${lang}/blog` },
+          { name: lang === 'ru' ? 'Веб-разработка' : lang === 'de' ? 'Webentwicklung' : 'Web Development', url: `https://pavellevdin.ru/${lang}/blog/category/${category}` }
         ]
       },
       author: {

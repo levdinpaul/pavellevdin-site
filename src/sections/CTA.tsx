@@ -83,8 +83,9 @@ export function CTA() {
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="mt-10 pt-8 border-t border-border/50"
+                className="relative mt-10 pt-8"
               >
+                <div className="absolute left-1/2 top-0 h-px w-12 -translate-x-1/2 bg-primary/60" />
                 <p className="text-sm text-muted-foreground mb-4">
                   {t('cta.responseTime')}
                 </p>

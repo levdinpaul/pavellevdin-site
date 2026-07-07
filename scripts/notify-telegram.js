@@ -45,7 +45,7 @@ if (!TOKEN || !CHAT_ID) {
 
 // ================= CONFIG =================
 const BLOG_DIR = path.join(projectRoot, 'src/content/blog');
-const SITE_URL = 'https://my.delimes.ru';
+const SITE_URL = 'https://pavellevdin.ru';
 const LOG_FILE = path.join(projectRoot, 'autopost.log');
 
 // ================= UTILS =================

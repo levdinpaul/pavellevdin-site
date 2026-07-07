@@ -16,12 +16,21 @@ app.use(cors({
     // Allow requests with no origin (like mobile apps, curl)
     if (!origin) return callback(null, true);
     // Allow localhost in dev and the production domain
-    const allowed = ['http://localhost:5173', 'http://localhost:5174', 'https://my.delimes.ru', 'http://my.delimes.ru'];
+    const allowed = ['http://localhost:5173', 'http://localhost:5174', 'https://pavellevdin.ru', 'http://pavellevdin.ru'];
     if (allowed.includes(origin)) return callback(null, true);
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
 }));
+
+// Security headers (базовая защита без внешних зависимостей)
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  next();
+});
 
 app.use(express.json({ limit: '50mb' }));
 
@@ -35,10 +44,12 @@ const publicationsRoutes = require('./routes/publications');
 const settingsRoutes = require('./routes/settings');
 const bufferRoutes = require('./routes/buffer');
 const mediaRoutes = require('./routes/media');
+const leadRoutes = require('./routes/lead');
 const { authMiddleware } = require('./middleware/auth');
 
 // Public routes
 app.use('/api/auth', authRoutes);
+app.use('/api/lead', leadRoutes);
 
 // Protected routes
 app.use('/api/stats', authMiddleware, statsRoutes);
@@ -57,15 +68,24 @@ app.get('/api/health', (req, res) => {
 
 // Продакшн: раздача статических файлов и SPA fallback
 if (isProd) {
-  // Путь к статике: htdocs/www на хостинге или dist/ локально
-  const staticDir = getEnv('STATIC_DIR', path.join(__dirname, '..', 'dist'));
-  if (fs.existsSync(staticDir)) {
+  // Устойчивый поиск папки статики: env → dist рядом с приложением → htdocs/www домена.
+  // Берём первый кандидат, где реально есть index.html (чтобы рестарт не уронил сайт).
+  const candidates = [
+    getEnv('STATIC_DIR', ''),
+    path.join(__dirname, '..', 'dist'),                        // project/app/dist
+    path.join(__dirname, '..', '..', '..', 'htdocs', 'www'),   // <домен>/htdocs/www
+  ].filter(Boolean);
+  const staticDir = candidates.find((dir) => fs.existsSync(path.join(dir, 'index.html')));
+
+  if (staticDir) {
     app.use(express.static(staticDir));
     // SPA fallback — все не-API запросы отдают index.html
     app.get('*', (req, res) => {
       res.sendFile(path.join(staticDir, 'index.html'));
     });
     console.log(`Serving static files from: ${staticDir}`);
+  } else {
+    console.warn('⚠️ Папка статики не найдена. Проверены:', candidates);
   }
 }
 

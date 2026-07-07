@@ -21,7 +21,7 @@
     "ogImage": "/blog-images/og-lighthouse-100.jpg",
     "ogType": "article",
     "twitterCard": "summary_large_image",
-    "canonical": "https://my.delimes.ru/en/blog/lighthouse-100-how-to-achieve-perfect-performance",
+    "canonical": "https://pavellevdin.ru/en/blog/lighthouse-100-how-to-achieve-perfect-performance",
     "articlePublishedTime": "2026-03-31T10:00:00+03:00",
     "articleModifiedTime": "2026-03-31T10:00:00+03:00",
     "articleSection": "Web Development",
@@ -32,15 +32,15 @@
       "LCP"
     ],
     "authorName": "Pavel Levdin",
-    "authorUrl": "https://my.delimes.ru/en/about",
+    "authorUrl": "https://pavellevdin.ru/en/about",
     "breadcrumb": [
       {
         "name": "Blog",
-        "url": "https://my.delimes.ru/en/blog"
+        "url": "https://pavellevdin.ru/en/blog"
       },
       {
         "name": "Web Development",
-        "url": "https://my.delimes.ru/en/blog/category/webdev"
+        "url": "https://pavellevdin.ru/en/blog/category/webdev"
       }
     ]
   },

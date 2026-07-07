@@ -39,8 +39,8 @@ function generateArticleHtml(article, lang, slug, date, image) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="${escapeHtml(article.title)}">
   <meta property="og:description" content="${escapeHtml(article.excerpt)}">
-  <meta property="og:image" content="https://my.delimes.ru${image}">
-  <meta property="og:url" content="https://my.delimes.ru/${lang}/blog/${slug}">
+  <meta property="og:image" content="https://pavellevdin.ru${image}">
+  <meta property="og:url" content="https://pavellevdin.ru/${lang}/blog/${slug}">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Delimes">
   <meta property="article:published_time" content="${date}T10:00:00+03:00">
@@ -66,7 +66,7 @@ function generateArticleHtml(article, lang, slug, date, image) {
     </header>
     <div class="content">${contentHtml}</div>
     <footer style="margin-top:3em;padding-top:2em;border-top:1px solid #eee">
-      <p><a href="https://my.delimes.ru/${lang}/blog/${slug}" style="color:#2F8E92">${lang === 'ru' ? 'Открыть полную версию' : lang === 'de' ? 'Vollständige Version öffnen' : 'Open full version'}</a></p>
+      <p><a href="https://pavellevdin.ru/${lang}/blog/${slug}" style="color:#2F8E92">${lang === 'ru' ? 'Открыть полную версию' : lang === 'de' ? 'Vollständige Version öffnen' : 'Open full version'}</a></p>
     </footer>
   </article>
 </body>

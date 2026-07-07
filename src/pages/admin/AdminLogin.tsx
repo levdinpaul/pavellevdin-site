@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { Lock } from 'lucide-react';
 import { useAdmin } from '@/hooks/useAdmin';
 
@@ -13,8 +13,7 @@ export function AdminLogin() {
 
   // If already authenticated, redirect
   if (isAuthenticated) {
-    navigate(`/${lang}/admin/dashboard`, { replace: true });
-    return null;
+    return <Navigate to={`/${lang}/admin/dashboard`} replace />;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

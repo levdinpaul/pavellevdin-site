@@ -27,19 +27,19 @@ function updateSitemap(root, id, date, translations) {
   const newEntries = `
   <!-- AUTO-ADDED: ${id} -->
   <url>
-    <loc>https://my.delimes.ru/de/blog/${translations.de.slug}</loc>
+    <loc>https://pavellevdin.ru/de/blog/${translations.de.slug}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://my.delimes.ru/en/blog/${translations.en.slug}</loc>
+    <loc>https://pavellevdin.ru/en/blog/${translations.en.slug}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://my.delimes.ru/ru/blog/${translations.ru.slug}</loc>
+    <loc>https://pavellevdin.ru/ru/blog/${translations.ru.slug}</loc>
     <lastmod>${date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

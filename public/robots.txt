@@ -1,18 +1,20 @@
-# robots.txt for my.delimes.ru
+# robots.txt for pavellevdin.ru
 # Last updated: 2026-03-31
 
 User-agent: *
 Allow: /
+Disallow: /*/admin
+Disallow: /api/
 
 # Crawl-delay for better server performance
 Crawl-delay: 1
 
 # Main sitemap
-Sitemap: https://my.delimes.ru/sitemap.xml
+Sitemap: https://pavellevdin.ru/sitemap.xml
 
 # Additional sitemaps for different content types (if applicable)
-# Sitemap: https://my.delimes.ru/sitemap-images.xml
-# Sitemap: https://my.delimes.ru/sitemap-videos.xml
+# Sitemap: https://pavellevdin.ru/sitemap-images.xml
+# Sitemap: https://pavellevdin.ru/sitemap-videos.xml
 
 # Disallow patterns (if needed in future)
 # Disallow: /admin/
@@ -41,10 +43,10 @@ Allow: /*.ico$
 # Disallow: /
 
 # Host directive (for Yandex and others)
-Host: https://my.delimes.ru
+Host: https://pavellevdin.ru
 
 # Clean-param for Yandex (if using URL parameters)
 # Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content /
 
 # Sitemap index (if you have multiple sitemaps)
-# Sitemap: https://my.delimes.ru/sitemap-index.xml
+# Sitemap: https://pavellevdin.ru/sitemap-index.xml

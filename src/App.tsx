@@ -1,16 +1,14 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Outlet, useLocation, useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { ThemeProvider } from '@/hooks/useTheme';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Layout } from '@/components/layout/Layout';
 import { Home } from '@/pages/Home';
-import { PortfolioPage } from '@/pages/PortfolioPage';
-import { ServicesPage } from '@/pages/ServicesPage';
-import { ContactPage } from '@/pages/ContactPage';
-import { ImprintPage } from '@/pages/ImprintPage';
-import { PrivacyPage } from '@/pages/PrivacyPage';
 import { CookiePreloader } from '@/components/CookiePreloader';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
+import { loadAnalytics } from '@/lib/analytics';
 import './App.css';
 
 function ScrollToTop() {
@@ -26,16 +24,23 @@ function detectBrowserLanguage(): string {
   const browserLang = navigator.language || (navigator as { userLanguage?: string }).userLanguage || 'de';
   const lang = browserLang.slice(0, 2).toLowerCase();
   const supportedLangs = ['ru', 'de', 'en'];
-  return supportedLangs.includes(lang) ? lang : 'de';
+  return supportedLangs.includes(lang) ? lang : 'ru';
 }
 
 function LangLayout() {
   const { lang } = useParams();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (lang && ['de', 'en', 'ru'].includes(lang) && i18n.language !== lang) {
+      i18n.changeLanguage(lang);
+    }
+  }, [i18n, lang]);
   
   const seoData = {
-    en: { lang: 'en', title: 'Pavel Levdin - Full-Stack Developer' },
-    ru: { lang: 'ru', title: 'Павел Левдин - Full-Stack Разработчик' },
-    de: { lang: 'de', title: 'Pavel Levdin - Full-Stack Entwickler' },
+    en: { lang: 'en', title: 'Pavel Levdin - Web Coding, SEO, AI Search and Automation' },
+    ru: { lang: 'ru', title: 'Павел Левдин - веб-кодинг, SEO, AI Search и автоматизация' },
+    de: { lang: 'de', title: 'Pavel Levdin - Web Coding, SEO, AI Search und Automation' },
   };
   
   const currentSeo = seoData[lang as keyof typeof seoData] || seoData.de;
@@ -47,16 +52,26 @@ function LangLayout() {
         <title>{currentSeo.title}</title>
       </Helmet>
       <Layout>
-        <Outlet />
+        <Suspense fallback={<AdminFallback />}>
+          <Outlet />
+        </Suspense>
       </Layout>
     </>
   );
 }
 
-import { BlogList } from '@/pages/blog/BlogList';
-import { BlogPost } from '@/pages/blog/BlogPost';
-import { CategoryPage } from './pages/blog/CategoryPage';
-import { TagPage } from './pages/blog/TagPage';
+// Публичные страницы — lazy, чтобы не раздувать стартовый бандл (Home грузится сразу как вход)
+const PortfolioPage = lazy(() => import('@/pages/PortfolioPage').then(m => ({ default: m.PortfolioPage })));
+const ServicesPage = lazy(() => import('@/pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
+const ContactPage = lazy(() => import('@/pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const BriefPage = lazy(() => import('@/pages/BriefPage').then(m => ({ default: m.BriefPage })));
+const BusinessCardPage = lazy(() => import('@/pages/BusinessCardPage').then(m => ({ default: m.BusinessCardPage })));
+const ImprintPage = lazy(() => import('@/pages/ImprintPage').then(m => ({ default: m.ImprintPage })));
+const PrivacyPage = lazy(() => import('@/pages/PrivacyPage').then(m => ({ default: m.PrivacyPage })));
+const BlogList = lazy(() => import('@/pages/blog/BlogList').then(m => ({ default: m.BlogList })));
+const BlogPost = lazy(() => import('@/pages/blog/BlogPost').then(m => ({ default: m.BlogPost })));
+const CategoryPage = lazy(() => import('@/pages/blog/CategoryPage').then(m => ({ default: m.CategoryPage })));
+const TagPage = lazy(() => import('@/pages/blog/TagPage').then(m => ({ default: m.TagPage })));
 
 // Admin pages (lazy-loaded)
 const AdminLogin = lazy(() => import('@/pages/admin/AdminLogin').then(m => ({ default: m.AdminLogin })));
@@ -82,9 +97,9 @@ function AdminFallback() {
 function AppContent() {
   const { consent, isLoaded, accept, decline } = useCookieConsent();
 
-  if (!isLoaded || consent === null) {
-    return <CookiePreloader onAccept={accept} onDecline={decline} />;
-  }
+  useEffect(() => {
+    if (consent === true) loadAnalytics();
+  }, [consent]);
 
   return (
     <BrowserRouter>
@@ -95,6 +110,8 @@ function AppContent() {
           <Route index element={<Home />} />
           <Route path="portfolio" element={<PortfolioPage />} />
           <Route path="services" element={<ServicesPage />} />
+          <Route path="brief" element={<BriefPage />} />
+          <Route path="business-card" element={<BusinessCardPage />} />
           <Route path="blog" element={<BlogList />} />
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="blog/category/:category" element={<CategoryPage />} />
@@ -120,15 +137,18 @@ function AppContent() {
           </Route>
         </Route>
       </Routes>
+      {isLoaded && consent === null && <CookiePreloader onAccept={accept} onDecline={decline} />}
     </BrowserRouter>
   );
 }
 
 function App() {
   return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

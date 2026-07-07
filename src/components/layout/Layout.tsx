@@ -3,6 +3,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { ScrollProgress } from '../ui-custom/ScrollProgress';
 import { Children, isValidElement, type ReactElement } from 'react';
 
 export interface LayoutProps {
@@ -43,24 +44,16 @@ function hasLayoutInChildren(children: React.ReactNode): boolean {
 }
 
 export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
-  console.log('=== LAYOUT DEBUG ===');
-  console.log('pageTitle:', pageTitle);
-  console.log('pageDescription:', pageDescription);
-  console.log('children exists:', !!children);
-  
   // Проверка на рекурсию
   if (children && hasLayoutInChildren(children)) {
-    console.error('❌❌❌ LAYOUT RECURSION DETECTED! ❌❌❌');
-    console.error('Children:', children);
+    console.error('Layout recursion detected: Layout cannot contain another Layout');
     return (
       <div style={{ color: 'red', padding: 50, textAlign: 'center' }}>
-        <h1>🚨 Layout Recursion Error</h1>
+        <h1>Layout Recursion Error</h1>
         <p>Layout cannot contain another Layout</p>
       </div>
     );
   }
-  
-  console.log('====================');
 
   const baseTitle = 'Pavel Levdin - Full-Stack Developer';
   const title = pageTitle ? `${pageTitle} | ${baseTitle}` : baseTitle;
@@ -73,6 +66,7 @@ export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
         <meta name="description" content={description} />
       </Helmet>
       <div className="min-h-screen bg-background text-foreground flex flex-col">
+        <ScrollProgress />
         <Header />
         <main className="flex-1 flex flex-col">
           {children ? (

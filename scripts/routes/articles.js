@@ -227,7 +227,7 @@ router.post('/publish/:articleId', async (req, res) => {
     // FTP upload
     await uploadDistToFTP(projectRoot);
 
-    res.json({ success: true, url: `https://my.delimes.ru/ru/blog/` });
+    res.json({ success: true, url: `https://pavellevdin.ru/ru/blog/` });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

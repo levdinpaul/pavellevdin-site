@@ -21,7 +21,7 @@
     "ogImage": "/blog-images/og-nextjs-15-server-components-complete-guide.jpg",
     "ogType": "article",
     "twitterCard": "summary_large_image",
-    "canonical": "https://my.delimes.ru/ru/blog/nextjs-15-server-components-polnoe-rukovodstvo",
+    "canonical": "https://pavellevdin.ru/ru/blog/nextjs-15-server-components-polnoe-rukovodstvo",
     "articlePublishedTime": "2026-03-30T10:00:00+03:00",
     "articleModifiedTime": "2026-03-30T10:00:00+03:00",
     "articleSection": "Веб-разработка",
@@ -32,15 +32,15 @@
       "performance"
     ],
     "authorName": "Pavel Levdin",
-    "authorUrl": "https://my.delimes.ru/ru/about",
+    "authorUrl": "https://pavellevdin.ru/ru/about",
     "breadcrumb": [
       {
         "name": "Блог",
-        "url": "https://my.delimes.ru/ru/blog"
+        "url": "https://pavellevdin.ru/ru/blog"
       },
       {
         "name": "Веб-разработка",
-        "url": "https://my.delimes.ru/ru/blog/category/webdev"
+        "url": "https://pavellevdin.ru/ru/blog/category/webdev"
       }
     ]
   },

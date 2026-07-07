@@ -49,7 +49,7 @@ export function BlogList() {
       <Helmet>
         <title>{t('blog.seo.title')}</title>
         <meta name="description" content={t('blog.seo.description')} />
-        <link rel="canonical" href={`https://my.delimes.ru/${currentLang}/blog`} />
+        <link rel="canonical" href={`https://pavellevdin.ru/${currentLang}/blog`} />
       </Helmet>
 
       <div className="py-16 md:py-24">

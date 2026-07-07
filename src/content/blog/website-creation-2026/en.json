@@ -12,16 +12,16 @@
     "ogImage": "/blog-images/og-website-creation-2026.jpg",
     "ogType": "article",
     "twitterCard": "summary_large_image",
-    "canonical": "https://my.delimes.ru/en/blog/modern-website-creation-2026",
+    "canonical": "https://pavellevdin.ru/en/blog/modern-website-creation-2026",
     "articlePublishedTime": "2026-03-29T10:00:00+03:00",
     "articleModifiedTime": "2026-03-29T10:00:00+03:00",
     "articleSection": "Web Development",
     "articleTags": ["website creation", "Next.js", "Astro", "SEO"],
     "authorName": "Pavel Levdin",
-    "authorUrl": "https://my.delimes.ru/en/about",
+    "authorUrl": "https://pavellevdin.ru/en/about",
     "breadcrumb": [
-      { "name": "Blog", "url": "https://my.delimes.ru/en/blog" },
-      { "name": "Web Development", "url": "https://my.delimes.ru/en/blog/category/webdev" }
+      { "name": "Blog", "url": "https://pavellevdin.ru/en/blog" },
+      { "name": "Web Development", "url": "https://pavellevdin.ru/en/blog/category/webdev" }
     ]
   },
   "author": {

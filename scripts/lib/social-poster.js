@@ -5,7 +5,7 @@ const FormData = require('form-data');
 const { getEnv, projectRoot } = require('./env');
 
 const VK_API_VERSION = '5.199';
-const SITE_URL = 'https://my.delimes.ru';
+const SITE_URL = 'https://pavellevdin.ru';
 
 function escapeHtml(text = '') {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

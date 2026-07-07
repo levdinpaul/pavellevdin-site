@@ -226,7 +226,7 @@ export function BlogPost() {
           const availSlug = getSlugByIdAndLang(post.id, availLang);
           if (!availSlug || availLang === currentLang) return null;
           return (
-            <link key={availLang} rel="alternate" hrefLang={availLang} href={`https://my.delimes.ru/${availLang}/blog/${availSlug}`} />
+            <link key={availLang} rel="alternate" hrefLang={availLang} href={`https://pavellevdin.ru/${availLang}/blog/${availSlug}`} />
           );
         })}
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
