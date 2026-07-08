@@ -162,6 +162,51 @@
   .navpill-cta { padding: 9px 14px !important; }
 }
 
+/* ════════ Homepage construction-scene animations ════════ */
+/* hero wireframe draw-in */
+.wf-draw, .wf-glow { fill: none; stroke: var(--line-blueprint); stroke-width: 1.2; stroke-dasharray: 900; stroke-dashoffset: 900; animation: wfdraw 1.4s var(--ease-out) forwards; }
+.wf-glow { stroke: var(--accent); filter: drop-shadow(0 0 6px var(--accent-ring)); }
+.wf-accent { fill: var(--accent); opacity: 0; animation: wfin 500ms var(--ease-out) forwards; }
+.wf-fill { fill: var(--border-2); opacity: 0; animation: wfin 500ms var(--ease-out) forwards; }
+.wf-dot { fill: none; stroke: var(--line-blueprint); opacity: 0; animation: wfin 400ms var(--ease-out) forwards; }
+.wf-label { fill: var(--ink-3); font: 500 9px 'JetBrains Mono', monospace; letter-spacing: 0.14em; opacity: 0; animation: wfin 600ms var(--ease-out) forwards; }
+@keyframes wfdraw { to { stroke-dashoffset: 0; } }
+@keyframes wfin { to { opacity: 1; } }
+
+/* hero text entrance (staggered rise) */
+.rise { opacity: 0; transform: translateY(20px); animation: rise 800ms var(--ease-out) forwards; }
+.rise:nth-child(2) { animation-delay: 120ms; }
+.rise:nth-child(3) { animation-delay: 240ms; }
+.rise:nth-child(4) { animation-delay: 360ms; }
+.rise:nth-child(5) { animation-delay: 480ms; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+/* outlined "wireframe" headline word */
+.hero-outline { color: transparent; -webkit-text-stroke: 1.5px var(--line-blueprint); }
+
+/* orbiting tech stack */
+.orbit { animation: orbit 60s linear infinite; }
+.orbit-counter { animation: orbitc 60s linear infinite; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes orbitc { to { transform: translate(-50%, -50%) rotate(-360deg); } }
+
+/* footer finale particles (leads flowing in) */
+.particle { position: absolute; bottom: -8px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent-ring); animation: flowup linear infinite; opacity: 0; }
+@keyframes flowup { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: 0.9; } 85% { opacity: 0.6; } 100% { transform: translateY(-320px); opacity: 0; } }
+
+.post-row:hover span:nth-child(2) { color: var(--accent-strong) !important; }
+
+/* section that constructs into view on scroll */
+.build-section { opacity: 0.25; transform: translateY(32px); transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); }
+.build-section.built { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-draw, .wf-glow { stroke-dashoffset: 0; animation: none; }
+  .wf-accent, .wf-fill, .wf-dot, .wf-label, .rise { opacity: 1; transform: none; animation: none; }
+  .orbit, .orbit-counter, .particle { animation: none; }
+  .build-section { opacity: 1; transform: none; transition: none; }
+}
+
 /* ========================================
    FOCUS STYLES
    ======================================== */
