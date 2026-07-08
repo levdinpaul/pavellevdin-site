@@ -1,7 +1,8 @@
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { blogIndex } from '@/data/blog-index';
 import type { BlogCategory, BlogTag } from '@/types/blog';
+import { getInitialBlogList } from '@/data/blog-hydration';
 
 export interface BlogPostListItem {
   id: string;
@@ -17,6 +18,39 @@ export interface BlogPostListItem {
   featured: boolean;
   views: number;
   lang: string;
+}
+
+// Сборка списка постов для языка (индекс + контент-JSON). Вынесена из useBlog-эффекта,
+// чтобы её же мог вызвать SSR-пререндер (см. entry-server.tsx) — единый источник, без расхождений.
+export async function loadBlogListItems(currentLang: string): Promise<BlogPostListItem[]> {
+  const loadedPosts: BlogPostListItem[] = [];
+  for (const [id, entry] of Object.entries(blogIndex)) {
+    const translation = entry.translations[currentLang];
+    if (!translation) continue;
+    try {
+      const module = await import(`@/content/blog/${id}/${currentLang}.json`);
+      const data = module.default;
+      loadedPosts.push({
+        id,
+        slug: translation.slug,
+        title: data.title || translation.title,
+        excerpt: data.excerpt || translation.excerpt,
+        image: data.meta?.ogImage || '/blog-images/default.jpg',
+        author: data.author?.name || 'Pavel Levdin',
+        date: data.date || entry.date,
+        readTime: data.readTime || '5 мин',
+        category: data.category || entry.category,
+        tags: data.tags || entry.tags,
+        featured: data.featured || false,
+        views: data.views || 0,
+        lang: currentLang,
+      });
+    } catch (error) {
+      console.error(`Failed to load post ${id} in ${currentLang}:`, error);
+    }
+  }
+  loadedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return loadedPosts;
 }
 
 export interface UseBlogReturn {
@@ -75,67 +109,27 @@ export function useBlog(currentLang: string = 'ru'): UseBlogReturn {
   
   // ВСЕ ХУКИ ДОЛЖНЫ БЫТЬ ЗДЕСЬ, ДО ЛЮБЫХ УСЛОВИЙ!
   const { t } = useTranslation();
-  const [posts, setPosts] = useState<BlogPostListItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Начальный стейт — из дегидрированных данных (SSR/пререндер), иначе пусто (обычная SPA-навигация).
+  const [posts, setPosts] = useState<BlogPostListItem[]>(() => getInitialBlogList(currentLang));
+  const [loading, setLoading] = useState(() => getInitialBlogList(currentLang).length === 0);
+  // Если данные пришли из гидратации — пропускаем первый прогон эффекта (иначе мигание loading→data).
+  const skipInitialLoad = useRef(getInitialBlogList(currentLang).length > 0);
 
-  // ✅ ЛОГ 1: Проверяем с каким языком вызван хук
-  console.log('🔵 useBlog called with currentLang:', currentLang);
-
-  // useEffect после всех useState
   useEffect(() => {
+    if (skipInitialLoad.current) {
+      skipInitialLoad.current = false;
+      return;
+    }
+    let cancelled = false;
     async function loadPosts() {
       setLoading(true);
-      setPosts([]);
-      
-      const loadedPosts: BlogPostListItem[] = [];
-      
-      // ✅ ЛОГ 2: Проверяем что в индексе
-      console.log('🟡 blogIndex entries:', Object.entries(blogIndex).length);
-      
-      for (const [id, entry] of Object.entries(blogIndex)) {
-        const translation = entry.translations[currentLang];
-        
-        // ✅ ЛОГ 3: Проверяем найден ли перевод
-        if (!translation) {
-          console.warn(`❌ No translation for ${id} in ${currentLang}`);
-          continue;
-        }
-        
-        console.log(`✅ Found translation for ${id}:`, { slug: translation.slug, lang: currentLang });
-        
-        try {
-          const module = await import(`@/content/blog/${id}/${currentLang}.json`);
-          const data = module.default;
-          
-          loadedPosts.push({
-            id,
-            slug: translation.slug,
-            title: data.title || translation.title,
-            excerpt: data.excerpt || translation.excerpt,
-            image: data.meta?.ogImage || '/blog-images/default.jpg',
-            author: data.author?.name || 'Pavel Levdin',
-            date: data.date || entry.date,
-            readTime: data.readTime || '5 мин',
-            category: data.category || entry.category,
-            tags: data.tags || entry.tags,
-            featured: data.featured || false,
-            views: data.views || 0,
-            lang: currentLang
-          });
-        } catch (error) {
-          console.error(`Failed to load post ${id} in ${currentLang}:`, error);
-        }
-      }
-      
-      // ✅ ЛОГ 4: Итоговый результат
-      console.log('🟢 Loaded posts:', loadedPosts.map(p => ({ id: p.id, slug: p.slug, lang: p.lang })));
-      
-      loadedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      const loadedPosts = await loadBlogListItems(currentLang);
+      if (cancelled) return;
       setPosts(loadedPosts);
       setLoading(false);
     }
-    
     loadPosts();
+    return () => { cancelled = true; };
   }, [currentLang]);
 
   // Подсчёт категорий

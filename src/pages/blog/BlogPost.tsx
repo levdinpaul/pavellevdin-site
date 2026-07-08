@@ -2,9 +2,10 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Calendar, Clock, ArrowLeft, User, Eye, Globe } from 'lucide-react';
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { loadBlogPostBySlug } from '@/data/blog-loader';
 import { getSlugByIdAndLang } from '@/data/blog-index';
+import { getInitialBlogPost } from '@/data/blog-hydration';
 import { useBlog } from '@/hooks/useBlog';
 import { AuthorCard } from '@/components/blog/AuthorCard';
 import { NewsletterCTA } from '@/components/blog';
@@ -140,10 +141,11 @@ function BlogPostSkeleton() {
 export function BlogPost() {
   const { t, i18n } = useTranslation();
   const { slug, lang } = useParams<{ slug: string; lang: string }>();
-  const [post, setPost] = useState<LoadedPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  
   const currentLang = lang || 'ru';
+  // Начальный стейт — из дегидрированных данных (SSR/пререндер), иначе null (обычная SPA-навигация).
+  const [post, setPost] = useState<LoadedPost | null>(() => getInitialBlogPost(slug, currentLang) as LoadedPost | null);
+  const [loading, setLoading] = useState(() => !getInitialBlogPost(slug, currentLang));
+  const skipInitialLoad = useRef(!!getInitialBlogPost(slug, currentLang));
 
   useEffect(() => {
     if (i18n.language !== currentLang) {
@@ -154,17 +156,26 @@ export function BlogPost() {
   const { categories, tags, recentPosts, getCategoryBySlug } = useBlog(currentLang);
 
   const blogPath = `/${currentLang}/blog`;
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  // Детерминированный canonical-URL вместо window.location.href: он используется и в теле
+  // (ShareButtons) — иначе SSR('') ≠ клиент(реальный URL) → hydration mismatch.
+  const currentUrl = `https://pavellevdin.ru/${currentLang}/blog/${slug ?? ''}`;
 
   useEffect(() => {
+    if (skipInitialLoad.current) {
+      skipInitialLoad.current = false;
+      return;
+    }
+    let cancelled = false;
     async function loadPost() {
       if (!slug || !currentLang) return;
       setLoading(true);
       const loaded = await loadBlogPostBySlug(slug, currentLang);
+      if (cancelled) return;
       setPost(loaded as LoadedPost | null);
       setLoading(false);
     }
     loadPost();
+    return () => { cancelled = true; };
   }, [slug, currentLang]);
 
   if (loading) {

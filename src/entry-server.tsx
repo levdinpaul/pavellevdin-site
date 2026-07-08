@@ -6,12 +6,35 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from '@/hooks/useTheme';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { AppRoutes } from './App';
+import { loadBlogListItems } from '@/hooks/useBlog';
+import { loadBlogPostBySlug } from '@/data/blog-loader';
+import { setServerBlogData, type BlogHydrationData } from '@/data/blog-hydration';
 import i18n from './i18n';
 
 export interface RenderResult {
   html: string;
   head: string;
   htmlAttributes: string;
+  /** JSON для инъекции в window.__BLOG_DATA__ (клиентская гидратация блога); undefined для не-блог-маршрутов. */
+  dehydrate?: string;
+}
+
+// Загружает данные блога для маршрута, кладёт в SSR-стор (чтобы useBlog/BlogPost отрендерились
+// с данными) и возвращает JSON для window.__BLOG_DATA__. Для не-блог-маршрутов — null.
+async function prepareBlogData(url: string, lang: string): Promise<string | null> {
+  const isList = new RegExp(`^/${lang}/blog/?$`).test(url);
+  const postMatch = new RegExp(`^/${lang}/blog/([^/]+)/?$`).exec(url);
+  if (!isList && !postMatch) return null;
+
+  const list = await loadBlogListItems(lang);
+  const data: BlogHydrationData = { list: { [lang]: list } };
+  if (postMatch) {
+    const slug = postMatch[1];
+    const loaded = await loadBlogPostBySlug(slug, lang);
+    if (loaded) data.posts = { [`${lang}:${slug}`]: loaded as any };
+  }
+  setServerBlogData(data);
+  return JSON.stringify(data).replace(/</g, '\\u003c');
 }
 
 /**
@@ -29,6 +52,8 @@ export interface RenderResult {
  */
 export async function render(url: string, lang: string): Promise<RenderResult> {
   await i18n.changeLanguage(lang);
+
+  const dehydrate = await prepareBlogData(url, lang);
 
   const helmetContext: { helmet?: any } = {};
   const app = (
@@ -63,5 +88,8 @@ export async function render(url: string, lang: string): Promise<RenderResult> {
     : '';
   const htmlAttributes = h ? h.htmlAttributes.toString() : '';
 
-  return { html, head, htmlAttributes };
+  // Сбрасываем стор, чтобы данные не «протекли» в следующий маршрут пререндер-цикла.
+  setServerBlogData({});
+
+  return { html, head, htmlAttributes, dehydrate: dehydrate ?? undefined };
 }

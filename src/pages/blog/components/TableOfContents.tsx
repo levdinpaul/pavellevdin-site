@@ -1,43 +1,47 @@
 import { useMemo } from 'react';
 import { List } from 'lucide-react';
 
+function decodeEntities(s: string): string {
+  return s
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ');
+}
+
 export default function TableOfContents({ content }: { content: string }) {
   const items = useMemo(() => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(content, 'text/html');
-    
-    const seen = new Set<string>(); // отслеживаем дубликаты
-    
-    return Array.from(doc.querySelectorAll('h2, h3')).map((h, index) => {
-      // Генерируем базовый id
-      let baseId = h.id || h.textContent
-        ?.toLowerCase()
-        .trim()
-        .replace(/[^\w\s-]+/g, '')  // убрали дефис из исключений!
-        .replace(/\s+/g, '-')
-        .replace(/^-+|-+$/g, '')     // обрезаем крайние дефисы
-        .replace(/-+/g, '-') || '';  // сжимаем множественные дефисы
-      
-      // Если пустой — используем индекс
-      if (!baseId) {
-        baseId = `heading-${index}`;
-      }
-      
-      // Добавляем суффикс для дубликатов
+    // Изоморфный разбор regex-ом вместо DOMParser: на сервере (SSR) DOMParser недоступен,
+    // а один и тот же алгоритм на сервере и клиенте гарантирует совпадение → чистая гидрация.
+    const seen = new Set<string>();
+    const result: { id: string; text: string; level: number }[] = [];
+    const re = /<h([23])\b([^>]*)>([\s\S]*?)<\/h\1>/gi;
+    let m: RegExpExecArray | null;
+    let index = 0;
+    while ((m = re.exec(content)) !== null) {
+      const level = parseInt(m[1], 10);
+      const attrs = m[2] || '';
+      const text = decodeEntities((m[3] || '').replace(/<[^>]+>/g, '')).trim();
+
+      const idAttr = /\bid=["']([^"']+)["']/.exec(attrs);
+      let baseId = idAttr
+        ? idAttr[1]
+        : text
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s-]+/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .replace(/-+/g, '-');
+      if (!baseId) baseId = `heading-${index}`;
+
       let id = baseId;
       let counter = 1;
-      while (seen.has(id)) {
-        id = `${baseId}-${counter}`;
-        counter++;
-      }
+      while (seen.has(id)) { id = `${baseId}-${counter}`; counter++; }
       seen.add(id);
-      
-      return {
-        id,
-        text: h.textContent || '',
-        level: parseInt(h.tagName[1])
-      };
-    }).filter(item => item.text); // фильтруем только по тексту, не по id
+
+      if (text) result.push({ id, text, level });
+      index++;
+    }
+    return result;
   }, [content]);
   
   if (items.length === 0) return null;

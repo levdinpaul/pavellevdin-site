@@ -19,9 +19,24 @@ const PORT = 5055;
 // а не из puppeteer-capture. SSR даёт React-канонический HTML → гидрация на клиенте
 // проходит без regeneration → LCP не скачет на момент гидрации (см. src/entry-server.tsx).
 // head (title/canonical/og/JSON-LD) по-прежнему берём из puppeteer (Helmet на клиенте).
-// renderToPipeableStream резолвит React.lazy, поэтому SSR-им и ленивые СИНХРОННЫЕ страницы
-// (без async-данных из useEffect). Блог (async) и формы — отдельными шагами.
-const SSR_ROUTES = { '/ru': 'ru', '/ru/services': 'ru', '/ru/portfolio': 'ru' };
+// Какие маршруты рендерим настоящим React SSR (renderToPipeableStream резолвит React.lazy).
+// Блог использует dehydrate/hydrate (данные грузятся на сервере и сериализуются в window.__BLOG_DATA__).
+// Формы (contact/brief) — пока на puppeteer (отдельный осторожный шаг).
+function ssrLangForRoute(route) {
+  if (['/ru', '/ru/services', '/ru/portfolio', '/ru/blog'].includes(route)) return 'ru';
+  if (/^\/ru\/blog\/[^/]+$/.test(route)) return 'ru'; // отдельные посты (один сегмент, не category/tag)
+  return null;
+}
+
+// Вставляет инлайн-скрипт с дегидрированными данными ПЕРЕД модульным скриптом гидрации,
+// чтобы window.__BLOG_DATA__ был доступен до первого клиентского рендера.
+function injectDehydrate(html, json) {
+  const tag = `<script>window.__BLOG_DATA__=${json}</script>`;
+  const rootIdx = html.indexOf('<div id="root">');
+  const scriptIdx = html.indexOf('<script', rootIdx === -1 ? 0 : rootIdx);
+  if (scriptIdx === -1) return html.replace('</body>', `${tag}</body>`);
+  return html.slice(0, scriptIdx) + tag + '\n    ' + html.slice(scriptIdx);
+}
 
 // Заменяет внутренность <div id="root">…</div> на SSR-разметку, не трогая head и скрипты.
 function swapRootBody(html, bodyHtml) {
@@ -152,12 +167,14 @@ async function run() {
       html = html.split(`http://localhost:${PORT}`).join('https://pavellevdin.ru');
 
       // Для SSR-маршрутов подменяем тело #root на React-канонический HTML (чистая гидрация)
-      if (ssrRender && SSR_ROUTES[route]) {
+      const ssrLang = ssrLangForRoute(route);
+      if (ssrRender && ssrLang) {
         try {
-          const { html: ssrBody } = await ssrRender(route, SSR_ROUTES[route]);
+          const { html: ssrBody, dehydrate } = await ssrRender(route, ssrLang);
           if (ssrBody && ssrBody.length > 500) {
             html = swapRootBody(html, ssrBody);
-            console.log(`    ↳ SSR body (${ssrBody.length} симв.)`);
+            if (dehydrate) html = injectDehydrate(html, dehydrate);
+            console.log(`    ↳ SSR body (${ssrBody.length} симв.)${dehydrate ? ' + dehydrate' : ''}`);
           }
         } catch (e) {
           console.log(`  ⚠ SSR-рендер ${route} не удался, оставляю puppeteer-body: ${e.message}`);
