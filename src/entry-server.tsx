@@ -1,7 +1,7 @@
-
-import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router';
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Writable } from 'node:stream';
+import { renderToPipeableStream } from 'react-dom/server';
+import { StaticRouter } from 'react-router';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from '@/hooks/useTheme';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
@@ -19,15 +19,19 @@ export interface RenderResult {
  * React-канонический HTML → гидрация на клиенте проходит чисто (без regeneration),
  * поэтому LCP остаётся на первом paint пререндера, а не скачет на момент гидрации.
  *
- * ВНИМАНИЕ: renderToString синхронен и НЕ резолвит React.lazy/async-data —
- * поэтому пригоден для НЕ-lazy маршрутов (главная). Ленивые под-страницы
- * по-прежнему пререндерятся через puppeteer.
+ * Используем renderToPipeableStream + onAllReady (а не renderToString): он ДОЖИДАЕТСЯ
+ * резолва React.lazy, поэтому ленивые под-страницы (services/portfolio/…) рендерятся
+ * полностью, а не как Suspense-fallback. Рендерим тот же <AppRoutes>, что и клиент,
+ * → структура совпадает → гидрация чистая.
+ *
+ * ВНИМАНИЕ: onAllReady ждёт только ленивый КОД, а не данные из useEffect —
+ * страницы с async-данными (блог) требуют отдельной сериализации стейта.
  */
 export async function render(url: string, lang: string): Promise<RenderResult> {
   await i18n.changeLanguage(lang);
 
   const helmetContext: { helmet?: any } = {};
-  const html = renderToString(
+  const app = (
     <HelmetProvider context={helmetContext}>
       <ErrorBoundary>
         <ThemeProvider>
@@ -36,8 +40,20 @@ export async function render(url: string, lang: string): Promise<RenderResult> {
           </StaticRouter>
         </ThemeProvider>
       </ErrorBoundary>
-    </HelmetProvider>,
+    </HelmetProvider>
   );
+
+  const html: string = await new Promise((resolve, reject) => {
+    let buf = '';
+    const writable = new Writable({
+      write(chunk, _enc, cb) { buf += chunk.toString(); cb(); },
+      final(cb) { cb(); resolve(buf); },
+    });
+    const { pipe } = renderToPipeableStream(app, {
+      onAllReady() { pipe(writable); },
+      onError(err) { reject(err); },
+    });
+  });
 
   const h = helmetContext.helmet;
   const head = h

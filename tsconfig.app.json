@@ -30,5 +30,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "//": "entry-server.tsx — серверный (node:stream + SSR), собирается и валидируется через `vite build --ssr`; из браузерного tsc-проекта исключён, чтобы не тянуть node-типы в app-конфиг.",
+  "exclude": ["src/entry-server.tsx"]
 }

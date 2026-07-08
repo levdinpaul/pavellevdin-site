@@ -19,8 +19,9 @@ const PORT = 5055;
 // а не из puppeteer-capture. SSR даёт React-канонический HTML → гидрация на клиенте
 // проходит без regeneration → LCP не скачет на момент гидрации (см. src/entry-server.tsx).
 // head (title/canonical/og/JSON-LD) по-прежнему берём из puppeteer (Helmet на клиенте).
-// Только НЕ-lazy маршруты (главная): renderToString не резолвит React.lazy/async-data.
-const SSR_ROUTES = { '/ru': 'ru' };
+// renderToPipeableStream резолвит React.lazy, поэтому SSR-им и ленивые СИНХРОННЫЕ страницы
+// (без async-данных из useEffect). Блог (async) и формы — отдельными шагами.
+const SSR_ROUTES = { '/ru': 'ru', '/ru/services': 'ru', '/ru/portfolio': 'ru' };
 
 // Заменяет внутренность <div id="root">…</div> на SSR-разметку, не трогая head и скрипты.
 function swapRootBody(html, bodyHtml) {
