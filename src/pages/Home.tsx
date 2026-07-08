@@ -1,15 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { Hero } from '@/sections/Hero';
-import { About } from '@/sections/About';
-import { TechStack } from '@/sections/TechStack';
-import { Services } from '@/sections/Services';
-import { DigitalEcosystem } from '@/sections/DigitalEcosystem';
-import { Portfolio } from '@/sections/Portfolio';
-import { Advantages } from '@/sections/Advantages';
-import { Testimonials } from '@/sections/Testimonials';
-import { LatestArticles } from '@/sections/LatestArticles';
-import { CTA } from '@/sections/CTA';
+import { HomeScene } from '@/sections/digitalbau/HomeScene';
 
 export function Home() {
   const { i18n } = useTranslation();
@@ -75,16 +66,7 @@ export function Home() {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      <Hero />
-      <About />
-      <Portfolio />
-      <Services />
-      <TechStack />
-      <DigitalEcosystem />
-      <Advantages />
-      <Testimonials />
-      <LatestArticles />
-      <CTA />
+      <HomeScene />
     </>
   );
 }

@@ -196,6 +196,19 @@
 
 .post-row:hover span:nth-child(2) { color: var(--accent-strong) !important; }
 
+/* Homepage responsive grids */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr !important; }
+  .hero-wireframe { max-width: 420px; }
+  .two-col, .work-grid { grid-template-columns: 1fr !important; }
+  .work-grid > a { aspect-ratio: 4 / 3 !important; grid-row: auto !important; }
+  .process-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .process-grid > li { border-right: none !important; }
+}
+@media (max-width: 520px) {
+  .process-grid { grid-template-columns: 1fr !important; }
+}
+
 /* section that constructs into view on scroll */
 .build-section { opacity: 0.25; transform: translateY(32px); transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); }
 .build-section.built { opacity: 1; transform: none; }
