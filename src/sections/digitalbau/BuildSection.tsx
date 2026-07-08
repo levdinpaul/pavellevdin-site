@@ -1,8 +1,4 @@
 import { useRef, useEffect, type ReactNode, type CSSProperties } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface BuildSectionProps {
   id?: string;
@@ -11,24 +7,37 @@ interface BuildSectionProps {
   style?: CSSProperties;
 }
 
-/** Секция, которая «строится» при попадании в зону скролла (GSAP ScrollTrigger → класс .built). */
+/**
+ * Секция, которая «строится» при попадании в зону скролла (класс .built → CSS-переход).
+ * Детектор — нативный IntersectionObserver: он не читает layout пачкой и на порядок дешевле
+ * GSAP ScrollTrigger по main-thread нагрузке (критично для TBT/Style&Layout на мобиле).
+ */
 export function BuildSection({ id, label, children, style }: BuildSectionProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      typeof IntersectionObserver === 'undefined'
+    ) {
       el.classList.add('built');
       return;
     }
-    const st = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 80%',
-      once: true,
-      onEnter: () => el.classList.add('built'),
-    });
-    return () => st.kill();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('built');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -20% 0px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   return (

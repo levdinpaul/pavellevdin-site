@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Check, Cookie } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -35,11 +34,8 @@ export function CookiePreloader({ onAccept, onDecline }: CookieConsentProps) {
   const text = fallback[lang];
 
   return (
-    <motion.aside
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 24 }}
-      className="fixed bottom-4 left-4 right-4 z-[80] mx-auto max-w-3xl rounded-2xl border border-white/10 bg-slate-950/90 p-4 text-white shadow-2xl backdrop-blur-2xl"
+    <aside
+      className="rise fixed bottom-4 left-4 right-4 z-[80] mx-auto max-w-3xl rounded-2xl border border-white/10 bg-slate-950/90 p-4 text-white shadow-2xl backdrop-blur-2xl"
     >
       <div className="grid gap-4 sm:grid-cols-[auto_1fr_auto] sm:items-center">
         <div className="grid h-11 w-11 place-items-center rounded-xl bg-cyan-300/10 text-cyan-100">
@@ -59,6 +55,6 @@ export function CookiePreloader({ onAccept, onDecline }: CookieConsentProps) {
           </Button>
         </div>
       </div>
-    </motion.aside>
+    </aside>
   );
 }

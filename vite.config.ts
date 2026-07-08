@@ -19,10 +19,16 @@ export default defineConfig(({ command }) => ({
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          charts: ['recharts'],
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+          // Изолируем ТОЛЬКО «листовые» ленивые библиотеки: они импортируют react в один
+          // сторону, но vendor их не импортирует → циклов между чанками нет.
+          if (id.includes('gsap')) return 'gsap';
+          if (id.includes('framer-motion') || id.includes('motion-dom') || id.includes('motion-utils')) return 'motion';
+          if (id.includes('recharts') || id.includes('d3-') || id.includes('victory')) return 'charts';
+          // Всё остальное (react, react-dom, router, i18next, radix, helmet…) — в один чанк,
+          // чтобы исключить меж-вендорные циклы и ошибки порядка инициализации (TDZ / createContext undefined).
+          return 'vendor';
         },
       },
     },

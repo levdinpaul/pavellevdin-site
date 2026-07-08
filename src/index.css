@@ -212,7 +212,15 @@
 }
 
 /* section that constructs into view on scroll */
-.build-section { opacity: 0.25; transform: translateY(32px); transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); }
+/* content-visibility: auto — браузер пропускает layout/paint секций ниже первого экрана,
+   пока они не приблизятся к вьюпорту. Резко снижает Style&Layout при загрузке длинной страницы.
+   contain-intrinsic-size резервирует высоту, чтобы не появлялся CLS/скачок скроллбара. */
+.build-section {
+  opacity: 0.25; transform: translateY(32px);
+  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
+}
 .build-section.built { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {

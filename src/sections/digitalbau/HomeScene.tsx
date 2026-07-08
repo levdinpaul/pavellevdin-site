@@ -56,14 +56,6 @@ function Hero({ copy, go }: { copy: HomeCopy; go: (p: string) => void }) {
         backgroundImage: 'var(--bg-grid)', backgroundSize: 'var(--grid-size) var(--grid-size)',
       }}
     >
-      <img
-        src="/images/hero/hero-bg.webp" alt="" aria-hidden="true" fetchPriority="high"
-        style={{
-          position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          opacity: 0.45, transform: `scale(1.05) translate(${mx * 6}px, ${my * 5}px)`,
-          transition: 'transform 600ms var(--ease-out)',
-        }}
-      />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, var(--bg-0) 18%, rgba(6,8,16,0.55) 55%, rgba(6,8,16,0.15) 100%)' }} />
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 70% 55% at 68% 45%, rgba(69,196,255,0.07), transparent 65%)' }} />
       <div className="hero-grid" style={{ maxWidth: 'var(--container-max)', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 48, alignItems: 'center', position: 'relative' }}>
@@ -72,7 +64,7 @@ function Hero({ copy, go }: { copy: HomeCopy; go: (p: string) => void }) {
             <Badge>Bremen · DE EN RU</Badge>
             <Badge tone="neutral">Bauplan Rev. 2.0</Badge>
           </div>
-          <h1 className="rise" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-hero)', fontWeight: 800, lineHeight: 0.95, letterSpacing: '-0.03em', color: 'var(--ink-1)', margin: 0 }}>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-hero)', fontWeight: 800, lineHeight: 0.95, letterSpacing: '-0.03em', color: 'var(--ink-1)', margin: 0 }}>
             {copy.heroLine1}<br />
             <span className="hero-outline">{copy.heroLine2}</span><br />
             <span style={{ color: 'var(--accent)' }}>{copy.heroLine3}</span>
