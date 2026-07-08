@@ -5,52 +5,22 @@ import { useCookieConsent } from '@/hooks/useCookieConsent';
 
 const labels = {
   de: {
-    pages: 'Seiten',
-    contact: 'Kontakt',
-    legal: 'Rechtliches',
-    home: 'Start',
-    services: 'Leistungen',
-    portfolio: 'Projekte',
-    brief: 'Konfigurator',
-    card: 'Online-Visitenkarte',
-    blog: 'Blog',
-    imprint: 'Impressum',
-    privacy: 'Datenschutz',
-    cookies: 'Cookie-Einstellungen',
-    tagline: 'Web Coding, SEO, AI Search, Google Business, Social Media, Analytics und Automatisierung fuer Unternehmen.',
-    rights: 'Alle Rechte vorbehalten.',
+    ready: 'System vollständig — bereit für Anfragen',
+    pages: 'Seiten', contact: 'Kontakt', legal: 'Rechtliches',
+    services: 'Leistungen', portfolio: 'Projekte', brief: 'Konfigurator', card: 'Visitenkarte', blog: 'Blog',
+    imprint: 'Impressum', privacy: 'Datenschutz', cookies: 'Cookie-Einstellungen', rights: 'Alle Rechte vorbehalten.',
   },
   en: {
-    pages: 'Pages',
-    contact: 'Contact',
-    legal: 'Legal',
-    home: 'Home',
-    services: 'Services',
-    portfolio: 'Work',
-    brief: 'Configurator',
-    card: 'Online business card',
-    blog: 'Blog',
-    imprint: 'Imprint',
-    privacy: 'Privacy',
-    cookies: 'Cookie settings',
-    tagline: 'Web coding, SEO, AI Search, Google Business, social media, analytics and automation for businesses.',
-    rights: 'All rights reserved.',
+    ready: 'System complete — ready for enquiries',
+    pages: 'Pages', contact: 'Contact', legal: 'Legal',
+    services: 'Services', portfolio: 'Work', brief: 'Configurator', card: 'Business card', blog: 'Blog',
+    imprint: 'Imprint', privacy: 'Privacy', cookies: 'Cookie settings', rights: 'All rights reserved.',
   },
   ru: {
-    pages: 'Страницы',
-    contact: 'Контакты',
-    legal: 'Документы',
-    home: 'Главная',
-    services: 'Услуги',
-    portfolio: 'Портфолио',
-    brief: 'Конфигуратор',
-    card: 'Онлайн-визитка',
-    blog: 'Блог',
-    imprint: 'Реквизиты',
-    privacy: 'Политика конфиденциальности',
-    cookies: 'Настройки cookie',
-    tagline: 'Веб-кодинг, SEO, AI Search, Google Business, соцсети, аналитика и автоматизация для бизнеса.',
-    rights: 'Все права защищены.',
+    ready: 'Система готова — принимаю заявки',
+    pages: 'Страницы', contact: 'Контакты', legal: 'Документы',
+    services: 'Услуги', portfolio: 'Портфолио', brief: 'Конфигуратор', card: 'Онлайн-визитка', blog: 'Блог',
+    imprint: 'Реквизиты', privacy: 'Политика', cookies: 'Настройки cookie', rights: 'Все права защищены.',
   },
 };
 
@@ -62,22 +32,23 @@ function VKIcon({ className }: { className?: string }) {
   );
 }
 
+const linkStyle: React.CSSProperties = { fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--ink-2)', textDecoration: 'none', transition: 'color var(--transition-fast)' };
+const colLabelStyle: React.CSSProperties = { fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--ink-3)', margin: '0 0 16px' };
+
 export function Footer() {
   const { i18n } = useTranslation();
-  const currentYear = new Date().getFullYear();
+  const currentYear = 2026;
   const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru') as keyof typeof labels;
   const text = labels[lang];
   const { reset } = useCookieConsent();
 
   const navLinks = [
-    { path: `/${lang}`, label: text.home },
     { path: `/${lang}/services`, label: text.services },
     { path: `/${lang}/portfolio`, label: text.portfolio },
     { path: `/${lang}/brief`, label: text.brief },
     { path: `/${lang}/business-card`, label: text.card },
     { path: `/${lang}/blog`, label: text.blog },
   ];
-
   const socialLinks = [
     { icon: Send, href: 'https://t.me/PavelLevdin', label: 'Telegram' },
     { icon: Instagram, href: 'https://instagram.com/', label: 'Instagram' },
@@ -87,72 +58,53 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-white/10 bg-slate-950 text-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 md:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_.8fr_.8fr_.8fr]">
-          <div>
-            <Link to={`/${lang}`} className="flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-xl border border-cyan-300/25 bg-cyan-300/12 font-black text-cyan-100">
-                PL
-              </span>
-              <span>
-                <span className="block font-black">Innovativ Digitalbau</span>
-                <span className="block text-xs text-cyan-100/58">Web Coding · SEO · Automation</span>
-              </span>
-            </Link>
-            <p className="mt-5 max-w-sm text-sm leading-6 text-white/55">{text.tagline}</p>
-            <div className="mt-5 flex items-center gap-2">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel="noopener noreferrer"
-                  className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.045] text-white/66 transition hover:border-cyan-300/30 hover:text-cyan-100"
-                  aria-label={link.label}
-                >
-                  <link.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
-          </div>
+    <footer style={{ position: 'relative', borderTop: '1px solid var(--border-1)', background: 'var(--bg-0)', padding: '80px var(--section-padding-x) 40px' }}>
+      <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, textAlign: 'center', marginBottom: 56 }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--success)' }}>● {text.ready}</span>
+          <Link to={`/${lang}`} style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(38px, 5.2vw, 68px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--ink-1)', textShadow: '0 0 48px var(--accent-ring)', textDecoration: 'none' }}>
+            PL<span style={{ color: 'var(--accent)' }}>·</span>Digitalbau
+          </Link>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em', color: 'var(--ink-3)' }}>PAVEL LEVDIN · BREMEN · DE EN RU</span>
+        </div>
 
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 40, paddingTop: 40, borderTop: '1px solid var(--border-1)' }}>
           <div>
-            <h3 className="text-sm font-black uppercase tracking-wide text-white/82">{text.pages}</h3>
-            <ul className="mt-4 grid gap-2">
-              {navLinks.map((link) => (
-                <li key={link.path}>
-                  <Link to={link.path} className="text-sm text-white/56 transition hover:text-cyan-100">
-                    {link.label}
-                  </Link>
-                </li>
+            <p style={colLabelStyle}>{text.pages}</p>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {navLinks.map((l) => (
+                <li key={l.path}><Link to={l.path} style={linkStyle} className="footer-link">{l.label}</Link></li>
               ))}
             </ul>
           </div>
-
           <div>
-            <h3 className="text-sm font-black uppercase tracking-wide text-white/82">{text.contact}</h3>
-            <ul className="mt-4 grid gap-2 text-sm text-white/56">
-              <li><a className="hover:text-cyan-100" href="https://t.me/PavelLevdin" target="_blank" rel="noopener noreferrer">Telegram: @PavelLevdin</a></li>
-              <li><a className="hover:text-cyan-100" href="https://wa.me/4917643141306" target="_blank" rel="noopener noreferrer">WhatsApp: +49 176 43141306</a></li>
-              <li><a className="hover:text-cyan-100" href="mailto:levdin.pavel@yandex.ru">levdin.pavel@yandex.ru</a></li>
-              <li>Bremen, Germany</li>
+            <p style={colLabelStyle}>{text.contact}</p>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <li><a href="https://t.me/PavelLevdin" target="_blank" rel="noopener noreferrer" style={linkStyle} className="footer-link">Telegram: @PavelLevdin</a></li>
+              <li><a href="https://wa.me/4917643141306" target="_blank" rel="noopener noreferrer" style={linkStyle} className="footer-link">WhatsApp: +49 176 43141306</a></li>
+              <li><a href="mailto:levdin.pavel@yandex.ru" style={linkStyle} className="footer-link">levdin.pavel@yandex.ru</a></li>
+              <li style={{ ...linkStyle, color: 'var(--ink-3)' }}>Bremen, Germany</li>
             </ul>
           </div>
-
           <div>
-            <h3 className="text-sm font-black uppercase tracking-wide text-white/82">{text.legal}</h3>
-            <ul className="mt-4 grid gap-2">
-              <li><Link to={`/${lang}/imprint`} className="text-sm text-white/56 hover:text-cyan-100">{text.imprint}</Link></li>
-              <li><Link to={`/${lang}/privacy`} className="text-sm text-white/56 hover:text-cyan-100">{text.privacy}</Link></li>
-              <li><button type="button" onClick={reset} className="text-left text-sm text-white/56 transition hover:text-cyan-100">{text.cookies}</button></li>
+            <p style={colLabelStyle}>{text.legal}</p>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <li><Link to={`/${lang}/imprint`} style={linkStyle} className="footer-link">{text.imprint}</Link></li>
+              <li><Link to={`/${lang}/privacy`} style={linkStyle} className="footer-link">{text.privacy}</Link></li>
+              <li><button type="button" onClick={reset} style={{ ...linkStyle, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' }} className="footer-link">{text.cookies}</button></li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/42 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {currentYear} PL Innovativ Digitalbau. {text.rights}</p>
-          <Link to={`/${lang}/admin`} className="text-white/18 hover:text-white/30" aria-hidden="true">.</Link>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, marginTop: 48, paddingTop: 24, borderTop: '1px solid var(--border-1)', flexWrap: 'wrap' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.06em', color: 'var(--ink-3)' }}>© {currentYear} PL Innovativ Digitalbau. {text.rights}</span>
+          <div style={{ display: 'flex', gap: 8 }}>
+            {socialLinks.map((s) => (
+              <a key={s.label} href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" aria-label={s.label} className="footer-social" style={{ display: 'grid', placeItems: 'center', width: 36, height: 36, borderRadius: 'var(--radius-md)', border: '1px solid var(--border-1)', color: 'var(--ink-3)', transition: 'all var(--transition-fast)' }}>
+                <s.icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
