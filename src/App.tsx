@@ -21,6 +21,8 @@ function ScrollToTop() {
 
 // Определяем язык браузера
 function detectBrowserLanguage(): string {
+  // SSR-guard: во время renderToString navigator нет — отдаём дефолт фазы 1 (ru).
+  if (typeof navigator === 'undefined') return 'ru';
   const browserLang = navigator.language || (navigator as { userLanguage?: string }).userLanguage || 'de';
   const lang = browserLang.slice(0, 2).toLowerCase();
   const supportedLangs = ['ru', 'de', 'en'];
@@ -94,7 +96,9 @@ function AdminFallback() {
   );
 }
 
-function AppContent() {
+// Router-agnostic содержимое приложения: маршруты + cookie-баннер.
+// Клиент оборачивает это в <BrowserRouter>, SSR-пререндер — в <StaticRouter> (см. entry-server.tsx).
+export function AppRoutes() {
   const { consent, isLoaded, accept, decline } = useCookieConsent();
 
   useEffect(() => {
@@ -102,7 +106,7 @@ function AppContent() {
   }, [consent]);
 
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Navigate to={`/${detectBrowserLanguage()}`} replace />} />
@@ -138,6 +142,14 @@ function AppContent() {
         </Route>
       </Routes>
       {isLoaded && consent === null && <CookiePreloader onAccept={accept} onDecline={decline} />}
+    </>
+  );
+}
+
+function AppContent() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

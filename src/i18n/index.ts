@@ -71,6 +71,15 @@ i18n
     resources,
     fallbackLng: 'ru',
     debug: false,
+    // Ресурсы заданы инлайн (без async-backend), поэтому инициализируем СИНХРОННО
+    // и БЕЗ Suspense. Иначе при гидрации пререндера useTranslation() успевал «подвиснуть»
+    // на async-init → клиент рендерил Suspense-fallback (спиннер) вместо контента →
+    // hydration mismatch → React перерисовывал всё дерево → LCP скакал на момент гидрации
+    // (~12.6s на мобиле). Синхронный init без Suspense убирает рассинхрон.
+    initImmediate: false,
+    react: {
+      useSuspense: false,
+    },
     interpolation: {
       escapeValue: false,
     },

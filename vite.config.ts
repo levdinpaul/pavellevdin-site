@@ -26,9 +26,15 @@ export default defineConfig(({ command }) => ({
           if (id.includes('gsap')) return 'gsap';
           if (id.includes('framer-motion') || id.includes('motion-dom') || id.includes('motion-utils')) return 'motion';
           if (id.includes('recharts') || id.includes('d3-') || id.includes('victory')) return 'charts';
-          // Всё остальное (react, react-dom, router, i18next, radix, helmet…) — в один чанк,
-          // чтобы исключить меж-вендорные циклы и ошибки порядка инициализации (TDZ / createContext undefined).
-          return 'vendor';
+          // Ядро, нужное на КАЖДОЙ странице (в т.ч. при гидрации главной) — держим одним
+          // чанком, чтобы исключить меж-вендорные циклы и TDZ (createContext undefined).
+          if (/[\\/]node_modules[\\/](react|react-dom|scheduler|react-router|react-router-dom|@remix-run[\\/]router|use-sync-external-store|i18next|react-i18next|i18next-browser-languagedetector|react-helmet-async|clsx|tailwind-merge|class-variance-authority)[\\/]/.test(id)) {
+            return 'vendor';
+          }
+          // Всё остальное (radix, react-hook-form, zod, embla, date-fns, axios, sonner, vaul…)
+          // используется только ленивыми маршрутами (формы/блог/админка) — отдаём Rollup на
+          // авто-сплит: эти либы уедут в чанки своих маршрутов и НЕ грузятся на главной.
+          return undefined;
         },
       },
     },

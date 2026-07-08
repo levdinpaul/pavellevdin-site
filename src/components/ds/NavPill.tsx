@@ -30,8 +30,11 @@ export function NavPill({
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
         padding: 6, borderRadius: 'var(--radius-pill)',
-        background: 'var(--glass-fill)', border: '1px solid var(--glass-border)',
-        backdropFilter: 'blur(var(--glass-blur))', WebkitBackdropFilter: 'blur(var(--glass-blur))',
+        /* Плотный полупрозрачный фон вместо backdrop-blur: пилюля всегда на первом экране,
+           а blur пересчитывался бы каждый кадр (дорогой paint на мобиле). Стекло сохраняем
+           через плотность фона + бордер + тень. */
+        background: 'linear-gradient(180deg, rgba(20,25,38,0.94), rgba(12,16,26,0.94))',
+        border: '1px solid var(--glass-border)',
         boxShadow: 'var(--shadow-overlay)',
         ...style,
       }}

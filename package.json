@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "prerender": "node scripts/prerender.cjs",
-    "build:static": "tsc -b && vite build && node scripts/generate-turbo-feed.cjs && node scripts/prerender.cjs",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-server",
+    "build:static": "tsc -b && vite build && npm run build:ssr && node scripts/generate-turbo-feed.cjs && node scripts/prerender.cjs",
     "lint": "eslint .",
     "preview": "vite preview",
+    "preview:static": "node scripts/serve-static.cjs",
     "admin-server": "node scripts/server.js"
   },
   "dependencies": {

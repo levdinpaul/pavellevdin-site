@@ -8,11 +8,31 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { pathToFileURL } = require('url');
 const puppeteer = require('puppeteer');
 
 const projectRoot = path.join(__dirname, '..');
 const dist = path.join(projectRoot, 'dist');
 const PORT = 5055;
+
+// Маршруты, для которых тело #root берём из НАСТОЯЩЕГО React SSR (renderToString),
+// а не из puppeteer-capture. SSR даёт React-канонический HTML → гидрация на клиенте
+// проходит без regeneration → LCP не скачет на момент гидрации (см. src/entry-server.tsx).
+// head (title/canonical/og/JSON-LD) по-прежнему берём из puppeteer (Helmet на клиенте).
+// Только НЕ-lazy маршруты (главная): renderToString не резолвит React.lazy/async-data.
+const SSR_ROUTES = { '/ru': 'ru' };
+
+// Заменяет внутренность <div id="root">…</div> на SSR-разметку, не трогая head и скрипты.
+function swapRootBody(html, bodyHtml) {
+  const openTag = '<div id="root">';
+  const openIdx = html.indexOf(openTag);
+  if (openIdx === -1) return html;
+  const afterOpen = openIdx + openTag.length;
+  const scriptIdx = html.indexOf('<script', afterOpen);
+  const closeIdx = html.lastIndexOf('</div>', scriptIdx === -1 ? html.length : scriptIdx);
+  if (closeIdx === -1 || closeIdx < afterOpen) return html;
+  return html.slice(0, afterOpen) + bodyHtml + html.slice(closeIdx);
+}
 
 const MIME = {
   '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript',
@@ -89,6 +109,19 @@ async function run() {
   ];
   for (const slug of getBlogSlugs()) routes.push(`/ru/blog/${slug}`);
 
+  // Загружаем SSR-рендер (ESM-бандл) для маршрутов из SSR_ROUTES
+  let ssrRender = null;
+  const ssrEntry = path.join(projectRoot, 'dist-server', 'entry-server.js');
+  if (fs.existsSync(ssrEntry)) {
+    try {
+      ({ render: ssrRender } = await import(pathToFileURL(ssrEntry).href));
+    } catch (e) {
+      console.log(`  ⚠ SSR-модуль не загружен (fallback на puppeteer-body): ${e.message}`);
+    }
+  } else {
+    console.log('  ⚠ dist-server/entry-server.js нет — запустите vite build --ssr. Body через puppeteer.');
+  }
+
   const server = startServer();
   const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
 
@@ -116,6 +149,19 @@ async function run() {
       html = dedupHead(html, meta);
       // Заменяем origin пререндер-сервера на боевой домен (утечки в canonical/og:url и т.п.)
       html = html.split(`http://localhost:${PORT}`).join('https://pavellevdin.ru');
+
+      // Для SSR-маршрутов подменяем тело #root на React-канонический HTML (чистая гидрация)
+      if (ssrRender && SSR_ROUTES[route]) {
+        try {
+          const { html: ssrBody } = await ssrRender(route, SSR_ROUTES[route]);
+          if (ssrBody && ssrBody.length > 500) {
+            html = swapRootBody(html, ssrBody);
+            console.log(`    ↳ SSR body (${ssrBody.length} симв.)`);
+          }
+        } catch (e) {
+          console.log(`  ⚠ SSR-рендер ${route} не удался, оставляю puppeteer-body: ${e.message}`);
+        }
+      }
 
       const outDir = path.join(dist, route.replace(/^\//, ''));
       fs.mkdirSync(outDir, { recursive: true });

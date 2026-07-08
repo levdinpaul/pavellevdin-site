@@ -163,15 +163,17 @@ export function HomeScene() {
             <circle cx="0" cy="0" r="160" fill="none" stroke="var(--line-blueprint-faint)" strokeDasharray="3 6" />
             <circle cx="0" cy="0" r="120" fill="none" stroke="var(--line-blueprint-faint)" strokeDasharray="3 6" />
             {STACK_NODES.map((n) => {
-              const x = Math.cos((n.a * Math.PI) / 180) * n.r;
-              const y = Math.sin((n.a * Math.PI) / 180) * n.r;
+              // Округляем: Math.cos(-90°)≈6e-15 → координата в научной нотации, которую
+              // SSR и браузерный DOM сериализуют по-разному → hydration attribute mismatch.
+              const x = Math.round(Math.cos((n.a * Math.PI) / 180) * n.r * 100) / 100;
+              const y = Math.round(Math.sin((n.a * Math.PI) / 180) * n.r * 100) / 100;
               return <line key={n.label} x1="0" y1="0" x2={x} y2={y} stroke="var(--line-blueprint-faint)" />;
             })}
           </svg>
           <div className="orbit" style={{ position: 'absolute', width: 480, height: 480, maxWidth: '100%' }}>
             {STACK_NODES.map((n) => {
-              const x = Math.cos((n.a * Math.PI) / 180) * n.r;
-              const y = Math.sin((n.a * Math.PI) / 180) * n.r;
+              const x = Math.round(Math.cos((n.a * Math.PI) / 180) * n.r * 100) / 100;
+              const y = Math.round(Math.sin((n.a * Math.PI) / 180) * n.r * 100) / 100;
               return (
                 <span key={n.label} className="orbit-counter" style={{ position: 'absolute', left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)`, transform: 'translate(-50%, -50%)' }}>
                   <Badge tone="neutral" style={{ background: 'var(--bg-2)', boxShadow: 'var(--shadow-card)' }}>{n.label}</Badge>

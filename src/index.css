@@ -230,6 +230,19 @@
   .build-section { opacity: 1; transform: none; transition: none; }
 }
 
+/* Мобильный (≤768px, 4× CPU-throttle) — рендерим сцену статически-готовой:
+   draw-анимация вайрфрейма, бесконечное вращение орбиты и частицы дороги на слабом CPU
+   (непрерывный composite/paint держит main-thread занятым → TBT). Desktop остаётся полным.
+   Вайрфрейм замораживаем в финальном состоянии (выглядит собранным), орбиту стопим,
+   частицы прячем. Одноразовый .rise-вход текста оставляем — он дёшев (GPU, один раз). */
+@media (max-width: 768px) {
+  .wf-draw, .wf-glow { stroke-dashoffset: 0; animation: none; }
+  .wf-glow { filter: none; }
+  .wf-accent, .wf-fill, .wf-dot, .wf-label { opacity: 1; animation: none; }
+  .orbit, .orbit-counter { animation: none; }
+  .particle { display: none; }
+}
+
 /* ========================================
    FOCUS STYLES
    ======================================== */

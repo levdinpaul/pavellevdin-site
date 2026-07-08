@@ -5,6 +5,7 @@ scripts/node_modules/
 # build output
 dist/
 dist-ssr/
+dist-server/
 *.local
 
 # env & secrets
