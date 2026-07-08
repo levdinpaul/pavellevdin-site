@@ -1,5 +1,37 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-07-09 — React SSR-пререндер всей /ru-выдачи
+
+### Контекст (что изменилось с 2026-06-13)
+Прод-домен теперь **pavellevdin.ru**, основной язык **ru** (фаза 1 — РФ/Яндекс, см. auto-memory
+`portfolio-target-market-ru`). Миграция на Next.js (план прошлой сессии) **НЕ делалась** — вместо неё
+на текущем React 19 + Vite внедрён честный **React SSR-пререндер**. Главная — новый blueprint-дизайн
+(`sections/digitalbau/HomeScene`), под-страницы пока в старом стиле (но SSR-чистые).
+
+### Что сделано (5 коммитов на ветке redesign-digitalbau, билд зелёный)
+1. **`5b6d2b65` главная** — корень тормозов был не дизайн, а сломанная гидрация. Фиксы: i18n
+   `initImmediate:false`+`useSuspense:false` (убрал Suspense-fallback при гидрации); настоящий SSR
+   (`src/entry-server.tsx` renderToPipeableStream) вместо puppeteer-capture; `prerender.cjs` подменяет
+   тело `#root`. Результат: гидрация чистая, **mobile 30→61 / desktop 64→86, TBT 2400→220ms, CLS 0**.
+2. **`54143c99` services+portfolio** — renderToPipeableStream+onAllReady резолвит React.lazy.
+3. **`891e9510` блог** — dehydrate/hydrate: prerender грузит данные, инжектит `window.__BLOG_DATA__`,
+   `useBlog`/`BlogPost` берут из него начальный стейт. TOC переписан на изоморфный regex (был DOMParser).
+4. **`b716bb2b` contact+brief** — формы неконтролируемые (FormData + fetch в onSubmit), SSR трогает
+   только разметку. Лид-захват проверен отправкой обеих форм (перехват `/api/lead`) — работает.
+5. **`8014387` imprint+privacy+business-card** — статичные страницы. Итог: **10/10 /ru-маршрутов чисто**.
+
+### Проверка
+Мерить перф/гидрацию через `npm run preview:static` (порт 4188, мимикрия Apache DirectoryIndex),
+НЕ `vite preview` (он отдаёт пустой SPA-shell). Все 10 маршрутов — прямая загрузка = чистая гидрация,
+0 ошибок в консоли. Визуал (скрины) и функционал (nav/⌘K/формы/блог) — без регрессий.
+
+### Что осталось (follow-up, в BACKLOG)
+- Lantern (движок PageSpeed) занижает mobile LCP (12s против реальных 4.7s applied / 1.7s observed) —
+  привязывает LCP к JS SPA. Для фазы-1 полевой перф важнее лаб-числа.
+- Пререндерятся только `/ru/*`. Фаза 2 (DE/EN на pavellevdin.dev) — добавить /de,/en в SSR_ROUTES/prerender.
+- Blog `category/*` и `tag/*` не SSR-ятся (не в списке пререндер-маршрутов) — при желании добавить.
+- Технические детали — в `LEARNINGS.md`.
+
 ## Сессия 2026-06-13
 
 ### Контекст проекта
