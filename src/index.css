@@ -156,6 +156,12 @@
   color: hsl(var(--foreground));
 }
 
+/* NavPill — на узких экранах прячем инлайн-ссылки (остаётся ⌘K / язык / CTA / бургер → меню) */
+@media (max-width: 640px) {
+  .navpill-links, .navpill-sep { display: none !important; }
+  .navpill-cta { padding: 9px 14px !important; }
+}
+
 /* ========================================
    FOCUS STYLES
    ======================================== */

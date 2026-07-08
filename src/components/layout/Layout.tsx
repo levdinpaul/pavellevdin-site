@@ -1,9 +1,8 @@
 // src/components/layout/Layout.tsx
 
 import { Helmet } from 'react-helmet-async';
-import { Header } from './Header';
+import { SiteNav } from './SiteNav';
 import { Footer } from './Footer';
-import { ScrollProgress } from '../ui-custom/ScrollProgress';
 import { Children, isValidElement, type ReactElement } from 'react';
 
 export interface LayoutProps {
@@ -55,7 +54,7 @@ export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
     );
   }
 
-  const baseTitle = 'Pavel Levdin - Full-Stack Developer';
+  const baseTitle = 'PL·Digitalbau — Pavel Levdin';
   const title = pageTitle ? `${pageTitle} | ${baseTitle}` : baseTitle;
   const description = pageDescription || 'Professional web developer specializing in modern websites and web applications.';
 
@@ -66,17 +65,8 @@ export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
         <meta name="description" content={description} />
       </Helmet>
       <div className="min-h-screen bg-background text-foreground flex flex-col">
-        <ScrollProgress />
-        <Header />
-        <main className="flex-1 flex flex-col">
-          {children ? (
-            children
-          ) : (
-            <div style={{ color: 'red', fontSize: 24, padding: 20, textAlign: 'center' }}>
-              ⚠️ NO CHILDREN! ⚠️
-            </div>
-          )}
-        </main>
+        <SiteNav />
+        <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
       </div>
     </>
