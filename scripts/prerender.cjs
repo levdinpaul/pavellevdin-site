@@ -25,7 +25,7 @@ const PORT = 5055;
 function ssrLangForRoute(route) {
   // Формы (contact/brief) безопасны: неконтролируемые нативные <form>, отправка через fetch
   // в клиентском onSubmit (после гидрации) — SSR трогает только разметку, не код заявки.
-  const staticRoutes = ['/ru', '/ru/services', '/ru/portfolio', '/ru/blog', '/ru/contact', '/ru/brief'];
+  const staticRoutes = ['/ru', '/ru/services', '/ru/portfolio', '/ru/blog', '/ru/contact', '/ru/brief', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
   if (staticRoutes.includes(route)) return 'ru';
   if (/^\/ru\/blog\/[^/]+$/.test(route)) return 'ru'; // отдельные посты (один сегмент, не category/tag)
   return null;
