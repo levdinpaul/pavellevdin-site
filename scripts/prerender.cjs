@@ -23,7 +23,10 @@ const PORT = 5055;
 // Блог использует dehydrate/hydrate (данные грузятся на сервере и сериализуются в window.__BLOG_DATA__).
 // Формы (contact/brief) — пока на puppeteer (отдельный осторожный шаг).
 function ssrLangForRoute(route) {
-  if (['/ru', '/ru/services', '/ru/portfolio', '/ru/blog'].includes(route)) return 'ru';
+  // Формы (contact/brief) безопасны: неконтролируемые нативные <form>, отправка через fetch
+  // в клиентском onSubmit (после гидрации) — SSR трогает только разметку, не код заявки.
+  const staticRoutes = ['/ru', '/ru/services', '/ru/portfolio', '/ru/blog', '/ru/contact', '/ru/brief'];
+  if (staticRoutes.includes(route)) return 'ru';
   if (/^\/ru\/blog\/[^/]+$/.test(route)) return 'ru'; // отдельные посты (один сегмент, не category/tag)
   return null;
 }
