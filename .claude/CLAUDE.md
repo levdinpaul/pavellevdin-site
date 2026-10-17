@@ -21,7 +21,8 @@ Project-brief. Читается при работе в этом репозито
   - **Поэтому трёхъязычную i18n (de/en/ru) и DSGVO-заготовки НЕ выпиливать** — это активы фазы 2.
     Архитектуру держать мульти-рынок / мульти-домен ready (домен — через env-константу, а не хардкод).
 
-- Контакты: Telegram + email `levdin.pavel@yandex.ru`, Am Dobben 102A, 28211 Bremen.
+- Контакты: Telegram + email `levdin.pavel@yandex.ru`. Город: **Hannover** (с 2026-10-18; Bremen больше не используется).
+  Юридический адрес для Impressum/Datenschutz/vCard/JSON-LD — уточняется (старый Am Dobben 102A, 28211 Bremen неактуален; не выдумывать).
 
 ## Стек
 - **Фронт:** React 19 + Vite 7 + TypeScript 5 + Tailwind 3.4 + shadcn/ui (Radix) + framer-motion +

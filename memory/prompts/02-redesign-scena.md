@@ -21,6 +21,17 @@
 4. Шрифт с Google Fonts → self-host Golos Text (woff2, latin+cyrillic, font-display: swap, preload) — требование DSGVO.
 5. three.js из CDN → npm-пакет `three` (новая зависимость, точная версия без ^), импорт только `import()` после гидрации/idle.
 
+[Локация: Bremen → Hannover] (решение Pavel 2026-10-18)
+Город везде меняется на Hannover. Сделать отдельным коммитом `chore(location): Bremen → Hannover`.
+- Уровень ГОРОДА — менять сразу:
+  - index.html + src/pages/Home.tsx: title/og/twitter «Web Coding Bremen» → «Web Coding Hannover»; keywords «Bremen web developer» → «Hannover web developer».
+  - JSON-LD (index.html): addressLocality → "Hannover", addressRegion → "Niedersachsen", areaServed City → "Hannover".
+  - Футер, бейджи сцены, home-copy.ts («Full-Stack-Entwickler in Bremen» и т.п.), BusinessCardPage `location` → Hannover; координаты-декор «53.07°N» → «52.37°N».
+  - .claude/agents.md: локальный поиск (Bremen) → (Hannover).
+- Уровень ЮРИДИЧЕСКОГО АДРЕСА (Am Dobben 102A, 28211 Bremen): Impressum/Datenschutz/Политика (i18n *.json addressLine1/2, privacy.text, src/i18n/index.ts, PrivacyPage.tsx), vCard ADR в BusinessCardPage, JSON-LD streetAddress/postalCode.
+  - Новый адрес НЕ выдумывать. Взять из .claude/CLAUDE.md (строка «Контакты»). Если там всё ещё «адрес — уточняется» → эти места НЕ трогать, вывести их списком на стоп-точке и спросить адрес у Pavel.
+  - Если адрес есть — заменить во всех местах одной правкой, проверить grep'ом `Bremen|Dobben|28211` = 0 вне memory/.
+
 [Файлы]
 src/pages/Home.tsx, src/sections/digitalbau/**, src/sections/*.tsx, src/components/layout/** (Header/Footer), src/components/ds/**, src/index.css, tailwind.config.js, src/i18n/locales/{ru,de,en}.json, src/data/projects.ts, src/entry-server.tsx, scripts/prerender.cjs, index.html, public/fonts/, public/images/portfolio/
 
