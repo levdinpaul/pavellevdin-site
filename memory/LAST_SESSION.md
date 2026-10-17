@@ -1,5 +1,35 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-17/18 — чистка и синхронизация перед редизайном
+Промпт: `memory/prompts/01-cleanup-sync.md`. Дизайн/функционал НЕ трогались.
+
+### Итог
+- **Бэкап:** `D:\Backups\portfolio-2026-10-17.bundle` (git --all), `D:\Backups\portfolio-src-2026-10-17.zip`
+  (без node_modules/dist), на сервере `/srv/sites/pavellevdin.ru/backup-2026-10-17.tgz` (dist+scripts вкл. data+src).
+- **Мусор:** `sardar-copy/` + `.tar.gz` (чужой проект) → `D:\Сайты\_sardar-copy\`; удалены `nul`, Design System .zip,
+  копия package-lock, `tlvT6.png`, `info.md` (не использовались), пустые `.agents/.codex/.qoder`.
+- **Прод ↔ репо:** по md5 контент блога (5 статей), картинки и `scripts/` на сервере = репо (кроме более нового
+  локального `prerender.cjs`). Server-only контента нет, переносить было нечего.
+- **CI:** `.github/workflows/deploy.yml` (GitHub Pages на каждый push в main) → `ci.yml` (npm ci + build:static, без публикации).
+  GitHub Pages в репо **всё ещё включены** — выключить в Settings → Pages.
+- **Git:** main fast-forward = redesign-digitalbau; теги `pre-merge-2026-10` (старый main b02e68aa), `v2-ssr-baseline`.
+  Push: у gh-аккаунта `levdinpaul` нет write в `levdinking/Code-Craft` (403) — push после выдачи доступа.
+- **Деплой** (через `ssh russh`, root): новый `dist` (SSR-пререндер 13 маршрутов) залит atomic mv, старый →
+  `projects/app/dist.bak-2026-10-18`; `docker compose restart pavellevdin` (контейнер `stack-pavellevdin-1`).
+  Проверено: все /ru-маршруты, /de/, /en/, /admin, sitemap, turbo.rss → 200; `#root` с SSR-контентом;
+  `/api/health` ok; leads.jsonl и .env на месте. `scripts/` на сервере не обновлялся (не было изменений).
+- **Проверки:** tsc зелёный, build:static зелёный; lint — 21 error / 7 warn в НЕтронутых файлах (в BACKLOG).
+
+### Найдено (в BACKLOG)
+- Блог-пайплайн админки (publish) после build делает `uploadDistToFTP` на HostLand → без FTP_* env падает 500
+  (dist при этом уже обновлён). Картинки/медиа/видео пайплайна тоже льются на FTP.
+- Legacy: `deploy-only.cjs`, `restart-passenger.cjs`, `ftp-list.cjs`, `add-article.cjs`, корневой `server.js`
+  (точка входа Passenger), fallback на `htdocs/www` в `scripts/server.js`, `tmp/restart.txt`.
+- Статья Tailwind: в `ru/de/en.json` нет `slug`/`published` → не пререндерится; старый URL
+  `/ru/blog/tailwind-css-2026-architecture/` теперь уходит в SPA-fallback.
+- `/images/projects/socialhub.png` (портфолио) — файла нет ни в репо, ни на проде.
+- В origin чужая ветка `что-делать-тут-a15a8` (отдельная история) — не трогалась.
+
 ## Сессия 2026-07-09 — React SSR-пререндер всей /ru-выдачи
 
 ### Контекст (что изменилось с 2026-06-13)

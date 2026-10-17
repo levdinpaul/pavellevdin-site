@@ -5,40 +5,36 @@
 ---
 
 ## 0. Открытые решения (нужен ввод Pavel)
-- [ ] **Git-гигиена перед коммитом.** Рабочее дерево содержит до-сессионные изменения: удалены `.gitignore`, `.env.example`, `AGENTS.md`, `avatar.png`, `create_image.py`, `autopost.log`; untracked `nul`, `dist/`, `node_modules/`, `scripts/node_modules/`. Решить: откатить/оставить/закоммитить. Затем мою работу — отдельным чистым коммитом на `main`.
-- [ ] **Освободить RAM** перед Next-сборками (сейчас ~1 ГБ свободно из 7.5).
+- [x] **Git-гигиена** — закрыто 2026-10-18: мусор убран, main = redesign-digitalbau (ff), теги `pre-merge-2026-10`/`v2-ssr-baseline`.
+- [ ] **Освободить RAM** — сборки/npm ci на ПК убиваются при нехватке памяти.
 - [ ] **Картинки 2 карточек** — подключить playwright-MCP (снять скрины живых сайтов VL Innovativbau и KUB Perevozki) или дать готовые. В `src/data/projects.ts` у обоих `image: ''`.
 
 ---
 
-## 1. ГЛАВНОЕ: Миграция Vite SPA → Next.js 15 (App Router, SSR/SSG)
-**Решение принято Pavel.** Цель — разблокировать SEO/AEO (сейчас CSR невидим для AI-ботов) + сам факт Next = УТП против WordPress-конкурентов. Оценка ~18–27 чел-дней. Старый сайт на FTP живёт до cutover; работа на ветке `next-migration`, выкатка через staging-поддомен.
+## 1. ~~Миграция Vite SPA → Next.js 15~~ — ОТМЕНЕНО (2026-07-09)
+Решено остаться на **React 19 + Vite + собственный SSR-пререндер** (`src/entry-server.tsx` + `scripts/prerender.cjs`,
+`npm run build:static`): проблема «CSR невидим для ботов» закрыта — /ru-выдача отдаётся готовым HTML.
+Полный план P0–P8 — в истории git (`git show v2-ssr-baseline:memory/BACKLOG.md`).
 
-### Решения по развилкам (из плана @system-architect, Fable 5)
-- **Next 15** (React 19), Tailwind остаётся 3.4 (не апгрейдить на v4 — палитра только что сделана).
-- **i18n → next-intl** (не react-i18next): переводы в RSC + `generateMetadata` + hreflang. Конвертировать `{{var}}`→ICU `{var}`, `useTranslation`→`useTranslations`.
-- **Блог:** оставить JSON+markdown, рендер в RSC (remark/rehype + shiki), SSG через `generateStaticParams`.
-- **Админка:** Express оставить отдельным сервисом (multer/FTP/Tinify/Telegram/секреты); UI-страницы перенести как client; Nginx-прокси `/api/admin/*` → CORS исчезает.
-- **Деплой:** VPS `212.227.100.97`, Docker, `output: 'standalone'`, Nginx+Certbot (НЕ static export — убьёт SSR).
-- **Тема:** кастомный useTheme → **next-themes** (фикс FOUC/hydration), dark по умолчанию.
-- **Cookie-consent:** переписать — баннер вместо гейта всего приложения; GA4/Metrika грузить ПОСЛЕ согласия (Consent Mode v2) — **заодно фикс текущего DSGVO-нарушения** (сейчас трекеры грузятся до согласия в index.html).
+## 1a. Легаси HostLand/FTP (из аудита 2026-10-18)
+- [ ] **Блог-пайплайн админки сломан на russh:** `POST /api/articles/publish/:id` (`scripts/routes/articles.js:212-234`)
+  после `npm run build` + static-html вызывает `uploadDistToFTP` → без `FTP_HOST/USER/PASSWORD` падает 500.
+  Также FTP: `image-generator.js`, `media-manager.js`, `video-generator.js` (uploadSingleFile, локальный файл удаляется!),
+  тест «ftp» в `routes/settings.js`. Перевести на локальную запись в dist/public + `build:static`.
+- [ ] Publish-роут собирает `npm run build`, а не `build:static` → после публикации статьи с админки пропадёт SSR-пререндер.
+- [ ] Удалить legacy после замены: `deploy-only.cjs`, `restart-passenger.cjs`, `ftp-list.cjs`, `add-article.cjs`,
+  `lib/ftp-upload.js`, Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
+  зависимость `basic-ftp`; `/srv/sites/pavellevdin.ru/htdocs/www` на сервере.
+- [ ] Скрипт деплоя на russh (scp + atomic mv + restart) вместо ручных шагов; удалить `dist.bak-*` после стабилизации.
 
-### Этапы
-- [ ] **P0** Аудит, заморозка, скаффолд Next15 (ветка `next-migration`, перенос tsconfig paths, URL-карта old→new, чеклист i18n-ключей). 1–2 дня.
-- [ ] **P1** Дизайн-система 1:1: `index.css`→`globals.css`, `tailwind.config.js`, шрифты→`next/font/local`, shadcn `ui/*` (+`'use client'`), next-themes. Пиксельная сверка. 2–3 дня.
-- [ ] **P2** i18n-фундамент: middleware (de/en/ru, detect), конвертер локалей, `app/[locale]/layout.tsx`, влить ruPrivacy/ruImprint-костыли из `i18n/index.ts` в `ru.json`. Прогнать @i18n-qa. 2–3 дня.
-- [ ] **P3** Маркетинг-страницы + SEO-ядро (самый крупный): `app/[locale]/(marketing)/*`, RSC/client-граница по секциям, `generateMetadata` per page/locale, **серверный JSON-LD** (LocalBusiness/Person/Service/FAQPage/Breadcrumb), новый cookie-consent. 4–6 дней.
-- [ ] **P4** Блог SSG: список/[slug]/category/tag, `generateStaticParams`, shiki, BlogPosting schema. ISR + revalidate webhook из админки. 2–3 дня.
-- [ ] **P5** SEO-инфра: `sitemap.ts` (alternates), `robots.ts` (allow GPTBot/ClaudeBot/PerplexityBot/Google-Extended, disallow admin/api), redirects. **Каркас под будущие лендинги** (локализованные pathnames). 1–2 дня.
-- [ ] **P6** Админка: Express на VPS (убрать хардкод CORS pavellevdin.ru, убрать SPA-fallback), UI → `app/[locale]/admin/*` client, noindex. 3–5 дней (можно после cutover).
-- [ ] **P7** Деплой-инфра: Dockerfile standalone, compose, Nginx vhost + проксирование admin-api, Certbot, CI (заменить `deploy-only.cjs`), staging-поддомен. 2–3 дня.
-- [ ] **P8** Cutover: DNS → VPS (TTL 300 заранее), старый хостинг держать 2–4 нед как rollback, GSC переобход, валидация schema/GA4/Metrika/CWV. 1–2 дня + неделя наблюдения.
-
-### Чеклист «не потерять» при миграции
-Визуал (CSS-токены байт-в-байт, Geist/Geist Mono, dark по умолчанию) · i18n-ключи de/en/ru (0 потерь, ru-фоллбеки) · schema/meta (адрес Bremen, hreflang x-default=de, theme-color #060810) · аналитика GA4 `G-PFRYET1M4T` + Yandex Metrika `108284704` за consent-гейтом · DSGVO (баннер до трекеров) · redirects (slugs блога per-locale!, /→locale) · `.env`-секреты не в `NEXT_PUBLIC_*` · последний Vite-билд на VPS как rollback.
-
-### Риски (топ)
-Hydration mismatch (theme/consent/framer) → next-themes + consent в cookie + e2e-смоук. SEO-просадка при cutover → URL-карта + crawl-тест staging + GSC-мониторинг. CWV-регресс TTFB на VPS → SSG/ISR (TTFB=static). Двойная поддержка → контент-фриз на P3+.
+## 1b. Найденные дефекты (2026-10-18)
+- [ ] Статья `tailwind-css-2026-architecture`: в `ru/de/en.json` нет `slug`/`published` → не пререндерится;
+  старый URL `/ru/blog/tailwind-css-2026-architecture/` (был заглушкой) — решить: 301 на новый slug.
+- [ ] `/images/projects/socialhub.png` (`src/data/projects.ts:90`) — файла нет.
+- [ ] Lint: 21 error (react-hooks/set-state-in-effect в Header/SiteNav/CommandMenu/useAdmin/usePipelinePolling/PlatformPreview;
+  no-unused-expressions CommandMenu:87,114; only-export-components в shadcn ui + useTheme; purity sidebar:611;
+  no-unused-vars ApiKeyManager:36; no-explicit-any в `PL Digitalbau Design System/` — добавить в eslint ignores). CI lint не гоняет.
+- [ ] Выключить GitHub Pages в репо (Settings → Pages) — workflow уже не публикует.
 
 ---
 
@@ -62,7 +58,7 @@ Hydration mismatch (theme/consent/framer) → next-themes + consent в cookie + 
 
 ---
 
-## 3. Визуал P2 (wow-слой, на текущем сайте ИЛИ перенести в Next)
+## 3. Визуал P2 (wow-слой)
 - [ ] Terminal-caret в Hero eyebrow (`caret-blink` уже в tailwind.config) — dev-signature.
 - [ ] Count-up метрик (Hero/TechStack/Advantages) при useInView.
 - [ ] Magnetic hover на 2 главных CTA (Hero + финальный).
@@ -74,4 +70,4 @@ Hydration mismatch (theme/consent/framer) → next-themes + consent в cookie + 
 ---
 
 ## Как продолжить
-Следующий `/begin` подтянет этот файл. Рекомендованный порядок: (C) глянуть текущий результат `npm run dev` → решить git-гигиену (секция 0) → освободить RAM → **старт миграции P0** (секция 1). SEO-лендинги/блог (секция 2) удобнее делать уже на Next (P3+).
+Следующий `/begin` подтянет этот файл. Рекомендованный порядок: редизайн (отдельная задача) → легаси FTP-пайплайн (1a) → дефекты (1b) → SEO (2).

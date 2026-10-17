@@ -2,6 +2,22 @@
 
 Долгоживущие технические уроки проекта. Пополняется по сессиям.
 
+## Инфраструктура и деплой (2026-10-18)
+
+- **Workflow GitHub Pages был миной:** `deploy.yml` публиковал `main` на levdinking.github.io при каждом push
+  (репо публичный). Заменён на `ci.yml` без публикации. Перед первым push в main всегда смотреть `.github/workflows/`.
+- **Прод = russh, без git.** `/srv/sites/pavellevdin.ru/projects/app` — просто копия файлов. Контейнер
+  `stack-pavellevdin-1` монтирует `/srv/sites/pavellevdin.ru` в `/home/host1731061/pavellevdin.ru` — старый
+  HostLand-путь только ВНУТРИ контейнера, снаружи это та же папка. Деплой — `scp` архива + atomic `mv dist`.
+- **MCP russh-песочница не видит docker.sock** и не может писать куда угодно — restart/логи через `ssh russh`.
+  Имя контейнера `stack-pavellevdin-1`, а не `pavellevdin` (для `docker logs`).
+- **Контент блога мог жить только на сервере** (админка пишет в `src/content/blog` и `dist/` на проде) — перед
+  заменой dist сверять md5 сервер↔репо. В 2026-10 расхождений не было, но проверка обязательна.
+- **express.static отдаёт 301 на слэш** для `/ru/services` → `/ru/services/` — это норма, не ошибка.
+- **`git checkout main` блокируется чужими незакоммиченными правками** — ff-перемотка без переключения:
+  `git fetch . redesign-digitalbau:main` (разрешает только fast-forward).
+- **Git-bash tar путает `C:/…` с удалённым хостом** — писать архив через stdout: `tar czf - -C dist . > file.tgz`.
+
 ## SSR-пререндер React 19 + Vite (2026-07-09)
 
 - **Мерить пререндер через `npm run preview:static` (`scripts/serve-static.cjs`, :4188), НЕ `vite preview`.**
