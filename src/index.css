@@ -1,3 +1,4 @@
+@import './styles/pl.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -158,24 +159,7 @@
   color: hsl(var(--foreground));
 }
 
-/* NavPill — на узких экранах прячем инлайн-ссылки (остаётся ⌘K / язык / CTA / бургер → меню) */
-@media (max-width: 640px) {
-  .navpill-links, .navpill-sep { display: none !important; }
-  .navpill-cta { padding: 9px 14px !important; }
-}
-
-/* ════════ Homepage construction-scene animations ════════ */
-/* hero wireframe draw-in */
-.wf-draw, .wf-glow { fill: none; stroke: var(--line-blueprint); stroke-width: 1.2; stroke-dasharray: 900; stroke-dashoffset: 900; animation: wfdraw 1.4s var(--ease-out) forwards; }
-.wf-glow { stroke: var(--accent); filter: drop-shadow(0 0 6px var(--accent-ring)); }
-.wf-accent { fill: var(--accent); opacity: 0; animation: wfin 500ms var(--ease-out) forwards; }
-.wf-fill { fill: var(--border-2); opacity: 0; animation: wfin 500ms var(--ease-out) forwards; }
-.wf-dot { fill: none; stroke: var(--line-blueprint); opacity: 0; animation: wfin 400ms var(--ease-out) forwards; }
-.wf-label { fill: var(--ink-3); font: 500 9px 'JetBrains Mono', monospace; letter-spacing: 0.14em; opacity: 0; animation: wfin 600ms var(--ease-out) forwards; }
-@keyframes wfdraw { to { stroke-dashoffset: 0; } }
-@keyframes wfin { to { opacity: 1; } }
-
-/* hero text entrance (staggered rise) */
+/* staggered rise (cookie-баннер) */
 .rise { opacity: 0; transform: translateY(20px); animation: rise 800ms var(--ease-out) forwards; }
 .rise:nth-child(2) { animation-delay: 120ms; }
 .rise:nth-child(3) { animation-delay: 240ms; }
@@ -183,66 +167,8 @@
 .rise:nth-child(5) { animation-delay: 480ms; }
 @keyframes rise { to { opacity: 1; transform: none; } }
 
-/* outlined "wireframe" headline word */
-.hero-outline { color: transparent; -webkit-text-stroke: 1.5px var(--line-blueprint); }
-
-/* orbiting tech stack */
-.orbit { animation: orbit 60s linear infinite; }
-.orbit-counter { animation: orbitc 60s linear infinite; }
-@keyframes orbit { to { transform: rotate(360deg); } }
-@keyframes orbitc { to { transform: translate(-50%, -50%) rotate(-360deg); } }
-
-/* footer finale particles (leads flowing in) */
-.particle { position: absolute; bottom: -8px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent-ring); animation: flowup linear infinite; opacity: 0; }
-@keyframes flowup { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: 0.9; } 85% { opacity: 0.6; } 100% { transform: translateY(-320px); opacity: 0; } }
-
-.post-row:hover span:nth-child(2) { color: var(--accent-strong) !important; }
-.footer-link:hover { color: var(--accent-strong) !important; }
-.footer-social:hover { border-color: var(--accent-ring) !important; color: var(--accent) !important; }
-
-/* Homepage responsive grids */
-@media (max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr !important; }
-  .hero-wireframe { max-width: 420px; }
-  .two-col, .work-grid { grid-template-columns: 1fr !important; }
-  .work-grid > a { aspect-ratio: 4 / 3 !important; grid-row: auto !important; }
-  .process-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .process-grid > li { border-right: none !important; }
-}
-@media (max-width: 520px) {
-  .process-grid { grid-template-columns: 1fr !important; }
-}
-
-/* section that constructs into view on scroll */
-/* content-visibility: auto — браузер пропускает layout/paint секций ниже первого экрана,
-   пока они не приблизятся к вьюпорту. Резко снижает Style&Layout при загрузке длинной страницы.
-   contain-intrinsic-size резервирует высоту, чтобы не появлялся CLS/скачок скроллбара. */
-.build-section {
-  opacity: 0.25; transform: translateY(32px);
-  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
-  content-visibility: auto;
-  contain-intrinsic-size: auto 700px;
-}
-.build-section.built { opacity: 1; transform: none; }
-
 @media (prefers-reduced-motion: reduce) {
-  .wf-draw, .wf-glow { stroke-dashoffset: 0; animation: none; }
-  .wf-accent, .wf-fill, .wf-dot, .wf-label, .rise { opacity: 1; transform: none; animation: none; }
-  .orbit, .orbit-counter, .particle { animation: none; }
-  .build-section { opacity: 1; transform: none; transition: none; }
-}
-
-/* Мобильный (≤768px, 4× CPU-throttle) — рендерим сцену статически-готовой:
-   draw-анимация вайрфрейма, бесконечное вращение орбиты и частицы дороги на слабом CPU
-   (непрерывный composite/paint держит main-thread занятым → TBT). Desktop остаётся полным.
-   Вайрфрейм замораживаем в финальном состоянии (выглядит собранным), орбиту стопим,
-   частицы прячем. Одноразовый .rise-вход текста оставляем — он дёшев (GPU, один раз). */
-@media (max-width: 768px) {
-  .wf-draw, .wf-glow { stroke-dashoffset: 0; animation: none; }
-  .wf-glow { filter: none; }
-  .wf-accent, .wf-fill, .wf-dot, .wf-label { opacity: 1; animation: none; }
-  .orbit, .orbit-counter { animation: none; }
-  .particle { display: none; }
+  .rise { opacity: 1; transform: none; animation: none; }
 }
 
 /* ========================================
@@ -252,79 +178,6 @@
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
-}
-
-/* ========================================
-   PL – Innovativ Digitalbau visual system
-   ======================================== */
-
-.hero-surface {
-  background:
-    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.35) 46%, hsl(var(--background)) 100%);
-}
-
-.circuit-grid {
-  background-image:
-    linear-gradient(to right, hsl(var(--foreground) / 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--foreground) / 0.07) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(circle at 50% 40%, black, transparent 72%);
-}
-
-.scan-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 140px;
-  background: linear-gradient(180deg, transparent, hsl(var(--primary) / 0.09), transparent);
-  pointer-events: none;
-}
-
-.hero-cinematic {
-  isolation: isolate;
-}
-
-.hero-noise {
-  background-image:
-    radial-gradient(circle at 25% 25%, rgb(255 255 255 / 0.08) 0 1px, transparent 1px),
-    radial-gradient(circle at 75% 60%, rgb(34 211 238 / 0.1) 0 1px, transparent 1px);
-  background-size: 34px 34px, 58px 58px;
-  opacity: 0.22;
-  mix-blend-mode: screen;
-}
-
-.hero-network {
-  background:
-    linear-gradient(115deg, transparent 0 34%, rgb(34 211 238 / 0.12) 35%, transparent 36% 100%),
-    linear-gradient(28deg, transparent 0 58%, rgb(245 158 11 / 0.1) 59%, transparent 60% 100%),
-    linear-gradient(to right, rgb(255 255 255 / 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 72px 72px, 72px 72px;
-  mask-image: radial-gradient(circle at 62% 50%, black, transparent 72%);
-  animation: network-drift 18s linear infinite;
-}
-
-@keyframes network-drift {
-  from {
-    background-position: 0 0, 0 0, 0 0, 0 0;
-  }
-  to {
-    background-position: 0 0, 0 0, 72px 72px, 72px 72px;
-  }
-}
-
-.service-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 0%), hsl(var(--primary) / 0.12), transparent 35%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.service-card:hover::after {
-  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

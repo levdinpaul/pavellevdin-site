@@ -12,10 +12,12 @@ import { loadAnalytics } from '@/lib/analytics';
 import './App.css';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    // Переход на якорь (/ru#about) прокручивает сама страница — не перебиваем его скроллом наверх.
+    if (hash) return;
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 

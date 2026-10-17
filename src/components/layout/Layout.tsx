@@ -1,7 +1,7 @@
 // src/components/layout/Layout.tsx
 
 import { Helmet } from 'react-helmet-async';
-import { SiteNav } from './SiteNav';
+import { SiteHeader } from './SiteHeader';
 import { Footer } from './Footer';
 import { Children, isValidElement, type ReactElement } from 'react';
 
@@ -65,7 +65,7 @@ export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
         <meta name="description" content={description} />
       </Helmet>
       <div className="min-h-screen bg-background text-foreground flex flex-col">
-        <SiteNav />
+        <SiteHeader />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
       </div>
