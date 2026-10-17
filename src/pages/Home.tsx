@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { HomeScene } from '@/sections/digitalbau/HomeScene';
+import { HomeScena } from '@/sections/scena/HomeScena';
 
 export function Home() {
   const { i18n } = useTranslation();
@@ -66,7 +66,7 @@ export function Home() {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      <HomeScene />
+      <HomeScena />
     </>
   );
 }

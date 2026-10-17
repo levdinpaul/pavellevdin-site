@@ -15,7 +15,7 @@ export const projects: Project[] = [
     description: 'Premium website and digital presence for a German construction company',
     url: 'https://vl-innovativbau.de/',
     category: 'websites',
-    image: '',
+    image: '/images/portfolio/vlinnovativbau.webp',
     technologies: ['Next.js', 'Strapi', 'SEO', 'Automation']
   },
   {
@@ -24,7 +24,7 @@ export const projects: Project[] = [
     description: 'Transport and logistics service website with local SEO focus',
     url: 'https://kub-perevozki.ru/',
     category: 'websites',
-    image: '',
+    image: '/images/portfolio/kubperevozki.webp',
     technologies: ['React', 'SEO', 'Lead Forms', 'Analytics']
   },
   {
