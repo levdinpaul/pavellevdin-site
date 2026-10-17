@@ -59,7 +59,7 @@ Project-brief. Читается при работе в этом репозито
   Откат: `mv dist.bak-<дата> dist` + restart. Перед заменой dist — бэкап и сверка контента блога сервер↔репо (md5).
 - **НЕ трогать:** `scripts/data/` (лиды, api-keys, публикации), `.env`, `scripts/node_modules`, `/srv/stack/*` (кроме restart
   pavellevdin), другие сайты в `/srv/sites`. `htdocs/www` — старая копия HostLand (fallback в server.js).
-- GitHub (`levdinking/Code-Craft`): `.github/workflows/ci.yml` только собирает, НЕ деплоит. Деплой — только с явного «деплой» Pavel.
+- GitHub (`levdinpaul/pavellevdin-site`, приватный; старый `levdinking/Code-Craft` заморожен на 05.04.2026, remote `old-levdinking`): `.github/workflows/ci.yml` только собирает, НЕ деплоит. Деплой — только с явного «деплой» Pavel.
 
 ## Маршрутизация агентов — см. `./agents.md`
 

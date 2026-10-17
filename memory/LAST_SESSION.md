@@ -13,7 +13,7 @@
 - **CI:** `.github/workflows/deploy.yml` (GitHub Pages на каждый push в main) → `ci.yml` (npm ci + build:static, без публикации).
   GitHub Pages в репо **всё ещё включены** — выключить в Settings → Pages.
 - **Git:** main fast-forward = redesign-digitalbau; теги `pre-merge-2026-10` (старый main b02e68aa), `v2-ssr-baseline`.
-  Push: у gh-аккаунта `levdinpaul` нет write в `levdinking/Code-Craft` (403) — push после выдачи доступа.
+  Push: у `levdinpaul` нет write в `levdinking/Code-Craft` (403) → 2026-10-18 origin перенесён в новый приватный `levdinpaul/pavellevdin-site` (вся история + теги), старый remote переименован в `old-levdinking`.
 - **Деплой** (через `ssh russh`, root): новый `dist` (SSR-пререндер 13 маршрутов) залит atomic mv, старый →
   `projects/app/dist.bak-2026-10-18`; `docker compose restart pavellevdin` (контейнер `stack-pavellevdin-1`).
   Проверено: все /ru-маршруты, /de/, /en/, /admin, sitemap, turbo.rss → 200; `#root` с SSR-контентом;
