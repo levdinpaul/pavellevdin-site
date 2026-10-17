@@ -2,16 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ═══ Fonts (self-hosted): Sora display · Inter body · JetBrains Mono annotations ═══ */
-@font-face { font-family: 'Sora'; src: url('/fonts/Sora.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Inter'; src: url('/fonts/Inter-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Inter'; src: url('/fonts/Inter-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Inter'; src: url('/fonts/Inter-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Inter'; src: url('/fonts/Inter-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+/* ═══ Fonts (self-hosted, DSGVO): Golos Text — текст и заголовки · JetBrains Mono — аннотации ═══ */
+@font-face { font-family: 'Golos Text'; src: url('/fonts/golos-text-cyrillic-wght-normal.woff2') format('woff2'); font-weight: 400 900; font-style: normal; font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Golos Text'; src: url('/fonts/golos-text-latin-wght-normal.woff2') format('woff2'); font-weight: 400 900; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'JetBrains Mono'; src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2122, U+2192, U+2212; }
 @font-face { font-family: 'JetBrains Mono'; src: url('/fonts/jetbrains-mono-cyrillic-wght-normal.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; unicode-range: U+0400-04FF, U+0500-052F, U+2116, U+20BD; }
 
-/* Заголовки — Sora (display), интерфейс/текст — Inter */
+/* Заголовки и текст — Golos Text (дизайн «PL Сцена») */
 @layer base {
   h1, h2, h3, h4, h5, h6, .font-display {
     font-family: var(--font-display);
@@ -25,31 +22,35 @@
 
 @layer base {
   :root {
-    /* ═══ PL Digitalbau design tokens (dark-only engineering theme) ═══ */
-    --bg-0: #060810; --bg-1: #0A0E19; --bg-2: #0E1424; --bg-3: #131A2E;
-    --ink-1: #EAF0FA; --ink-2: #A6B4CC; --ink-3: #64748F; --ink-inverse: #060810;
-    --accent: #45C4FF; --accent-strong: #7FDBFF; --accent-deep: #1E7FBF;
-    --accent-ghost: rgba(69,196,255,0.10); --accent-ring: rgba(69,196,255,0.35);
+    /* ═══ PL design tokens — «PL Сцена» (dark-only) ═══ */
+    --bg-0: #060810; --bg-1: #0A0E1A; --bg-2: #0E121E; --bg-3: #141A2A;
+    --ink-1: #EEF1F8; --ink-2: #B7BFD1; --ink-3: #7B8499; --ink-inverse: #0A0E1A;
+    --accent: #7AA2FF; --accent-strong: #B9CDFF; --accent-deep: #4F74D9;
+    --accent-ghost: rgba(122,162,255,0.10); --accent-ring: rgba(122,162,255,0.45);
+    --on-accent: #061022;
+    /* сцена: линии и стеклянные поверхности */
+    --line: rgba(255,255,255,0.10); --line-2: rgba(255,255,255,0.18); --line-acc: rgba(122,162,255,0.45);
+    --surface-glass: rgba(14,18,30,0.66);
     --gold: #C9A876; --gold-strong: #E2C89B; --gold-ghost: rgba(201,168,118,0.10);
-    --line-blueprint: rgba(96,178,255,0.30); --line-blueprint-faint: rgba(96,178,255,0.14);
-    --grid-line: rgba(120,160,220,0.07); --grid-line-major: rgba(120,160,220,0.13);
-    --border-1: rgba(150,175,215,0.14); --border-2: rgba(150,175,215,0.26);
-    --glass-fill: rgba(14,20,36,0.62); --glass-border: rgba(150,190,255,0.16);
+    --line-blueprint: rgba(122,162,255,0.30); --line-blueprint-faint: rgba(122,162,255,0.14);
+    --grid-line: rgba(122,162,255,0.06); --grid-line-major: rgba(122,162,255,0.12);
+    --border-1: var(--line); --border-2: var(--line-2);
+    --glass-fill: var(--surface-glass); --glass-border: var(--line);
     --success: #3ADFA5; --warning: #FFC24D; --danger: #FF6B7A;
     /* semantic aliases (used by ported design-system components) */
     --surface-page: var(--bg-0); --surface-card: var(--bg-2); --surface-overlay: var(--bg-3);
     --text-heading: var(--ink-1); --text-body: var(--ink-2); --text-muted: var(--ink-3); --text-accent: var(--accent);
     --interactive: var(--accent); --interactive-hover: var(--accent-strong);
 
-    --font-display: 'Sora','Inter',system-ui,sans-serif;
-    --font-body: 'Inter',system-ui,sans-serif;
+    --font-display: 'Golos Text',system-ui,sans-serif;
+    --font-body: 'Golos Text',system-ui,sans-serif;
     --font-mono: 'JetBrains Mono',ui-monospace,monospace;
     --text-hero: clamp(56px,8vw,128px); --text-display: clamp(44px,6vw,84px);
     --text-h1: clamp(36px,4.2vw,64px); --text-h2: clamp(28px,3vw,44px); --text-h3: clamp(20px,1.8vw,26px);
     --text-lg: 18px; --text-base: 16px; --text-sm: 14px; --text-xs: 12px; --text-annotation: 11px;
-    --weight-display: 700; --weight-heading: 600; --weight-body: 400;
-    --leading-display: 0.95; --leading-heading: 1.05; --leading-body: 1.65;
-    --tracking-display: -0.03em; --tracking-heading: -0.02em; --tracking-annotation: 0.18em;
+    --weight-display: 600; --weight-heading: 600; --weight-body: 400;
+    --leading-display: 1.04; --leading-heading: 1.08; --leading-body: 1.65;
+    --tracking-display: -0.035em; --tracking-heading: -0.03em; --tracking-annotation: 0.18em;
 
     --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
     --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px; --space-10:128px;
@@ -63,6 +64,7 @@
     --glass-blur: 16px; --grid-size: 48px;
     --bg-grid: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     --gradient-protect: linear-gradient(180deg, rgba(6,8,16,0) 30%, rgba(6,8,16,0.85) 100%);
+    --ease-pl: cubic-bezier(0.22,0.8,0.24,1);
     --gradient-section: linear-gradient(180deg, var(--bg-0), var(--bg-1));
     --duration-fast:150ms; --duration-base:250ms; --duration-slow:400ms; --duration-scene:800ms;
     --ease-out: cubic-bezier(0.22,1,0.36,1); --ease-in-out: cubic-bezier(0.65,0,0.35,1); --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
@@ -70,32 +72,32 @@
     --stagger-step:80ms; --lift-hover: translateY(-4px);
 
     /* ═══ shadcn/Radix HSL tokens → dark palette (single source of truth) ═══ */
-    --background: 222 44% 4%;        /* #060810 */
-    --foreground: 213 56% 95%;       /* #EAF0FA */
-    --card: 224 44% 10%;             /* #0E1424 */
-    --card-foreground: 213 56% 95%;
-    --popover: 224 40% 13%;          /* #131A2E */
-    --popover-foreground: 213 56% 95%;
-    --primary: 200 100% 64%;         /* #45C4FF */
-    --primary-foreground: 222 44% 4%;
-    --secondary: 224 44% 10%;
-    --secondary-foreground: 213 56% 95%;
-    --muted: 224 40% 13%;
-    --muted-foreground: 220 18% 48%; /* #64748F */
-    --ui-accent: 224 40% 13%;        /* renamed to avoid collision with design --accent */
-    --ui-accent-foreground: 213 56% 95%;
+    --background: 228 45% 4%;        /* #060810 */
+    --foreground: 222 42% 95%;       /* #EEF1F8 */
+    --card: 225 36% 9%;              /* #0E121E */
+    --card-foreground: 222 42% 95%;
+    --popover: 224 35% 12%;          /* #141A2A */
+    --popover-foreground: 222 42% 95%;
+    --primary: 222 100% 74%;         /* #7AA2FF */
+    --primary-foreground: 228 45% 4%;
+    --secondary: 225 36% 9%;
+    --secondary-foreground: 222 42% 95%;
+    --muted: 224 35% 12%;
+    --muted-foreground: 222 13% 54%; /* #7B8499 */
+    --ui-accent: 224 35% 12%;        /* renamed to avoid collision with design --accent */
+    --ui-accent-foreground: 222 42% 95%;
     --destructive: 353 100% 71%;     /* #FF6B7A */
-    --destructive-foreground: 213 56% 95%;
-    --border: 220 22% 16%;
-    --input: 220 22% 16%;
-    --ring: 200 100% 64%;
+    --destructive-foreground: 222 42% 95%;
+    --border: 225 26% 15%;
+    --input: 225 26% 15%;
+    --ring: 222 100% 74%;
     --radius: 0.75rem;
     /* legacy brand aliases (kept for existing components) */
-    --surface: 224 44% 10%; --surface-2: 224 40% 13%; --faint: 220 18% 48%; --signal: 40 100% 65%;
-    --sidebar-background: 224 40% 13%; --sidebar-foreground: 213 56% 95%;
-    --sidebar-primary: 200 100% 64%; --sidebar-primary-foreground: 222 44% 4%;
-    --sidebar-accent: 224 44% 10%; --sidebar-accent-foreground: 213 56% 95%;
-    --sidebar-border: 220 22% 16%; --sidebar-ring: 200 100% 64%;
+    --surface: 225 36% 9%; --surface-2: 224 35% 12%; --faint: 222 13% 54%; --signal: 40 100% 65%;
+    --sidebar-background: 224 35% 12%; --sidebar-foreground: 222 42% 95%;
+    --sidebar-primary: 222 100% 74%; --sidebar-primary-foreground: 228 45% 4%;
+    --sidebar-accent: 225 36% 9%; --sidebar-accent-foreground: 222 42% 95%;
+    --sidebar-border: 225 26% 15%; --sidebar-ring: 222 100% 74%;
   }
 }
 
