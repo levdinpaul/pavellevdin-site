@@ -17,7 +17,7 @@ const ruPrivacy = {
   title: "Политика конфиденциальности",
   section1: {
     title: "Оператор данных",
-    text: "Оператором данных является Павел Левдин, Am Dobben 102A, 28211 Bremen, Германия. По вопросам защиты данных вы можете связаться с нами в любое время."
+    text: "Оператором данных является Павел Левдин, Ганновер, Германия. По вопросам защиты данных вы можете связаться с нами в любое время."
   },
   section2: {
     title: "Сбор данных",
@@ -44,8 +44,8 @@ const ruImprint = {
   owner: "Владелец сайта",
   ownerName: "Павел Левдин",
   address: "Адрес",
-  addressLine1: "Am Dobben 102A",
-  addressLine2: "28211 Bremen",
+  addressLine1: "Hannover",
+  addressLine2: "Германия",
   country: "Германия",
   email: "Email",
   emailValue: "levdin.pavel@yandex.ru",

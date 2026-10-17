@@ -50,7 +50,7 @@ TITLE:Web Developer / Digital Business Systems
 TEL;TYPE=CELL:+4917643141306
 EMAIL:levdin.pavel@yandex.ru
 URL:https://pavellevdin.ru/ru
-ADR;TYPE=WORK:;;Am Dobben 102A;Bremen;;28211;Germany
+ADR;TYPE=WORK:;;;Hannover;;;Germany
 END:VCARD`;
 
 const contactRows: [LucideIcon, string, string, string | null][] = [

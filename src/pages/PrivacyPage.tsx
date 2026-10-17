@@ -53,7 +53,7 @@ const policy: Record<'ru' | 'en' | 'de', Policy> = {
         paragraphs: ['Оператором персональных данных (далее — «Оператор») является:'],
         items: [
           'Павел Левдин',
-          'Адрес: Am Dobben 102A, 28211 Bremen, Германия',
+          'Адрес: Ганновер, Германия',
           `Электронная почта: ${OPERATOR_EMAIL}`,
         ],
       },
@@ -158,7 +158,7 @@ const policy: Record<'ru' | 'en' | 'de', Policy> = {
       {
         heading: '2. Data operator',
         paragraphs: ['The personal data operator (the “Operator”) is:'],
-        items: ['Pavel Levdin', 'Address: Am Dobben 102A, 28211 Bremen, Germany', `Email: ${OPERATOR_EMAIL}`],
+        items: ['Pavel Levdin', 'Address: Hannover, Germany', `Email: ${OPERATOR_EMAIL}`],
       },
       {
         heading: '3. Personal data we process',
@@ -261,7 +261,7 @@ const policy: Record<'ru' | 'en' | 'de', Policy> = {
       {
         heading: '2. Betreiber',
         paragraphs: ['Betreiber der personenbezogenen Daten (der „Betreiber“) ist:'],
-        items: ['Pavel Levdin', 'Adresse: Am Dobben 102A, 28211 Bremen, Deutschland', `E-Mail: ${OPERATOR_EMAIL}`],
+        items: ['Pavel Levdin', 'Adresse: Hannover, Deutschland', `E-Mail: ${OPERATOR_EMAIL}`],
       },
       {
         heading: '3. Verarbeitete personenbezogene Daten',

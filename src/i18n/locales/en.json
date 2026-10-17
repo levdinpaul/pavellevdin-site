@@ -242,8 +242,8 @@
     "owner": "Owner",
     "ownerName": "Pavel Levdin",
     "address": "Address",
-    "addressLine1": "Am Dobben 102A",
-    "addressLine2": "28211 Bremen",
+    "addressLine1": "Hannover",
+    "addressLine2": "Germany",
     "country": "Germany",
     "contact": "Contact",
     "email": "Email",
@@ -270,7 +270,7 @@
     "title": "Privacy Policy",
     "section1": {
       "title": "Data Controller",
-      "text": "The data controller is Pavel Levdin, Am Dobben 102A, 28211 Bremen, Germany. If you have any questions about data protection, please contact us at any time."
+      "text": "The data controller is Pavel Levdin, Hannover, Germany. If you have any questions about data protection, please contact us at any time."
     },
     "section2": {
       "title": "Data Collection",

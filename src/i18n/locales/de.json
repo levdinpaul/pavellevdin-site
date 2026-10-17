@@ -242,8 +242,8 @@
       "owner": "Inhaber",
       "ownerName": "Pavel Levdin",
       "address": "Anschrift",
-      "addressLine1": "Am Dobben 102A",
-      "addressLine2": "28211 Bremen",
+      "addressLine1": "Hannover",
+      "addressLine2": "Deutschland",
       "country": "Deutschland",
       "contact": "Kontakt",
       "email": "E-Mail",
@@ -270,7 +270,7 @@
     "title": "Datenschutzerklärung",
     "section1": {
       "title": "Verantwortlicher",
-      "text": "Verantwortlich für die Datenverarbeitung ist Pavel Levdin, Am Dobben 102A, 28211 Bremen, Deutschland. Bei Fragen zum Datenschutz können Sie sich jederzeit an uns wenden."
+      "text": "Verantwortlich für die Datenverarbeitung ist Pavel Levdin, Hannover, Deutschland. Bei Fragen zum Datenschutz können Sie sich jederzeit an uns wenden."
     },
     "section2": {
       "title": "Erhebung von Daten",
