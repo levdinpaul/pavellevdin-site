@@ -33,3 +33,8 @@ nul
 # Claude Design export (source, not app code)
 PL Digitalbau Design System/
 *.zip
+
+# чужие проекты / архивы / серверные бэкапы
+sardar-copy*
+*.tar.gz
+backup-*.tgz
