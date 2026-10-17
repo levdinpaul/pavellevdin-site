@@ -1,0 +1,33 @@
+name: CI
+
+# Только проверка сборки — без публикации.
+# Раньше здесь был деплой на GitHub Pages; прод живёт на russh (docker-сервис pavellevdin),
+# поэтому push в main не должен ничего выкладывать.
+
+on:
+  push:
+    branches: ["main", "redesign-digitalbau"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (SSR prerender)
+        run: npm run build:static
