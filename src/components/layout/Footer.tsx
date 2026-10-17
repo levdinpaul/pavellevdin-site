@@ -65,7 +65,7 @@ export function Footer() {
           <Link to={`/${lang}`} style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(38px, 5.2vw, 68px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--ink-1)', textShadow: '0 0 48px var(--accent-ring)', textDecoration: 'none' }}>
             PL<span style={{ color: 'var(--accent)' }}>·</span>Digitalbau
           </Link>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em', color: 'var(--ink-3)' }}>PAVEL LEVDIN · BREMEN · DE EN RU</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.16em', color: 'var(--ink-3)' }}>PAVEL LEVDIN · HANNOVER · DE EN RU</span>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 40, paddingTop: 40, borderTop: '1px solid var(--border-1)' }}>
@@ -83,7 +83,7 @@ export function Footer() {
               <li><a href="https://t.me/PavelLevdin" target="_blank" rel="noopener noreferrer" style={linkStyle} className="footer-link">Telegram: @PavelLevdin</a></li>
               <li><a href="https://wa.me/4917643141306" target="_blank" rel="noopener noreferrer" style={linkStyle} className="footer-link">WhatsApp: +49 176 43141306</a></li>
               <li><a href="mailto:levdin.pavel@yandex.ru" style={linkStyle} className="footer-link">levdin.pavel@yandex.ru</a></li>
-              <li style={{ ...linkStyle, color: 'var(--ink-3)' }}>Bremen, Germany</li>
+              <li style={{ ...linkStyle, color: 'var(--ink-3)' }}>Hannover, Germany</li>
             </ul>
           </div>
           <div>

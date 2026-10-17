@@ -22,7 +22,7 @@
 | **Конверсия** | воронка лида, CTA, формы, trust-сигналы, A/B, трекинг | `@cro-analytics` |
 | **Маркетинг** | копирайтинг, контент-стратегия, креатив | `@marketer` |
 | **Соцсети** | контент-план, посты IG/FB/Telegram (под админку соц-публикаций) | `@smm-manager` |
-| **Локальное** | Google Business, отзывы, локальный поиск (Bremen) | `@google-business-local` |
+| **Локальное** | Google Business, отзывы, локальный поиск (Hannover) | `@google-business-local` |
 | **Инфра / деплой** | FTP-деплой, admin Express-сервер, Node, сборка, «упало» | `@devops-engineer` |
 | **Решение / совет** | «sovet», «стоит ли», пресс-тест идеи | `/sovet` (llm-council) |
 

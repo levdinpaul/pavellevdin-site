@@ -61,7 +61,7 @@ function Hero({ copy, go }: { copy: HomeCopy; go: (p: string) => void }) {
       <div className="hero-grid" style={{ maxWidth: 'var(--container-max)', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 48, alignItems: 'center', position: 'relative' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           <div className="rise" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <Badge>Bremen · DE EN RU</Badge>
+            <Badge>Hannover · DE EN RU</Badge>
             <Badge tone="neutral">Bauplan Rev. 2.0</Badge>
           </div>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-hero)', fontWeight: 800, lineHeight: 0.95, letterSpacing: '-0.03em', color: 'var(--ink-1)', margin: 0 }}>
@@ -114,7 +114,7 @@ export function HomeScene() {
       <BuildSection id="about" label={copy.aboutEyebrow}>
         <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
           <SectionHeader index="01" eyebrow={copy.aboutEyebrow} title={copy.aboutTitle} lead={copy.aboutLead} />
-          <BlueprintFrame label="Profil · P-01" coords="Bremen · 53.07°N" padding={28}>
+          <BlueprintFrame label="Profil · P-01" coords="Hannover · 52.37°N" padding={28}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <p style={{ margin: 0, fontSize: 15, lineHeight: 1.7, color: 'var(--ink-2)' }}>{copy.aboutText}</p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>

@@ -8,9 +8,9 @@ export function Home() {
   const baseUrl = 'https://pavellevdin.ru';
 
   const titles = {
-    en: 'Web Coding Bremen | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
+    en: 'Web Coding Hannover | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
     ru: 'Веб-кодинг и сайты под ключ | SEO, AI Search, Google Business | PL Innovativ Digitalbau',
-    de: 'Web Coding Bremen | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
+    de: 'Web Coding Hannover | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
   };
 
   const descriptions = {
@@ -50,7 +50,7 @@ export function Home() {
         <meta name="description" content={descriptions[lang]} />
         <meta
           name="keywords"
-          content="PL – Innovativ Digitalbau, web development, SEO, AEO, AI search optimization, Google Business Profile, React developer, Bremen web developer, автоматизация бизнеса, разработка сайтов"
+          content="PL – Innovativ Digitalbau, web development, SEO, AEO, AI search optimization, Google Business Profile, React developer, Hannover web developer, автоматизация бизнеса, разработка сайтов"
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="author" content="Pavel Levdin" />

@@ -27,7 +27,7 @@ export const HOME_COPY: Record<'de' | 'en' | 'ru', HomeCopy> = {
     heroCta: 'Projekt konfigurieren', heroCta2: 'Portfolio ansehen', scrollHint: 'Scrollen — die Seite baut sich selbst',
     aboutEyebrow: 'Positionierung', aboutTitle: 'Ein Entwickler. Das ganze System.',
     aboutLead: 'Kein Agentur-Overhead, keine Übergabeverluste — Strategie, Code und Wachstum aus einer Hand.',
-    aboutText: 'PL Innovativ Digitalbau ist das Ein-Personen-Studio von Pavel Levdin, Full-Stack-Entwickler in Bremen. Diese Seite ist selbst das Portfolio: Wenn mein eigener Auftritt so aussieht — stellen Sie sich vor, was ich für Ihr Geschäft baue.',
+    aboutText: 'PL Innovativ Digitalbau ist das Ein-Personen-Studio von Pavel Levdin, Full-Stack-Entwickler in Hannover. Diese Seite ist selbst das Portfolio: Wenn mein eigener Auftritt so aussieht — stellen Sie sich vor, was ich für Ihr Geschäft baue.',
     servicesEyebrow: 'Leistungen', servicesTitle: 'Vom Bauplan zum laufenden System.',
     servicesLead: 'Fünf Baustufen — jede einzeln buchbar, zusammen ein komplettes Startsystem.',
     services: [
@@ -70,7 +70,7 @@ export const HOME_COPY: Record<'de' | 'en' | 'ru', HomeCopy> = {
     heroCta: 'Configure project', heroCta2: 'View portfolio', scrollHint: 'Scroll — the site builds itself',
     aboutEyebrow: 'Positioning', aboutTitle: 'One developer. The whole system.',
     aboutLead: 'No agency overhead, no hand-off losses — strategy, code and growth from one source.',
-    aboutText: 'PL Innovativ Digitalbau is the one-person studio of Pavel Levdin, full-stack developer in Bremen. This site is the portfolio itself: if my own site looks like this — imagine what I build for your business.',
+    aboutText: 'PL Innovativ Digitalbau is the one-person studio of Pavel Levdin, full-stack developer in Hannover. This site is the portfolio itself: if my own site looks like this — imagine what I build for your business.',
     servicesEyebrow: 'Services', servicesTitle: 'From blueprint to running system.',
     servicesLead: 'Five construction stages — bookable individually, together a complete launch system.',
     services: [
@@ -113,7 +113,7 @@ export const HOME_COPY: Record<'de' | 'en' | 'ru', HomeCopy> = {
     heroCta: 'Рассчитать проект', heroCta2: 'Портфолио', scrollHint: 'Листайте — сайт строит себя сам',
     aboutEyebrow: 'Позиционирование', aboutTitle: 'Один разработчик. Вся система.',
     aboutLead: 'Без агентских накладных и потерь на передаче — стратегия, код и рост из одних рук.',
-    aboutText: 'PL Innovativ Digitalbau — студия одного человека, Павла Левдина, full-stack-разработчика из Бремена. Этот сайт — само портфолио: если мой сайт выглядит так — представьте, что я построю для вашего бизнеса.',
+    aboutText: 'PL Innovativ Digitalbau — студия одного человека, Павла Левдина, full-stack-разработчика из Ганновера. Этот сайт — само портфолио: если мой сайт выглядит так — представьте, что я построю для вашего бизнеса.',
     servicesEyebrow: 'Услуги', servicesTitle: 'От чертежа до работающей системы.',
     servicesLead: 'Пять этапов строительства — по отдельности или как полная стартовая система.',
     services: [

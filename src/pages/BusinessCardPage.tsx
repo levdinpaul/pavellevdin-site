@@ -15,7 +15,7 @@ const copy = {
     project: 'Projekt starten',
     brief: 'Konfigurator',
     save: 'Kontakt speichern',
-    location: 'Bremen, Deutschland',
+    location: 'Hannover, Deutschland',
   },
   en: {
     title: 'Online Business Card | Pavel Levdin',
@@ -26,7 +26,7 @@ const copy = {
     project: 'Start project',
     brief: 'Configurator',
     save: 'Save contact',
-    location: 'Bremen, Germany',
+    location: 'Hannover, Germany',
   },
   ru: {
     title: 'Онлайн-визитка | Павел Левдин',
@@ -37,7 +37,7 @@ const copy = {
     project: 'Запустить проект',
     brief: 'Конфигуратор',
     save: 'Сохранить контакт',
-    location: 'Бремен, Германия',
+    location: 'Ганновер, Германия',
   },
 };
 
