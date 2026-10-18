@@ -73,6 +73,7 @@ const ServicesPage = lazy(() => import('@/pages/ServicesPage').then(m => ({ defa
 const ReviewPage = lazy(() => import('@/pages/ReviewPage').then(m => ({ default: m.ReviewPage })));
 const ContactPage = lazy(() => import('@/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const BriefPage = lazy(() => import('@/pages/BriefPage').then(m => ({ default: m.BriefPage })));
+const CalculatorPage = lazy(() => import('@/pages/CalculatorPage').then(m => ({ default: m.CalculatorPage })));
 const BusinessCardPage = lazy(() => import('@/pages/BusinessCardPage').then(m => ({ default: m.BusinessCardPage })));
 const ImprintPage = lazy(() => import('@/pages/ImprintPage').then(m => ({ default: m.ImprintPage })));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage').then(m => ({ default: m.PrivacyPage })));
@@ -116,6 +117,7 @@ export function AppRoutes() {
           <Route path="portfolio/:slug" element={<ProjectPage />} />
           <Route path="services" element={<ServicesPage />} />
           <Route path="brief" element={<BriefPage />} />
+          <Route path="calculator" element={<CalculatorPage />} />
           <Route path="business-card" element={<BusinessCardPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="imprint" element={<ImprintPage />} />

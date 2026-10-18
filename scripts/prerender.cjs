@@ -25,7 +25,7 @@ const PORT = 5055;
 function ssrLangForRoute(route) {
   // Формы (contact/brief) безопасны: неконтролируемые нативные <form>, отправка через fetch
   // в клиентском onSubmit (после гидрации) — SSR трогает только разметку, не код заявки.
-  const staticRoutes = ['/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact', '/ru/brief', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
+  const staticRoutes = ['/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact', '/ru/brief', '/ru/calculator', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
   if (staticRoutes.includes(route)) return 'ru';
   if (/^\/ru\/portfolio\/[^/]+$/.test(route)) return 'ru'; // страницы кейсов
   return null;
@@ -117,7 +117,7 @@ async function run() {
   // Русские маршруты — приоритет фазы 1
   const routes = [
     '/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact',
-    '/ru/brief', '/ru/business-card', '/ru/imprint', '/ru/privacy',
+    '/ru/brief', '/ru/calculator', '/ru/business-card', '/ru/imprint', '/ru/privacy',
   ];
   for (const slug of getProjectSlugs()) routes.push(`/ru/portfolio/${slug}`);
 

@@ -19,6 +19,7 @@ export function Footer() {
     // Блог и кабинет отдаёт pl-platform (nginx) → обычная ссылка, полная загрузка страницы.
     { to: `/${lang}/blog`, label: t('pl.footer.blog'), external: true },
     { to: `/${lang}/brief`, label: t('pl.footer.brief') },
+    { to: `/${lang}/calculator`, label: t('pl.footer.calc') },
     { to: `/${lang}/business-card`, label: t('pl.footer.card') },
     { to: `/${lang}/cabinet`, label: t('pl.footer.cabinet'), external: true },
   ];

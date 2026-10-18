@@ -69,6 +69,14 @@ const DEADLINES = ['Срочно (1–2 недели)', '2–4 недели', '1
 
 const STEP_TITLES = ['Что нужно?', 'Соберите проект', 'Детали', 'Контакт'];
 
+// Точный расчёт «от–до» со сроком и разбивкой — в калькуляторе (/calculator, общий модуль src/lib/calculator.ts).
+// Здесь — только ориентир «от» по пакетам для брифа.
+const CALC_HINT = {
+  ru: 'Нужна цена «от–до» и срок с разбивкой? Откройте калькулятор',
+  de: 'Preisrahmen und Dauer mit Aufschlüsselung? Zum Kostenrechner',
+  en: 'Need a price range and timeline with a breakdown? Open the calculator',
+} as const;
+
 export function BriefPage() {
   const { i18n } = useTranslation();
   const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru') as 'de' | 'en' | 'ru';
@@ -219,6 +227,16 @@ export function BriefPage() {
                     />
                   </div>
                 </div>
+
+                {step === 0 && (
+                  <Link
+                    to={`/${lang}/calculator`}
+                    className="mb-6 flex items-center justify-between gap-3 rounded-2xl border border-cyan-300/25 bg-cyan-300/[0.06] p-4 text-sm text-cyan-50 transition hover:border-cyan-300/50"
+                  >
+                    <span>{CALC_HINT[lang]}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                )}
 
                 <AnimatePresence mode="wait">
                   {/* ШАГ 1 — цель */}

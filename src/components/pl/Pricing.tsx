@@ -33,6 +33,10 @@ export function Pricing({ lang }: { lang: string }) {
         })}
       </ul>
 
+      <div className="pl-cta__actions pl-prices__calc" data-reveal="">
+        <Link to={`/${lang}/calculator`} className="pl-btn pl-btn--primary">{t('pl.prices.calc')}</Link>
+      </div>
+
       <div className="pl-prices__ongoing" data-reveal="">
         <h3 className="pl-prices__subtitle">{t('pl.prices.ongoing')}</h3>
         <dl>
