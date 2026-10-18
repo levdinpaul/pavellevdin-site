@@ -25,8 +25,9 @@ const PORT = 5055;
 function ssrLangForRoute(route) {
   // Формы (contact/brief) безопасны: неконтролируемые нативные <form>, отправка через fetch
   // в клиентском onSubmit (после гидрации) — SSR трогает только разметку, не код заявки.
-  const staticRoutes = ['/ru', '/ru/services', '/ru/portfolio', '/ru/blog', '/ru/contact', '/ru/brief', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
+  const staticRoutes = ['/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/blog', '/ru/contact', '/ru/brief', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
   if (staticRoutes.includes(route)) return 'ru';
+  if (/^\/ru\/portfolio\/[^/]+$/.test(route)) return 'ru'; // страницы кейсов
   if (/^\/ru\/blog\/[^/]+$/.test(route)) return 'ru'; // отдельные посты (один сегмент, не category/tag)
   return null;
 }
@@ -100,6 +101,12 @@ function dedupHead(html, meta) {
   return html;
 }
 
+// Слаги кейсов портфолио — из того же JSON, что читает React (src/data/portfolio.json)
+function getProjectSlugs() {
+  const f = path.join(projectRoot, 'src', 'data', 'portfolio.json');
+  return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')).map((p) => p.slug) : [];
+}
+
 function getBlogSlugs() {
   const blogDir = path.join(projectRoot, 'src', 'content', 'blog');
   const slugs = [];
@@ -123,9 +130,10 @@ async function run() {
 
   // Русские маршруты — приоритет фазы 1
   const routes = [
-    '/ru', '/ru/services', '/ru/portfolio', '/ru/contact',
+    '/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact',
     '/ru/brief', '/ru/business-card', '/ru/imprint', '/ru/privacy', '/ru/blog',
   ];
+  for (const slug of getProjectSlugs()) routes.push(`/ru/portfolio/${slug}`);
   for (const slug of getBlogSlugs()) routes.push(`/ru/blog/${slug}`);
 
   // Загружаем SSR-рендер (ESM-бандл) для маршрутов из SSR_ROUTES
