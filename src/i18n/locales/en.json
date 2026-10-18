@@ -231,7 +231,7 @@
       "weekend": "Saturday - Sunday",
       "weekendTime": "By appointment"
     }
-  },  
+  },
   "imprint": {
     "seo": {
       "title": "Imprint | Pavel Levdin",
@@ -427,7 +427,10 @@
     },
     "scene": {
       "label": "Technologies I work with",
-      "skip": "Skip to work"
+      "skip": "Skip to work",
+      "finaleLabel": "The whole stack",
+      "finaleA": "One developer.",
+      "finaleB": "The full cycle."
     },
     "about": {
       "eyebrow": "About",
@@ -783,5 +786,4 @@
       "systemText": "Positioning, website, Google Business, Yandex Business, social media, SEO, AEO, analytics, CRM and automation all work together."
     }
   }
- 
 }

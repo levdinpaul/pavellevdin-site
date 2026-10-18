@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import type { SceneGL } from './scene-gl';
-import { clamp, fallbackSpiral, smoothstep, TECHNOLOGIES } from './scene-model';
+import { STACK } from '@/data/stack';
+import { clamp, fallbackSpiral, FINALE, FLIGHT, HERO_END, smoothstep } from './scene-model';
 import './scene.css';
 
 const MOTION_QUERY = '(prefers-reduced-motion: no-preference)';
@@ -23,6 +24,7 @@ export function SceneSection({ lang }: { lang: string }) {
   const heroRef = useRef<HTMLDivElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
+  const finaleRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -31,8 +33,9 @@ export function SceneSection({ lang }: { lang: string }) {
     const hero = heroRef.current;
     const labels = labelsRef.current;
     const controls = controlsRef.current;
+    const finale = finaleRef.current;
     const canvas = canvasRef.current;
-    if (!section || !stage || !hero || !labels || !controls || !canvas) return;
+    if (!section || !stage || !hero || !labels || !controls || !finale || !canvas) return;
 
     const media = window.matchMedia(MOTION_QUERY);
     const labelElements = Array.from(labels.children) as HTMLElement[];
@@ -69,6 +72,7 @@ export function SceneSection({ lang }: { lang: string }) {
       hero.inert = false;
       controls.removeAttribute('style');
       controls.inert = true;
+      finale.removeAttribute('style');
       labelElements.forEach((element) => element.removeAttribute('style'));
     };
 
@@ -80,25 +84,31 @@ export function SceneSection({ lang }: { lang: string }) {
       currentProgress += (targetProgress - currentProgress) * (1 - Math.exp(-elapsed / 78));
       if (Math.abs(targetProgress - currentProgress) < 0.00015) currentProgress = targetProgress;
 
-      const heroOpacity = 1 - smoothstep(0.015, 0.15, currentProgress);
+      const heroOpacity = 1 - smoothstep(0.015, HERO_END, currentProgress);
       hero.style.opacity = heroOpacity.toFixed(3);
       hero.style.transform = `translate3d(0, ${(-28 * (1 - heroOpacity)).toFixed(2)}px, 0)`;
       hero.style.visibility = heroOpacity < 0.01 ? 'hidden' : 'visible';
       hero.inert = heroOpacity < 0.08;
-      const controlsOpacity = smoothstep(0.15, 0.24, currentProgress);
+      const controlsOpacity = smoothstep(HERO_END, 0.24, currentProgress) * (1 - smoothstep(FLIGHT[1] - 0.04, FLIGHT[1], currentProgress));
       controls.style.opacity = controlsOpacity.toFixed(3);
       controls.style.visibility = controlsOpacity < 0.01 ? 'hidden' : 'visible';
       controls.inert = controlsOpacity < 0.5;
+      const finaleOpacity = smoothstep(FINALE[0], FINALE[1], currentProgress);
+      finale.style.opacity = finaleOpacity.toFixed(3);
+      finale.style.transform = `scale(${(0.96 + 0.04 * finaleOpacity).toFixed(4)})`;
+      finale.style.visibility = finaleOpacity < 0.01 ? 'hidden' : 'visible';
 
-      const positions = graphics.render(currentProgress);
+      const positions = graphics.render(currentProgress, time / 1000);
       positions.forEach(({ x, y, scale, opacity }, index) => {
         const element = labelElements[index];
+        if (opacity < 0.01 && element.style.visibility === 'hidden') return;
         element.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translate(-50%, -50%) scale(${(scale * LABEL_SCALE).toFixed(4)})`;
         element.style.opacity = opacity.toFixed(3);
         element.style.visibility = opacity < 0.01 ? 'hidden' : 'visible';
       });
 
-      if (currentProgress !== targetProgress) frame = requestAnimationFrame(draw);
+      // Quiet idle spin: keep drawing while the section is on screen (paused when hidden or scrolled away).
+      frame = requestAnimationFrame(draw);
     };
 
     const schedule = () => {
@@ -127,7 +137,7 @@ export function SceneSection({ lang }: { lang: string }) {
       try {
         const module = await import('./scene-gl');
         if (disposed || request !== generation || !media.matches) return;
-        graphics = module.createSceneGL(canvas, reset);
+        graphics = module.createSceneGL(canvas, STACK.length, reset);
         if (!graphics) return;
         // The section grows when it goes live. If the reader has already scrolled past the
         // compact hero, keep the content they are looking at in place.
@@ -226,7 +236,7 @@ export function SceneSection({ lang }: { lang: string }) {
           <div className="pl-hero__copy">
             <p className="pl-hero__eyebrow">{t('pl.hero.eyebrow')}</p>
             <h1 id="pl-hero-title" className="pl-hero__title">
-              <span>{t('pl.hero.titleLine1')}</span>
+              <span>{t('pl.hero.titleLine1')}</span>{' '}
               <span>{t('pl.hero.titleLine2')}</span>
             </h1>
             <p className="pl-hero__lead">{t('pl.hero.lead')}</p>
@@ -236,15 +246,22 @@ export function SceneSection({ lang }: { lang: string }) {
             </div>
           </div>
           <p className="pl-hero__scroll" aria-hidden="true"><span />{t('pl.hero.scroll')}</p>
-          <ul className="pl-tech-fallback" aria-label={t('pl.scene.label')}>
-            {TECHNOLOGIES.map((technology) => <li key={technology}>{technology}</li>)}
+          <ul className="pl-tech-fallback" aria-hidden="true">
+            {STACK.filter((item) => item.key).map((item) => <li key={item.name}>{item.name}</li>)}
+          </ul>
+          <ul className="pl-visually-hidden" aria-label={t('pl.scene.label')}>
+            {STACK.map((item) => <li key={item.name}>{item.name}</li>)}
           </ul>
         </div>
 
         <div ref={labelsRef} className="pl-tech-cloud" aria-hidden="true">
-          {TECHNOLOGIES.map((technology, index) => (
-            <span key={technology} className="pl-tech" data-tone={index % 3 === 0 ? 'accent' : 'light'}>{technology}</span>
+          {STACK.map((item) => (
+            <span key={item.name} className="pl-tech" data-key={item.key ? 'true' : undefined}>{item.name}</span>
           ))}
+        </div>
+        <div ref={finaleRef} className="pl-scene__finale">
+          <p>{t('pl.scene.finaleLabel')}</p>
+          <h2 className="pl-scene__finale-title">{t('pl.scene.finaleA')} <span>{t('pl.scene.finaleB')}</span></h2>
         </div>
         <div ref={controlsRef} className="pl-scene__controls">
           <p>{t('pl.scene.label')}</p>

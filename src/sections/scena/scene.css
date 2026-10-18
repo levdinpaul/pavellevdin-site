@@ -10,7 +10,7 @@
   overflow: clip;
   isolation: isolate;
 }
-.pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 190svh); }
+.pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 380svh); }
 .pl-scene[data-motion='live'] .pl-stage {
   position: sticky;
   top: min(0px, calc(100svh - var(--scene-frame-height)));
@@ -72,7 +72,7 @@
 .pl-scene .pl-hero__title {
   margin: 0;
   font: 500 clamp(44px, 6.1vw, 88px)/1.04 var(--font-display);
-  letter-spacing: -0.055em;
+  letter-spacing: -0.04em;
   color: var(--ink-1);
 }
 .pl-scene .pl-hero__title > span { display: block; }
@@ -138,8 +138,9 @@
   color: var(--ink-3);
   font: 400 10px/1.5 var(--font-mono);
 }
-.pl-scene[data-motion='live'] .pl-tech-fallback {
-  /* Keep the useful technology list in the accessibility tree. */
+.pl-scene .pl-visually-hidden {
+  /* Full stack list for search engines and screen readers (the flight itself is decorative). */
+  position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
@@ -165,14 +166,55 @@
   left: 0;
   opacity: 0;
   visibility: hidden;
-  color: #d7dfef;
+  color: #9aa3b8;
   /* Base size is twice the on-screen median: the driver scales down, so near labels stay crisp. */
-  font: 400 68px/1 var(--font-mono);
-  letter-spacing: -0.065em;
+  font: 400 50px/1 var(--font-mono);
+  letter-spacing: -0.04em;
   white-space: nowrap;
   will-change: transform, opacity;
 }
-.pl-scene .pl-tech[data-tone='accent'] { color: #9bbaff; }
+.pl-scene .pl-tech[data-key] {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  color: #eef1f8;
+  font: 500 72px/1 var(--font-display);
+  letter-spacing: -0.04em;
+}
+.pl-scene .pl-tech[data-key]::before {
+  content: '';
+  width: 0.14em;
+  height: 0.14em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.pl-scene__finale {
+  position: absolute;
+  z-index: 4;
+  top: max(0px, calc(var(--scene-frame-height) - 100svh));
+  left: 0;
+  right: 0;
+  height: 100svh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.pl-scene[data-motion='live'] .pl-scene__finale { display: flex; }
+.pl-scene__finale p { margin: 0 0 20px; color: var(--accent); font: 400 12px/1.4 var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+.pl-scene__finale .pl-scene__finale-title {
+  margin: 0;
+  color: var(--ink-1);
+  font: 500 clamp(34px, 5.2vw, 76px)/1.04 var(--font-display);
+  letter-spacing: -0.04em;
+  text-transform: none;
+}
+.pl-scene__finale-title span { display: block; color: var(--ink-3); }
 .pl-scene__controls {
   position: absolute;
   z-index: 4;
@@ -213,14 +255,14 @@
   .pl-scene .pl-tech-fallback { gap: 8px 14px; font-size: 9px; }
 }
 @media (max-width: 767px) {
-  .pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 130svh); }
+  .pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 300svh); }
   .pl-scene .pl-hero {
     justify-content: flex-start;
     padding: clamp(132px, 20svh, 180px) 24px 138px;
   }
   .pl-scene .pl-hero__copy { max-width: 560px; }
   .pl-scene .pl-hero__eyebrow { margin-bottom: 24px; font-size: 12px; }
-  .pl-scene .pl-hero__title { font-size: clamp(38px, 7.9vw, 60px); line-height: 1.08; letter-spacing: -0.052em; }
+  .pl-scene .pl-hero__title { font-size: clamp(30px, 8.3vw, 60px); line-height: 1.08; letter-spacing: -0.04em; }
   .pl-scene .pl-hero__lead { max-width: 35ch; margin-top: 25px; font-size: 15px; }
   .pl-scene .pl-hero__actions { gap: 12px 25px; margin-top: 27px; }
   .pl-scene .pl-hero__actions .pl-btn { min-height: 50px; padding: 0 20px; gap: 22px; font-size: 13px; }
@@ -232,11 +274,12 @@
   .pl-scene__controls { top: calc(93px + max(0px, var(--scene-frame-height) - 100svh)); right: 24px; left: 24px; }
   .pl-scene__controls p { font-size: 11px; }
   .pl-scene__controls a { gap: 8px; font-size: 11px; }
-  .pl-scene .pl-tech { font-size: 54px; }
+  .pl-scene .pl-tech { font-size: 40px; }
+  .pl-scene .pl-tech[data-key] { font-size: 56px; }
 }
 @media (max-width: 389px) {
   .pl-scene .pl-hero { padding-right: 20px; padding-left: 20px; }
-  .pl-scene .pl-hero__title { font-size: 36px; }
+  .pl-scene .pl-hero__title { font-size: 30px; }
   .pl-scene .pl-hero__actions { gap: 8px 20px; }
 }
 @media (max-height: 699px) {
@@ -257,7 +300,7 @@
   .pl-scene[data-motion='live'] { height: auto; }
   .pl-scene[data-motion='live'] .pl-stage { position: relative; height: auto; }
   .pl-scene .pl-hero { opacity: 1 !important; transform: none !important; visibility: visible !important; }
-  .pl-gl, .pl-tech-cloud, .pl-scene__controls { display: none !important; }
+  .pl-gl, .pl-tech-cloud, .pl-scene__controls, .pl-scene__finale { display: none !important; }
   .pl-scene__fallback { opacity: 1 !important; }
 }
 

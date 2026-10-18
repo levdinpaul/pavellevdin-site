@@ -27,7 +27,7 @@ Project-brief. Читается при работе в этом репозито
 ## Стек
 - **Фронт:** React 19 + Vite 7 + TypeScript 5 + Tailwind 3.4 + shadcn/ui (Radix) + framer-motion +
   react-router-dom 7 + react-i18next (de/en/ru) + recharts + RHF + Zod v4 + react-helmet-async + three 0.186.1 (только сцена, лениво).
-- **Дизайн «PL Сцена»** (с 2026-10-18): тёмная палитра #060810 / акцент #7AA2FF, шрифт Golos Text (self-host).
+- **Дизайн «PL Сцена»** (с 2026-10-18): тёмная палитра #060810 / акцент #7AA2FF, шрифт Onest (self-host).
   Токены — `src/index.css` (:root), классы `pl-*` — `src/styles/pl.css`.
 - **Бэкенд (админка):** Node + Express (`scripts/server.js`) — auth, stats, публикации.
   В коде ещё легаси **FTP/HostLand** (`basic-ftp`, см. BACKLOG 1a), сжатие картинок **Tinify**, загрузки `multer`,
@@ -40,8 +40,8 @@ Project-brief. Читается при работе в этом репозито
 - `pages/` — Home, About, Services, Portfolio, Project (кейс /portfolio/:slug), Contact, Brief, Imprint, Privacy;
   `pages/blog/*`; `pages/admin/*`.
 - `components/` — `layout/` (SiteHeader, Footer, Layout), `pl/` (ProjectCard, ServicesGrid, Integrations, Counter,
-  Marquee, PageMeta+seo, PointerFX, GenImage), `ds/CommandMenu` (⌘K), `ui/` (shadcn), `admin/`, `blog/`.
-- `data/` — **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
+  Marquee, PageMeta+seo), `ds/CommandMenu` (⌘K), `ui/` (shadcn), `admin/`, `blog/`.
+- `data/` — **stack.ts** (реальный стек: спираль, SEO-список, бегущая строка About) + **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
   testimonials.ts, blog-index/loader.
 - `constants/contacts.ts` — единый источник контактов.
 - `i18n/locales/` — de.json / en.json / ru.json (держать синхронными).

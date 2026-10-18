@@ -16,7 +16,8 @@ const CMD: Record<Lang, CommandLabels & { blog: string; brief: string }> = {
 };
 
 /**
- * Шапка «PL Сцена»: лого, меню, язык, CTA, «···»-меню на узких экранах, соц-колонка справа.
+ * Шапка «PL Сцена» без плашек: лого-текст, меню, RU / DE / EN текстом, CTA-ссылка, «···»-меню на узких экранах,
+ * соц-колонка справа (кроме главной).
  * На главной прозрачная поверх hero, после первого экрана — фон + blur + граница.
  * На остальных страницах фон сразу (решается по pathname — одинаково на сервере и клиенте).
  */
@@ -29,17 +30,13 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
-  const progressRef = useRef<HTMLDivElement>(null);
   const topRef = useRef<HTMLButtonElement>(null);
 
-  // Скролл-прогресс в шапке и кнопка «наверх» — пишем в DOM напрямую, без ре-рендеров
+  // Кнопка «наверх» — пишем в DOM напрямую, без ре-рендеров
   useEffect(() => {
     let raf = 0;
     const update = () => {
       raf = 0;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const k = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-      if (progressRef.current) progressRef.current.style.transform = `scaleX(${k.toFixed(4)})`;
       if (topRef.current) topRef.current.dataset.visible = String(window.scrollY > window.innerHeight * 1.5);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
@@ -86,12 +83,13 @@ export function SiteHeader() {
     return () => document.removeEventListener('pointerdown', onDown);
   }, [menuOpen]);
 
-  const cycleLang = () => {
-    const next = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length];
+  const switchLang = (next: Lang) => {
+    if (next === lang) return;
     i18n.changeLanguage(next);
     const rest = location.pathname.replace(/^\/(ru|de|en)(?=\/|$)/, '');
     navigate(`/${next}${rest || ''}${location.hash}`);
   };
+  const cycleLang = () => switchLang(LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length]);
 
   const links = [
     { to: `/${lang}/about`, label: t('pl.nav.about'), match: '/about' },
@@ -115,7 +113,6 @@ export function SiteHeader() {
       <header className="pl-header" data-solid={!isHome || scrolled || menuOpen}>
         <div className="pl-header__inner">
           <Link to={`/${lang}`} className="pl-logo" aria-label={t('pl.nav.home')}>
-            <span className="pl-logo__mark">PL</span>
             <span className="pl-logo__text">
               <span className="pl-logo__name">Innovativ Digitalbau</span>
               <span className="pl-logo__sub">{t('pl.brandSub')}</span>
@@ -129,11 +126,15 @@ export function SiteHeader() {
           </nav>
 
           <div className="pl-header__actions">
-            <button type="button" className="pl-chip" onClick={cycleLang} aria-label={t('pl.nav.lang')}>{lang.toUpperCase()}</button>
-            <Link to={`/${lang}/brief`} className="pl-btn pl-btn--light pl-header__cta">{t('pl.nav.cta')}</Link>
+            <span className="pl-langs" role="group" aria-label={t('pl.nav.lang')}>
+              {LANGS.map((l) => (
+                <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
+              ))}
+            </span>
+            <Link to={`/${lang}/brief`} className="pl-header__cta">{t('pl.nav.cta')}</Link>
             <button
               type="button"
-              className="pl-chip pl-burger"
+              className="pl-burger"
               aria-label={t('pl.nav.menu')}
               aria-expanded={menuOpen}
               aria-controls="pl-menu"
@@ -141,7 +142,6 @@ export function SiteHeader() {
             >···</button>
           </div>
         </div>
-        <div className="pl-progress" aria-hidden="true"><div ref={progressRef} /></div>
       </header>
 
       <button ref={topRef} type="button" className="pl-chip pl-totop" data-visible="false" aria-label={t('pl.nav.top')} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>↑</button>
@@ -150,14 +150,22 @@ export function SiteHeader() {
         <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')}>
           {links.map((l) => <Link key={l.to} to={l.to}>{l.label}</Link>)}
           <Link to={`/${lang}/brief`} className="pl-menu__cta">{t('pl.nav.cta')}</Link>
+          <span className="pl-langs pl-menu__langs" role="group" aria-label={t('pl.nav.lang')}>
+            {LANGS.map((l) => (
+              <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
+            ))}
+          </span>
         </nav>
       )}
 
-      <div className="pl-social" aria-label={t('pl.nav.social')}>
-        {social.map((s) => (
-          <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>{s.icon}</a>
-        ))}
-      </div>
+      {/* На главной контакты есть в CTA и футере — без боковой колонки */}
+      {!isHome && (
+        <div className="pl-social" aria-label={t('pl.nav.social')}>
+          {social.map((s) => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>{s.icon}</a>
+          ))}
+        </div>
+      )}
 
       <CommandMenu
         open={cmdOpen}

@@ -1,5 +1,9 @@
 /** Shared, deterministic scene data; importing this file does not load Three.js. */
-export const TECHNOLOGIES = ['TypeScript', 'JavaScript', 'React', 'Node.js', 'SQL', 'HTML', 'CSS'] as const;
+
+/** Scroll timeline of the section (0…1): hero leaves, the flight passes the stack, the finale holds ~10%. */
+export const HERO_END = 0.15;
+export const FLIGHT = [0.12, 0.84] as const;
+export const FINALE = [0.84, 0.9] as const;
 
 export const clamp = (value: number) => Math.max(0, Math.min(1, value));
 

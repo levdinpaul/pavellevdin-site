@@ -7,7 +7,7 @@ import { Counter } from '@/components/pl/Counter';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE } from '@/components/pl/seo';
 import { Marquee } from '@/components/pl/Marquee';
-import { STACK } from '@/components/pl/stack';
+import { STACK } from '@/data/stack';
 import { ProjectCard } from '@/components/pl/ProjectCard';
 import { TelegramIcon, WhatsAppIcon } from '@/components/layout/social-icons';
 import { useReveal } from '@/sections/scena/useReveal';
@@ -117,7 +117,7 @@ export function AboutPage() {
 
         <section className="pl-section" aria-label={t('pl.aboutPage.stackTitle')}>
           <div className="pl-container"><h2 className="pl-h2 pl-stack__title" data-reveal="">{t('pl.aboutPage.stackTitle')}</h2></div>
-          <Marquee items={STACK} label={t('pl.aboutPage.stackTitle')} />
+          <Marquee items={STACK.map((item) => item.name)} label={t('pl.aboutPage.stackTitle')} />
         </section>
 
         <section className="pl-container pl-section" aria-labelledby="pl-featured-title">

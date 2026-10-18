@@ -8,40 +8,17 @@ import { ServicesGrid } from '@/components/pl/ServicesGrid';
 import { Integrations } from '@/components/pl/Integrations';
 import { useReveal } from './useReveal';
 
-type Item = { title: string; text: string };
-type Stat = { value: string; label: string };
-
-/** Секции главной после сцены: Обо мне → Проекты → Услуги → Интеграции → CTA. */
+/** Секции главной после сцены: Проекты (сразу после финала полёта) → Обо мне → Услуги → Интеграции → CTA. */
 export function HomeSections({ lang }: { lang: string }) {
   const { t } = useTranslation();
   const root = useRef<HTMLDivElement>(null);
   useReveal(root);
 
-  const aboutCards = t('pl.about.cards', { returnObjects: true }) as Item[];
-  const stats = t('pl.about.stats', { returnObjects: true }) as Stat[];
   const work = projects.filter((p) => p.featured).slice(0, 6);
 
   return (
     <div ref={root} className="pl-main">
       <div className="pl-container">
-        <section id="about" className="pl-section" aria-labelledby="pl-about-title">
-          <p className="pl-eyebrow" data-reveal="">{t('pl.about.eyebrow')}</p>
-          <h2 id="pl-about-title" className="pl-h2 pl-about__title" data-reveal="">{t('pl.about.title')}</h2>
-          <p className="pl-lead" data-reveal="">{t('pl.about.lead')}</p>
-          <div className="pl-about__grid" data-reveal="">
-            {aboutCards.map((c) => (
-              <div key={c.title} className="pl-tile">
-                <h3 className="pl-tile__title">{c.title}</h3>
-                <p className="pl-tile__text">{c.text}</p>
-              </div>
-            ))}
-          </div>
-          <ul className="pl-stats" data-reveal="">
-            {stats.map((s) => <li key={s.label}><strong>{s.value}</strong><span>{s.label}</span></li>)}
-          </ul>
-          <Link to={`/${lang}/about`} className="pl-btn pl-btn--ghost pl-about__more" data-reveal="">{t('pl.about.more')}</Link>
-        </section>
-
         <section id="work" className="pl-section" aria-labelledby="pl-work-title">
           <div className="pl-section__head" data-reveal="">
             <h2 id="pl-work-title" className="pl-h2">{t('pl.work.title')}</h2>
@@ -50,6 +27,22 @@ export function HomeSections({ lang }: { lang: string }) {
           <ul className="pl-work__grid">
             {work.map((p) => <li key={p.slug} data-reveal=""><ProjectCard project={p} lang={lang} /></li>)}
           </ul>
+        </section>
+
+        <section id="about" className="pl-section pl-about" aria-labelledby="pl-about-title">
+          <figure className="pl-about__photo" data-reveal="">
+            <picture>
+              <source type="image/avif" srcSet="/about/photo-480.avif 480w, /about/photo-720.avif 720w" sizes="(max-width: 699px) 60vw, 320px" />
+              <source type="image/webp" srcSet="/about/photo-480.webp 480w, /about/photo-720.webp 720w" sizes="(max-width: 699px) 60vw, 320px" />
+              <img src="/about/photo-480.webp" width={480} height={665} alt={t('pl.aboutPage.photoAlt')} loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+          <div className="pl-about__text">
+            <p className="pl-eyebrow" data-reveal="">{t('pl.about.eyebrow')}</p>
+            <h2 id="pl-about-title" className="pl-h2 pl-about__title" data-reveal="">{t('pl.about.title')}</h2>
+            <p className="pl-lead" data-reveal="">{t('pl.about.lead')}</p>
+            <Link to={`/${lang}/about`} className="pl-link pl-about__more" data-reveal="">{t('pl.about.more')}</Link>
+          </div>
         </section>
 
         <section id="services" className="pl-section" aria-labelledby="pl-services-title">
