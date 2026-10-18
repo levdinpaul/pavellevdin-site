@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, MessageCircle, Phone, Send, Sparkles, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Mail, MessageCircle, Phone, Send, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -114,11 +114,10 @@ export function ContactPage() {
 
       <main className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,.18),transparent_30%),radial-gradient(circle_at_82%_52%,rgba(245,158,11,.12),transparent_28%)]" />
           <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-bold text-cyan-100">
-                <Sparkles className="h-4 w-4" />
+
                 {text.badge}
               </span>
               <h1 className="text-4xl font-black leading-tight md:text-6xl">{text.h1}</h1>

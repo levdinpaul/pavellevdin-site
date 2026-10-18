@@ -27,12 +27,3 @@ export function InstagramIcon({ size = 18 }: IconProps) {
     </svg>
   );
 }
-
-/** Четырёхлучевая звезда — фирменный акцент сцены. */
-export function Sparkle({ size = 13, className = 'pl-sparkle' }: IconProps & { className?: string }) {
-  return (
-    <svg className={className} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 0c.5 6.4 5.1 11 11.5 11.5C17.1 12 12.5 16.6 12 23c-.5-6.4-5.1-11-11.5-11.5C6.9 11 11.5 6.4 12 0Z" fill="#7AA2FF" />
-    </svg>
-  );
-}

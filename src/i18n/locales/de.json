@@ -417,49 +417,17 @@
       "top": "Nach oben"
     },
     "hero": {
-      "badge": "Digitaler Business-Start aus einer Hand",
-      "eyebrow": "PL – Innovativ Digitalbau",
-      "titleA": "Nicht nur eine Website — ",
-      "titleAccent": "ein fertiges System",
-      "titleB": ", das Kunden bringt.",
-      "lead": "Website, Sichtbarkeit in Google und Yandex, Analytics, CRM und Automatisierung. Alles schlüsselfertig, aus einer Hand.",
-      "primary": "Projekt starten →",
+      "eyebrow": "Pavel Levdin · Webentwickler",
+      "titleLine1": "Ich entwickle Websites.",
+      "titleLine2": "Und verbinde Systeme.",
+      "lead": "Design, Entwicklung, SEO und Automatisierung — von der ersten Idee bis zum Launch.",
+      "primary": "Projekt besprechen",
       "secondary": "Arbeiten ansehen",
-      "scroll": "nach unten scrollen"
+      "scroll": "Scrollen und entdecken"
     },
     "scene": {
-      "eyebrow": "Der Projektweg",
-      "title": "Sieben Schritte von der Idee zur Anfrage",
-      "steps": [
-        {
-          "title": "Positionierung",
-          "text": "Angebot, Zielgruppe, Struktur und eine starke Botschaft."
-        },
-        {
-          "title": "Website",
-          "text": "Design, Entwicklung, Speed 100/100 und mobile UX."
-        },
-        {
-          "title": "Sichtbarkeit",
-          "text": "SEO, AEO für die KI-Suche, Google Business, Maps, Schema.org."
-        },
-        {
-          "title": "Kanäle",
-          "text": "Meta, Instagram, Facebook, VK, Pixel und Events."
-        },
-        {
-          "title": "Analytics",
-          "text": "GA4, Tag Manager, Funnels und Conversions."
-        },
-        {
-          "title": "Anfragen & CRM",
-          "text": "Formulare, Messenger, CRM und Automatisierung."
-        },
-        {
-          "title": "Betreuung & Wachstum",
-          "text": "Updates, Content, Kampagnen und Optimierungen."
-        }
-      ]
+      "label": "Technologien, mit denen ich arbeite",
+      "skip": "Zu den Projekten"
     },
     "about": {
       "eyebrow": "Über mich",

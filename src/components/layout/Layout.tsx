@@ -3,7 +3,6 @@
 import { Helmet } from 'react-helmet-async';
 import { SiteHeader } from './SiteHeader';
 import { Footer } from './Footer';
-import { PointerFX } from '@/components/pl/PointerFX';
 import { Children, Suspense, isValidElement, type ReactElement } from 'react';
 
 export interface LayoutProps {
@@ -69,7 +68,6 @@ export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
         <SiteHeader />
         <main className="flex-1 flex flex-col">{children}</main>
         <Suspense fallback={null}><Footer /></Suspense>
-        <PointerFX />
       </div>
     </>
   );

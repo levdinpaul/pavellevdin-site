@@ -6,11 +6,10 @@ import { CONTACTS } from '@/constants/contacts';
 import { Counter } from '@/components/pl/Counter';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE } from '@/components/pl/seo';
-import { GenImage } from '@/components/pl/GenImage';
 import { Marquee } from '@/components/pl/Marquee';
 import { STACK } from '@/components/pl/stack';
 import { ProjectCard } from '@/components/pl/ProjectCard';
-import { Sparkle, TelegramIcon, WhatsAppIcon } from '@/components/layout/social-icons';
+import { TelegramIcon, WhatsAppIcon } from '@/components/layout/social-icons';
 import { useReveal } from '@/sections/scena/useReveal';
 
 type Group = { title: string; points: string[] };
@@ -87,14 +86,10 @@ export function AboutPage() {
               <p className="pl-eyebrow" data-reveal="">{t('pl.aboutPage.skillsEyebrow')}</p>
               <h2 id="pl-skills-title" className="pl-h2" data-reveal="">{t('pl.aboutPage.skillsTitle')}</h2>
             </div>
-            <div className="pl-gen-frame" data-reveal="">
-              <GenImage dir="site" name="about-workspace" ratio="16/9" sizes="(max-width: 899px) calc(100vw - 40px), 520px" />
-            </div>
           </div>
           <ul className="pl-skills">
             {skills.map((g) => (
               <li key={g.title} className="pl-tile" data-reveal="">
-                <Sparkle />
                 <h3 className="pl-tile__title">{g.title}</h3>
                 <ul className="pl-checklist">{g.points.map((p) => <li key={p}>{p}</li>)}</ul>
               </li>
@@ -107,9 +102,6 @@ export function AboutPage() {
             <div>
               <p className="pl-eyebrow" data-reveal="">{t('pl.aboutPage.processEyebrow')}</p>
               <h2 id="pl-process-title" className="pl-h2" data-reveal="">{t('pl.aboutPage.processTitle')}</h2>
-            </div>
-            <div className="pl-gen-frame" data-reveal="">
-              <GenImage dir="site" name="about-path" ratio="16/9" sizes="(max-width: 899px) calc(100vw - 40px), 520px" />
             </div>
           </div>
           <ol className="pl-process">
@@ -154,7 +146,6 @@ export function AboutPage() {
 
         <section className="pl-container pl-section">
           <div className="pl-cta-box" data-reveal="">
-            <Sparkle size={15} />
             <h2 className="pl-h2">{t('pl.aboutPage.ctaTitle')}</h2>
             <p className="pl-lead">{t('pl.aboutPage.ctaLead')}</p>
             <div className="pl-cta__actions">

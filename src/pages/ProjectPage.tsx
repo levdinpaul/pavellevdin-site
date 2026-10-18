@@ -4,7 +4,6 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { isOnline, projectCopy, projectImages, projects } from '@/data/projects';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
-import { Sparkle } from '@/components/layout/social-icons';
 import { useReveal } from '@/sections/scena/useReveal';
 
 /** Страница кейса /:lang/portfolio/:slug — скриншоты реального сайта, Задача → Решение → Что сделано. */
@@ -129,7 +128,6 @@ export function ProjectPage() {
 
         <section className="pl-container pl-section">
           <div className="pl-cta-box" data-reveal="">
-            <Sparkle size={15} />
             <h2 className="pl-h2">{t('pl.project.ctaTitle')}</h2>
             <p className="pl-lead">{t('pl.project.ctaLead')}</p>
             <div className="pl-cta__actions">

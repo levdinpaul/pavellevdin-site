@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Globe2, Mail, MapPin, Phone, Send, Share2, Sparkles, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Download, Globe2, Mail, MapPin, Phone, Send, Share2, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -100,13 +100,12 @@ export function BusinessCardPage() {
 
       <main className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_24%,rgba(34,211,238,.22),transparent_32%),radial-gradient(circle_at_78%_68%,rgba(245,158,11,.14),transparent_28%)]" />
           <div className="absolute inset-0 bg-dot-grid opacity-25" />
 
           <div className="relative mx-auto grid max-w-6xl gap-8 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}>
               <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-bold text-cyan-100">
-                <Sparkles className="h-4 w-4" />
+
                 PL Innovativ Digitalbau
               </span>
               <h1 className="text-5xl font-black leading-none md:text-7xl">{text.h1}</h1>

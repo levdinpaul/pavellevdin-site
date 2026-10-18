@@ -1,224 +1,255 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Sparkle } from '@/components/layout/social-icons';
-import { SCENE, SCENE_MEDIA, STEP_IMAGES } from './scene-data';
 import type { SceneGL } from './scene-gl';
+import { clamp, fallbackSpiral, smoothstep, TECHNOLOGIES } from './scene-model';
+import './scene.css';
 
-type Step = { title: string; text: string };
-
-const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
-
-/**
- * Слова заголовка по отдельности — поэтапный «въезд» (только transform, см. .pl-word). Пробелы сохраняются.
- * tail — пунктуация из следующей части фразы («, которая…»): склеивается с последним словом (nowrap),
- * чтобы запятая не переносилась на новую строку.
- */
-function Words({ text, from, className, tail }: { text: string; from: number; className?: string; tail?: string }) {
-  const parts = text.split(/(\s+)/);
-  const last = parts.reduce((acc, w, i) => (w.trim() ? i : acc), -1);
-  const word = (w: string, i: number, cls = className) => (
-    <span key={i} className={cls ? `pl-word ${cls}` : 'pl-word'} style={{ animationDelay: `${(from + i / 2) * 70}ms` }}>{w}</span>
-  );
-  return (
-    <>
-      {parts.map((w, i) => {
-        if (!w.trim()) return w;
-        if (i === last && tail) return <span key={i} className="pl-nowrap">{word(w, i)}{word(tail, i + 1, undefined)}</span>;
-        return word(w, i);
-      })}
-    </>
-  );
-}
-
-/** Отделяет ведущую пунктуацию («, которая…» → [«,», « которая…»]). */
-function splitLeadPunct(s: string): [string, string] {
-  const m = s.match(/^([,.;:!?…]+)([\s\S]*)$/);
-  return m ? [m[1], m[2]] : ['', s];
-}
+const MOTION_QUERY = '(prefers-reduced-motion: no-preference)';
+/** .pl-tech is set at twice its median size; scaling down keeps near labels sharp. */
+const LABEL_SCALE = 0.5;
+const SPIRAL_PATH = fallbackSpiral(0);
+const SECONDARY_PATH = fallbackSpiral(Math.PI);
 
 /**
- * Hero + «спиральная» сцена из 7 шагов.
- * SSR: статичный CSS-фон и весь текст шагов в HTML (читается без JS, индексируется).
- * Десктоп: sticky-кадр, скролл-драйвер пишет opacity/transform прямо в DOM (без ре-рендеров),
- * WebGL подгружается import()-ом после гидрации и idle. Мобайл/reduced-motion — статичный список (pl.css).
+ * Native scrolling drives one shared camera for the filaments and HTML type.
+ * The section becomes tall only after WebGL succeeds. SSR, reduced motion and
+ * graphics failures therefore retain a compact, useful hero and working links.
  */
 export function SceneSection({ lang }: { lang: string }) {
   const { t } = useTranslation();
-  const steps = t('pl.scene.steps', { returnObjects: true }) as Step[];
-  const [punct, titleRest] = splitLeadPunct(t('pl.hero.titleB'));
   const sectionRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const headRef = useRef<HTMLDivElement>(null);
-  const dotsRef = useRef<HTMLOListElement>(null);
-  const stepsRef = useRef<HTMLOListElement>(null);
+  const labelsRef = useRef<HTMLDivElement>(null);
+  const controlsRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const progress = useRef(0);
 
-  // Скролл-драйвер (только в «живом» режиме)
   useEffect(() => {
-    const section = sectionRef.current, hero = heroRef.current, head = headRef.current, dots = dotsRef.current, list = stepsRef.current;
-    if (!section || !hero || !head || !dots || !list) return;
-    const mq = window.matchMedia(SCENE_MEDIA);
-    const cards = Array.from(list.children) as HTMLElement[];
-    const dotEls = Array.from(dots.children) as HTMLElement[];
-    const span = (1 - SCENE.stepsStart) / cards.length;
-    const ov = SCENE.overlap;
-    let raf = 0;
+    const section = sectionRef.current;
+    const stage = stageRef.current;
+    const hero = heroRef.current;
+    const labels = labelsRef.current;
+    const controls = controlsRef.current;
+    const canvas = canvasRef.current;
+    if (!section || !stage || !hero || !labels || !controls || !canvas) return;
+
+    const media = window.matchMedia(MOTION_QUERY);
+    const labelElements = Array.from(labels.children) as HTMLElement[];
+    let graphics: SceneGL | null = null;
+    let disposed = false;
+    let armed = false;
+    let loading = false;
+    let generation = 0;
+    let frame = 0;
+    const initialBounds = section.getBoundingClientRect();
+    let visible = initialBounds.top < window.innerHeight && initialBounds.bottom > 0;
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let lastTime = 0;
+
+    const measureProgress = () => {
+      const bounds = section.getBoundingClientRect();
+      const range = bounds.height - stage.clientHeight;
+      // On very short screens, let the whole opening frame scroll into view
+      // before starting the flight. Viewport size never disables the animation.
+      const introScroll = Math.max(0, stage.clientHeight - window.innerHeight);
+      targetProgress = range > 0 ? clamp((-bounds.top - introScroll) / range) : 0;
+    };
 
     const reset = () => {
-      [hero, head, dots, ...cards].forEach((el) => { el.style.opacity = ''; el.style.transform = ''; el.style.pointerEvents = ''; el.style.visibility = ''; });
+      generation += 1;
+      loading = false;
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      graphics?.dispose();
+      graphics = null;
+      delete section.dataset.motion;
+      hero.removeAttribute('style');
+      hero.inert = false;
+      controls.removeAttribute('style');
+      controls.inert = true;
+      labelElements.forEach((element) => element.removeAttribute('style'));
     };
 
-    const update = () => {
-      raf = 0;
-      const r = section.getBoundingClientRect();
-      const range = r.height - window.innerHeight;
-      const p = range > 0 ? clamp(-r.top / range) : 0;
-      progress.current = p;
+    const draw = (time: number) => {
+      frame = 0;
+      if (!graphics || !visible || document.hidden || disposed) return;
+      const elapsed = Math.min(64, Math.max(1, time - (lastTime || time - 16)));
+      lastTime = time;
+      currentProgress += (targetProgress - currentProgress) * (1 - Math.exp(-elapsed / 78));
+      if (Math.abs(targetProgress - currentProgress) < 0.00015) currentProgress = targetProgress;
 
-      const f = clamp(p / SCENE.heroEnd);
-      hero.style.opacity = String(1 - f);
-      hero.style.transform = `translate3d(0, ${(-f * 40).toFixed(1)}px, 0)`;
-      hero.style.visibility = f >= 1 ? 'hidden' : '';
-      hero.style.pointerEvents = f > 0.4 ? 'none' : '';
+      const heroOpacity = 1 - smoothstep(0.015, 0.15, currentProgress);
+      hero.style.opacity = heroOpacity.toFixed(3);
+      hero.style.transform = `translate3d(0, ${(-28 * (1 - heroOpacity)).toFixed(2)}px, 0)`;
+      hero.style.visibility = heroOpacity < 0.01 ? 'hidden' : 'visible';
+      hero.inert = heroOpacity < 0.08;
+      const controlsOpacity = smoothstep(0.15, 0.24, currentProgress);
+      controls.style.opacity = controlsOpacity.toFixed(3);
+      controls.style.visibility = controlsOpacity < 0.01 ? 'hidden' : 'visible';
+      controls.inert = controlsOpacity < 0.5;
 
-      const h = clamp((p - SCENE.stepsStart + 0.02) / 0.04);
-      head.style.opacity = String(h);
-      dots.style.opacity = String(h);
-
-      let active = -1;
-      cards.forEach((el, i) => {
-        const u = (p - (SCENE.stepsStart + i * span)) / span; // 0…1 — «своё» окно шага
-        const last = i === cards.length - 1;
-        let o = 0, y = 48, s = 0.96;
-        if (u >= -ov && u < ov) { const k = (u + ov) / (2 * ov); o = k; y = 48 * (1 - k); s = 0.96 + 0.04 * k; }
-        else if (u >= ov && (u <= 1 - ov || last)) { o = 1; y = 0; s = 1; }
-        else if (u > 1 - ov && u <= 1 + ov) { const k = (u - (1 - ov)) / (2 * ov); o = 1 - k; y = -48 * k; s = 1; }
-        if (u >= 0 && (u < 1 || last)) active = i;
-        el.style.opacity = o.toFixed(3);
-        el.style.transform = `translate3d(0, calc(-50% + ${y.toFixed(1)}px), 0) scale(${s.toFixed(3)})`;
-        el.style.visibility = o < 0.01 ? 'hidden' : '';
+      const positions = graphics.render(currentProgress);
+      positions.forEach(({ x, y, scale, opacity }, index) => {
+        const element = labelElements[index];
+        element.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translate(-50%, -50%) scale(${(scale * LABEL_SCALE).toFixed(4)})`;
+        element.style.opacity = opacity.toFixed(3);
+        element.style.visibility = opacity < 0.01 ? 'hidden' : 'visible';
       });
-      dotEls.forEach((d, i) => { d.dataset.active = String(i === active); });
+
+      if (currentProgress !== targetProgress) frame = requestAnimationFrame(draw);
     };
 
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    const attach = () => {
-      if (mq.matches) {
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll);
-        update();
-      } else {
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', onScroll);
-        reset();
+    const schedule = () => {
+      if (!graphics || !visible || document.hidden || disposed || frame) return;
+      lastTime = 0;
+      frame = requestAnimationFrame(draw);
+    };
+
+    const onScroll = () => {
+      if (!graphics) return;
+      measureProgress();
+      schedule();
+    };
+
+    const onResize = () => {
+      if (!graphics) return;
+      graphics.resize();
+      measureProgress();
+      schedule();
+    };
+
+    const activate = async () => {
+      if (disposed || !armed || loading || graphics || !media.matches || !visible) return;
+      loading = true;
+      const request = ++generation;
+      try {
+        const module = await import('./scene-gl');
+        if (disposed || request !== generation || !media.matches) return;
+        graphics = module.createSceneGL(canvas, reset);
+        if (!graphics) return;
+        // The section grows when it goes live. If the reader has already scrolled past the
+        // compact hero, keep the content they are looking at in place.
+        const before = section.getBoundingClientRect();
+        section.dataset.motion = 'live';
+        if (-before.top > before.height - window.innerHeight) {
+          window.scrollBy(0, section.getBoundingClientRect().height - before.height);
+        }
+        graphics.resize();
+        measureProgress();
+        currentProgress = targetProgress;
+        schedule();
+      } catch {
+        // The default server-rendered hero remains fully useful if the chunk or GPU fails.
+        if (request === generation) reset();
+      } finally {
+        if (request === generation) loading = false;
       }
     };
-    attach();
-    mq.addEventListener('change', attach);
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      mq.removeEventListener('change', attach);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
-  }, []);
 
-  // WebGL — лениво и только в «живом» режиме: по первому взаимодействию (скролл/мышь/касание/клавиша)
-  // или через 8 с простоя. До этого первый кадр — статичный CSS-фон; загрузку не блокирует (TBT).
-  useEffect(() => {
-    const canvas = canvasRef.current, section = sectionRef.current;
-    if (!canvas || !section || !window.matchMedia(SCENE_MEDIA).matches) return;
-    let gl: SceneGL | null = null, cancelled = false, started = false;
-    const events = ['scroll', 'pointermove', 'pointerdown', 'keydown', 'wheel', 'touchstart'] as const;
-    const start = () => {
-      if (started) return;
-      started = true;
-      events.forEach((e) => window.removeEventListener(e, start));
-      window.clearTimeout(timer);
-      import('./scene-gl').then((m) => {
-        if (!cancelled) gl = m.createSceneGL(canvas, section, () => progress.current);
-      }).catch(() => { /* без WebGL остаётся CSS-фон */ });
+    const onMotionChange = () => {
+      reset();
+      if (media.matches) void activate();
     };
-    events.forEach((e) => window.addEventListener(e, start, { passive: true, once: true }));
-    const timer = window.setTimeout(() => {
-      if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 2000 }); else start();
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+      } else {
+        onScroll();
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) {
+        if (!graphics) void activate();
+        else onScroll();
+      } else if (frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
+    }, { rootMargin: '80px 0px' });
+    observer.observe(section);
+
+    // Three.js (~500 KB) waits for the first interaction or 8 s of quiet, so it never
+    // competes with the first paint and hydration. Until then the SVG spiral is shown.
+    const wakeEvents = ['scroll', 'wheel', 'pointermove', 'pointerdown', 'touchstart', 'keydown'] as const;
+    let wakeTimer = 0;
+    const arm = () => {
+      if (armed) return;
+      armed = true;
+      wakeEvents.forEach((name) => window.removeEventListener(name, arm));
+      window.clearTimeout(wakeTimer);
+      void activate();
+    };
+    wakeEvents.forEach((name) => window.addEventListener(name, arm, { passive: true }));
+    wakeTimer = window.setTimeout(() => {
+      if ('requestIdleCallback' in window) window.requestIdleCallback(arm, { timeout: 2000 }); else arm();
     }, 8000);
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(stage);
+    controls.inert = true;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    media.addEventListener('change', onMotionChange);
+
     return () => {
-      cancelled = true;
-      events.forEach((e) => window.removeEventListener(e, start));
-      window.clearTimeout(timer);
-      gl?.dispose();
+      disposed = true;
+      wakeEvents.forEach((name) => window.removeEventListener(name, arm));
+      window.clearTimeout(wakeTimer);
+      observer.disconnect();
+      resizeObserver.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      media.removeEventListener('change', onMotionChange);
+      reset();
     };
   }, []);
 
   return (
     <section ref={sectionRef} className="pl-scene" aria-labelledby="pl-hero-title">
-      <div className="pl-stage">
-        <div className="pl-stars" aria-hidden="true" />
+      <div ref={stageRef} className="pl-stage">
+        <div className="pl-scene__atmosphere" aria-hidden="true" />
+        <svg className="pl-scene__fallback" viewBox="0 0 1440 900" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+          <path d={SPIRAL_PATH} stroke="currentColor" strokeWidth="1" />
+          <path d={SECONDARY_PATH} stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
+        </svg>
         <canvas ref={canvasRef} className="pl-gl" aria-hidden="true" />
-        <div className="pl-glow" aria-hidden="true" />
-        <div className="pl-fade" aria-hidden="true" />
+        <div className="pl-scene__vignette" aria-hidden="true" />
 
         <div ref={heroRef} className="pl-hero">
-          <span className="pl-badge"><span className="pl-badge__dot" aria-hidden="true" />{t('pl.hero.badge')}</span>
-          <p className="pl-eyebrow pl-hero__eyebrow">{t('pl.hero.eyebrow')}</p>
-          <h1 id="pl-hero-title" className="pl-hero__title">
-            <Words text={t('pl.hero.titleA')} from={0} />
-            <Words text={t('pl.hero.titleAccent')} from={4} className="pl-accent" tail={punct} />
-            <Words text={titleRest} from={7} />
-          </h1>
-          <p className="pl-hero__lead">{t('pl.hero.lead')}</p>
-          <div className="pl-hero__actions">
-            <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary">{t('pl.hero.primary')}</Link>
-            <Link to={`/${lang}#work`} className="pl-btn pl-btn--ghost">{t('pl.hero.secondary')}</Link>
+          <div className="pl-hero__copy">
+            <p className="pl-hero__eyebrow">{t('pl.hero.eyebrow')}</p>
+            <h1 id="pl-hero-title" className="pl-hero__title">
+              <span>{t('pl.hero.titleLine1')}</span>
+              <span>{t('pl.hero.titleLine2')}</span>
+            </h1>
+            <p className="pl-hero__lead">{t('pl.hero.lead')}</p>
+            <div className="pl-hero__actions">
+              <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary">{t('pl.hero.primary')}<span aria-hidden="true">↗</span></Link>
+              <a href="#work" className="pl-hero__secondary">{t('pl.hero.secondary')}<span aria-hidden="true">↗</span></a>
+            </div>
           </div>
-          <p className="pl-hero__scroll" aria-hidden="true">{t('pl.hero.scroll')}</p>
+          <p className="pl-hero__scroll" aria-hidden="true"><span />{t('pl.hero.scroll')}</p>
+          <ul className="pl-tech-fallback" aria-label={t('pl.scene.label')}>
+            {TECHNOLOGIES.map((technology) => <li key={technology}>{technology}</li>)}
+          </ul>
         </div>
 
-        <div ref={headRef} className="pl-scene__head">
-          <p className="pl-eyebrow">{t('pl.scene.eyebrow')}</p>
-          <h2 className="pl-scene__title">{t('pl.scene.title')}</h2>
+        <div ref={labelsRef} className="pl-tech-cloud" aria-hidden="true">
+          {TECHNOLOGIES.map((technology, index) => (
+            <span key={technology} className="pl-tech" data-tone={index % 3 === 0 ? 'accent' : 'light'}>{technology}</span>
+          ))}
         </div>
-
-        <ol ref={stepsRef} className="pl-steps">
-          {steps.map((s, i) => {
-            const img = STEP_IMAGES[i];
-            return (
-              <li key={s.title} className="pl-step">
-                <div className="pl-step__head">
-                  <Sparkle />
-                  <span className="pl-step__num">{String(i + 1).padStart(2, '0')} / {String(steps.length).padStart(2, '0')}</span>
-                </div>
-                <article className="pl-step__card">
-                  {img && (
-                    <div className="pl-step__media">
-                      <img
-                        src={`/images/scene/${img}-960.webp`}
-                        srcSet={`/images/scene/${img}-480.webp 480w, /images/scene/${img}-960.webp 960w`}
-                        sizes="(max-width: 767px) calc(100vw - 60px), 400px"
-                        width={960}
-                        height={540}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  )}
-                  <div className="pl-step__body">
-                    <h3 className="pl-step__title">{s.title}</h3>
-                    <p className="pl-step__text">{s.text}</p>
-                  </div>
-                </article>
-              </li>
-            );
-          })}
-        </ol>
-
-        <ol ref={dotsRef} className="pl-dots" aria-hidden="true">
-          {steps.map((s) => <li key={s.title} data-active="false" />)}
-        </ol>
+        <div ref={controlsRef} className="pl-scene__controls">
+          <p>{t('pl.scene.label')}</p>
+          <a href="#work">{t('pl.scene.skip')}<span aria-hidden="true">↓</span></a>
+        </div>
       </div>
     </section>
   );

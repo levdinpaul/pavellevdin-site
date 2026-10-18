@@ -34,7 +34,8 @@ Project-brief. Читается при работе в этом репозито
   уведомления в **Telegram** (`notify-telegram.js`). CORS бэка завязан на `pavellevdin.ru`.
 
 ## Структура (src/)
-- `sections/scena/` — главная: SceneSection (hero + sticky-сцена 7 шагов, скролл-драйвер), scene-gl.ts (three, import()),
+- `sections/scena/` — главная: SceneSection (минималистичный hero + спиральный полёт с названиями технологий), scene-gl.ts (three, import()),
+  scene-model.ts (данные и SVG-фолбэк), scene.css (изолированные стили сцены),
   HomeSections (Обо мне / Проекты / Услуги / Интеграции / CTA), useReveal.
 - `pages/` — Home, About, Services, Portfolio, Project (кейс /portfolio/:slug), Contact, Brief, Imprint, Privacy;
   `pages/blog/*`; `pages/admin/*`.

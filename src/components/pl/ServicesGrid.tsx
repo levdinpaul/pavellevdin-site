@@ -1,12 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { GenImage } from './GenImage';
 
 type Service = { title: string; text: string; points: string[] };
 
-/** Имена иллюстраций услуг (public/images/services/<name>-{480,960}.webp), порядок = pl.services.items. */
-const SERVICE_IMAGES = ['service-01-websites', 'service-02-seo', 'service-03-api', 'service-04-ai', 'service-05-social', 'service-06-bots', 'service-07-infra', 'service-08-support'];
-
-// Линейные иконки с pathLength=1 — обводка «рисуется» при раскрытии карточки (см. .pl-svc in pl.css).
+// Небольшие линейные иконки помогают различать направления услуг.
 const ICONS: string[][] = [
   ['M3 5h18v12H3z', 'M8 21h8', 'M12 17v4'],
   ['M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z', 'M15.5 15.5 21 21'],
@@ -27,12 +23,10 @@ export function ServicesGrid() {
         <li key={s.title} data-reveal="">
           <details className="pl-svc">
             <summary>
-              <GenImage dir="services" name={SERVICE_IMAGES[i]} ratio="4/3" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 999px) 45vw, 270px" className="pl-svc__img" />
               <span className="pl-svc__head">
                 <svg className="pl-svc__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   {ICONS[i].map((d) => <path key={d} d={d} pathLength={1} />)}
                 </svg>
-                <span className="pl-srv__num">{String(i + 1).padStart(2, '0')}</span>
               </span>
               <span className="pl-srv__title">{s.title}</span>
               <span className="pl-srv__text">{s.text}</span>

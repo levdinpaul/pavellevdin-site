@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
 import { CONTACTS } from '@/constants/contacts';
-import { Sparkle } from '@/components/layout/social-icons';
 import { ProjectCard } from '@/components/pl/ProjectCard';
 import { ServicesGrid } from '@/components/pl/ServicesGrid';
 import { Integrations } from '@/components/pl/Integrations';
@@ -66,7 +65,6 @@ export function HomeSections({ lang }: { lang: string }) {
 
         <section id="contact" className="pl-section" aria-labelledby="pl-cta-title">
           <div className="pl-cta-box" data-reveal="">
-            <Sparkle size={15} />
             <h2 id="pl-cta-title" className="pl-h2">{t('pl.cta.title')}</h2>
             <p className="pl-lead">{t('pl.cta.lead')}</p>
             <div className="pl-cta__actions">

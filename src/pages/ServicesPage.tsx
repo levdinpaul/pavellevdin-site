@@ -5,7 +5,6 @@ import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { ServicesGrid } from '@/components/pl/ServicesGrid';
 import { Integrations } from '@/components/pl/Integrations';
-import { Sparkle } from '@/components/layout/social-icons';
 import { useReveal } from '@/sections/scena/useReveal';
 
 type Item = { title: string; text: string };
@@ -70,7 +69,6 @@ export function ServicesPage() {
 
         <section className="pl-container pl-section">
           <div className="pl-cta-box" data-reveal="">
-            <Sparkle size={15} />
             <h2 className="pl-h2">{t('pl.servicesPage.systemTitle')}</h2>
             <p className="pl-lead">{t('pl.servicesPage.systemText')}</p>
             <div className="pl-cta__actions">

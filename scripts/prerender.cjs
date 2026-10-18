@@ -186,6 +186,8 @@ async function run() {
 
       let html = '<!doctype html>\n' + (await page.evaluate(() => document.documentElement.outerHTML));
       html = dedupHead(html, meta);
+      // Vite добавляет modulepreload ленивого чанка в момент import(); в статике он не нужен — WebGL грузится по взаимодействию.
+      html = html.replace(/\s*<link[^>]*rel="modulepreload"[^>]*scene-gl[^>]*>/gi, '');
       // Заменяем origin пререндер-сервера на боевой домен (утечки в canonical/og:url и т.п.)
       html = html.split(`http://localhost:${PORT}`).join('https://pavellevdin.ru');
 

@@ -417,49 +417,17 @@
       "top": "Back to top"
     },
     "hero": {
-      "badge": "Turnkey digital launch for your business",
-      "eyebrow": "PL – Innovativ Digitalbau",
-      "titleA": "Not just a website — ",
-      "titleAccent": "a complete system",
-      "titleB": ", built to bring you clients.",
-      "lead": "Website, visibility on Google and Yandex, analytics, CRM and automation. All turnkey, from a single source.",
-      "primary": "Build my project →",
+      "eyebrow": "Pavel Levdin · web developer",
+      "titleLine1": "I build websites.",
+      "titleLine2": "I connect systems.",
+      "lead": "Design, development, SEO and automation — from the first idea to launch.",
+      "primary": "Discuss a project",
       "secondary": "View work",
-      "scroll": "scroll down"
+      "scroll": "Scroll to explore"
     },
     "scene": {
-      "eyebrow": "Project journey",
-      "title": "Seven steps from idea to leads",
-      "steps": [
-        {
-          "title": "Positioning",
-          "text": "Offer, audience, structure and a strong message."
-        },
-        {
-          "title": "Website",
-          "text": "Design, development, 100/100 speed and mobile UX."
-        },
-        {
-          "title": "Visibility",
-          "text": "SEO, AEO for AI search, Google Business, Maps, Schema.org."
-        },
-        {
-          "title": "Channels",
-          "text": "Meta, Instagram, Facebook, VK, pixels and events."
-        },
-        {
-          "title": "Analytics",
-          "text": "GA4, Tag Manager, funnels and conversions."
-        },
-        {
-          "title": "Leads & CRM",
-          "text": "Forms, messengers, CRM and automation."
-        },
-        {
-          "title": "Support & growth",
-          "text": "Updates, content, campaigns and improvements."
-        }
-      ]
+      "label": "Technologies I work with",
+      "skip": "Skip to work"
     },
     "about": {
       "eyebrow": "About",

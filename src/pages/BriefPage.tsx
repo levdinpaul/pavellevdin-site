@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, ArrowRight, Check, Sparkles, Send, Rocket, ShoppingCart, AppWindow,
+  ArrowLeft, ArrowRight, Check, Send, Rocket, ShoppingCart, AppWindow,
   TrendingUp, Bot, Globe, Share2, LineChart, PenLine, Search, Layout as LayoutIcon,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -170,7 +170,6 @@ export function BriefPage() {
 
       <main className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-24 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,.18),transparent_32%),radial-gradient(circle_at_80%_40%,rgba(245,158,11,.10),transparent_26%)]" />
 
           <div className="relative mx-auto max-w-3xl">
             {status === 'success' ? (
@@ -205,7 +204,7 @@ export function BriefPage() {
               <>
                 <div className="mb-8">
                   <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-bold text-cyan-100">
-                    <Sparkles className="h-4 w-4" /> Конструктор проекта · шаг {step + 1} из {STEP_TITLES.length}
+                    Конструктор проекта · шаг {step + 1} из {STEP_TITLES.length}
                   </span>
                   <h1 className="text-3xl font-black leading-tight md:text-5xl">{STEP_TITLES[step]}</h1>
 

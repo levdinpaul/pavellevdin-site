@@ -11,7 +11,7 @@ export function ProjectCard({ project, lang, eager = false }: { project: Project
   const status = project.status === 'preview' ? 'preview' : online ? 'live' : 'offline';
 
   return (
-    <Link to={`/${lang}/portfolio/${project.slug}`} viewTransition className="pl-work__card" data-tilt="">
+    <Link to={`/${lang}/portfolio/${project.slug}`} viewTransition className="pl-work__card">
       <div className="pl-work__media">
         <img src={img.desktop} alt={`${t('pl.project.shotAlt')} ${project.title}`} width={1200} height={750} loading={eager ? 'eager' : 'lazy'} decoding="async" />
         <span className="pl-status" data-status={status}>{t(`pl.portfolio.status.${status}`)}</span>
