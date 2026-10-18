@@ -1,73 +1,43 @@
-# React + TypeScript + Vite
+# pavellevdin.ru — PL Innovativ Digitalbau
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сайт-портфолио Павла Левдина (веб-разработка, SEO, интеграции, AI-автоматизация). Дизайн «PL Сцена».
+React 19 + Vite 7 + TypeScript + Tailwind 3.4 + react-i18next (ru / de / en) + собственный SSR-пререндер.
 
-Currently, two official plugins are available:
+## Команды
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Команда | Что делает |
+|---|---|
+| `npm run build:static` | **Прод-сборка**: проверка доступности проектов → sitemap → `tsc` → vite build → SSR build → turbo-feed → пререндер `/ru/*` |
+| `npm run preview:static` | Локальная раздача `dist/` как на проде (порт 4188). Для замеров — **не** `vite preview` |
+| `npm run photo` | Пересобрать фото «Обо мне» из исходника (см. ниже) |
+| `npm run lint` | ESLint |
+| `npm run dev` | Vite dev-сервер |
 
-## React Compiler
+## Данные
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Портфолио** — `src/data/portfolio.json` (11 проектов: ссылка, категория, статус, featured, стек, тексты ru/de/en).
+  Его читают React, `scripts/prerender.cjs` (страницы кейсов) и `scripts/generate-sitemap.cjs`.
+  Скриншоты реальных сайтов: `public/images/portfolio/<slug>/{desktop,desktop-2,mobile}.webp`.
+- **Статус «онлайн»** — `src/data/projects-status.json`, пишет `scripts/check-projects.cjs` при сборке.
+- **Тексты** — `src/i18n/locales/{ru,de,en}.json`, ключи нового дизайна под `pl.*` (структура одинакова во всех локалях).
+- **Контакты** — единый источник `src/constants/contacts.ts`.
 
-## Expanding the ESLint configuration
+## Фото «Обо мне» — замена в одно действие
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Положить новое фото как `_design/photo-source.jpg` (или `.png` / `.webp` / `.avif`; папка `_design/` вне git).
+2. Выполнить `npm run photo`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Скрипт `scripts/build-photo.cjs` соберёт `public/about/photo-{480,720}.{avif,webp}` (каждый файл ≤ 90 КБ,
+качество подбирается автоматически; ч/б фото кодируется в оттенках серого). Код страницы менять не нужно.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Иллюстрации
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Сгенерированы gpt-image через Codex в едином стиле (изометрия, матовая керамика + стекло, пастельный фон
+#B9CDFF → лаванда → персик, акцент #7AA2FF; без текста, людей и логотипов). Исходники PNG — `_design/generated/`
+(вне git), на сайте — webp 960w/480w в `public/images/{scene,services,site}/`.
+Скриншоты реальных проектов и фото Павла сгенерированными картинками не заменяются.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Деплой
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Прод — сервер russh, docker-сервис `pavellevdin`. Процедура (бэкап → atomic `mv dist` → restart → проверка → откат)
+описана в `.claude/CLAUDE.md`, раздел «Деплой».

@@ -26,26 +26,37 @@ Project-brief. Читается при работе в этом репозито
 
 ## Стек
 - **Фронт:** React 19 + Vite 7 + TypeScript 5 + Tailwind 3.4 + shadcn/ui (Radix) + framer-motion +
-  react-router-dom 7 + react-i18next (de/en/ru) + recharts + RHF + Zod v4 + react-helmet-async.
+  react-router-dom 7 + react-i18next (de/en/ru) + recharts + RHF + Zod v4 + react-helmet-async + three 0.186.1 (только сцена, лениво).
+- **Дизайн «PL Сцена»** (с 2026-10-18): тёмная палитра #060810 / акцент #7AA2FF, шрифт Golos Text (self-host).
+  Токены — `src/index.css` (:root), классы `pl-*` — `src/styles/pl.css`.
 - **Бэкенд (админка):** Node + Express (`scripts/server.js`) — auth, stats, публикации.
   В коде ещё легаси **FTP/HostLand** (`basic-ftp`, см. BACKLOG 1a), сжатие картинок **Tinify**, загрузки `multer`,
   уведомления в **Telegram** (`notify-telegram.js`). CORS бэка завязан на `pavellevdin.ru`.
 
 ## Структура (src/)
-- `sections/` — маркетинг-блоки: Hero, About, Services, Portfolio, Testimonials, Advantages, CTA,
-  DigitalEcosystem, LatestArticles.
-- `pages/` — Home, Services, Portfolio, Contact, Imprint, Privacy; `pages/blog/*`; `pages/admin/*`.
-- `components/` — `ui/` (shadcn), `ui-custom/`, `layout/`, `admin/`, `blog/`.
-- `data/` — projects.ts, testimonials.ts, blog-index/loader.
+- `sections/scena/` — главная: SceneSection (hero + sticky-сцена 7 шагов, скролл-драйвер), scene-gl.ts (three, import()),
+  HomeSections (Обо мне / Проекты / Услуги / Интеграции / CTA), useReveal.
+- `pages/` — Home, About, Services, Portfolio, Project (кейс /portfolio/:slug), Contact, Brief, Imprint, Privacy;
+  `pages/blog/*`; `pages/admin/*`.
+- `components/` — `layout/` (SiteHeader, Footer, Layout), `pl/` (ProjectCard, ServicesGrid, Integrations, Counter,
+  Marquee, PageMeta+seo, PointerFX, GenImage), `ds/CommandMenu` (⌘K), `ui/` (shadcn), `admin/`, `blog/`.
+- `data/` — **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
+  testimonials.ts, blog-index/loader.
+- `constants/contacts.ts` — единый источник контактов.
 - `i18n/locales/` — de.json / en.json / ru.json (держать синхронными).
 - `content/blog/` — статьи блога.
-- `scripts/` — admin Express-сервер, prerender.cjs (SSR), notify-telegram; legacy FTP: deploy-only, add-article, restart-passenger, ftp-list.
+- `scripts/` — admin Express-сервер, prerender.cjs (SSR), check-projects, generate-sitemap, build-photo, notify-telegram;
+  legacy FTP: deploy-only, add-article, restart-passenger, ftp-list.
 
 ## Команды
 - `npm run dev` — Vite dev (НЕ запускать без запроса Pavel).
 - `npm run build` — `tsc -b && vite build` (без пререндера).
 - `npm run build:static` — **прод-сборка**: vite build + SSR build + turbo-feed + `prerender.cjs` (/ru-маршруты в HTML).
 - `npm run preview:static` — проверка пререндера (:4188), НЕ `vite preview`.
+- `npm run photo` — **замена фото «Обо мне» в одно действие**: положить файл как `_design/photo-source.<jpg|png|webp|avif>`
+  и запустить — соберутся `public/about/photo-{480,720}.{avif,webp}` (≤ 90 КБ). Подробно — README.
+- Картинки сайта: генерировать по правилам глобального CLAUDE.md в едином стиле (см. README «Иллюстрации»);
+  исходники — `_design/generated/` (вне git). Скриншоты проектов и фото Pavel НЕ заменять генерацией.
 - `npm run lint` — eslint.
 - `npm run admin-server` — Node admin-бэкенд.
 - ~~`node scripts/deploy-only.cjs`~~ — legacy FTP-деплой на HostLand, НЕ использовать.

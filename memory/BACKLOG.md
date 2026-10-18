@@ -27,6 +27,21 @@
   зависимость `basic-ftp`; `/srv/sites/pavellevdin.ru/htdocs/www` на сервере.
 - [ ] Скрипт деплоя на russh (scp + atomic mv + restart) вместо ручных шагов; удалить `dist.bak-*` после стабилизации.
 
+## 1c. После редизайна «PL Сцена» (2026-10-18)
+- [ ] Пререндер /de и /en (сейчас SPA, только /ru в HTML) — фаза 2; hreflang уже указывает на de/en.
+- [ ] Две `<title>` внутри `#root` в пререндере (React 19 + Helmet в SSR) — было и до редизайна; убрать из SSR-тела.
+- [ ] Polaris: публично только экран входа — снять скриншоты из авторизованной сессии или сделать лендинг.
+- [ ] Opora Life (vestoralife.de): на скриншоте приложения в hero ещё «Vestora Life» — привести бренд к одному.
+- [ ] med-agency (превью): стоит `index, follow` — поставить noindex; языки RU/EN/TG.
+- [ ] kub-perevozki: на мобайле `.sticky-cta` и cookie-баннер шире экрана (~590px). delimes (GermanyShop): кнопка
+  «Как это работает» белым по белому. — баги на сайтах клиентов/своих, не в портфолио.
+- [ ] Вложенные <main> (и footer в imprint) внутри старых под-страниц contact/brief/business-card/imprint — семантика.
+- [ ] Ленивая подгрузка de/en локалей (≈15 КБ gzip из initial-чанка) — если понадобится ещё перф.
+- [ ] Под-страницы contact / brief / business-card / imprint / privacy / blog — внутренняя вёрстка в новом стиле
+  (сейчас только токены/шапка/футер; amber-акценты в brief/contact остались).
+- [ ] Удалить неиспользуемые i18n-ключи старой главной (hero/about/advantages/…) и зависимость gsap.
+- [ ] GitHub Pages репо levdinking/Code-Craft больше не используется (origin → levdinpaul/pavellevdin-site).
+
 ## 1b. Найденные дефекты (2026-10-18)
 - [ ] Статья `tailwind-css-2026-architecture`: в `ru/de/en.json` нет `slug`/`published` → не пререндерится;
   старый URL `/ru/blog/tailwind-css-2026-architecture/` (был заглушкой) — решить: 301 на новый slug.
@@ -34,7 +49,6 @@
 - [ ] Lint: 21 error (react-hooks/set-state-in-effect в Header/SiteNav/CommandMenu/useAdmin/usePipelinePolling/PlatformPreview;
   no-unused-expressions CommandMenu:87,114; only-export-components в shadcn ui + useTheme; purity sidebar:611;
   no-unused-vars ApiKeyManager:36; no-explicit-any в `PL Digitalbau Design System/` — добавить в eslint ignores). CI lint не гоняет.
-- [ ] Выключить GitHub Pages в репо (Settings → Pages) — workflow уже не публикует.
 
 ---
 
