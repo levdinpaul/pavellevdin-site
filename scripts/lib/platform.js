@@ -23,17 +23,11 @@ function legacyId(lead) {
 
 const SOURCE = { contact: 'contact_form', brief: 'brief' };
 
-/** Отправить лид в CRM платформы (best-effort, 8 с). Возвращает true при успехе. */
 /**
- * 152-ФЗ: лиды с русской формы (и с неизвестным языком — по умолчанию считаем их российскими) остаются только
- * в data/leads.jsonl на сервере в РФ + Telegram. В CRM платформы (VPS в Германии) уходят лишь de/en.
+ * Отправить лид в CRM платформы (best-effort, 8 с). Возвращает true при успехе.
+ * Все языки: платформа с 2026-10-19 работает на этом же сервере в РФ (152-ФЗ соблюдён).
  */
-function isForeignLead(lead) {
-  return lead.language === 'de' || lead.language === 'en';
-}
-
 async function forwardLead(lead) {
-  if (!isForeignLead(lead)) return false;
   const cfg = readConfig();
   if (!cfg || !cfg.leadUrl) return false;
   const payload = {
@@ -71,4 +65,4 @@ function isPlatformRequest(req) {
   return crypto.timingSafeEqual(Buffer.from(got), Buffer.from(cfg.token));
 }
 
-module.exports = { forwardLead, isForeignLead, isPlatformRequest, legacyId };
+module.exports = { forwardLead, isPlatformRequest, legacyId };

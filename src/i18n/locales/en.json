@@ -769,6 +769,7 @@
       "lead": "Guide prices per package. The final price follows the brief – it depends on scope, integrations and timeline.",
       "note": "All prices are starting prices, net. You get an exact quote after the brief.",
       "vatNote": "VAT note to follow.",
+      "fxNote": "≈ €, Bank of Russia rate as of {{date}}",
       "discuss": "Discuss",
       "duration": "Timeline",
       "ongoing": "Ongoing care after launch",

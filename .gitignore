@@ -45,3 +45,6 @@ _design/
 
 # Связь с pl-platform (токен) — только на сервере
 scripts/platform.json
+
+# курс ЦБ РФ — рантайм-кэш бэкенда (GET /api/fx)
+scripts/fx-cache.json

@@ -1,10 +1,10 @@
 {
-  "_comment": "Цены «от»: ru — ₽ (локаль ru), eu — € netto (локали de/en). Финальная цена — после брифа. Править можно без кода; источник — memory/pricing-research.md.",
+  "_comment": "Единый прайс «от» в рублях — медиана регионального рынка РФ (без Москвы/СПб), источник: memory/pricing-research-regions.md. de/en показывают те же рублёвые цены в € по курсу ЦБ РФ (src/data/fx-rate.json при сборке + GET /api/fx раз в сутки), округление до 10 €. Финальная цена — после брифа. Править можно без кода.",
   "packages": [
     {
       "id": "landing",
       "group": "project",
-      "price": { "ru": 60000, "eu": 1900 },
+      "price": { "ru": 45000 },
       "copy": {
         "ru": { "title": "Лендинг", "duration": "1–2 недели", "points": ["Одна страница под рекламу или запуск", "Адаптив, скорость, базовое SEO", "Форма заявок → Telegram и почта", "Аналитика и цели"] },
         "de": { "title": "Landingpage", "duration": "1–2 Wochen", "points": ["Eine Seite für Kampagne oder Launch", "Responsive, schnell, SEO-Basis", "Anfrageformular → Telegram und E-Mail", "Analytics und Conversions"] },
@@ -14,7 +14,7 @@
     {
       "id": "small-site",
       "group": "project",
-      "price": { "ru": 90000, "eu": 3500 },
+      "price": { "ru": 80000 },
       "copy": {
         "ru": { "title": "Сайт 5–7 страниц", "duration": "2–3 недели", "points": ["Услуги, о компании, контакты, портфолио", "Мультиязычность по запросу", "Техническое SEO и schema.org", "Политика и согласие по 152-ФЗ"] },
         "de": { "title": "Kleine Website", "duration": "2–3 Wochen", "points": ["5–7 Seiten: Leistungen, Über uns, Kontakt", "Mehrsprachig auf Wunsch", "Technisches SEO und schema.org", "Impressum und Datenschutz (DSGVO)"] },
@@ -25,7 +25,7 @@
       "id": "business-site",
       "group": "project",
       "featured": true,
-      "price": { "ru": 180000, "eu": 6500 },
+      "price": { "ru": 120000 },
       "copy": {
         "ru": { "title": "Корпоративный сайт на Next.js + CMS", "duration": "4–6 недель", "points": ["Next.js + headless CMS: тексты меняете сами", "Блог, кейсы, мультиязычность", "SEO, AI-поиск, Яндекс Бизнес и Google Business", "Формы, CRM, аналитика"] },
         "de": { "title": "Unternehmenswebsite mit Next.js + CMS", "duration": "4–6 Wochen", "points": ["Next.js + Headless CMS: Inhalte selbst pflegen", "Blog, Referenzen, Mehrsprachigkeit", "SEO, AI Search, Google Business Profile", "Formulare, CRM, Analytics"] },
@@ -35,7 +35,7 @@
     {
       "id": "shop",
       "group": "project",
-      "price": { "ru": 250000, "eu": 8000 },
+      "price": { "ru": 100000 },
       "copy": {
         "ru": { "title": "Интернет-магазин", "duration": "от 6 недель", "points": ["Каталог, корзина, оплата, доставка", "Импорт товаров и остатков", "SEO-структура категорий", "Уведомления о заказах"] },
         "de": { "title": "Online-Shop", "duration": "ab 6 Wochen", "points": ["Katalog, Warenkorb, Zahlung, Versand", "Import von Produkten und Beständen", "SEO-Struktur der Kategorien", "Bestellbenachrichtigungen"] },
@@ -45,7 +45,7 @@
     {
       "id": "web-app",
       "group": "project",
-      "price": { "ru": 300000, "eu": 12000 },
+      "price": { "ru": 180000 },
       "copy": {
         "ru": { "title": "Веб-приложение, личный кабинет", "duration": "индивидуально", "points": ["Кабинет клиента, роли, авторизация", "PostgreSQL, API, интеграции", "Админка и отчёты", "Деплой на свой сервер"] },
         "de": { "title": "Web-App, Kundenportal", "duration": "individuell", "points": ["Kundenportal, Rollen, Login", "PostgreSQL, API, Integrationen", "Admin-Bereich und Reports", "Deployment auf eigenem Server"] },
@@ -55,7 +55,7 @@
     {
       "id": "integrations",
       "group": "project",
-      "price": { "ru": 25000, "eu": 600 },
+      "price": { "ru": 25000 },
       "copy": {
         "ru": { "title": "Интеграции: CRM, Telegram-бот, API", "duration": "от 3 дней", "points": ["Заявки с сайта → CRM и мессенджеры", "Telegram-бот для уведомлений", "Связка сервисов через API"] },
         "de": { "title": "Integrationen: CRM, Telegram-Bot, API", "duration": "ab 3 Tagen", "points": ["Website-Anfragen → CRM und Messenger", "Telegram-Bot für Benachrichtigungen", "Dienste per API verbinden"] },
@@ -65,7 +65,7 @@
     {
       "id": "ai",
       "group": "project",
-      "price": { "ru": 40000, "eu": 1200 },
+      "price": { "ru": 50000 },
       "copy": {
         "ru": { "title": "AI-автоматизация, MCP", "duration": "от 1 недели", "points": ["AI-пайплайны: тексты, документы, отчёты", "Собственный MCP-сервер для данных бизнеса", "Контроль расходов на модели"] },
         "de": { "title": "KI-Automatisierung, MCP", "duration": "ab 1 Woche", "points": ["KI-Pipelines: Texte, Dokumente, Reports", "Eigener MCP-Server für Unternehmensdaten", "Kostenkontrolle für KI-Modelle"] },
@@ -76,7 +76,7 @@
       "id": "seo-care",
       "group": "ongoing",
       "period": "month",
-      "price": { "ru": 25000, "eu": 490 },
+      "price": { "ru": 25000 },
       "copy": {
         "ru": { "title": "SEO-сопровождение", "points": ["Контент, технический аудит, отчёт раз в месяц"] },
         "de": { "title": "SEO-Betreuung", "points": ["Inhalte, technisches Audit, monatlicher Report"] },
@@ -87,7 +87,7 @@
       "id": "care",
       "group": "ongoing",
       "period": "month",
-      "price": { "ru": 7000, "eu": 99 },
+      "price": { "ru": 10000 },
       "copy": {
         "ru": { "title": "Поддержка и хостинг", "points": ["Обновления, бэкапы, мониторинг, SSL"] },
         "de": { "title": "Wartung & Hosting", "points": ["Updates, Backups, Monitoring, SSL"] },
@@ -98,12 +98,13 @@
       "id": "hour",
       "group": "ongoing",
       "period": "hour",
-      "price": { "ru": 2500, "eu": 75 },
+      "price": { "ru": 2000 },
       "copy": {
         "ru": { "title": "Час работы", "points": ["Доработки и задачи вне пакетов"] },
         "de": { "title": "Stundensatz", "points": ["Anpassungen und Aufgaben außerhalb der Pakete"] },
         "en": { "title": "Hourly rate", "points": ["Changes and tasks outside the packages"] }
       }
     }
-  ]
+  ],
+  "de_market": { "_todo": "Отдельный прайс для pavellevdin.de (рынок DE) — позже" }
 }

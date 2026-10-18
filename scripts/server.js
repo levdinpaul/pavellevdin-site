@@ -39,9 +39,11 @@ app.use(express.json({ limit: '50mb' }));
 // (auth/stats/articles/social/pipeline/publications/settings/buffer/media) удалён. Здесь остаются лиды и отзывы.
 const leadRoutes = require('./routes/lead');
 const reviewRoutes = require('./routes/reviews');
+const fxRoutes = require('./routes/fx');
 
 // Public routes
 app.use('/api/lead', leadRoutes);
+app.use('/api/fx', fxRoutes); // курс EUR/RUB ЦБ РФ для цен de/en (кэш сутки)
 app.use('/api', reviewRoutes.publicRouter);
 app.use('/api/admin/reviews', reviewRoutes.adminRouter);
 // Тот же роутер под путём, который nginx оставляет сайту (/api/admin/* уходит платформе)

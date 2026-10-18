@@ -769,6 +769,7 @@
       "lead": "Richtwerte pro Paket. Der Endpreis steht nach dem Briefing fest – er hängt von Umfang, Integrationen und Zeitplan ab.",
       "note": "Alle Preise sind „ab“-Preise, netto. Ein genaues Angebot erhalten Sie nach dem Briefing.",
       "vatNote": "Umsatzsteuer-Hinweis folgt.",
+      "fxNote": "≈ €, Kurs der Zentralbank Russlands vom {{date}}",
       "discuss": "Besprechen",
       "duration": "Dauer",
       "ongoing": "Betreuung nach dem Launch",

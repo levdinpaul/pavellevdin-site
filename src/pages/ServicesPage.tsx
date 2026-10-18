@@ -8,7 +8,8 @@ import { Integrations } from '@/components/pl/Integrations';
 import { useReveal } from '@/sections/scena/useReveal';
 import { Pricing } from '@/components/pl/Pricing';
 import { Title } from '@/components/pl/Title';
-import { PACKAGES, currencyFor, packageCopy, regionFor } from '@/data/pricing';
+import { PACKAGES, currencyFor, packageCopy, priceFor } from '@/data/pricing';
+import { useFxRate } from '@/data/fx';
 
 type Item = { title: string; text: string };
 
@@ -18,6 +19,7 @@ export function ServicesPage() {
   const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
   const root = useRef<HTMLDivElement>(null);
   useReveal(root);
+  const fx = useFxRate(lang);
   const services = t('pl.services.items', { returnObjects: true }) as Item[];
   const process = t('pl.aboutPage.process', { returnObjects: true }) as Item[];
 
@@ -43,7 +45,7 @@ export function ServicesPage() {
         seller: { '@type': 'Person', name: 'Pavel Levdin', url: `${SITE}/${lang}/about` },
         priceSpecification: {
           '@type': p.period ? 'UnitPriceSpecification' : 'PriceSpecification',
-          minPrice: p.price[regionFor(lang)],
+          minPrice: priceFor(lang, p.price.ru, fx),
           priceCurrency: currencyFor(lang),
           ...(p.period ? { unitText: p.period === 'month' ? 'MONTH' : 'HOUR' } : {}),
           ...(lang === 'ru' ? {} : { valueAddedTaxIncluded: false }),
