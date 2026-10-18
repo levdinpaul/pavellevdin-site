@@ -1,16 +1,5 @@
-import { createContext, useContext, useEffect, type ReactNode } from 'react';
-
-interface ThemeContextType {
-  theme: 'dark';
-  resolvedTheme: 'dark';
-  setTheme: (theme?: string) => void;
-}
-
-const ThemeContext = createContext<ThemeContextType>({
-  theme: 'dark',
-  resolvedTheme: 'dark',
-  setTheme: () => {},
-});
+import { useEffect, type ReactNode } from 'react';
+import { ThemeContext } from './theme-context';
 
 /** Тема зафиксирована тёмной — дизайн PL Digitalbau задуман dark-only (#060810). */
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -30,8 +19,4 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       {children}
     </ThemeContext.Provider>
   );
-}
-
-export function useTheme() {
-  return useContext(ThemeContext);
 }

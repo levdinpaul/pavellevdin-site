@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 export interface CommandSection { id: string; label: string; hint?: string; }
 export interface CommandAction { label: string; glyph?: string; kbd?: string; onSelect?: () => void; }
@@ -34,7 +34,12 @@ export function CommandMenu({
   const [query, setQuery] = useState('');
   const [hoverId, setHoverId] = useState<string | null>(null);
 
-  useEffect(() => { if (!open) setQuery(''); }, [open]);
+  // Сброс поиска при закрытии — «подстройка state при смене пропса» во время рендера, без эффекта.
+  const [prevOpen, setPrevOpen] = useState(open);
+  if (open !== prevOpen) {
+    setPrevOpen(open);
+    if (!open) setQuery('');
+  }
 
   const filteredActions = useMemo(() => {
     if (!query) return actions;
@@ -84,7 +89,7 @@ export function CommandMenu({
                 {sections.map((sec, i) => (
                   <button
                     key={sec.id}
-                    onClick={() => { onNavigate && onNavigate(sec.id); onClose && onClose(); }}
+                    onClick={() => { onNavigate?.(sec.id); onClose?.(); }}
                     onMouseEnter={() => setHoverId(sec.id)}
                     onMouseLeave={() => setHoverId(null)}
                     style={{
@@ -111,7 +116,7 @@ export function CommandMenu({
           {filteredActions.map((a) => (
             <button
               key={a.label}
-              onClick={() => { a.onSelect && a.onSelect(); onClose && onClose(); }}
+              onClick={() => { a.onSelect?.(); onClose?.(); }}
               onMouseEnter={() => setHoverId(a.label)}
               onMouseLeave={() => setHoverId(null)}
               style={{

@@ -91,7 +91,7 @@ router.post('/', limiter, async (req, res) => {
     console.error('Не удалось отправить лид на почту:', err.message);
   }
 
-  // 4) Копия в CRM платформы (pl-platform) — после записи в РФ; без конфига scripts/platform.json выключено
+  // 4) Копия в CRM платформы (pl-platform) — только de/en (152-ФЗ: ru остаются в РФ); без scripts/platform.json выключено
   try {
     await forwardLead(lead);
   } catch (err) {
