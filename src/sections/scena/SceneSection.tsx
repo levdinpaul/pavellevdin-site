@@ -9,15 +9,32 @@ type Step = { title: string; text: string };
 
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
-/** Слова заголовка по отдельности — поэтапный «въезд» (только transform, см. .pl-word). Пробелы сохраняются. */
-function Words({ text, from, className }: { text: string; from: number; className?: string }) {
+/**
+ * Слова заголовка по отдельности — поэтапный «въезд» (только transform, см. .pl-word). Пробелы сохраняются.
+ * tail — пунктуация из следующей части фразы («, которая…»): склеивается с последним словом (nowrap),
+ * чтобы запятая не переносилась на новую строку.
+ */
+function Words({ text, from, className, tail }: { text: string; from: number; className?: string; tail?: string }) {
+  const parts = text.split(/(\s+)/);
+  const last = parts.reduce((acc, w, i) => (w.trim() ? i : acc), -1);
+  const word = (w: string, i: number, cls = className) => (
+    <span key={i} className={cls ? `pl-word ${cls}` : 'pl-word'} style={{ animationDelay: `${(from + i / 2) * 70}ms` }}>{w}</span>
+  );
   return (
     <>
-      {text.split(/(s+)/).map((w, i) => (/^s+$/.test(w) || !w
-        ? w
-        : <span key={i} className={className ? `pl-word ${className}` : 'pl-word'} style={{ animationDelay: `${(from + i / 2) * 70}ms` }}>{w}</span>))}
+      {parts.map((w, i) => {
+        if (!w.trim()) return w;
+        if (i === last && tail) return <span key={i} className="pl-nowrap">{word(w, i)}{word(tail, i + 1, undefined)}</span>;
+        return word(w, i);
+      })}
     </>
   );
+}
+
+/** Отделяет ведущую пунктуацию («, которая…» → [«,», « которая…»]). */
+function splitLeadPunct(s: string): [string, string] {
+  const m = s.match(/^([,.;:!?…]+)([\s\S]*)$/);
+  return m ? [m[1], m[2]] : ['', s];
 }
 
 /**
@@ -29,6 +46,7 @@ function Words({ text, from, className }: { text: string; from: number; classNam
 export function SceneSection({ lang }: { lang: string }) {
   const { t } = useTranslation();
   const steps = t('pl.scene.steps', { returnObjects: true }) as Step[];
+  const [punct, titleRest] = splitLeadPunct(t('pl.hero.titleB'));
   const sectionRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -148,8 +166,8 @@ export function SceneSection({ lang }: { lang: string }) {
           <p className="pl-eyebrow pl-hero__eyebrow">{t('pl.hero.eyebrow')}</p>
           <h1 id="pl-hero-title" className="pl-hero__title">
             <Words text={t('pl.hero.titleA')} from={0} />
-            <Words text={t('pl.hero.titleAccent')} from={4} className="pl-accent" />
-            <Words text={t('pl.hero.titleB')} from={7} />
+            <Words text={t('pl.hero.titleAccent')} from={4} className="pl-accent" tail={punct} />
+            <Words text={titleRest} from={7} />
           </h1>
           <p className="pl-hero__lead">{t('pl.hero.lead')}</p>
           <div className="pl-hero__actions">

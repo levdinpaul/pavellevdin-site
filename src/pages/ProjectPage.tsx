@@ -26,7 +26,8 @@ export function ProjectPage() {
       raf = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       if (bar.current) bar.current.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
-      if (!reduced && shot.current) shot.current.style.transform = `translate3d(0, ${(Math.min(window.scrollY, 600) * -0.08).toFixed(1)}px, 0)`;
+      // мягкий параллакс-zoom скриншота (без сдвига — не открывает пустую полосу под картинкой)
+      if (!reduced && shot.current) shot.current.style.transform = `scale(${(1 + Math.min(window.scrollY, 600) * 0.0001).toFixed(4)})`;
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     window.addEventListener('scroll', onScroll, { passive: true });

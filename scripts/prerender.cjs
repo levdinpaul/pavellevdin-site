@@ -43,14 +43,26 @@ function injectDehydrate(html, json) {
 }
 
 // Заменяет внутренность <div id="root">…</div> на SSR-разметку, не трогая head и скрипты.
+// Парный </div> ищем счётом вложенности (содержимое <script> пропускаем): эвристика «последний </div>
+// перед первым <script>» ломалась, когда внутри #root есть <script> (JSON-LD) — хвост страницы дублировался.
+function findRootClose(html, from) {
+  const re = /<script\b[\s\S]*?<\/script>|<div\b[^>]*>|<\/div>/gi;
+  re.lastIndex = from;
+  let depth = 1, m;
+  while ((m = re.exec(html))) {
+    const tag = m[0];
+    if (tag[1] === 's' || tag[1] === 'S') continue;
+    if (tag[1] === '/') { if (--depth === 0) return m.index; } else if (!tag.endsWith('/>')) depth++;
+  }
+  return -1;
+}
 function swapRootBody(html, bodyHtml) {
   const openTag = '<div id="root">';
   const openIdx = html.indexOf(openTag);
   if (openIdx === -1) return html;
   const afterOpen = openIdx + openTag.length;
-  const scriptIdx = html.indexOf('<script', afterOpen);
-  const closeIdx = html.lastIndexOf('</div>', scriptIdx === -1 ? html.length : scriptIdx);
-  if (closeIdx === -1 || closeIdx < afterOpen) return html;
+  const closeIdx = findRootClose(html, afterOpen);
+  if (closeIdx === -1) return html;
   return html.slice(0, afterOpen) + bodyHtml + html.slice(closeIdx);
 }
 

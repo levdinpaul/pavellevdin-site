@@ -9,7 +9,7 @@ export function Home() {
 
   const titles = {
     en: 'Web Coding Hannover | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
-    ru: 'Веб-кодинг и сайты под ключ | SEO, AI Search, Google Business | PL Innovativ Digitalbau',
+    ru: 'Web Coding Hannover | Сайты, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
     de: 'Web Coding Hannover | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
   };
 

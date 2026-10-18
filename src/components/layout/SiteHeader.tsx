@@ -50,7 +50,9 @@ export function SiteHeader() {
 
   useEffect(() => {
     if (!isHome) return;
-    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.6);
+    // десктоп: сцена — шапка прозрачна весь первый экран; мобайл/reduced-motion: обычный поток — фон почти сразу
+    const live = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+    const onScroll = () => setScrolled(window.scrollY > (live.matches ? window.innerHeight * 0.6 : 24));
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);

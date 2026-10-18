@@ -75,6 +75,9 @@ export async function render(url: string, lang: string): Promise<RenderResult> {
       final(cb) { cb(); resolve(buf); },
     });
     const { pipe } = renderToPipeableStream(app, {
+      // React 19.2 выносит крупные Suspense-границы в отдельные сегменты ($RC/$RB-скрипты) даже при onAllReady.
+      // Для статичного пререндера нужен цельный HTML без стриминговых артефактов → без порога.
+      progressiveChunkSize: Number.POSITIVE_INFINITY,
       onAllReady() { pipe(writable); },
       onError(err) { reject(err); },
     });
