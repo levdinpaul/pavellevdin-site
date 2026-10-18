@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE = 'https://pavellevdin.ru';
+import { SITE } from './seo';
 const LANGS = ['de', 'en', 'ru'] as const;
 
 interface PageMetaProps {
@@ -36,12 +36,3 @@ export function PageMeta({ lang, path, title, description, image = '/og-image.jp
   );
 }
 
-export function breadcrumbs(lang: string, items: { name: string; path: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: `${SITE}/${lang}${it.path}` })),
-  };
-}
-
-export { SITE };

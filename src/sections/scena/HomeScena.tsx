@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { SceneSection } from './SceneSection';
@@ -17,10 +17,11 @@ export function HomeScena() {
     return () => window.clearTimeout(id);
   }, [hash]);
 
+  // Suspense-границы делят гидрацию на отдельные задачи (React уступает поток между ними) — меньше TBT.
   return (
     <>
-      <SceneSection lang={lang} />
-      <HomeSections lang={lang} />
+      <Suspense fallback={null}><SceneSection lang={lang} /></Suspense>
+      <Suspense fallback={null}><HomeSections lang={lang} /></Suspense>
     </>
   );
 }

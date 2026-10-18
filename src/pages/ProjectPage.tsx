@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { isOnline, projectCopy, projectImages, projects } from '@/data/projects';
-import { PageMeta, SITE, breadcrumbs } from '@/components/pl/PageMeta';
+import { PageMeta } from '@/components/pl/PageMeta';
+import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { Sparkle } from '@/components/layout/social-icons';
 import { useReveal } from '@/sections/scena/useReveal';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { startTransition } from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
@@ -21,7 +21,9 @@ const app = (
 // запускаясь до первого paint, отодвигает LCP/FCP. Отложив её за requestIdleCallback,
 // даём браузеру покрасить контент сразу, а интерактив «доезжает» в простое (cap 1.5s).
 if (rootElement.hasChildNodes()) {
-  const hydrate = () => ReactDOM.hydrateRoot(rootElement, app);
+  // startTransition: первичная гидрация идёт с time-slicing (как в Next.js) — React уступает поток
+  // каждые ~5 мс, вместо одной длинной задачи (TBT); Suspense-границы гидрируются по отдельности.
+  const hydrate = () => startTransition(() => { ReactDOM.hydrateRoot(rootElement, app); });
   if ('requestIdleCallback' in window) {
     requestIdleCallback(hydrate, { timeout: 1500 });
   } else {

@@ -107,22 +107,30 @@ export function SceneSection({ lang }: { lang: string }) {
     };
   }, []);
 
-  // WebGL — лениво: после гидрации + idle, только в «живом» режиме
+  // WebGL — лениво и только в «живом» режиме: по первому взаимодействию (скролл/мышь/касание/клавиша)
+  // или через 8 с простоя. До этого первый кадр — статичный CSS-фон; загрузку не блокирует (TBT).
   useEffect(() => {
     const canvas = canvasRef.current, section = sectionRef.current;
     if (!canvas || !section || !window.matchMedia(SCENE_MEDIA).matches) return;
-    let gl: SceneGL | null = null, cancelled = false;
+    let gl: SceneGL | null = null, cancelled = false, started = false;
+    const events = ['scroll', 'pointermove', 'pointerdown', 'keydown', 'wheel', 'touchstart'] as const;
     const start = () => {
+      if (started) return;
+      started = true;
+      events.forEach((e) => window.removeEventListener(e, start));
+      window.clearTimeout(timer);
       import('./scene-gl').then((m) => {
         if (!cancelled) gl = m.createSceneGL(canvas, section, () => progress.current);
       }).catch(() => { /* без WebGL остаётся CSS-фон */ });
     };
-    // Safari без requestIdleCallback → таймер
-    const hasIdle = 'requestIdleCallback' in window;
-    const id = hasIdle ? window.requestIdleCallback(start, { timeout: 2500 }) : window.setTimeout(start, 1200);
+    events.forEach((e) => window.addEventListener(e, start, { passive: true, once: true }));
+    const timer = window.setTimeout(() => {
+      if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 2000 }); else start();
+    }, 8000);
     return () => {
       cancelled = true;
-      if (hasIdle) window.cancelIdleCallback(id); else window.clearTimeout(id);
+      events.forEach((e) => window.removeEventListener(e, start));
+      window.clearTimeout(timer);
       gl?.dispose();
     };
   }, []);

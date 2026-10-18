@@ -15,6 +15,8 @@ export default defineConfig(({ command }) => ({
     react(),
     ...(command === 'build' ? [visualizer({ open: false, filename: 'dist/stats.html' })] : []),
   ],
+  // JSON-локали → JSON.parse("…"): парсится быстрее объектного литерала (меньше Script Evaluation)
+  json: { stringify: true },
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {

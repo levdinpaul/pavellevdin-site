@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { PageMeta, SITE, breadcrumbs } from '@/components/pl/PageMeta';
+import { PageMeta } from '@/components/pl/PageMeta';
+import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { ServicesGrid } from '@/components/pl/ServicesGrid';
 import { Integrations } from '@/components/pl/Integrations';
 import { Sparkle } from '@/components/layout/social-icons';

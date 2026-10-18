@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PROJECT_CATEGORIES, projects, type ProjectCategory } from '@/data/projects';
-import { PageMeta, SITE, breadcrumbs } from '@/components/pl/PageMeta';
+import { PageMeta } from '@/components/pl/PageMeta';
+import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { ProjectCard } from '@/components/pl/ProjectCard';
 import { useReveal } from '@/sections/scena/useReveal';
 

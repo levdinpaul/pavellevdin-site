@@ -15,9 +15,10 @@ export function useReveal(root: RefObject<HTMLElement | null>) {
         if (e.isIntersecting) { (e.target as HTMLElement).dataset.reveal = 'shown'; io.unobserve(e.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px' });
-    items.forEach((it) => {
-      if (it.getBoundingClientRect().top > window.innerHeight) { it.dataset.reveal = 'armed'; io.observe(it); }
-    });
+    // сначала все чтения геометрии, потом записи — иначе каждая запись форсирует пересчёт layout
+    const h = window.innerHeight;
+    const below = items.filter((it) => it.getBoundingClientRect().top > h);
+    below.forEach((it) => { it.dataset.reveal = 'armed'; io.observe(it); });
     return () => io.disconnect();
   }, [root]);
 }
