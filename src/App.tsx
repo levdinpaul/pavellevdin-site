@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/hooks/useTheme';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Layout } from '@/components/layout/Layout';
 import { Home } from '@/pages/Home';
+import { PlatformRedirect } from '@/components/PlatformRedirect';
 import { CookiePreloader } from '@/components/CookiePreloader';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
 import { loadAnalytics } from '@/lib/analytics';
@@ -56,7 +57,7 @@ function LangLayout() {
         <title>{currentSeo.title}</title>
       </Helmet>
       <Layout>
-        <Suspense fallback={<AdminFallback />}>
+        <Suspense fallback={<PageFallback />}>
           <Outlet />
         </Suspense>
       </Layout>
@@ -70,31 +71,13 @@ const ProjectPage = lazy(() => import('@/pages/ProjectPage').then(m => ({ defaul
 const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ServicesPage = lazy(() => import('@/pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
 const ReviewPage = lazy(() => import('@/pages/ReviewPage').then(m => ({ default: m.ReviewPage })));
-const AdminReviews = lazy(() => import('@/pages/admin/AdminReviews').then(m => ({ default: m.AdminReviews })));
 const ContactPage = lazy(() => import('@/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const BriefPage = lazy(() => import('@/pages/BriefPage').then(m => ({ default: m.BriefPage })));
 const BusinessCardPage = lazy(() => import('@/pages/BusinessCardPage').then(m => ({ default: m.BusinessCardPage })));
 const ImprintPage = lazy(() => import('@/pages/ImprintPage').then(m => ({ default: m.ImprintPage })));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage').then(m => ({ default: m.PrivacyPage })));
-const BlogList = lazy(() => import('@/pages/blog/BlogList').then(m => ({ default: m.BlogList })));
-const BlogPost = lazy(() => import('@/pages/blog/BlogPost').then(m => ({ default: m.BlogPost })));
-const CategoryPage = lazy(() => import('@/pages/blog/CategoryPage').then(m => ({ default: m.CategoryPage })));
-const TagPage = lazy(() => import('@/pages/blog/TagPage').then(m => ({ default: m.TagPage })));
 
-// Admin pages (lazy-loaded)
-const AdminLogin = lazy(() => import('@/pages/admin/AdminLogin').then(m => ({ default: m.AdminLogin })));
-const AdminDashboard = lazy(() => import('@/pages/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
-const AdminAnalytics = lazy(() => import('@/pages/admin/AdminAnalytics').then(m => ({ default: m.AdminAnalytics })));
-const AdminArticles = lazy(() => import('@/pages/admin/AdminArticles').then(m => ({ default: m.AdminArticles })));
-const AdminSocial = lazy(() => import('@/pages/admin/AdminSocial').then(m => ({ default: m.AdminSocial })));
-const AdminPublications = lazy(() => import('@/pages/admin/AdminPublications').then(m => ({ default: m.AdminPublications })));
-const AdminCreatePublication = lazy(() => import('@/pages/admin/AdminCreatePublication').then(m => ({ default: m.AdminCreatePublication })));
-const AdminSettings = lazy(() => import('@/pages/admin/AdminSettings').then(m => ({ default: m.AdminSettings })));
-const AdminManualPublish = lazy(() => import('@/pages/admin/AdminManualPublish').then(m => ({ default: m.AdminManualPublish })));
-const AdminLayout = lazy(() => import('@/components/admin/AdminLayout').then(m => ({ default: m.AdminLayout })));
-const AdminProtectedRoute = lazy(() => import('@/components/admin/AdminProtectedRoute').then(m => ({ default: m.AdminProtectedRoute })));
-
-function AdminFallback() {
+function PageFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
@@ -134,31 +117,19 @@ export function AppRoutes() {
           <Route path="services" element={<ServicesPage />} />
           <Route path="brief" element={<BriefPage />} />
           <Route path="business-card" element={<BusinessCardPage />} />
-          <Route path="blog" element={<BlogList />} />
-          <Route path="blog/:slug" element={<BlogPost />} />
-          <Route path="blog/category/:category" element={<CategoryPage />} />
-          <Route path="blog/tag/:tag" element={<TagPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="imprint" element={<ImprintPage />} />
           <Route path="privacy" element={<PrivacyPage />} />
           <Route path="review/:token" element={<ReviewPage />} />
-        </Route>
-        {/* Admin routes (lazy-loaded, separate layout) */}
-        <Route path="/:lang/admin">
-          <Route index element={<Suspense fallback={<AdminFallback />}><AdminLogin /></Suspense>} />
-          <Route element={<Suspense fallback={<AdminFallback />}><AdminProtectedRoute /></Suspense>}>
-            <Route element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
-              <Route path="dashboard" element={<Suspense fallback={<AdminFallback />}><AdminDashboard /></Suspense>} />
-              <Route path="analytics" element={<Suspense fallback={<AdminFallback />}><AdminAnalytics /></Suspense>} />
-              <Route path="articles" element={<Suspense fallback={<AdminFallback />}><AdminArticles /></Suspense>} />
-              <Route path="social" element={<Suspense fallback={<AdminFallback />}><AdminSocial /></Suspense>} />
-              <Route path="publications" element={<Suspense fallback={<AdminFallback />}><AdminPublications /></Suspense>} />
-              <Route path="publications/create" element={<Suspense fallback={<AdminFallback />}><AdminCreatePublication /></Suspense>} />
-              <Route path="publish" element={<Suspense fallback={<AdminFallback />}><AdminManualPublish /></Suspense>} />
-              <Route path="settings" element={<Suspense fallback={<AdminFallback />}><AdminSettings /></Suspense>} />
-              <Route path="reviews" element={<Suspense fallback={<AdminFallback />}><AdminReviews /></Suspense>} />
-            </Route>
-          </Route>
+          {/* Блог / кабинет / админка / вход — на pl-platform (nginx). Внутри SPA → полная перезагрузка. */}
+          <Route path="blog/*" element={<PlatformRedirect />} />
+          <Route path="cabinet/*" element={<PlatformRedirect />} />
+          <Route path="admin/*" element={<PlatformRedirect />} />
+          <Route path="login" element={<PlatformRedirect />} />
+          <Route path="register" element={<PlatformRedirect />} />
+          <Route path="forgot-password" element={<PlatformRedirect />} />
+          <Route path="reset-password" element={<PlatformRedirect />} />
+          <Route path="set-password" element={<PlatformRedirect />} />
         </Route>
       </Routes>
       {isLoaded && consent === null && <CookiePreloader onAccept={accept} onDecline={decline} />}

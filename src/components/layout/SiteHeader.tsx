@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CommandMenu, type CommandLabels } from '@/components/ds/CommandMenu';
 import { getContacts } from '@/constants/contacts';
 import { startPointerEffects } from '@/lib/pointer-effects';
+import { isPlatformPath } from '@/lib/platform-paths';
 import { InstagramIcon, TelegramIcon, WhatsAppIcon } from './social-icons';
 
 const LANGS = ['ru', 'de', 'en'] as const;
@@ -111,7 +112,12 @@ export function SiteHeader() {
   ].filter((s) => s.href);
 
   const cmd = CMD[lang];
-  const go = (path: string) => navigate(`/${lang}${path}`);
+  // Блог/кабинет живут на платформе (pl-platform) — туда только полной загрузкой страницы, не через SPA-роутер.
+  const go = (path: string) => {
+    const to = `/${lang}${path}`;
+    if (isPlatformPath(to)) window.location.assign(to);
+    else navigate(to);
+  };
 
   return (
     <>

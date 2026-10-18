@@ -546,6 +546,11 @@
       "brief": "Fill out the brief",
       "email": "Send an email"
     },
+    "notFound": {
+      "title": "Page not found",
+      "text": "This page does not exist or has moved.",
+      "home": "Back to home"
+    },
     "footer": {
       "location": "Hannover, Germany",
       "pages": "Pages",
@@ -554,6 +559,7 @@
       "brief": "Project brief",
       "card": "Digital business card",
       "blog": "Blog",
+      "cabinet": "Client area",
       "imprint": "Imprint",
       "privacy": "Privacy policy",
       "cookies": "Cookie settings",

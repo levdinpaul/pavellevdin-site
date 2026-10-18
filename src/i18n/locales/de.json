@@ -546,6 +546,11 @@
       "brief": "Briefing ausfüllen",
       "email": "E-Mail schreiben"
     },
+    "notFound": {
+      "title": "Seite nicht gefunden",
+      "text": "Diese Seite existiert nicht oder wurde verschoben.",
+      "home": "Zur Startseite"
+    },
     "footer": {
       "location": "Hannover, Deutschland",
       "pages": "Seiten",
@@ -554,6 +559,7 @@
       "brief": "Projekt-Briefing",
       "card": "Digitale Visitenkarte",
       "blog": "Blog",
+      "cabinet": "Kundenkonto",
       "imprint": "Impressum",
       "privacy": "Datenschutzerklärung",
       "cookies": "Cookie-Einstellungen",

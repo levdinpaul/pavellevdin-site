@@ -20,26 +20,15 @@ const PORT = 5055;
 // проходит без regeneration → LCP не скачет на момент гидрации (см. src/entry-server.tsx).
 // head (title/canonical/og/JSON-LD) по-прежнему берём из puppeteer (Helmet на клиенте).
 // Какие маршруты рендерим настоящим React SSR (renderToPipeableStream резолвит React.lazy).
-// Блог использует dehydrate/hydrate (данные грузятся на сервере и сериализуются в window.__BLOG_DATA__).
+// Блог больше не на сайте — его отдаёт pl-platform (nginx), здесь не пререндерится.
 // Формы (contact/brief) — пока на puppeteer (отдельный осторожный шаг).
 function ssrLangForRoute(route) {
   // Формы (contact/brief) безопасны: неконтролируемые нативные <form>, отправка через fetch
   // в клиентском onSubmit (после гидрации) — SSR трогает только разметку, не код заявки.
-  const staticRoutes = ['/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/blog', '/ru/contact', '/ru/brief', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
+  const staticRoutes = ['/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact', '/ru/brief', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
   if (staticRoutes.includes(route)) return 'ru';
   if (/^\/ru\/portfolio\/[^/]+$/.test(route)) return 'ru'; // страницы кейсов
-  if (/^\/ru\/blog\/[^/]+$/.test(route)) return 'ru'; // отдельные посты (один сегмент, не category/tag)
   return null;
-}
-
-// Вставляет инлайн-скрипт с дегидрированными данными ПЕРЕД модульным скриптом гидрации,
-// чтобы window.__BLOG_DATA__ был доступен до первого клиентского рендера.
-function injectDehydrate(html, json) {
-  const tag = `<script>window.__BLOG_DATA__=${json}</script>`;
-  const rootIdx = html.indexOf('<div id="root">');
-  const scriptIdx = html.indexOf('<script', rootIdx === -1 ? 0 : rootIdx);
-  if (scriptIdx === -1) return html.replace('</body>', `${tag}</body>`);
-  return html.slice(0, scriptIdx) + tag + '\n    ' + html.slice(scriptIdx);
 }
 
 // Заменяет внутренность <div id="root">…</div> на SSR-разметку, не трогая head и скрипты.
@@ -119,21 +108,6 @@ function getProjectSlugs() {
   return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')).map((p) => p.slug) : [];
 }
 
-function getBlogSlugs() {
-  const blogDir = path.join(projectRoot, 'src', 'content', 'blog');
-  const slugs = [];
-  if (!fs.existsSync(blogDir)) return slugs;
-  for (const dir of fs.readdirSync(blogDir)) {
-    const f = path.join(blogDir, dir, 'ru.json');
-    if (!fs.existsSync(f)) continue;
-    try {
-      const a = JSON.parse(fs.readFileSync(f, 'utf8').replace(/^﻿/, ''));
-      if (a.published && (a.slug || a.id)) slugs.push(a.slug || a.id);
-    } catch { /* пропускаем битый JSON */ }
-  }
-  return slugs;
-}
-
 async function run() {
   if (!fs.existsSync(path.join(dist, 'index.html'))) {
     console.error('❌ dist/index.html не найден. Сначала запустите vite build.');
@@ -143,10 +117,9 @@ async function run() {
   // Русские маршруты — приоритет фазы 1
   const routes = [
     '/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact',
-    '/ru/brief', '/ru/business-card', '/ru/imprint', '/ru/privacy', '/ru/blog',
+    '/ru/brief', '/ru/business-card', '/ru/imprint', '/ru/privacy',
   ];
   for (const slug of getProjectSlugs()) routes.push(`/ru/portfolio/${slug}`);
-  for (const slug of getBlogSlugs()) routes.push(`/ru/blog/${slug}`);
 
   // Загружаем SSR-рендер (ESM-бандл) для маршрутов из SSR_ROUTES
   let ssrRender = null;
@@ -195,11 +168,10 @@ async function run() {
       const ssrLang = ssrLangForRoute(route);
       if (ssrRender && ssrLang) {
         try {
-          const { html: ssrBody, dehydrate } = await ssrRender(route, ssrLang);
+          const { html: ssrBody } = await ssrRender(route, ssrLang);
           if (ssrBody && ssrBody.length > 500) {
             html = swapRootBody(html, ssrBody);
-            if (dehydrate) html = injectDehydrate(html, dehydrate);
-            console.log(`    ↳ SSR body (${ssrBody.length} симв.)${dehydrate ? ' + dehydrate' : ''}`);
+            console.log(`    ↳ SSR body (${ssrBody.length} симв.)`);
           }
         } catch (e) {
           console.log(`  ⚠ SSR-рендер ${route} не удался, оставляю puppeteer-body: ${e.message}`);

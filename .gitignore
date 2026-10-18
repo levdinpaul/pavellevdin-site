@@ -42,3 +42,6 @@ _design/
 
 # env/.env — только публичные VITE_* флаги фронтенда (см. vite.config.ts envDir), коммитим
 !env/.env
+
+# Связь с pl-platform (токен) — только на сервере
+scripts/platform.json
