@@ -1,0 +1,576 @@
+[
+  {
+    "slug": "vl-innovativbau",
+    "title": "VL-Innovativbau",
+    "url": "https://vl-innovativbau.de/",
+    "category": "clients-de",
+    "status": "live",
+    "featured": true,
+    "stack": [
+      "Next.js",
+      "Strapi",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Сайт монтажной компании: окна, двери и зимние сады в Ганновере, с онлайн-конфигуратором окон",
+        "task": "Компании из Ганновера, которая монтирует окна, двери и зимние сады, нужен был сайт, приводящий заявки из региона. Посетитель должен быстро понять услуги, увидеть выполненные объекты и отзывы и без лишних шагов запросить консультацию.",
+        "solution": "Сделал многоязычный сайт на Next.js с контентом в Strapi: услуги, проекты, блог и отзывы редактируются в админке без участия разработчика. Главный инструмент для лидов — онлайн-конфигуратор окон и дверей, рядом раздел о господдержке (KfW, BAFA, proKlima) и быстрые контакты через WhatsApp и Telegram.",
+        "done": [
+          "Онлайн-конфигуратор окон и дверей: материал, размеры, цвет, остекление, запрос предложения",
+          "Разделы услуг, проектов, господдержки и локаций по региону Ганновер",
+          "Блог «Aktuelles & Tipps» и блок отзывов из Google",
+          "Три языка интерфейса: DE / EN / RU",
+          "CMS на Strapi + PostgreSQL, развёртывание в Docker"
+        ]
+      },
+      "en": {
+        "summary": "Website for a window, door and conservatory installer in Hanover, with an online window configurator",
+        "task": "A Hanover installer of windows, doors and conservatories needed a website that brings in local enquiries. Visitors had to grasp the services quickly, see completed projects and reviews, and request a consultation without friction.",
+        "solution": "I built a multilingual Next.js site backed by Strapi, so services, projects, blog posts and reviews are edited in the CMS without a developer. The main lead tool is an online window and door configurator, alongside a funding section (KfW, BAFA, proKlima) and quick contact via WhatsApp and Telegram.",
+        "done": [
+          "Online window and door configurator: material, dimensions, colour, glazing, quote request",
+          "Service, project, funding and location pages for the Hanover region",
+          "\"Aktuelles & Tipps\" blog and a Google reviews section",
+          "Three interface languages: DE / EN / RU",
+          "Strapi + PostgreSQL CMS, deployed with Docker"
+        ]
+      },
+      "de": {
+        "summary": "Website für einen Fenster-, Türen- und Wintergartenbauer in Hannover, mit Online-Fensterkonfigurator",
+        "task": "Ein Montagebetrieb für Fenster, Türen und Wintergärten aus Hannover brauchte eine Website, die regionale Anfragen bringt. Besucher sollen die Leistungen schnell verstehen, Referenzen und Bewertungen sehen und ohne Umwege eine Beratung anfragen.",
+        "solution": "Ich habe eine mehrsprachige Next.js-Website mit Strapi gebaut: Leistungen, Projekte, Blog und Bewertungen pflegt das Team selbst im CMS. Zentrales Lead-Werkzeug ist der Online-Konfigurator für Fenster und Türen, ergänzt um einen Förderbereich (KfW, BAFA, proKlima) und Schnellkontakt per WhatsApp und Telegram.",
+        "done": [
+          "Online-Konfigurator für Fenster und Türen: Material, Maße, Farbe, Verglasung, Angebotsanfrage",
+          "Seiten für Leistungen, Projekte, Förderung und Standorte in der Region Hannover",
+          "Blog „Aktuelles & Tipps“ und Google-Bewertungen",
+          "Drei Sprachen: DE / EN / RU",
+          "CMS mit Strapi + PostgreSQL, Deployment per Docker"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "mp-innovativbau",
+    "title": "MP-Innovativbau",
+    "url": "https://mp-innovativbau.de/",
+    "category": "clients-de",
+    "status": "live",
+    "featured": true,
+    "stack": [
+      "Next.js",
+      "Strapi",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Сайт инженерного бюро деревянного домостроения: хиро с чертежом, который при скролле собирается в дом",
+        "task": "Инженерному бюро из Лангенхагена, которое строит деревянные каркасные дома и занимается достройкой и отделкой, нужен был сайт. Он должен показывать инженерный подход, восемь направлений работ и типовые дома и вести к звонку.",
+        "solution": "Сделал сайт на Next.js и Strapi на собственном VPS клиента. Главный приём — сцена на главной: при скролле чертёж этажа шаг за шагом превращается в готовый каркасный дом. Отдельные разделы посвящены типовым домам у озера Бернштайнзее, господдержке, галерее объектов и блогу.",
+        "done": [
+          "Анимированная сцена на скролле «от плана к дому»: фундамент, каркас, стропила, оболочка",
+          "Каталог из восьми направлений работ со страницами услуг",
+          "Раздел типовых домов (Musterhäuser) с площадью и ценой «под ключ»",
+          "Галерея объектов, блог, FAQ, раздел о господдержке",
+          "Три языка интерфейса: DE / EN / RU",
+          "Next.js + Strapi + PostgreSQL в Docker на собственном VPS"
+        ]
+      },
+      "en": {
+        "summary": "Website for a timber-frame engineering firm with a hero blueprint that assembles into a house on scroll",
+        "task": "An engineering firm from Langenhagen that builds timber-frame houses and handles fit-out work needed a website. It had to convey the engineering approach, the eight trades and the show homes, and lead visitors to call.",
+        "solution": "I built the site with Next.js and Strapi on the client's own VPS. The centrepiece is a scroll-driven homepage scene: a floor plan turns step by step into a finished timber-frame house. Dedicated sections cover the show homes at Bernsteinsee, funding, a project gallery and a blog.",
+        "done": [
+          "Scroll-driven \"from plan to house\" scene: foundation, frame, rafters, envelope",
+          "Catalogue of eight trades with individual service pages",
+          "Show homes section with floor area and turnkey price",
+          "Project gallery, blog, FAQ and a funding section",
+          "Three interface languages: DE / EN / RU",
+          "Next.js + Strapi + PostgreSQL in Docker on a dedicated VPS"
+        ]
+      },
+      "de": {
+        "summary": "Website für einen Holzbau-Ingenieurbetrieb: der Bauplan im Hero wächst beim Scrollen zum Haus",
+        "task": "Ein Holzbau-Ingenieurbetrieb aus Langenhagen, der Holzrahmenhäuser baut und Ausbauarbeiten übernimmt, brauchte eine Website. Sie sollte den Ingenieuranspruch, die acht Gewerke und die Musterhäuser zeigen und zum Anruf führen.",
+        "solution": "Umgesetzt mit Next.js und Strapi auf dem eigenen VPS des Kunden. Herzstück ist die Scroll-Szene auf der Startseite: Aus dem Grundriss entsteht Schritt für Schritt ein fertiges Holzrahmenhaus. Eigene Bereiche gibt es für die Musterhäuser am Bernsteinsee, die Förderung, die Projektgalerie und den Blog.",
+        "done": [
+          "Scroll-Animation „Vom Bauplan zum Haus“: Fundament, Ständerwerk, Dachstuhl, Hülle",
+          "Übersicht über acht Gewerke mit eigenen Leistungsseiten",
+          "Musterhäuser mit Wohnfläche und Schlüsselfertig-Preis",
+          "Projektgalerie, Blog, FAQ und Förderbereich",
+          "Drei Sprachen: DE / EN / RU",
+          "Next.js + Strapi + PostgreSQL in Docker auf eigenem VPS"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "vestora-life",
+    "title": "Opora Life",
+    "url": "https://vestoralife.de/",
+    "category": "products",
+    "status": "live",
+    "featured": true,
+    "stack": [
+      "Next.js",
+      "PostgreSQL (RLS)",
+      "PWA",
+      "MCP",
+      "Telegram Bot",
+      "i18n DE/RU/EN"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Собственный продукт: все сроки, документы и платежи семьи в одном списке, где срочное всегда сверху",
+        "task": "Сроки по документам, письма с дедлайнами, семейные встречи и регулярные платежи разбросаны по разным местам, и помнить о них приходится одному человеку. Хотелось сделать сервис, где всё это собрано в одном списке и срочное само поднимается наверх.",
+        "solution": "Разработал PWA на Next.js и PostgreSQL с изоляцией данных через RLS (мульти-тенант) и интерфейсом на трёх языках. Сервис разбит на шесть сфер: жильё, деньги, дети, документы со сроком действия, рутины и совместный доступ для двоих. Поверх работают уведомления, Telegram-бот и MCP-интеграция. Сейчас доступ выдаётся по заявке.",
+        "done": [
+          "Экран «Сегодня»: записи сортируются по срочности, горящие подсвечены",
+          "Шесть сфер, совместный календарь и списки для двоих с раздельными правами",
+          "Распознавание фото чека с разнесением по категориям после подтверждения",
+          "PWA: работает в браузере и ставится на домашний экран",
+          "Мульти-тенант на PostgreSQL с RLS, экспорт и удаление аккаунта самим пользователем",
+          "Telegram-бот и MCP-интеграция; интерфейс DE / RU / EN"
+        ]
+      },
+      "en": {
+        "summary": "Own product: all of a family's deadlines, documents and payments in one list, with what's urgent on top",
+        "task": "Document expiry dates, letters with deadlines, family appointments and recurring payments are scattered across different places, and usually one person has to remember them all. The goal was a service that collects everything in one list and brings what's urgent to the top by itself.",
+        "solution": "I built a PWA on Next.js and PostgreSQL with row-level security for multi-tenant data isolation and a three-language UI. It covers six areas: home, money, kids, expiring documents, routines and shared access for couples. Notifications, a Telegram bot and an MCP integration sit on top. Access is currently granted on request.",
+        "done": [
+          "\"Today\" screen: entries sorted by urgency, overdue items highlighted",
+          "Six life areas plus a shared calendar and lists for two with separate permissions",
+          "Receipt photo recognition, booked by category after user confirmation",
+          "PWA: runs in the browser and installs to the home screen",
+          "Multi-tenant PostgreSQL with RLS; self-service export and account deletion",
+          "Telegram bot and MCP integration; DE / RU / EN interface"
+        ]
+      },
+      "de": {
+        "summary": "Eigenes Produkt: alle Fristen, Dokumente und Zahlungen der Familie in einer Liste, Dringendes oben",
+        "task": "Ablaufdaten von Dokumenten, Schreiben mit Frist, Familientermine und regelmäßige Zahlungen liegen an verschiedenen Stellen, und meist muss eine einzige Person an alles denken. Ziel war ein Dienst, der alles in einer Liste bündelt und Dringendes von selbst nach oben holt.",
+        "solution": "Entwickelt als PWA mit Next.js und PostgreSQL, mit Datentrennung per RLS (Multi-Tenant) und Oberfläche in drei Sprachen. Sechs Bereiche: Wohnen, Geld, Kinder, Dokumente mit Ablaufdatum, Routinen und gemeinsamer Zugang zu zweit. Dazu kommen Benachrichtigungen, ein Telegram-Bot und eine MCP-Integration. Der Zugang wird derzeit auf Anfrage vergeben.",
+        "done": [
+          "„Heute“-Ansicht: Einträge nach Dringlichkeit sortiert, Brennendes hervorgehoben",
+          "Sechs Lebensbereiche, gemeinsamer Kalender und Listen zu zweit mit getrennten Rechten",
+          "Kassenbon-Erkennung per Foto, Buchung nach Bestätigung",
+          "PWA: läuft im Browser und lässt sich auf den Startbildschirm legen",
+          "Multi-Tenant-PostgreSQL mit RLS, Export und Kontolöschung in Eigenregie",
+          "Telegram-Bot und MCP-Integration; Oberfläche DE / RU / EN"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "kub-perevozki",
+    "title": "ТК «КУБ»",
+    "url": "https://kub-perevozki.ru/",
+    "category": "clients-ru",
+    "status": "live",
+    "featured": true,
+    "stack": [
+      "Node.js",
+      "Express"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Сайт транспортной компании: переезды и грузоперевозки по России с формой расчёта прямо на первом экране",
+        "task": "Транспортной компании, которая занимается переездами и грузоперевозками по России, нужен был сайт под заявки из поиска. Клиент должен сразу оставить маршрут и телефон, а услуги и направления должны быть отдельными посадочными страницами.",
+        "solution": "Сделал сайт на Node/Express: форма расчёта стоимости стоит прямо на первом экране, внизу на мобильных закреплена панель «Позвонить / Рассчитать». Каждая услуга и каждый маршрут — отдельная страница под поисковый запрос. Блог с советами по переезду и виджет отзывов с Яндекс Карт работают на доверие.",
+        "done": [
+          "Форма расчёта (откуда, куда, объём, телефон) с согласием на обработку ПДн",
+          "Отдельные страницы услуг: квартирный, офисный и дачный переезд, сборный груз",
+          "Страницы маршрутов вида «Анапа — город» и раздел популярных направлений",
+          "Блог «Советы по переезду», FAQ, блок отзывов с Яндекс Карт",
+          "Плавающие кнопки связи (телефон, почта, MAX, VK) и мобильная CTA-панель"
+        ]
+      },
+      "en": {
+        "summary": "Website for a Russia-wide moving and freight company with a price-quote form on the first screen",
+        "task": "A moving and freight company operating across Russia needed a website built to capture search leads. Visitors had to be able to leave a route and phone number right away, and each service and route needed its own landing page.",
+        "solution": "I built the site on Node/Express with the quote form right in the hero and a sticky \"Call / Get a quote\" bar at the bottom on mobile. Every service and route is a separate page aimed at a search query. A moving-tips blog and a Yandex Maps reviews widget add trust.",
+        "done": [
+          "Quote form (from, to, volume, phone) with personal-data consent",
+          "Separate service pages: home, office and country-house moves, groupage freight",
+          "City-to-city route pages and a popular routes section",
+          "Moving-tips blog, FAQ and Yandex Maps reviews",
+          "Floating contact buttons (phone, email, MAX, VK) and a mobile CTA bar"
+        ]
+      },
+      "de": {
+        "summary": "Website für ein Umzugs- und Transportunternehmen in Russland, mit Preisanfrage direkt im ersten Screen",
+        "task": "Ein Umzugs- und Transportunternehmen mit Einsatzgebiet in ganz Russland brauchte eine Website, die Anfragen aus der Suche einsammelt. Interessenten sollen sofort Strecke und Telefonnummer hinterlassen können, und jede Leistung und Strecke braucht eine eigene Landingpage.",
+        "solution": "Umgesetzt mit Node/Express: Das Anfrageformular steht direkt im Hero, auf dem Smartphone bleibt unten eine Leiste „Anrufen / Berechnen“ sichtbar. Jede Leistung und jede Strecke hat eine eigene Seite für die Suche. Ein Ratgeber-Blog und Bewertungen aus Yandex Maps schaffen Vertrauen.",
+        "done": [
+          "Anfrageformular (von, nach, Volumen, Telefon) mit Datenschutz-Einwilligung",
+          "Eigene Leistungsseiten: Wohnungs-, Büro- und Datscha-Umzug, Sammelgut",
+          "Streckenseiten und Übersicht beliebter Verbindungen",
+          "Ratgeber-Blog, FAQ, Bewertungen aus Yandex Maps",
+          "Schwebende Kontaktbuttons (Telefon, E-Mail, MAX, VK) und mobile CTA-Leiste"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "fithilf",
+    "title": "FitHilf",
+    "url": "https://fithilf.vl-innovativbau.de/",
+    "category": "products",
+    "status": "live",
+    "featured": true,
+    "stack": [
+      "PHP",
+      "MariaDB",
+      "Queues & Scheduler",
+      "Docker"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Собственный продукт: кабинет для учёта состава тела, тренировок, привычек и прогресса",
+        "task": "Вес сам по себе мало говорит о прогрессе, а замеры, тренировки и привычки обычно хранятся в разных заметках. Нужен был единый кабинет, который сам считает показатели и показывает, что действительно работает.",
+        "solution": "Сделал веб-приложение на PHP и MariaDB с очередями и планировщиком в Docker. Состав тела считается по двум формулам, есть план тренировок с живой записью подходов, рекорды, трекер привычек и отчёты в PDF и Excel. Публичная часть — лендинг на трёх языках с блогом и тарифами.",
+        "done": [
+          "Состав тела: процент жира по формулам Navy и Deurenberg, ИМТ, история обхватов",
+          "План тренировок по дням с автоматическим переносом и записью подходов",
+          "Прогресс и рекорды: тоннаж, оценка одноповторного максимума по Эпли",
+          "Трекер привычек и челлендж «200 в день»",
+          "Отчёты для печати и PDF, выгрузка в Excel/CSV по подписанным ссылкам",
+          "Лендинг RU / DE / EN, блог, тарифы, тёмная тема; PHP + MariaDB, очереди и планировщик в Docker"
+        ]
+      },
+      "en": {
+        "summary": "Own product: a dashboard for tracking body composition, workouts, habits and progress",
+        "task": "Body weight alone says little about progress, and measurements, workouts and habits usually live in separate notes. The goal was a single dashboard that does the maths and shows what actually works.",
+        "solution": "I built a web app on PHP and MariaDB with queues and a scheduler in Docker. Body composition is calculated with two formulas, and the app adds a workout plan with live set logging, personal records, a habit tracker and PDF/Excel reports. The public side is a three-language landing page with a blog and pricing.",
+        "done": [
+          "Body composition: body-fat % via Navy and Deurenberg formulas, BMI, measurement history",
+          "Day-by-day workout plan with automatic rescheduling and set logging",
+          "Progress and records: training volume, Epley one-rep-max estimate",
+          "Habit tracker and a \"200 a day\" challenge",
+          "Printable/PDF reports and Excel/CSV exports via signed links",
+          "RU / DE / EN landing page, blog, pricing, dark mode; PHP + MariaDB, queues and scheduler in Docker"
+        ]
+      },
+      "de": {
+        "summary": "Eigenes Produkt: Dashboard für Körperzusammensetzung, Training, Gewohnheiten und Fortschritt",
+        "task": "Das Gewicht allein sagt wenig über den Fortschritt, und Maße, Trainings und Gewohnheiten landen meist in verschiedenen Notizen. Gesucht war ein zentrales Dashboard, das selbst rechnet und zeigt, was wirklich wirkt.",
+        "solution": "Entwickelt als Web-App mit PHP und MariaDB, mit Queues und Scheduler in Docker. Die Körperzusammensetzung wird nach zwei Formeln berechnet, dazu kommen ein Trainingsplan mit Live-Erfassung der Sätze, Rekorde, ein Habit-Tracker und Berichte als PDF und Excel. Öffentlich gibt es eine dreisprachige Landingpage mit Blog und Tarifen.",
+        "done": [
+          "Körperzusammensetzung: Körperfett nach Navy und Deurenberg, BMI, Umfangsverlauf",
+          "Wochenplan fürs Training mit automatischer Verschiebung und Satz-Erfassung",
+          "Fortschritt und Rekorde: Volumen, 1RM-Schätzung nach Epley",
+          "Habit-Tracker und Challenge „200 am Tag“",
+          "Druck-/PDF-Berichte und Excel/CSV-Export über signierte Links",
+          "Landingpage RU / DE / EN, Blog, Tarife, Dark Mode; PHP + MariaDB, Queues und Scheduler in Docker"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "anapa-manipulyator",
+    "title": "Манипулятор Анапа",
+    "url": "https://anapa-manipulyator.ru/",
+    "category": "clients-ru",
+    "status": "live",
+    "featured": true,
+    "stack": [
+      "Node.js",
+      "Express"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Сайт частного оператора крана-манипулятора в Анапе: услуги, техника, галерея работ и расчёт цены",
+        "task": "Частному оператору крана-манипулятора в Анапе нужен был сайт, который приводит заказы из локального поиска. Важно было показать, что работает сам владелец, без посредников, с понятными характеристиками техники и ценой.",
+        "solution": "Сделал сайт на Node/Express с формой расчёта на первом экране. Характеристики техники вынесены в отдельную плашку, каждая услуга получила свою посадочную страницу под конкретный запрос. Сайт перелинкован с проектом ТК «КУБ» и показывает реальные фотографии работ.",
+        "done": [
+          "Форма «Узнать цену за минуту» с согласием на обработку ПДн",
+          "Восемь страниц услуг: бытовки, контейнеры, бани, ЖБ-кольца, люлька и другие",
+          "Раздел о технике (Tadano Super Z на ISUZU) с характеристиками",
+          "Галерея реальных работ, отзывы, FAQ, блог с экспертными статьями",
+          "Мобильная CTA-панель и плавающие кнопки связи (телефон, почта, Telegram, MAX)"
+        ]
+      },
+      "en": {
+        "summary": "Website for an independent crane-truck operator in Anapa: services, equipment, work gallery and quotes",
+        "task": "An owner-operator of a truck-mounted crane in Anapa needed a website that wins jobs from local search. It had to make clear that the owner does the work himself, with no middlemen, and show the equipment specs and pricing upfront.",
+        "solution": "I built the site on Node/Express with a quote form on the first screen. Equipment specs sit in a dedicated strip, and every service has its own landing page for a specific search query. The site cross-links with the KUB freight project and shows real job photos.",
+        "done": [
+          "\"Get a price in a minute\" form with personal-data consent",
+          "Eight service pages: site cabins, containers, saunas, concrete rings, aerial basket and more",
+          "Equipment section (Tadano Super Z on an ISUZU chassis) with specs",
+          "Gallery of real jobs, reviews, FAQ and an expert blog",
+          "Mobile CTA bar and floating contact buttons (phone, email, Telegram, MAX)"
+        ]
+      },
+      "de": {
+        "summary": "Website für einen selbstständigen Ladekranbetreiber in Anapa: Leistungen, Technik, Galerie, Preisanfrage",
+        "task": "Ein selbstständiger Betreiber eines Lkw-Ladekrans in Anapa brauchte eine Website, die Aufträge aus der lokalen Suche bringt. Sie sollte zeigen, dass der Inhaber selbst arbeitet, ohne Vermittler, und Technikdaten und Preise klar nennen.",
+        "solution": "Umgesetzt mit Node/Express und einem Preisformular im ersten Screen. Die Technikdaten stehen in einer eigenen Leiste, jede Leistung hat eine eigene Landingpage für eine konkrete Suchanfrage. Die Seite ist mit dem Projekt „KUB“ verlinkt und zeigt echte Fotos von Einsätzen.",
+        "done": [
+          "Formular „Preis in einer Minute“ mit Datenschutz-Einwilligung",
+          "Acht Leistungsseiten: Baucontainer, Container, Saunen, Betonringe, Arbeitskorb u. a.",
+          "Technikbereich (Tadano Super Z auf ISUZU) mit Kenndaten",
+          "Galerie echter Einsätze, Bewertungen, FAQ, Fachblog",
+          "Mobile CTA-Leiste und schwebende Kontaktbuttons (Telefon, E-Mail, Telegram, MAX)"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "med-agency",
+    "title": "Med Agency",
+    "url": "https://med-preview.vl-innovativbau.de/",
+    "category": "clients-de",
+    "status": "preview",
+    "featured": false,
+    "stack": [
+      "Next.js 16",
+      "Strapi 5",
+      "PostgreSQL 16",
+      "i18n"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Платформа агентства медицинского туризма: сопровождение лечения в Германии, услуги, цены, личный кабинет",
+        "task": "Агентству, которое сопровождает пациентов на лечение в Германии, нужна была платформа, где честно показано, что делает агентство, а что клиника. Также нужны были прозрачные цены на каждую услугу и простой способ задать вопрос координатору.",
+        "solution": "Разрабатываю платформу на Next.js 16 (App Router), Strapi 5 и PostgreSQL 16 с интерфейсом на трёх языках, ролями и личными кабинетами. Каталог услуг собран из отдельных позиций с ценами, их можно сложить в пакет под поездку. Форма вопроса не принимает медицинские данные онлайн, страница координатора показывает только реальных людей.",
+        "done": [
+          "Каталог услуг сопровождения (трансфер, жильё, приём в клинике, переводчик, документы, виза) с ценами",
+          "Разделы «Города», «Стоимость», FAQ, «Вопрос-ответ», блог и магазин",
+          "Личный кабинет, роли пользователей",
+          "Интерфейс RU / EN / TG (таджикский), светлая и тёмная тема",
+          "Форма вопроса координатору с согласием на обработку данных",
+          "Next.js 16 + Strapi 5 + PostgreSQL 16"
+        ]
+      },
+      "en": {
+        "summary": "Medical-travel agency platform: treatment support in Germany, services, pricing and a client account area",
+        "task": "An agency that accompanies patients travelling to Germany for treatment needed a platform that is honest about what the agency does and what the clinic does. It also had to show transparent per-service pricing and make it easy to ask a coordinator a question.",
+        "solution": "I'm building the platform on Next.js 16 (App Router), Strapi 5 and PostgreSQL 16, with a three-language UI, user roles and personal accounts. The service catalogue is made of individually priced items that can be combined into a trip package. The enquiry form deliberately collects no medical data online, and the coordinator section shows only real people.",
+        "done": [
+          "Catalogue of support services (transfer, housing, clinic visits, interpreter, documents, visa) with prices",
+          "\"Cities\", \"Pricing\", FAQ, Q&A, blog and shop sections",
+          "Personal account area and user roles",
+          "RU / EN / TG (Tajik) interface, light and dark themes",
+          "Coordinator enquiry form with data-processing consent",
+          "Next.js 16 + Strapi 5 + PostgreSQL 16"
+        ]
+      },
+      "de": {
+        "summary": "Plattform für eine Medizintourismus-Agentur: Behandlungsbegleitung in Deutschland, Preise, Kundenkonto",
+        "task": "Eine Agentur, die Patienten zur Behandlung nach Deutschland begleitet, brauchte eine Plattform, die ehrlich zeigt, was die Agentur leistet und was die Klinik. Dazu gehören transparente Preise je Leistung und ein einfacher Weg, dem Koordinator eine Frage zu stellen.",
+        "solution": "Ich entwickle die Plattform mit Next.js 16 (App Router), Strapi 5 und PostgreSQL 16, mit dreisprachiger Oberfläche, Rollen und persönlichen Konten. Der Leistungskatalog besteht aus einzeln bepreisten Positionen, die sich zu einem Reisepaket kombinieren lassen. Das Anfrageformular erfasst bewusst keine medizinischen Daten online, und im Koordinatorbereich erscheinen nur echte Personen.",
+        "done": [
+          "Katalog der Begleitleistungen (Transfer, Unterkunft, Klinikbesuch, Dolmetscher, Dokumente, Visum) mit Preisen",
+          "Bereiche „Städte“, „Kosten“, FAQ, Fragen & Antworten, Blog und Shop",
+          "Persönliches Konto und Benutzerrollen",
+          "Oberfläche RU / EN / TG (Tadschikisch), helles und dunkles Theme",
+          "Anfrageformular an den Koordinator mit Einwilligung",
+          "Next.js 16 + Strapi 5 + PostgreSQL 16"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "polaris",
+    "title": "Polaris",
+    "url": "https://polaris.delimes.ru/",
+    "category": "products",
+    "status": "live",
+    "featured": false,
+    "stack": [
+      "Next.js"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Собственный продукт: трекер жизненных целей с геймификацией — сферы, опыт, уровни, достижения",
+        "task": "Цели в разных сферах жизни легко забросить, если не видно прогресса. Задумка — превратить работу над ними в игру, где каждая сфера жизни прокачивается, как персонаж.",
+        "solution": "Сделал веб-приложение на Next.js с беспарольным входом по ссылке на почту и входом через Google. Цели сгруппированы в «галактику сфер», за действия начисляется опыт (XP), открываются уровни и достижения.",
+        "done": [
+          "Вход по magic-link на e-mail и через Google OAuth",
+          "Модель «галактика сфер» для жизненных целей",
+          "Геймификация: XP, уровни, достижения",
+          "Next.js-приложение на поддомене delimes.ru"
+        ]
+      },
+      "en": {
+        "summary": "Own product: a gamified life-goals tracker with spheres, XP, levels and achievements",
+        "task": "Goals across different areas of life are easy to abandon when progress isn't visible. The idea was to turn working on them into a game where each area of life levels up like a character.",
+        "solution": "I built a Next.js web app with passwordless email magic-link sign-in and Google sign-in. Goals are grouped into a \"galaxy of spheres\", actions earn experience points (XP), and levels and achievements unlock along the way.",
+        "done": [
+          "Email magic-link and Google OAuth sign-in",
+          "\"Galaxy of spheres\" model for life goals",
+          "Gamification: XP, levels, achievements",
+          "Next.js app on a delimes.ru subdomain"
+        ]
+      },
+      "de": {
+        "summary": "Eigenes Produkt: gamifizierter Tracker für Lebensziele mit Sphären, XP, Levels und Erfolgen",
+        "task": "Ziele in verschiedenen Lebensbereichen gibt man schnell auf, wenn kein Fortschritt sichtbar ist. Die Idee: die Arbeit daran in ein Spiel verwandeln, in dem jeder Lebensbereich wie eine Spielfigur aufsteigt.",
+        "solution": "Umgesetzt als Next.js-Web-App mit passwortlosem Login per Magic Link und Google-Anmeldung. Ziele sind in einer „Galaxie der Sphären“ organisiert, Aktionen bringen Erfahrungspunkte (XP), dabei werden Levels und Erfolge freigeschaltet.",
+        "done": [
+          "Login per Magic Link und Google OAuth",
+          "Modell „Galaxie der Sphären“ für Lebensziele",
+          "Gamification: XP, Levels, Erfolge",
+          "Next.js-App auf einer Subdomain von delimes.ru"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "peristeen",
+    "title": "Peristeen Plus System",
+    "url": "https://peristeenplussystem.delimes.ru/",
+    "category": "clients-ru",
+    "status": "live",
+    "featured": false,
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Blog"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Продуктовый сайт с блогом: помощь в заказе оригинальной системы Peristeen Plus (Coloplast) из Германии",
+        "task": "Нужен был сайт, который помогает пациентам из России заказать оригинальную систему трансанальной ирригации Peristeen Plus производства Coloplast с доставкой из Германии. Аудитория чувствительная, поэтому важно спокойно и честно объяснить, кому подходит продукт, как выбрать размер и как устроены заказ и доставка.",
+        "solution": "Сделал статический HTML-сайт с блогом. Он построен вокруг выбора комплектации (Standard / Small), ответов на вопросы и блоков доверия: маркировка CE, условия оплаты и доставки, медицинское предупреждение. Заявка уходит через форму с согласием на обработку ПДн или в WhatsApp.",
+        "done": [
+          "Каталог комплектаций Standard и Small и расходных материалов с ценами",
+          "Разделы «Как использовать», «Кому подходит», «Как происходит доставка»",
+          "Развёрнутый FAQ и медицинское предупреждение",
+          "Блог с инструкциями и статьями по теме",
+          "Форма заявки с согласием на обработку ПДн и консультация в WhatsApp"
+        ]
+      },
+      "en": {
+        "summary": "Product site with a blog that helps patients order the original Peristeen Plus (Coloplast) from Germany",
+        "task": "The site helps patients in Russia order the original Peristeen Plus transanal irrigation system by Coloplast, shipped from Germany. The audience is sensitive, so it had to explain calmly and honestly who the product is for, how to pick a size, and how ordering and delivery work.",
+        "solution": "I built a static HTML site with a blog, structured around choosing a kit (Standard / Small), answering questions and building trust: CE marking, payment and delivery terms, and a medical disclaimer. Enquiries come in through a form with personal-data consent or via WhatsApp.",
+        "done": [
+          "Catalogue of Standard and Small kits and consumables with prices",
+          "\"How to use\", \"Who it's for\" and \"How delivery works\" sections",
+          "Detailed FAQ and a medical disclaimer",
+          "Blog with guides and related articles",
+          "Order form with personal-data consent and a WhatsApp consultation"
+        ]
+      },
+      "de": {
+        "summary": "Produktseite mit Blog: Hilfe bei der Bestellung des originalen Peristeen Plus (Coloplast) aus Deutschland",
+        "task": "Die Seite hilft Patienten in Russland, das originale Peristeen Plus von Coloplast, ein System zur transanalen Irrigation, aus Deutschland zu bestellen. Die Zielgruppe ist sensibel, deshalb musste ruhig und ehrlich erklärt werden, für wen das Produkt geeignet ist, wie man die Größe wählt und wie Bestellung und Versand ablaufen.",
+        "solution": "Umgesetzt als statische HTML-Seite mit Blog, aufgebaut um die Wahl des Sets (Standard / Small), Antworten auf häufige Fragen und Vertrauenselemente: CE-Kennzeichnung, Zahlungs- und Lieferbedingungen, medizinischer Hinweis. Anfragen kommen über ein Formular mit Einwilligung oder per WhatsApp.",
+        "done": [
+          "Katalog der Sets Standard und Small sowie Verbrauchsmaterial mit Preisen",
+          "Bereiche „Anwendung“, „Für wen geeignet“, „Ablauf der Lieferung“",
+          "Ausführliches FAQ und medizinischer Hinweis",
+          "Blog mit Anleitungen und Fachartikeln",
+          "Bestellformular mit Einwilligung und Beratung per WhatsApp"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "delimes",
+    "title": "GermanyShop",
+    "url": "https://delimes.ru/",
+    "category": "products",
+    "status": "live",
+    "featured": false,
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Собственный проект: сервис выкупа и доставки оригинальных товаров из немецких магазинов",
+        "task": "Для собственного сервиса выкупа товаров из Германии нужен был сайт, который объясняет схему работы и снимает главные сомнения покупателя: оригинальность, отслеживание посылки и конфиденциальность.",
+        "solution": "Сделал статический сайт: на первом экране сформулировано предложение, дальше идут три преимущества, схема работы в четыре шага и каталог брендов, где у каждого бренда своя посадочная страница. Для товаров не из каталога есть индивидуальный заказ, вопросы закрывает FAQ.",
+        "done": [
+          "Главная с оффером и блоками «100% оригинал», «Трек на каждом этапе», «Конфиденциальность»",
+          "Схема «Как это работает» из четырёх шагов",
+          "Каталог брендов (Adidas, Bosch, Rimowa, Lamy, Nivea, WMF) с отдельными лендингами",
+          "Индивидуальный заказ товара не из каталога",
+          "Раздел FAQ"
+        ]
+      },
+      "en": {
+        "summary": "Own project: a service that buys and ships original goods from German stores",
+        "task": "My own service for buying goods in Germany needed a website that explains the process and answers buyers' main concerns: authenticity, parcel tracking and confidentiality.",
+        "solution": "I built a static site: the first screen states the offer, followed by three key benefits, a four-step process and a brand catalogue in which every brand has its own landing page. Items outside the catalogue can be requested individually, and an FAQ covers the remaining questions.",
+        "done": [
+          "Homepage with the offer and \"100% original\", \"Tracking at every step\", \"Confidentiality\" blocks",
+          "Four-step \"How it works\" flow",
+          "Brand catalogue (Adidas, Bosch, Rimowa, Lamy, Nivea, WMF) with individual landing pages",
+          "Custom orders for items outside the catalogue",
+          "FAQ section"
+        ]
+      },
+      "de": {
+        "summary": "Eigenes Projekt: Service für Einkauf und Versand von Originalware aus deutschen Shops",
+        "task": "Mein eigener Service für den Einkauf von Waren in Deutschland brauchte eine Website, die den Ablauf erklärt und die wichtigsten Bedenken der Käufer ausräumt: Echtheit, Sendungsverfolgung und Diskretion.",
+        "solution": "Umgesetzt als statische Website: Der erste Screen formuliert das Angebot, danach folgen drei Kernvorteile, ein Ablauf in vier Schritten und ein Markenkatalog, in dem jede Marke eine eigene Landingpage hat. Artikel außerhalb des Katalogs lassen sich individuell anfragen, offene Fragen beantwortet das FAQ.",
+        "done": [
+          "Startseite mit Angebot und Blöcken „100 % Original“, „Tracking in jedem Schritt“, „Diskretion“",
+          "Ablauf „So funktioniert es“ in vier Schritten",
+          "Markenkatalog (Adidas, Bosch, Rimowa, Lamy, Nivea, WMF) mit eigenen Landingpages",
+          "Individuelle Bestellung von Artikeln außerhalb des Katalogs",
+          "FAQ-Bereich"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "domusman",
+    "title": "Дом в Новой Усмани",
+    "url": "https://domusman.ru/",
+    "category": "landings",
+    "status": "live",
+    "featured": false,
+    "stack": [
+      "HTML",
+      "CSS",
+      "PHP Forms"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Лендинг продажи частного дома в Новой Усмани: фото по комнатам, видео-тур, планировка, запись на просмотр",
+        "task": "Нужно было продать конкретный дом и получить заявки на просмотр, а не звонки с вопросами, на которые и так есть ответ. Покупатель должен увидеть всё о доме на одной странице: характеристики, комнаты, расположение и цену.",
+        "solution": "Сделал одностраничный статический сайт с формой заявки на PHP. Все характеристики собраны в таблицу, фотогалерея разбита по комнатам, видео-тур подгружается только по клику. Есть планировка в PDF, маршрут в Яндекс Картах и закреплённая панель связи на мобильных.",
+        "done": [
+          "Таблица характеристик дома и блок «Что входит в стоимость»",
+          "Фотогалерея по комнатам и видео-тур с отложенной загрузкой",
+          "Планировка со скачиванием PDF и маршрут в Яндекс Картах",
+          "Форма записи на просмотр (PHP) с согласием на обработку ПДн и защитой от спама",
+          "Мобильная панель: звонок, WhatsApp, MAX"
+        ]
+      },
+      "en": {
+        "summary": "Landing page for a house sale in Novaya Usman: room-by-room photos, video tour, floor plan, viewing requests",
+        "task": "The goal was to sell one specific house and get viewing requests rather than calls asking things the listing already answers. Buyers needed to see everything about the house on one page: specs, rooms, location and price.",
+        "solution": "I built a single-page static site with a PHP enquiry form. All specs are collected in a table, the photo gallery is split by room, and the video tour loads only on click. There is also a downloadable PDF floor plan, a Yandex Maps route link and a sticky contact bar on mobile.",
+        "done": [
+          "Property spec table and a \"What's included in the price\" block",
+          "Room-by-room photo gallery and a lazy-loaded video tour",
+          "Floor plan with PDF download and a Yandex Maps route",
+          "Viewing request form (PHP) with personal-data consent and spam protection",
+          "Mobile contact bar: call, WhatsApp, MAX"
+        ]
+      },
+      "de": {
+        "summary": "Landingpage für einen Hausverkauf in Nowaja Usman: Fotos nach Räumen, Videotour, Grundriss, Besichtigung",
+        "task": "Ziel war, ein konkretes Haus zu verkaufen und Besichtigungsanfragen zu bekommen, statt Anrufe mit Fragen, die das Inserat bereits beantwortet. Käufer sollten alles Wichtige auf einer Seite finden: Eckdaten, Räume, Lage und Preis.",
+        "solution": "Umgesetzt als statische One-Page mit PHP-Anfrageformular. Alle Eckdaten stehen in einer Tabelle, die Fotogalerie ist nach Räumen gegliedert, die Videotour lädt erst auf Klick. Dazu kommen ein Grundriss als PDF, eine Route in Yandex Maps und eine feste Kontaktleiste auf dem Smartphone.",
+        "done": [
+          "Tabelle mit Eckdaten und Block „Im Preis enthalten“",
+          "Fotogalerie nach Räumen und Videotour mit Lazy Loading",
+          "Grundriss zum Download (PDF) und Route in Yandex Maps",
+          "Besichtigungsformular (PHP) mit Einwilligung und Spamschutz",
+          "Mobile Kontaktleiste: Anruf, WhatsApp, MAX"
+        ]
+      }
+    }
+  }
+]
