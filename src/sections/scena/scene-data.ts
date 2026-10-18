@@ -1,18 +1,15 @@
 // Данные главной, не зависящие от языка (тексты — в i18n pl.*).
 
-/** Картинки шагов сцены: public/images/scene/<name>-{960,480}.webp. null — картинки пока нет. */
+/** Картинки шагов сцены: public/images/scene/<name>-{960,480}.webp. null — без картинки. */
 export const STEP_IMAGES: (string | null)[] = [
   'step-1-positioning',
   'step-2-website',
-  null,
-  null,
-  null,
-  null,
-  null,
+  'step-3-visibility',
+  'step-4-channels',
+  'step-5-analytics',
+  'step-6-crm',
+  'step-7-growth',
 ];
-
-/** Проекты блока «Последние проекты» — id из src/data/projects.ts. */
-export const HOME_WORK_IDS = ['vlinnovativbau', 'kubperevozki', 'fithilf', 'peristeen', 'delimes', 'mpinnovativ'];
 
 /** Тайминг сцены в долях прогресса прокрутки (0…1). */
 export const SCENE = {

@@ -9,6 +9,17 @@ type Step = { title: string; text: string };
 
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
+/** Слова заголовка по отдельности — поэтапный «въезд» (только transform, см. .pl-word). Пробелы сохраняются. */
+function Words({ text, from, className }: { text: string; from: number; className?: string }) {
+  return (
+    <>
+      {text.split(/(s+)/).map((w, i) => (/^s+$/.test(w) || !w
+        ? w
+        : <span key={i} className={className ? `pl-word ${className}` : 'pl-word'} style={{ animationDelay: `${(from + i / 2) * 70}ms` }}>{w}</span>))}
+    </>
+  );
+}
+
 /**
  * Hero + «спиральная» сцена из 7 шагов.
  * SSR: статичный CSS-фон и весь текст шагов в HTML (читается без JS, индексируется).
@@ -128,7 +139,9 @@ export function SceneSection({ lang }: { lang: string }) {
           <span className="pl-badge"><span className="pl-badge__dot" aria-hidden="true" />{t('pl.hero.badge')}</span>
           <p className="pl-eyebrow pl-hero__eyebrow">{t('pl.hero.eyebrow')}</p>
           <h1 id="pl-hero-title" className="pl-hero__title">
-            {t('pl.hero.titleA')}<span>{t('pl.hero.titleAccent')}</span>{t('pl.hero.titleB')}
+            <Words text={t('pl.hero.titleA')} from={0} />
+            <Words text={t('pl.hero.titleAccent')} from={4} className="pl-accent" />
+            <Words text={t('pl.hero.titleB')} from={7} />
           </h1>
           <p className="pl-hero__lead">{t('pl.hero.lead')}</p>
           <div className="pl-hero__actions">

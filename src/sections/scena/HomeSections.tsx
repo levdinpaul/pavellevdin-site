@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
 import { CONTACTS } from '@/constants/contacts';
 import { Sparkle } from '@/components/layout/social-icons';
-import { HOME_WORK_IDS } from './scene-data';
+import { ProjectCard } from '@/components/pl/ProjectCard';
+import { ServicesGrid } from '@/components/pl/ServicesGrid';
+import { Integrations } from '@/components/pl/Integrations';
 import { useReveal } from './useReveal';
 
 type Item = { title: string; text: string };
 type Stat = { value: string; label: string };
 
-/** Секции главной после сцены: Обо мне → Проекты → Услуги → CTA. */
+/** Секции главной после сцены: Обо мне → Проекты → Услуги → Интеграции → CTA. */
 export function HomeSections({ lang }: { lang: string }) {
   const { t } = useTranslation();
   const root = useRef<HTMLDivElement>(null);
@@ -18,8 +20,7 @@ export function HomeSections({ lang }: { lang: string }) {
 
   const aboutCards = t('pl.about.cards', { returnObjects: true }) as Item[];
   const stats = t('pl.about.stats', { returnObjects: true }) as Stat[];
-  const services = t('pl.services.items', { returnObjects: true }) as Item[];
-  const work = HOME_WORK_IDS.map((id) => projects.find((p) => p.id === id)).filter((p) => p !== undefined);
+  const work = projects.filter((p) => p.featured).slice(0, 6);
 
   return (
     <div ref={root} className="pl-main">
@@ -39,6 +40,7 @@ export function HomeSections({ lang }: { lang: string }) {
           <ul className="pl-stats" data-reveal="">
             {stats.map((s) => <li key={s.label}><strong>{s.value}</strong><span>{s.label}</span></li>)}
           </ul>
+          <Link to={`/${lang}/about`} className="pl-btn pl-btn--ghost pl-about__more" data-reveal="">{t('pl.about.more')}</Link>
         </section>
 
         <section id="work" className="pl-section" aria-labelledby="pl-work-title">
@@ -47,36 +49,19 @@ export function HomeSections({ lang }: { lang: string }) {
             <Link to={`/${lang}/portfolio`} className="pl-link">{t('pl.work.all')}</Link>
           </div>
           <ul className="pl-work__grid">
-            {work.map((p) => (
-              <li key={p.id} data-reveal="">
-                <a href={p.url} target="_blank" rel="noopener noreferrer" className="pl-work__card">
-                  <div className="pl-work__media">
-                    {p.image && <img src={p.image} alt={p.title} width={800} height={500} loading="lazy" decoding="async" />}
-                  </div>
-                  <div className="pl-work__body">
-                    <h3 className="pl-work__title">{p.title}</h3>
-                    <p className="pl-work__text">{t(`pl.work.items.${p.id}`, { defaultValue: p.description })}</p>
-                    <ul className="pl-tags">{p.technologies.slice(0, 3).map((tech) => <li key={tech}>{tech}</li>)}</ul>
-                  </div>
-                </a>
-              </li>
-            ))}
+            {work.map((p) => <li key={p.slug} data-reveal=""><ProjectCard project={p} lang={lang} /></li>)}
           </ul>
         </section>
 
         <section id="services" className="pl-section" aria-labelledby="pl-services-title">
           <h2 id="pl-services-title" className="pl-h2" data-reveal="">{t('pl.services.title')}</h2>
           <p className="pl-lead pl-services__lead" data-reveal="">{t('pl.services.lead')}</p>
-          <ol className="pl-srv">
-            {services.map((s, i) => (
-              <li key={s.title} data-reveal="">
-                <span className="pl-srv__num">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="pl-srv__title">{s.title}</h3>
-                <p className="pl-srv__text">{s.text}</p>
-              </li>
-            ))}
-          </ol>
+          <ServicesGrid />
           <Link to={`/${lang}/services`} className="pl-link pl-services__more">{t('pl.services.more')}</Link>
+        </section>
+
+        <section id="integrations" className="pl-section" aria-label={t('pl.integrations.eyebrow')}>
+          <Integrations />
         </section>
 
         <section id="contact" className="pl-section" aria-labelledby="pl-cta-title">

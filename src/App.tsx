@@ -66,6 +66,8 @@ function LangLayout() {
 
 // Публичные страницы — lazy, чтобы не раздувать стартовый бандл (Home грузится сразу как вход)
 const PortfolioPage = lazy(() => import('@/pages/PortfolioPage').then(m => ({ default: m.PortfolioPage })));
+const ProjectPage = lazy(() => import('@/pages/ProjectPage').then(m => ({ default: m.ProjectPage })));
+const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ServicesPage = lazy(() => import('@/pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
 const ContactPage = lazy(() => import('@/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const BriefPage = lazy(() => import('@/pages/BriefPage').then(m => ({ default: m.BriefPage })));
@@ -114,7 +116,9 @@ export function AppRoutes() {
         <Route path="/" element={<Navigate to={`/${detectBrowserLanguage()}`} replace />} />
         <Route path="/:lang" element={<LangLayout />}>
           <Route index element={<Home />} />
+          <Route path="about" element={<AboutPage />} />
           <Route path="portfolio" element={<PortfolioPage />} />
+          <Route path="portfolio/:slug" element={<ProjectPage />} />
           <Route path="services" element={<ServicesPage />} />
           <Route path="brief" element={<BriefPage />} />
           <Route path="business-card" element={<BusinessCardPage />} />

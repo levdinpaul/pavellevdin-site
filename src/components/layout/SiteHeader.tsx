@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CommandMenu, type CommandLabels } from '@/components/ds/CommandMenu';
@@ -29,6 +29,24 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const topRef = useRef<HTMLButtonElement>(null);
+
+  // Скролл-прогресс в шапке и кнопка «наверх» — пишем в DOM напрямую, без ре-рендеров
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const k = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${k.toFixed(4)})`;
+      if (topRef.current) topRef.current.dataset.visible = String(window.scrollY > window.innerHeight * 1.5);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); };
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!isHome) return;
@@ -74,7 +92,7 @@ export function SiteHeader() {
   };
 
   const links = [
-    { to: `/${lang}#about`, label: t('pl.nav.about'), match: null },
+    { to: `/${lang}/about`, label: t('pl.nav.about'), match: '/about' },
     { to: `/${lang}/portfolio`, label: t('pl.nav.portfolio'), match: '/portfolio' },
     { to: `/${lang}/services`, label: t('pl.nav.services'), match: '/services' },
     { to: `/${lang}/contact`, label: t('pl.nav.contact'), match: '/contact' },
@@ -121,7 +139,10 @@ export function SiteHeader() {
             >···</button>
           </div>
         </div>
+        <div className="pl-progress" aria-hidden="true"><div ref={progressRef} /></div>
       </header>
+
+      <button ref={topRef} type="button" className="pl-chip pl-totop" data-visible="false" aria-label={t('pl.nav.top')} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>↑</button>
 
       {menuOpen && (
         <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')}>

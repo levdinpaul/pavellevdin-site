@@ -12,6 +12,7 @@ export function Footer() {
   const year = 2026;
 
   const pages = [
+    { to: `/${lang}/about`, label: t('pl.footer.about') },
     { to: `/${lang}/services`, label: t('pl.nav.services') },
     { to: `/${lang}/portfolio`, label: t('pl.nav.portfolio') },
     { to: `/${lang}/blog`, label: t('pl.footer.blog') },
@@ -57,6 +58,7 @@ export function Footer() {
 
         <div className="pl-footer__bottom">
           <span>{t('pl.brandSub')}</span>
+          <span className="pl-footer__hint">{t('pl.footer.cmdHint')}</span>
           <span>© {year} PL Innovativ Digitalbau. {t('pl.footer.rights')}</span>
         </div>
       </div>
