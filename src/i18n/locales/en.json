@@ -401,6 +401,419 @@
       "seo": "SEO",
       "performance": "Performance"
     }
+  },
+  "pl": {
+    "brandSub": "Web Coding · SEO · AI · Automation",
+    "nav": {
+      "about": "About",
+      "portfolio": "Portfolio",
+      "services": "Services",
+      "contact": "Contact",
+      "cta": "Start a project",
+      "menu": "Menu",
+      "lang": "Change language",
+      "social": "Messengers",
+      "home": "Home",
+      "top": "Back to top"
+    },
+    "hero": {
+      "badge": "Turnkey digital launch for your business",
+      "eyebrow": "PL – Innovativ Digitalbau",
+      "titleA": "Not just a website — ",
+      "titleAccent": "a complete system",
+      "titleB": ", built to bring you clients.",
+      "lead": "Website, visibility on Google and Yandex, analytics, CRM and automation. All turnkey, from a single source.",
+      "primary": "Build my project →",
+      "secondary": "View work",
+      "scroll": "scroll down"
+    },
+    "scene": {
+      "eyebrow": "Project journey",
+      "title": "Seven steps from idea to leads",
+      "steps": [
+        {
+          "title": "Positioning",
+          "text": "Offer, audience, structure and a strong message."
+        },
+        {
+          "title": "Website",
+          "text": "Design, development, 100/100 speed and mobile UX."
+        },
+        {
+          "title": "Visibility",
+          "text": "SEO, AEO for AI search, Google Business, Maps, Schema.org."
+        },
+        {
+          "title": "Channels",
+          "text": "Meta, Instagram, Facebook, VK, pixels and events."
+        },
+        {
+          "title": "Analytics",
+          "text": "GA4, Tag Manager, funnels and conversions."
+        },
+        {
+          "title": "Leads & CRM",
+          "text": "Forms, messengers, CRM and automation."
+        },
+        {
+          "title": "Support & growth",
+          "text": "Updates, content, campaigns and improvements."
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "About",
+      "title": "I bring together design, code and business logic.",
+      "lead": "I build digital systems: positioning, a fast frontend, SEO structure, analytics, social media and automation — so the project keeps working after launch.",
+      "cards": [
+        {
+          "title": "Business first",
+          "text": "Every page has a job: trust, an inquiry, a sale or automation."
+        },
+        {
+          "title": "Strong visuals",
+          "text": "A premium look, clear hierarchy, animations and careful details."
+        },
+        {
+          "title": "Solid tech foundation",
+          "text": "Speed, SEO, schema, analytics and scalable architecture."
+        }
+      ],
+      "stats": [
+        {
+          "value": "10+",
+          "label": "years of experience"
+        },
+        {
+          "value": "100/100",
+          "label": "Lighthouse target"
+        },
+        {
+          "value": "DE / EN / RU",
+          "label": "three languages"
+        },
+        {
+          "value": "1",
+          "label": "contact for everything"
+        }
+      ],
+      "more": "More about me →"
+    },
+    "work": {
+      "title": "Recent projects",
+      "all": "All projects →",
+      "items": {
+        "vlinnovativbau": "Premium website for a construction company in Germany.",
+        "kubperevozki": "Transport and logistics service with local SEO.",
+        "fithilf": "Fitness platform with personalized training programs.",
+        "peristeen": "Website for a Coloplast medical product.",
+        "delimes": "Corporate website for a digital agency.",
+        "mpinnovativ": "Website for a construction company in Germany."
+      }
+    },
+    "services": {
+      "title": "Everything your business needs to launch online",
+      "lead": "From idea and design to SEO, AI search, integrations, automation and your own servers.",
+      "items": [
+        {
+          "title": "Websites & web apps",
+          "text": "Fast, responsive websites and web apps with a distinctive look.",
+          "points": [
+            "Next.js (App Router, SSR/SSG), React 19 + Vite",
+            "Headless CMS Strapi, PostgreSQL / MariaDB, PHP",
+            "PWA and multilingual DE / RU / EN"
+          ]
+        },
+        {
+          "title": "SEO & AI search",
+          "text": "So you get found on Google, Yandex and in AI assistant answers.",
+          "points": [
+            "Technical SEO and schema.org",
+            "AEO — optimization for AI search",
+            "Google Business Profile and Yandex Business",
+            "Local SEO"
+          ]
+        },
+        {
+          "title": "API & integrations",
+          "text": "I connect your website to CRM, messengers and analytics — no lead gets lost.",
+          "points": [
+            "Lead forms → own backend → Telegram notifications",
+            "REST / Strapi API",
+            "GA4 and GTM (events, conversions), Yandex Metrica, Search Console API",
+            "Magic-link auth, multi-tenant with RLS"
+          ]
+        },
+        {
+          "title": "AI automation & MCP",
+          "text": "AI pipelines and custom MCP servers that connect business data to AI assistants.",
+          "points": [
+            "AI article pipeline: text, images, publishing",
+            "PDF quote generation",
+            "Receipt recognition",
+            "Cost-aware AI model router, BYOK OpenRouter",
+            "Custom MCP servers for business data"
+          ]
+        },
+        {
+          "title": "Social media & autoposting",
+          "text": "Autoposting, social media content, pixels and events for ads.",
+          "points": [
+            "Autoposting to social networks",
+            "Video and content generation for social media",
+            "Pixels and events for ad accounts"
+          ]
+        },
+        {
+          "title": "Telegram bots",
+          "text": "Bots for lead notifications and personal assistants.",
+          "points": [
+            "Notifications about leads and events",
+            "Assistant bot",
+            "Integration with website and CRM"
+          ]
+        },
+        {
+          "title": "Infrastructure & VPS",
+          "text": "Own servers on Docker: deployment, SSL, backups, monitoring.",
+          "points": [
+            "Docker Compose, nginx reverse proxy, Let's Encrypt",
+            "Backups and monitoring",
+            "Migrating sites from shared hosting to VPS",
+            "Own mail server"
+          ]
+        },
+        {
+          "title": "Support & growth",
+          "text": "Updates, new pages and improvements after launch.",
+          "points": [
+            "Updates, new pages and content",
+            "GDPR and 152-FZ",
+            "Analytics and data-driven improvements"
+          ]
+        }
+      ],
+      "more": "More about services →",
+      "open": "Learn more"
+    },
+    "cta": {
+      "title": "Ready to start your project?",
+      "lead": "I usually reply within 24 hours. Available for new projects.",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "brief": "Fill out the brief"
+    },
+    "footer": {
+      "location": "Hannover, Germany",
+      "pages": "Pages",
+      "contact": "Contact",
+      "legal": "Legal",
+      "brief": "Project brief",
+      "card": "Digital business card",
+      "blog": "Blog",
+      "imprint": "Imprint",
+      "privacy": "Privacy policy",
+      "cookies": "Cookie settings",
+      "rights": "All rights reserved.",
+      "cmdHint": "⌘K / Ctrl+K — quick navigation",
+      "about": "About",
+      "portfolio": "Portfolio"
+    },
+    "integrations": {
+      "eyebrow": "API & integrations",
+      "title": "Website, CRM, Telegram and AI — one system",
+      "lead": "A lead from your website goes straight into the CRM and arrives as a Telegram notification, while AI helps process it and draft a reply.",
+      "nodes": {
+        "site": "Website",
+        "crm": "CRM",
+        "telegram": "Telegram",
+        "ai": "AI"
+      },
+      "imageAlt": "Connected modules: website, database, messenger and AI"
+    },
+    "aboutPage": {
+      "metaTitle": "About — Pavel Levdin, web developer in Hannover",
+      "metaDescription": "Pavel Levdin — 10+ years in web development: websites with Next.js and React, SEO and AI search, integrations, AI automation and own servers.",
+      "eyebrow": "About",
+      "title": "Pavel Levdin — 10+ years in web development",
+      "lead": "I build complete digital systems for businesses: website, SEO, integrations, automation and servers. One contractor — from idea to leads, plus support after launch.",
+      "primary": "Discuss a project",
+      "secondary": "View projects",
+      "photoAlt": "Pavel Levdin",
+      "stats": {
+        "years": "years of experience",
+        "projects": "projects in portfolio",
+        "servers": "own servers",
+        "langs": "languages"
+      },
+      "skillsEyebrow": "Skills",
+      "skillsTitle": "What I do",
+      "skills": [
+        {
+          "title": "Websites & web apps",
+          "points": [
+            "Next.js (App Router, SSR/SSG)",
+            "React 19 + Vite",
+            "Headless CMS Strapi",
+            "PostgreSQL / MariaDB, PHP"
+          ]
+        },
+        {
+          "title": "Infrastructure",
+          "points": [
+            "Own VPS — 3 servers",
+            "Docker Compose, nginx, Let's Encrypt",
+            "Backups and monitoring",
+            "Migration from shared hosting to VPS",
+            "Own mail server"
+          ]
+        },
+        {
+          "title": "API & integrations",
+          "points": [
+            "REST / Strapi API",
+            "Forms → own backend → Telegram",
+            "GA4 / GTM, Yandex Metrica, Search Console API",
+            "Magic link, multi-tenant with RLS"
+          ]
+        },
+        {
+          "title": "AI automation",
+          "points": [
+            "Cost-aware AI model router",
+            "AI article pipeline",
+            "PDF quotes, receipt recognition",
+            "Custom MCP servers",
+            "Agentic development with Claude Code"
+          ]
+        },
+        {
+          "title": "Social media & marketing",
+          "points": [
+            "Autoposting to social networks",
+            "Video and content for social media",
+            "Google Business Profile, Yandex Business",
+            "Local SEO, AEO, schema.org"
+          ]
+        },
+        {
+          "title": "Bots",
+          "points": [
+            "Telegram bots for notifications",
+            "Personal assistant bot",
+            "Integration with website and CRM"
+          ]
+        },
+        {
+          "title": "PWA & multilingual",
+          "points": [
+            "PWA",
+            "Websites in DE / RU / EN",
+            "GDPR and 152-FZ"
+          ]
+        }
+      ],
+      "processEyebrow": "Process",
+      "processTitle": "How I work",
+      "process": [
+        {
+          "title": "Analysis",
+          "text": "Goals, audiences, current state — surveyed like a building plot."
+        },
+        {
+          "title": "Blueprint",
+          "text": "Architecture, wireframes, content structure in three languages."
+        },
+        {
+          "title": "Build",
+          "text": "Development with a performance budget. Progress every week."
+        },
+        {
+          "title": "Launch",
+          "text": "Go-live with SEO, analytics, Google Business — everything connected."
+        },
+        {
+          "title": "Growth",
+          "text": "Measure, iterate, automate. The system keeps working."
+        }
+      ],
+      "stackTitle": "Stack",
+      "featuredTitle": "Featured projects",
+      "principlesEyebrow": "Principles",
+      "principlesTitle": "What my work is built on",
+      "principles": [
+        {
+          "title": "One contractor for everything",
+          "text": "Website, SEO, integrations and servers — no chain of contractors, nothing lost at the handoffs."
+        },
+        {
+          "title": "Honest timelines",
+          "text": "I give realistic timelines and let you know early if anything changes."
+        },
+        {
+          "title": "Speed and SEO from day one",
+          "text": "Performance, structure and markup are built into the architecture, not left for “later”."
+        },
+        {
+          "title": "Support after launch",
+          "text": "I stay in touch: updates, improvements and growth after release."
+        }
+      ],
+      "ctaTitle": "Shall we discuss your project?",
+      "ctaLead": "Message me on Telegram or WhatsApp — I'll reply within 24 hours."
+    },
+    "portfolio": {
+      "metaTitle": "Portfolio — websites and products by Pavel Levdin",
+      "metaDescription": "11 projects: websites for clients in Germany and Russia, landing pages and own products built with Next.js, React, Strapi and PHP. All links lead to live sites.",
+      "eyebrow": "Portfolio",
+      "title": "Projects",
+      "lead": "Websites for clients in Germany and Russia, plus my own products — from landing pages to SaaS. Links lead to the live sites.",
+      "filters": {
+        "all": "All",
+        "clients-de": "Clients DE",
+        "clients-ru": "Clients RU",
+        "products": "Own products",
+        "landings": "Landing pages"
+      },
+      "status": {
+        "live": "Live",
+        "preview": "Preview · in development",
+        "offline": "Unavailable"
+      },
+      "open": "Visit site",
+      "details": "Details",
+      "filterLabel": "Filter by category"
+    },
+    "project": {
+      "back": "← All projects",
+      "task": "Challenge",
+      "solution": "Solution",
+      "done": "What was done",
+      "stack": "Stack",
+      "category": "Category",
+      "gallery": "Gallery",
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "open": "Visit site",
+      "prev": "Previous",
+      "next": "Next",
+      "ctaTitle": "Need a similar project?",
+      "ctaLead": "Tell me about your task — I'll suggest a solution and a realistic timeline.",
+      "ctaButton": "Discuss a project",
+      "previewNote": "Project in development — preview access is open.",
+      "metaSuffix": "case study by Pavel Levdin",
+      "shotAlt": "Website screenshot"
+    },
+    "servicesPage": {
+      "metaTitle": "Services — websites, SEO, AI automation | PL Innovativ Digitalbau",
+      "metaDescription": "Websites and web apps with Next.js and React, SEO and AI search, APIs and integrations, AI automation and MCP, social media, Telegram bots, servers and support.",
+      "eyebrow": "Services",
+      "title": "Digital services from strategy to growth",
+      "lead": "One person for design, development, visibility, integrations, automation and servers.",
+      "cta": "Fill out the brief",
+      "systemTitle": "Not just a website, but your business's entire online infrastructure",
+      "systemText": "Positioning, website, Google Business, Yandex Business, social media, SEO, AEO, analytics, CRM and automation all work together."
+    }
   }
  
 }

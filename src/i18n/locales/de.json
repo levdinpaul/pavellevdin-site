@@ -401,6 +401,419 @@
       "seo": "SEO",
       "performance": "Leistung"
     }
+  },
+  "pl": {
+    "brandSub": "Web Coding · SEO · AI · Automation",
+    "nav": {
+      "about": "Über mich",
+      "portfolio": "Portfolio",
+      "services": "Leistungen",
+      "contact": "Kontakt",
+      "cta": "Projekt starten",
+      "menu": "Menü",
+      "lang": "Sprache wechseln",
+      "social": "Messenger",
+      "home": "Zur Startseite",
+      "top": "Nach oben"
+    },
+    "hero": {
+      "badge": "Digitaler Business-Start aus einer Hand",
+      "eyebrow": "PL – Innovativ Digitalbau",
+      "titleA": "Nicht nur eine Website — ",
+      "titleAccent": "ein fertiges System",
+      "titleB": ", das Kunden bringt.",
+      "lead": "Website, Sichtbarkeit in Google und Yandex, Analytics, CRM und Automatisierung. Alles schlüsselfertig, aus einer Hand.",
+      "primary": "Projekt starten →",
+      "secondary": "Arbeiten ansehen",
+      "scroll": "nach unten scrollen"
+    },
+    "scene": {
+      "eyebrow": "Der Projektweg",
+      "title": "Sieben Schritte von der Idee zur Anfrage",
+      "steps": [
+        {
+          "title": "Positionierung",
+          "text": "Angebot, Zielgruppe, Struktur und eine starke Botschaft."
+        },
+        {
+          "title": "Website",
+          "text": "Design, Entwicklung, Speed 100/100 und mobile UX."
+        },
+        {
+          "title": "Sichtbarkeit",
+          "text": "SEO, AEO für die KI-Suche, Google Business, Maps, Schema.org."
+        },
+        {
+          "title": "Kanäle",
+          "text": "Meta, Instagram, Facebook, VK, Pixel und Events."
+        },
+        {
+          "title": "Analytics",
+          "text": "GA4, Tag Manager, Funnels und Conversions."
+        },
+        {
+          "title": "Anfragen & CRM",
+          "text": "Formulare, Messenger, CRM und Automatisierung."
+        },
+        {
+          "title": "Betreuung & Wachstum",
+          "text": "Updates, Content, Kampagnen und Optimierungen."
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "Über mich",
+      "title": "Ich verbinde Design, Code und Geschäftslogik.",
+      "lead": "Ich baue digitale Systeme: Positionierung, schnelles Frontend, SEO-Struktur, Analytics, Social Media und Automatisierung – damit Ihr Projekt auch nach dem Launch funktioniert.",
+      "cards": [
+        {
+          "title": "Vom Business gedacht",
+          "text": "Jede Seite hat eine Aufgabe: Vertrauen, Anfrage, Verkauf oder Automatisierung."
+        },
+        {
+          "title": "Starker Auftritt",
+          "text": "Hochwertige Optik, klare Hierarchie, Animationen und sorgfältige Details."
+        },
+        {
+          "title": "Technisches Fundament",
+          "text": "Performance, SEO, Schema, Analytics und skalierbare Architektur."
+        }
+      ],
+      "stats": [
+        {
+          "value": "10+",
+          "label": "Jahre Erfahrung"
+        },
+        {
+          "value": "100/100",
+          "label": "Lighthouse-Ziel"
+        },
+        {
+          "value": "DE / EN / RU",
+          "label": "drei Sprachen"
+        },
+        {
+          "value": "1",
+          "label": "Ansprechpartner für alles"
+        }
+      ],
+      "more": "Mehr über mich →"
+    },
+    "work": {
+      "title": "Aktuelle Projekte",
+      "all": "Alle Projekte →",
+      "items": {
+        "vlinnovativbau": "Premium-Website für ein Bauunternehmen in Deutschland.",
+        "kubperevozki": "Transport- und Logistikservice mit lokalem SEO.",
+        "fithilf": "Fitnessplattform mit individuellen Trainingsplänen.",
+        "peristeen": "Website für ein Medizinprodukt von Coloplast.",
+        "delimes": "Unternehmenswebsite einer Digitalagentur.",
+        "mpinnovativ": "Website für ein Bauunternehmen in Deutschland."
+      }
+    },
+    "services": {
+      "title": "Alles, was Ihr Unternehmen für den Online-Start braucht",
+      "lead": "Von Idee und Design über SEO, KI-Suche, Integrationen und Automatisierung bis zu eigenen Servern.",
+      "items": [
+        {
+          "title": "Websites & Web-Apps",
+          "text": "Schnelle, responsive Websites und Web-Apps mit einem Look, der auffällt.",
+          "points": [
+            "Next.js (App Router, SSR/SSG), React 19 + Vite",
+            "Headless CMS Strapi, PostgreSQL / MariaDB, PHP",
+            "PWA und Mehrsprachigkeit DE / RU / EN"
+          ]
+        },
+        {
+          "title": "SEO & KI-Suche",
+          "text": "Damit man Sie in Google, Yandex und in den Antworten von KI-Assistenten findet.",
+          "points": [
+            "Technisches SEO und schema.org",
+            "AEO – Optimierung für die KI-Suche",
+            "Google Business Profile und Yandex Business",
+            "Lokales SEO"
+          ]
+        },
+        {
+          "title": "API & Integrationen",
+          "text": "Ich verbinde Ihre Website mit CRM, Messengern und Analytics – keine Anfrage geht verloren.",
+          "points": [
+            "Anfrageformulare → eigenes Backend → Benachrichtigung per Telegram",
+            "REST / Strapi API",
+            "GA4 und GTM (Events, Conversions), Yandex Metrica, Search Console API",
+            "Magic-Link-Login, Multi-Tenant mit RLS"
+          ]
+        },
+        {
+          "title": "KI-Automatisierung & MCP",
+          "text": "KI-Pipelines und eigene MCP-Server, die Ihre Unternehmensdaten mit KI-Assistenten verbinden.",
+          "points": [
+            "KI-Pipeline für Artikel: Text, Bilder, Veröffentlichung",
+            "Erstellung von Angeboten als PDF",
+            "Belegerkennung",
+            "Kostenbewusster KI-Modell-Router, BYOK OpenRouter",
+            "Eigene MCP-Server für Unternehmensdaten"
+          ]
+        },
+        {
+          "title": "Social Media & Autoposting",
+          "text": "Autoposting, Content für Social Media, Pixel und Events für Werbung.",
+          "points": [
+            "Autoposting in sozialen Netzwerken",
+            "Video- und Content-Erstellung für Social Media",
+            "Pixel und Events für Werbekonten"
+          ]
+        },
+        {
+          "title": "Telegram-Bots",
+          "text": "Bots für Anfrage-Benachrichtigungen und persönliche Assistenten.",
+          "points": [
+            "Benachrichtigungen über Anfragen und Ereignisse",
+            "Assistenz-Bot",
+            "Anbindung an Website und CRM"
+          ]
+        },
+        {
+          "title": "Infrastruktur & VPS",
+          "text": "Eigene Server mit Docker: Deployment, SSL, Backups, Monitoring.",
+          "points": [
+            "Docker Compose, nginx Reverse Proxy, Let's Encrypt",
+            "Backups und Monitoring",
+            "Umzug von Shared Hosting auf VPS",
+            "Eigener Mailserver"
+          ]
+        },
+        {
+          "title": "Betreuung & Wachstum",
+          "text": "Updates, neue Seiten und Optimierungen nach dem Launch.",
+          "points": [
+            "Updates, neue Seiten und Content",
+            "DSGVO und 152-FZ",
+            "Analytics und datenbasierte Optimierung"
+          ]
+        }
+      ],
+      "more": "Mehr zu den Leistungen →",
+      "open": "Mehr erfahren"
+    },
+    "cta": {
+      "title": "Bereit, Ihr Projekt zu starten?",
+      "lead": "Ich antworte in der Regel innerhalb von 24 Stunden. Offen für neue Projekte.",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "brief": "Briefing ausfüllen"
+    },
+    "footer": {
+      "location": "Hannover, Deutschland",
+      "pages": "Seiten",
+      "contact": "Kontakt",
+      "legal": "Rechtliches",
+      "brief": "Projekt-Briefing",
+      "card": "Digitale Visitenkarte",
+      "blog": "Blog",
+      "imprint": "Impressum",
+      "privacy": "Datenschutzerklärung",
+      "cookies": "Cookie-Einstellungen",
+      "rights": "Alle Rechte vorbehalten.",
+      "cmdHint": "⌘K / Ctrl+K — Schnellnavigation",
+      "about": "Über mich",
+      "portfolio": "Portfolio"
+    },
+    "integrations": {
+      "eyebrow": "API & Integrationen",
+      "title": "Website, CRM, Telegram und KI – ein System",
+      "lead": "Eine Anfrage von der Website landet sofort im CRM und kommt als Benachrichtigung in Telegram an – und KI hilft, sie zu bearbeiten und eine Antwort vorzubereiten.",
+      "nodes": {
+        "site": "Website",
+        "crm": "CRM",
+        "telegram": "Telegram",
+        "ai": "KI"
+      },
+      "imageAlt": "Verbundene Module: Website, Datenbank, Messenger und KI"
+    },
+    "aboutPage": {
+      "metaTitle": "Über mich – Pavel Levdin, Webentwickler in Hannover",
+      "metaDescription": "Pavel Levdin – über 10 Jahre Webentwicklung: Websites mit Next.js und React, SEO und KI-Suche, Integrationen, KI-Automatisierung und eigene Server.",
+      "eyebrow": "Über mich",
+      "title": "Pavel Levdin – über 10 Jahre Webentwicklung",
+      "lead": "Ich baue digitale Systeme für Unternehmen komplett: Website, SEO, Integrationen, Automatisierung und Server. Ein Ansprechpartner – von der Idee über die ersten Anfragen bis zur Betreuung nach dem Launch.",
+      "primary": "Projekt besprechen",
+      "secondary": "Projekte ansehen",
+      "photoAlt": "Pavel Levdin",
+      "stats": {
+        "years": "Jahre Erfahrung",
+        "projects": "Projekte im Portfolio",
+        "servers": "eigene Server",
+        "langs": "Sprachen"
+      },
+      "skillsEyebrow": "Kompetenzen",
+      "skillsTitle": "Was ich kann",
+      "skills": [
+        {
+          "title": "Websites & Web-Apps",
+          "points": [
+            "Next.js (App Router, SSR/SSG)",
+            "React 19 + Vite",
+            "Headless CMS Strapi",
+            "PostgreSQL / MariaDB, PHP"
+          ]
+        },
+        {
+          "title": "Infrastruktur",
+          "points": [
+            "Eigene VPS – 3 Server",
+            "Docker Compose, nginx, Let's Encrypt",
+            "Backups und Monitoring",
+            "Umzug von Shared Hosting auf VPS",
+            "Eigener Mailserver"
+          ]
+        },
+        {
+          "title": "API & Integrationen",
+          "points": [
+            "REST / Strapi API",
+            "Formulare → eigenes Backend → Telegram",
+            "GA4 / GTM, Yandex Metrica, Search Console API",
+            "Magic-Link, Multi-Tenant mit RLS"
+          ]
+        },
+        {
+          "title": "KI-Automatisierung",
+          "points": [
+            "Kostenbewusster KI-Modell-Router",
+            "KI-Pipeline für Artikel",
+            "Angebote als PDF, Belegerkennung",
+            "Eigene MCP-Server",
+            "Agentenbasierte Entwicklung mit Claude Code"
+          ]
+        },
+        {
+          "title": "Social Media & Marketing",
+          "points": [
+            "Autoposting in sozialen Netzwerken",
+            "Videos und Content für Social Media",
+            "Google Business Profile, Yandex Business",
+            "Lokales SEO, AEO, schema.org"
+          ]
+        },
+        {
+          "title": "Bots",
+          "points": [
+            "Telegram-Bots für Benachrichtigungen",
+            "Persönlicher Assistenz-Bot",
+            "Anbindung an Website und CRM"
+          ]
+        },
+        {
+          "title": "PWA & Mehrsprachigkeit",
+          "points": [
+            "PWA",
+            "Websites auf DE / RU / EN",
+            "DSGVO und 152-FZ"
+          ]
+        }
+      ],
+      "processEyebrow": "Prozess",
+      "processTitle": "Wie ich arbeite",
+      "process": [
+        {
+          "title": "Analyse",
+          "text": "Ziele, Zielgruppen, Ist-Zustand – vermessen wie ein Grundstück."
+        },
+        {
+          "title": "Bauplan",
+          "text": "Architektur, Wireframes, Content-Struktur in drei Sprachen."
+        },
+        {
+          "title": "Bauphase",
+          "text": "Entwicklung mit Performance-Budget. Fortschritt jede Woche."
+        },
+        {
+          "title": "Launch",
+          "text": "Go-live mit SEO, Analytics, Google Business – alles verbunden."
+        },
+        {
+          "title": "Wachstum",
+          "text": "Messen, iterieren, automatisieren. Das System arbeitet weiter."
+        }
+      ],
+      "stackTitle": "Stack",
+      "featuredTitle": "Ausgewählte Projekte",
+      "principlesEyebrow": "Prinzipien",
+      "principlesTitle": "Worauf meine Arbeit aufbaut",
+      "principles": [
+        {
+          "title": "Ein Ansprechpartner für alles",
+          "text": "Website, SEO, Integrationen und Server – ohne Dienstleisterkette und ohne Reibungsverluste an den Schnittstellen."
+        },
+        {
+          "title": "Ehrliche Zeitpläne",
+          "text": "Ich nenne realistische Termine und sage frühzeitig Bescheid, wenn sich etwas ändert."
+        },
+        {
+          "title": "Performance und SEO ab Tag eins",
+          "text": "Performance, Struktur und Markup sind Teil der Architektur – nicht etwas für „später“."
+        },
+        {
+          "title": "Betreuung nach dem Launch",
+          "text": "Ich bleibe erreichbar: Updates, Optimierungen und Wachstum nach dem Release."
+        }
+      ],
+      "ctaTitle": "Sprechen wir über Ihr Projekt?",
+      "ctaLead": "Schreiben Sie mir per Telegram oder WhatsApp – ich antworte innerhalb von 24 Stunden."
+    },
+    "portfolio": {
+      "metaTitle": "Portfolio – Websites und Produkte von Pavel Levdin",
+      "metaDescription": "11 Projekte: Websites für Kunden in Deutschland und Russland, Landingpages und eigene Produkte mit Next.js, React, Strapi und PHP. Alle Links sind live.",
+      "eyebrow": "Portfolio",
+      "title": "Projekte",
+      "lead": "Websites für Kunden in Deutschland und Russland sowie eigene Produkte – von Landingpages bis SaaS. Die Links führen zu den Live-Seiten.",
+      "filters": {
+        "all": "Alle",
+        "clients-de": "Kunden DE",
+        "clients-ru": "Kunden RU",
+        "products": "Eigene Produkte",
+        "landings": "Landingpages"
+      },
+      "status": {
+        "live": "Online",
+        "preview": "Preview · in Entwicklung",
+        "offline": "Nicht erreichbar"
+      },
+      "open": "Website öffnen",
+      "details": "Details",
+      "filterLabel": "Nach Kategorie filtern"
+    },
+    "project": {
+      "back": "← Alle Projekte",
+      "task": "Aufgabe",
+      "solution": "Lösung",
+      "done": "Umgesetzt",
+      "stack": "Stack",
+      "category": "Kategorie",
+      "gallery": "Galerie",
+      "desktop": "Desktop",
+      "mobile": "Mobil",
+      "open": "Website öffnen",
+      "prev": "Vorheriges",
+      "next": "Nächstes",
+      "ctaTitle": "Sie brauchen ein ähnliches Projekt?",
+      "ctaLead": "Erzählen Sie mir von Ihrer Aufgabe – ich schlage eine Lösung und einen realistischen Zeitplan vor.",
+      "ctaButton": "Projekt besprechen",
+      "previewNote": "Projekt in Entwicklung – Preview-Zugang ist freigeschaltet.",
+      "metaSuffix": "Case Study von Pavel Levdin",
+      "shotAlt": "Screenshot der Website"
+    },
+    "servicesPage": {
+      "metaTitle": "Leistungen – Websites, SEO & KI | PL Innovativ Digitalbau",
+      "metaDescription": "Websites und Web-Apps mit Next.js und React, SEO und KI-Suche, API und Integrationen, KI-Automatisierung und MCP, Social Media, Telegram-Bots, Server, Support.",
+      "eyebrow": "Leistungen",
+      "title": "Digitale Leistungen von der Strategie bis zum Wachstum",
+      "lead": "Ein Ansprechpartner für Design, Entwicklung, Sichtbarkeit, Integrationen, Automatisierung und Server.",
+      "cta": "Briefing ausfüllen",
+      "systemTitle": "Nicht nur eine Website, sondern die gesamte Online-Infrastruktur Ihres Unternehmens",
+      "systemText": "Positionierung, Website, Google Business, Yandex Business, Social Media, SEO, AEO, Analytics, CRM und Automatisierung greifen ineinander."
+    }
   }
   
 }
