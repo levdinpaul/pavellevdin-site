@@ -1,9 +1,13 @@
 /** Shared, deterministic scene data; importing this file does not load Three.js. */
 
-/** Scroll timeline of the section (0…1): hero leaves, the flight passes the stack, the finale holds ~10%. */
-export const HERO_END = 0.15;
-export const FLIGHT = [0.12, 0.84] as const;
-export const FINALE = [0.84, 0.9] as const;
+/**
+ * Scroll timeline of the section (0…1): hero leaves, the flight passes the stack, the finale holds.
+ * The live section is 610svh tall (mobile 480svh); hero exit and finale keep their absolute scroll length,
+ * the flight takes the rest (≈1.6× the 03b timeline).
+ */
+export const HERO_END = 0.095;
+export const FLIGHT = [0.075, 0.9] as const;
+export const FINALE = [0.9, 0.9375] as const;
 
 export const clamp = (value: number) => Math.max(0, Math.min(1, value));
 

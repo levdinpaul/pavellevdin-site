@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { sendTelegramMessage } = require('../lib/telegram');
 const { createRateLimiter, clientIp } = require('../lib/rate-limit');
+const { sendMail, leadMailbox } = require('../lib/mailer');
 
 const router = express.Router();
 
@@ -78,6 +79,15 @@ router.post('/', limiter, async (req, res) => {
     await sendTelegramMessage(parts.join('\n'));
   } catch (err) {
     console.error('Не удалось отправить лид в Telegram:', err.message);
+  }
+
+  // 3) Письмо на ящик своей локали (ru → info@pavellevdin.ru, de/en → info@pavellevdin.de при DE_MAIL_READY)
+  try {
+    const text = parts.join('\n').replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+    const replyTo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.contact) ? lead.contact : undefined;
+    await sendMail({ to: leadMailbox(lead.language), subject: `Новая заявка (${lead.type}) — ${lead.name}`, text, replyTo });
+  } catch (err) {
+    console.error('Не удалось отправить лид на почту:', err.message);
   }
 
   res.json({ ok: true });

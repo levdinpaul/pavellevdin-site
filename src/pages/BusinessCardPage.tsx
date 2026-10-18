@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Globe2, Mail, MapPin, Phone, Send, Share2, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Download, Globe2, Mail, MapPin, MessageCircle, Send, Share2, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { getContacts } from '@/constants/contacts';
 
 const copy = {
   de: {
@@ -16,6 +17,7 @@ const copy = {
     brief: 'Konfigurator',
     save: 'Kontakt speichern',
     location: 'Hannover, Deutschland',
+    whatsapp: 'Nachricht in WhatsApp',
   },
   en: {
     title: 'Online Business Card | Pavel Levdin',
@@ -27,6 +29,7 @@ const copy = {
     brief: 'Configurator',
     save: 'Save contact',
     location: 'Hannover, Germany',
+    whatsapp: 'Message on WhatsApp',
   },
   ru: {
     title: 'Онлайн-визитка | Павел Левдин',
@@ -38,36 +41,38 @@ const copy = {
     brief: 'Конфигуратор',
     save: 'Сохранить контакт',
     location: 'Ганновер, Германия',
+    whatsapp: 'Написать в WhatsApp',
   },
 };
 
-const vcard = `BEGIN:VCARD
+// vCard без телефона: связь — почта, Telegram и сайт.
+const vcardFor = (lang: string, email: string, telegram: string) => `BEGIN:VCARD
 VERSION:3.0
 N:Levdin;Pavel;;;
 FN:Pavel Levdin
 ORG:PL Innovativ Digitalbau
 TITLE:Web Developer / Digital Business Systems
-TEL;TYPE=CELL:+4917643141306
-EMAIL:levdin.pavel@yandex.ru
-URL:https://pavellevdin.ru/ru
+EMAIL:${email}
+URL:https://pavellevdin.ru/${lang}
+X-SOCIALPROFILE;TYPE=telegram:${telegram}
 ADR;TYPE=WORK:;;;Hannover;;;Germany
 END:VCARD`;
-
-const contactRows: [LucideIcon, string, string, string | null][] = [
-  [Send, 'Telegram', '@PavelLevdin', 'https://t.me/PavelLevdin'],
-  [Phone, 'WhatsApp', '+49 176 43141306', 'https://wa.me/4917643141306'],
-  [Mail, 'Email', 'levdin.pavel@yandex.ru', 'mailto:levdin.pavel@yandex.ru'],
-  [Globe2, 'Website', 'pavellevdin.ru', null],
-  [MapPin, 'Location', '', null],
-];
 
 export function BusinessCardPage() {
   const { i18n } = useTranslation();
   const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'de') as keyof typeof copy;
   const text = copy[lang];
+  const contacts = getContacts(lang);
+  const contactRows: [LucideIcon, string, string, string | null][] = [
+    [Send, 'Telegram', contacts.telegram.handle, contacts.telegram.url],
+    [MessageCircle, 'WhatsApp', text.whatsapp, contacts.whatsapp.url],
+    [Mail, 'Email', contacts.email, contacts.mailto],
+    [Globe2, 'Website', 'pavellevdin.ru', null],
+    [MapPin, 'Location', '', null],
+  ];
 
   const downloadVcard = () => {
-    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+    const blob = new Blob([vcardFor(lang, contacts.email, contacts.telegram.url)], { type: 'text/vcard;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;

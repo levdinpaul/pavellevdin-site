@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next';
+import { MicroUI } from './MicroUI';
+import { SERVICE_MICRO } from './micro-kinds';
 
 type Service = { title: string; text: string; points: string[] };
 
@@ -14,13 +16,15 @@ const ICONS: string[][] = [
   ['M12 20V9', 'M6 13l6-6 6 6', 'M5 4h14'],
 ];
 
-export function ServicesGrid() {
+/** micro — показать тематичную micro-UI над карточкой (страница /services). */
+export function ServicesGrid({ micro = false }: { micro?: boolean }) {
   const { t } = useTranslation();
   const items = t('pl.services.items', { returnObjects: true }) as Service[];
   return (
     <ol className="pl-svc-grid">
       {items.map((s, i) => (
         <li key={s.title} data-reveal="">
+          {micro && SERVICE_MICRO[i] && <MicroUI kind={SERVICE_MICRO[i]!} />}
           <details className="pl-svc">
             <summary>
               <span className="pl-svc__head">

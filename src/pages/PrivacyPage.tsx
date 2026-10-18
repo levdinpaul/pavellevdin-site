@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { getEmail } from '@/constants/contacts';
 import {
   Shield, Building2, Database, Target, Scale, Server,
   Share2, Cookie, UserCheck, Undo2, Lock, Gavel, FileText, type LucideIcon,
@@ -28,10 +29,10 @@ const sectionIcons: LucideIcon[] = [
   Share2, Cookie, UserCheck, Undo2, Lock, Gavel, FileText,
 ];
 
-const OPERATOR_EMAIL = 'levdin.pavel@yandex.ru';
 const SITE = 'pavellevdin.ru';
 
-const policy: Record<'ru' | 'en' | 'de', Policy> = {
+// Почта оператора зависит от локали (constants/contacts). В de/en аналитика — только GA4, без Яндекса.
+const buildPolicy = (OPERATOR_EMAIL: string): Record<'ru' | 'en' | 'de', Policy> => ({
   ru: {
     seoTitle: 'Политика конфиденциальности | Delimes',
     seoDesc: 'Политика обработки персональных данных сайта в соответствии с Федеральным законом № 152-ФЗ «О персональных данных».',
@@ -204,14 +205,14 @@ const policy: Record<'ru' | 'en' | 'de', Policy> = {
         paragraphs: ['The Operator does not sell personal data and does not share it with third parties, except where necessary to achieve the purposes of processing:'],
         items: [
           'Telegram — to deliver a notification of your request to the Operator;',
-          'Yandex.Metrica web analytics — to collect anonymised statistics;',
+          'Google Analytics 4 (Google Ireland Ltd.) — only with your consent, to collect anonymised statistics;',
           'the Website’s hosting provider — for technical operation and data storage.',
         ],
       },
       {
         heading: '9. Cookies and web analytics',
         paragraphs: [
-          'The Website uses cookies and web-analytics systems (Yandex.Metrica, including the “Webvisor” session-recording technology) to analyse user behaviour and improve the Website.',
+          'With your consent, the Website uses cookies and Google Analytics 4 (IP anonymisation enabled) to analyse usage and improve the Website. Without consent no analytics scripts are loaded.',
           'You can decline analytics cookies in the consent banner on your first visit and disable cookies in your browser settings. Disabling some cookies may affect certain Website features.',
         ],
       },
@@ -307,14 +308,14 @@ const policy: Record<'ru' | 'en' | 'de', Policy> = {
         paragraphs: ['Der Betreiber verkauft keine personenbezogenen Daten und gibt sie nicht an Dritte weiter, außer soweit dies zur Zweckerreichung erforderlich ist:'],
         items: [
           'Telegram — zur Zustellung einer Benachrichtigung über Ihre Anfrage an den Betreiber;',
-          'Web-Analyse Yandex.Metrica — zur Erhebung anonymisierter Statistiken;',
+          'Google Analytics 4 (Google Ireland Ltd.) — nur mit Ihrer Einwilligung, zur Erhebung anonymisierter Statistiken;',
           'Hosting-Anbieter der Website — für den technischen Betrieb und die Datenspeicherung.',
         ],
       },
       {
         heading: '9. Cookies und Web-Analyse',
         paragraphs: [
-          'Die Website nutzt Cookies und Web-Analyse (Yandex.Metrica, einschließlich der Sitzungsaufzeichnung „Webvisor“) zur Analyse des Nutzerverhaltens und zur Verbesserung der Website.',
+          'Mit Ihrer Einwilligung nutzt die Website Cookies und Google Analytics 4 (mit IP-Anonymisierung) zur Analyse der Nutzung und zur Verbesserung der Website. Ohne Einwilligung werden keine Analyse-Skripte geladen.',
           'Sie können Analyse-Cookies im Einwilligungsbanner beim ersten Besuch ablehnen und Cookies in den Browsereinstellungen deaktivieren. Das Deaktivieren einzelner Cookies kann Funktionen der Website beeinträchtigen.',
         ],
       },
@@ -345,12 +346,13 @@ const policy: Record<'ru' | 'en' | 'de', Policy> = {
       },
     ],
   },
-};
+});
 
 export function PrivacyPage() {
   const { i18n } = useTranslation();
   const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru') as 'de' | 'en' | 'ru';
-  const text = policy[lang];
+  const OPERATOR_EMAIL = getEmail(lang);
+  const text = buildPolicy(OPERATOR_EMAIL)[lang];
 
   return (
     <>

@@ -1,17 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, prefer-rest-params */
 // Веб-аналитика грузится ТОЛЬКО после согласия пользователя (152-ФЗ / cookie-consent).
 // Скрипты вынесены из index.html, чтобы ничего не срабатывало до согласия.
+// Яндекс.Метрика — только на /ru; на /de и /en — только GA4.
 
 const GA_ID = 'G-PFRYET1M4T';
 const YM_ID = 108284704;
 
-let loaded = false;
+let gaLoaded = false;
+let ymLoaded = false;
 
-export function loadAnalytics() {
-  if (loaded || typeof window === 'undefined') return;
-  loaded = true;
+export function loadAnalytics({ yandex }: { yandex: boolean }) {
+  if (typeof window === 'undefined') return;
   const w = window as any;
+  if (!gaLoaded) {
+    gaLoaded = true;
+    loadGoogle(w);
+  }
+  if (yandex && !ymLoaded) {
+    ymLoaded = true;
+    loadYandex(w);
+  }
+}
 
+function loadGoogle(w: any) {
   // Google Analytics 4
   const ga = document.createElement('script');
   ga.async = true;
@@ -23,7 +34,9 @@ export function loadAnalytics() {
   };
   w.gtag('js', new Date());
   w.gtag('config', GA_ID, { anonymize_ip: true });
+}
 
+function loadYandex(w: any) {
   // Яндекс.Метрика
   (function (m: any, e: any, t: any, r: any, i: any) {
     m[i] =

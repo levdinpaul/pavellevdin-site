@@ -45,11 +45,14 @@ const settingsRoutes = require('./routes/settings');
 const bufferRoutes = require('./routes/buffer');
 const mediaRoutes = require('./routes/media');
 const leadRoutes = require('./routes/lead');
+const reviewRoutes = require('./routes/reviews');
 const { authMiddleware } = require('./middleware/auth');
 
 // Public routes
 app.use('/api/auth', authRoutes);
 app.use('/api/lead', leadRoutes);
+app.use('/api', reviewRoutes.publicRouter);
+app.use('/api/admin/reviews', reviewRoutes.adminRouter);
 
 // Protected routes
 app.use('/api/stats', authMiddleware, statsRoutes);

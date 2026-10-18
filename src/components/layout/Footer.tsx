@@ -1,13 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
-import { CONTACTS } from '@/constants/contacts';
+import { getContacts } from '@/constants/contacts';
 
 /** Футер «PL Сцена»: бренд, страницы, контакты, документы (Реквизиты/Политика/cookie — обязательны). */
 export function Footer() {
   const { t, i18n } = useTranslation();
   const lang = ['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru';
   const { reset } = useCookieConsent();
+  const contacts = getContacts(lang);
   // Год фиксирован: SSR-пререндер и клиент должны отдать одинаковую разметку.
   const year = 2026;
 
@@ -33,16 +34,16 @@ export function Footer() {
           <div>
             <p className="pl-footer__label">{t('pl.footer.pages')}</p>
             <ul className="pl-footer__list">
-              {pages.map((p) => <li key={p.to}><Link to={p.to}>{p.label}</Link></li>)}
+              {pages.map((p) => <li key={p.to}><Link to={p.to} viewTransition>{p.label}</Link></li>)}
             </ul>
           </div>
 
           <div>
             <p className="pl-footer__label">{t('pl.footer.contact')}</p>
             <ul className="pl-footer__list">
-              <li><a href={CONTACTS.telegram.url} target="_blank" rel="noopener noreferrer">Telegram {CONTACTS.telegram.handle}</a></li>
-              <li><a href={CONTACTS.whatsapp.url} target="_blank" rel="noopener noreferrer">WhatsApp {CONTACTS.whatsapp.phone}</a></li>
-              <li><a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a></li>
+              <li><a href={contacts.telegram.url} target="_blank" rel="noopener noreferrer">Telegram {contacts.telegram.handle}</a></li>
+              <li><a href={contacts.whatsapp.url} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+              <li><a href={contacts.mailto}>{contacts.email}</a></li>
             </ul>
           </div>
 

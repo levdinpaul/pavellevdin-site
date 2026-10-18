@@ -1,0 +1,17 @@
+{
+  "_comment": "Персональные ссылки на отзыв: https://pavellevdin.ru/ru/review/<token>. Новый токен — добавить запись (token: 16+ случайных символов).",
+  "tokens": [
+    {
+      "token": "XpfzgygS0LYhzUEO",
+      "project": "vl-innovativbau",
+      "title": "VL-Innovativbau",
+      "createdAt": "2026-10-18"
+    },
+    {
+      "token": "Zf5LShQuEyWU83_F",
+      "project": "mp-innovativbau",
+      "title": "MP-Innovativbau",
+      "createdAt": "2026-10-18"
+    }
+  ]
+}

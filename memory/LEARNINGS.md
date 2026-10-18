@@ -30,6 +30,25 @@
   (выглядит как «пустота»). Проверять секции скроллом во вьюпорт, а не fullPage.
 - **JSON для React + .cjs-скриптов** (portfolio.json) — один источник для приложения, пререндера и sitemap.
 
+## Доводка 04a (2026-10-18)
+
+- **Vite читает корневой `.env` и берёт из него NODE_ENV.** `NODE_ENV=development` (нужен admin-серверу) молча
+  переключал `vite build` на development-React (jsxDEV в vendor, ×2 Script Evaluation, mobile LH −15…20).
+  Лечение — `envDir: 'env'` (только публичные VITE_*). Проверка: `grep -c jsxDEV dist/assets/vendor-*.js` = 0.
+- **A/B перфа — только на одном сервере.** Прод vs локально расходятся на 5–15 баллов и шумят; база —
+  git worktree с тегом до изменений + `serve-gz.cjs` на соседнем порту, прогоны чередовать.
+- **content-visibility:auto = paint containment**: «взведённый» reveal-элемент внизу секции (translateY 26px)
+  обрезается контейнером, и IntersectionObserver считает его невидимым навсегда. Запас: padding-bottom + равный
+  отрицательный margin-bottom у секции.
+- **html { scroll-behavior: smooth } делает window.scrollBy анимированным** — компенсация роста сцены «ехала»
+  через 6000px, плюс Chrome scroll anchoring добавлял свою. Компенсация: overflow-anchor:none на один кадр
+  и `scrollTo({ behavior: 'instant' })`.
+- **getBoundingClientRect в эффектах счётчиков = forced layout на каждый Counter.** Исходное положение берём из
+  первого колбэка IntersectionObserver.
+- **Литеральные NBSP в TS ловит eslint (no-irregular-whitespace)**, а `' '` в Python/Write легко превращается
+  в литерал — надёжнее `String.fromCharCode(0xa0)`. Разряды форматировать вручную, не Intl (SSR = клиент).
+- **SMTP без зависимостей** (net/tls, STARTTLS, AUTH LOGIN) — 100 строк; так не трогаем scripts/node_modules на сервере.
+
 ## Инфраструктура и деплой (2026-10-18)
 
 - **Workflow GitHub Pages был миной:** `deploy.yml` публиковал `main` на levdinking.github.io при каждом push

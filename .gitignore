@@ -39,3 +39,6 @@ sardar-copy*
 *.tar.gz
 backup-*.tgz
 _design/
+
+# env/.env — только публичные VITE_* флаги фронтенда (см. vite.config.ts envDir), коммитим
+!env/.env

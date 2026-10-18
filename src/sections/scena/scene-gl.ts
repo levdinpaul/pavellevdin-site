@@ -60,8 +60,10 @@ const DUST_VERTEX = /* glsl */ `
     gl_Position = projectionMatrix * mv;
     float far = 1.0 - d / ${DUST_DEPTH.toFixed(1)};
     float twinkle = 0.75 + 0.25 * sin(uTime * 1.6 + aPhase);
-    vAlpha = sqrt(far) * smoothstep(0.5, 4.0, d) * twinkle;
-    gl_PointSize = clamp(aSize * 24.0 / max(d, 0.1), 1.3, 2.5) * uPixelRatio;
+    // Near-fade: points right at the camera dissolve instead of growing into grey squares.
+    float near = smoothstep(2.0, 9.0, d);
+    vAlpha = sqrt(far) * near * twinkle;
+    gl_PointSize = clamp(aSize * 24.0 / max(d, 0.1), 1.3, mix(1.6, 2.5, near)) * uPixelRatio;
   }
 `;
 const DUST_FRAGMENT = /* glsl */ `
@@ -184,7 +186,7 @@ export function createSceneGL(canvas: HTMLCanvasElement, labelCount: number, onC
       const mobile = width < 768;
       const flight = smoothstep(FLIGHT[0], FLIGHT[1], progress);
       const orbit = flight * TAU * 1.15;
-      const introduction = 1 - smoothstep(0.02, 0.28, progress);
+      const introduction = 1 - smoothstep(0.0125, 0.175, progress);
       const travel = flight * travelLength;
       const cameraZ = 12 - travel;
       const spin = time * 0.035 + flight * 2.4;
@@ -201,7 +203,7 @@ export function createSceneGL(canvas: HTMLCanvasElement, labelCount: number, onC
       uniforms.uSpin.value = spin;
       uniforms.uTime.value = time;
 
-      const labelVisibility = smoothstep(FLIGHT[0] + 0.03, FLIGHT[0] + 0.08, progress) * (1 - smoothstep(FLIGHT[1] - 0.02, FLIGHT[1] + 0.02, progress));
+      const labelVisibility = smoothstep(FLIGHT[0] + 0.02, FLIGHT[0] + 0.05, progress) * (1 - smoothstep(FLIGHT[1] - 0.025, FLIGHT[1], progress));
       labels.forEach((label, index) => {
         const angle = label.angle + spin * 0.6;
         world.set(Math.cos(angle) * label.radius, Math.sin(angle) * label.radius, label.z);

@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CommandMenu, type CommandLabels } from '@/components/ds/CommandMenu';
-import { CONTACTS } from '@/constants/contacts';
+import { getContacts } from '@/constants/contacts';
+import { startPointerEffects } from '@/lib/pointer-effects';
 import { InstagramIcon, TelegramIcon, WhatsAppIcon } from './social-icons';
 
 const LANGS = ['ru', 'de', 'en'] as const;
@@ -31,6 +32,9 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const topRef = useRef<HTMLButtonElement>(null);
+
+  // Наклон карточек и магнит CTA — один делегированный слушатель на весь сайт
+  useEffect(() => { startPointerEffects(); }, []);
 
   // Кнопка «наверх» — пишем в DOM напрямую, без ре-рендеров
   useEffect(() => {
@@ -99,10 +103,11 @@ export function SiteHeader() {
   ];
   const isActive = (match: string | null) => match !== null && location.pathname.startsWith(`/${lang}${match}`);
 
+  const contacts = getContacts(lang);
   const social = [
-    { href: CONTACTS.telegram.url, label: 'Telegram', icon: <TelegramIcon /> },
-    { href: CONTACTS.whatsapp.url, label: 'WhatsApp', icon: <WhatsAppIcon /> },
-    { href: CONTACTS.instagram, label: 'Instagram', icon: <InstagramIcon /> },
+    { href: contacts.telegram.url, label: 'Telegram', icon: <TelegramIcon /> },
+    { href: contacts.whatsapp.url, label: 'WhatsApp', icon: <WhatsAppIcon /> },
+    { href: contacts.instagram, label: 'Instagram', icon: <InstagramIcon /> },
   ].filter((s) => s.href);
 
   const cmd = CMD[lang];
@@ -112,7 +117,7 @@ export function SiteHeader() {
     <>
       <header className="pl-header" data-solid={!isHome || scrolled || menuOpen}>
         <div className="pl-header__inner">
-          <Link to={`/${lang}`} className="pl-logo" aria-label={t('pl.nav.home')}>
+          <Link to={`/${lang}`} viewTransition className="pl-logo" aria-label={t('pl.nav.home')}>
             <span className="pl-logo__text">
               <span className="pl-logo__name">Innovativ Digitalbau</span>
               <span className="pl-logo__sub">{t('pl.brandSub')}</span>
@@ -121,7 +126,7 @@ export function SiteHeader() {
 
           <nav className="pl-nav" aria-label={t('pl.nav.menu')}>
             {links.map((l) => (
-              <Link key={l.to} to={l.to} aria-current={isActive(l.match) ? 'page' : undefined}>{l.label}</Link>
+              <Link key={l.to} to={l.to} viewTransition aria-current={isActive(l.match) ? 'page' : undefined}>{l.label}</Link>
             ))}
           </nav>
 
@@ -131,7 +136,7 @@ export function SiteHeader() {
                 <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
               ))}
             </span>
-            <Link to={`/${lang}/brief`} className="pl-header__cta">{t('pl.nav.cta')}</Link>
+            <Link to={`/${lang}/brief`} viewTransition className="pl-header__cta">{t('pl.nav.cta')}</Link>
             <button
               type="button"
               className="pl-burger"
@@ -148,7 +153,7 @@ export function SiteHeader() {
 
       {menuOpen && (
         <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')}>
-          {links.map((l) => <Link key={l.to} to={l.to}>{l.label}</Link>)}
+          {links.map((l) => <Link key={l.to} to={l.to} viewTransition>{l.label}</Link>)}
           <Link to={`/${lang}/brief`} className="pl-menu__cta">{t('pl.nav.cta')}</Link>
           <span className="pl-langs pl-menu__langs" role="group" aria-label={t('pl.nav.lang')}>
             {LANGS.map((l) => (

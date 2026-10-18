@@ -6,6 +6,9 @@ import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { ServicesGrid } from '@/components/pl/ServicesGrid';
 import { Integrations } from '@/components/pl/Integrations';
 import { useReveal } from '@/sections/scena/useReveal';
+import { Pricing } from '@/components/pl/Pricing';
+import { Title } from '@/components/pl/Title';
+import { PACKAGES, currencyFor, packageCopy, regionFor } from '@/data/pricing';
 
 type Item = { title: string; text: string };
 
@@ -29,6 +32,24 @@ export function ServicesPage() {
         item: { '@type': 'Service', name: s.title, description: s.text, provider: { '@type': 'Person', name: 'Pavel Levdin', url: `${SITE}/${lang}/about` }, areaServed: ['Germany', 'Europe', 'Russia'] },
       })),
     },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'OfferCatalog',
+      name: t('pl.prices.title'),
+      url: `${SITE}/${lang}/services#prices`,
+      itemListElement: PACKAGES.map((p) => ({
+        '@type': 'Offer',
+        name: packageCopy(p, lang).title,
+        seller: { '@type': 'Person', name: 'Pavel Levdin', url: `${SITE}/${lang}/about` },
+        priceSpecification: {
+          '@type': p.period ? 'UnitPriceSpecification' : 'PriceSpecification',
+          minPrice: p.price[regionFor(lang)],
+          priceCurrency: currencyFor(lang),
+          ...(p.period ? { unitText: p.period === 'month' ? 'MONTH' : 'HOUR' } : {}),
+          ...(lang === 'ru' ? {} : { valueAddedTaxIncluded: false }),
+        },
+      })),
+    },
     breadcrumbs(lang, [{ name: 'PL Innovativ Digitalbau', path: '' }, { name: t('pl.servicesPage.eyebrow'), path: '/services' }]),
   ];
 
@@ -46,8 +67,10 @@ export function ServicesPage() {
         </section>
 
         <section className="pl-container">
-          <ServicesGrid />
+          <ServicesGrid micro />
         </section>
+
+        <Pricing lang={lang} />
 
         <section className="pl-container pl-section">
           <Integrations />
@@ -55,7 +78,7 @@ export function ServicesPage() {
 
         <section className="pl-container pl-section" aria-labelledby="pl-svc-process">
           <p className="pl-eyebrow" data-reveal="">{t('pl.aboutPage.processEyebrow')}</p>
-          <h2 id="pl-svc-process" className="pl-h2 pl-mb" data-reveal="">{t('pl.aboutPage.processTitle')}</h2>
+          <Title id="pl-svc-process" className="pl-h2 pl-mb" lines={[t('pl.aboutPage.processTitle')]} />
           <ol className="pl-process">
             {process.map((s, i) => (
               <li key={s.title} data-reveal="">
@@ -72,7 +95,7 @@ export function ServicesPage() {
             <h2 className="pl-h2">{t('pl.servicesPage.systemTitle')}</h2>
             <p className="pl-lead">{t('pl.servicesPage.systemText')}</p>
             <div className="pl-cta__actions">
-              <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary">{t('pl.servicesPage.cta')}</Link>
+              <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary" data-magnetic="">{t('pl.servicesPage.cta')}<span aria-hidden="true">→</span></Link>
               <Link to={`/${lang}/contact`} className="pl-btn pl-btn--ghost">{t('pl.nav.contact')}</Link>
             </div>
           </div>

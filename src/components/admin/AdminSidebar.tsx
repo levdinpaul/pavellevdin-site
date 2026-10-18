@@ -9,6 +9,7 @@ import {
   Layers,
   Settings,
   Send,
+  Star,
 } from 'lucide-react';
 import { useAdmin } from '@/hooks/useAdmin';
 import { ThemeToggle } from '@/components/ui-custom/ThemeToggle';
@@ -19,6 +20,7 @@ const navItems = [
   { key: 'publications', icon: Layers, label: 'Публикации' },
   { key: 'articles', icon: FileText, label: 'Статьи' },
   { key: 'social', icon: Share2, label: 'Соцсети' },
+  { key: 'reviews', icon: Star, label: 'Отзывы' },
   { key: 'analytics', icon: BarChart3, label: 'Аналитика' },
   { key: 'settings', icon: Settings, label: 'Настройки' },
 ];

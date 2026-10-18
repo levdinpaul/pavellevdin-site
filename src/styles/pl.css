@@ -190,7 +190,6 @@
 .pl-status--inline { position: static; }
 .pl-work__media { position: relative; }
 
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: 280ms; }
 
 
 /* шапка: скролл-прогресс, кнопка наверх */

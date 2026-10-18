@@ -1,5 +1,27 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-18 (ночь) — промпт 04a «доводка сайта», задеплоено (тег v5-site-fixes)
+- **Спираль медленнее**: сцена 610svh (mobile 480svh, ×1.6), таймлайн HERO_END 0.095 / FLIGHT [0.075, 0.9] /
+  FINALE [0.9, 0.9375] — hero и финал по абсолютной прокрутке как раньше, полёт длиннее; следование за скроллом
+  мягче (τ 260 мс ≈ lerp 0.06); near-fade пыли у камеры (альфа и размер), без «квадратов».
+- **Контакты**: `getContacts(lang)` / `getEmail(lang)` в `src/constants/contacts.ts` — ru → info@pavellevdin.ru,
+  de/en → info@pavellevdin.de при `VITE_DE_MAIL_READY=true` (пока .ru). Телефон удалён отовсюду (тексты, i18n, визитка,
+  vCard, Impressum, JSON-LD); WhatsApp — только кнопкой wa.me. levdin.pavel@yandex.ru удалён из кода.
+  Лиды → письмо на ящик своей локали (`scripts/lib/mailer.js`, SMTP без зависимостей, включается `SMTP_HOST` в .env).
+- **Цены**: `src/data/pricing.json` (ru ₽ / eu € netto), блок «Стоимость» на /services#prices + OfferCatalog JSON-LD,
+  строка «Сайты от 60 000 ₽ / ab 1.900 € netto» на главной.
+- **DE/EN без Яндекса**: Метрика грузится только на /ru (GA4 — везде после согласия); тексты de/en, portfolio.json,
+  cookie-баннер, Datenschutz/Privacy (→ GA4), JSON-LD index.html — без Yandex; «Яндекс Метрика» в спирали только ru.
+- **Анимации**: line-mask reveal заголовков (Title), stagger 70 мс, 3D-tilt ≤ 4° + блик карточек (pointer:fine),
+  магнит главных CTA, подчёркивание меню, View Transitions, count-up «10+ / 11 / 3» на главной; micro-UI
+  (Lighthouse 100, сниппет+JSON-LD, лог API, чат с MCP, Telegram, контейнеры, пост) — главная «Что я делаю» + /services.
+- **Отзывы**: `scripts/routes/reviews.js` (POST /api/review, GET /api/reviews, админ /api/admin/reviews),
+  хранение `scripts/data/reviews.json`, токены `scripts/review-tokens.json`, страница /:lang/review/:token,
+  модерация «Отзывы» в админке, секция скрыта без одобренных, JSON-LD AggregateRating при ≥ 3.
+- **Найдено и исправлено**: прод-сборка шла с development-React — Vite читал корневой `.env` (NODE_ENV=development
+  для admin-сервера). Теперь `envDir: env/` (только VITE_*). Mobile Lighthouse локально 65 → 80–83.
+- Скролл-компенсация при росте сцены: мгновенная, без scroll anchoring (hash /ru/#about встаёт ровно).
+
 ## Сессия 2026-10-18 (вечер) — доводка hero (промпты 03 + 03b), задеплоено
 - **Hero**: «Создаю сайты. / Соединяю системы.», подпись, лид, одна кнопка + текстовая ссылка. Шрифт **Onest**
   (self-host, вместо Golos Text), JetBrains Mono — только технологии и мелкие метки. Заголовки 500 / −0.04em.

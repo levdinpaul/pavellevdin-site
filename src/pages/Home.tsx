@@ -33,7 +33,7 @@ export function Home() {
       'SEO',
       'AI search optimization',
       'Google Business Profile setup',
-      'Yandex Business setup',
+      ...(lang === 'ru' ? ['Yandex Business setup'] : []),
       'Social media setup',
       'Analytics',
       'CRM automation',

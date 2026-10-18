@@ -2,23 +2,19 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, MessageCircle, Phone, Send, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Mail, MessageCircle, Send, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { getContacts } from '@/constants/contacts';
 
 // Относительный путь: в dev идёт через vite-прокси на localhost:3001, в prod — same-origin.
 // Для отдельного API-хоста задайте VITE_API_URL.
 const API_BASE = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || '';
 const LEAD_ENDPOINT = `${API_BASE}/api/lead`;
 
-const contactRows: [LucideIcon, string, string, string][] = [
-  [Send, 'Telegram', '@PavelLevdin', 'https://t.me/PavelLevdin'],
-  [Phone, 'WhatsApp', '+49 176 43141306', 'https://wa.me/4917643141306'],
-  [Mail, 'Email', 'levdin.pavel@yandex.ru', 'mailto:levdin.pavel@yandex.ru'],
-];
 
 const copy = {
   de: {
@@ -35,6 +31,7 @@ const copy = {
     success: 'Danke. Deine Nachricht ist angekommen.',
     consent: 'Ich stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu.',
     consentLink: 'Datenschutz',
+    whatsapp: 'Nachricht in WhatsApp',
   },
   en: {
     title: 'Contact | Pavel Levdin',
@@ -50,6 +47,7 @@ const copy = {
     success: 'Thank you. Your message has arrived.',
     consent: 'I agree to the processing of my data to handle this request.',
     consentLink: 'Privacy Policy',
+    whatsapp: 'Message on WhatsApp',
   },
   ru: {
     title: 'Контакты | Павел Левдин',
@@ -65,6 +63,7 @@ const copy = {
     success: 'Спасибо. Сообщение отправлено.',
     consent: 'Я согласен на обработку персональных данных для обработки заявки.',
     consentLink: 'Политика конфиденциальности',
+    whatsapp: 'Написать в WhatsApp',
   },
 };
 
@@ -73,6 +72,12 @@ export function ContactPage() {
   const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru') as keyof typeof copy;
   const text = copy[lang];
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const contacts = getContacts(lang);
+  const contactRows: [LucideIcon, string, string, string][] = [
+    [Send, 'Telegram', contacts.telegram.handle, contacts.telegram.url],
+    [MessageCircle, 'WhatsApp', text.whatsapp, contacts.whatsapp.url],
+    [Mail, 'Email', contacts.email, contacts.mailto],
+  ];
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

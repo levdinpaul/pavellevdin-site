@@ -247,9 +247,6 @@
     "country": "Deutschland",
     "contact": "Kontakt",
     "email": "E-Mail",
-    "emailValue": "levdin.pavel@yandex.ru",
-    "phone": "Telefon",
-    "phoneValue": "+49 176 43141306",
     "vatId": "USt-IdNr.",
     "vatValue": "DE [Ihre USt-IdNr. oder 'nicht vorhanden']",
     "responsible": "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV",
@@ -436,39 +433,12 @@
       "eyebrow": "Über mich",
       "title": "Ich verbinde Design, Code und Geschäftslogik.",
       "lead": "Ich baue digitale Systeme: Positionierung, schnelles Frontend, SEO-Struktur, Analytics, Social Media und Automatisierung – damit Ihr Projekt auch nach dem Launch funktioniert.",
-      "cards": [
-        {
-          "title": "Vom Business gedacht",
-          "text": "Jede Seite hat eine Aufgabe: Vertrauen, Anfrage, Verkauf oder Automatisierung."
-        },
-        {
-          "title": "Starker Auftritt",
-          "text": "Hochwertige Optik, klare Hierarchie, Animationen und sorgfältige Details."
-        },
-        {
-          "title": "Technisches Fundament",
-          "text": "Performance, SEO, Schema, Analytics und skalierbare Architektur."
-        }
-      ],
-      "stats": [
-        {
-          "value": "10+",
-          "label": "Jahre Erfahrung"
-        },
-        {
-          "value": "100/100",
-          "label": "Lighthouse-Ziel"
-        },
-        {
-          "value": "DE / EN / RU",
-          "label": "drei Sprachen"
-        },
-        {
-          "value": "1",
-          "label": "Ansprechpartner für alles"
-        }
-      ],
-      "more": "Mehr über mich →"
+      "more": "Mehr über mich →",
+      "facts": {
+        "years": "Jahre Webentwicklung",
+        "projects": "Projekte im Portfolio",
+        "langs": "Website-Sprachen: DE · EN · RU"
+      }
     },
     "work": {
       "title": "Aktuelle Projekte",
@@ -497,11 +467,11 @@
         },
         {
           "title": "SEO & KI-Suche",
-          "text": "Damit man Sie in Google, Yandex und in den Antworten von KI-Assistenten findet.",
+          "text": "Damit man Sie in Google, Bing und in den Antworten von KI-Assistenten findet.",
           "points": [
             "Technisches SEO und schema.org",
             "AEO – Optimierung für die KI-Suche",
-            "Google Business Profile und Yandex Business",
+            "Google Business Profile und Bing Places",
             "Lokales SEO"
           ]
         },
@@ -511,7 +481,7 @@
           "points": [
             "Anfrageformulare → eigenes Backend → Benachrichtigung per Telegram",
             "REST / Strapi API",
-            "GA4 und GTM (Events, Conversions), Yandex Metrica, Search Console API",
+            "GA4 und GTM (Events, Conversions), Search Console API",
             "Magic-Link-Login, Multi-Tenant mit RLS"
           ]
         },
@@ -565,14 +535,16 @@
         }
       ],
       "more": "Mehr zu den Leistungen →",
-      "open": "Mehr erfahren"
+      "open": "Mehr erfahren",
+      "eyebrow": "Was ich mache"
     },
     "cta": {
       "title": "Bereit, Ihr Projekt zu starten?",
       "lead": "Ich antworte in der Regel innerhalb von 24 Stunden. Offen für neue Projekte.",
       "telegram": "Telegram",
       "whatsapp": "WhatsApp",
-      "brief": "Briefing ausfüllen"
+      "brief": "Briefing ausfüllen",
+      "email": "E-Mail schreiben"
     },
     "footer": {
       "location": "Hannover, Deutschland",
@@ -644,7 +616,7 @@
           "points": [
             "REST / Strapi API",
             "Formulare → eigenes Backend → Telegram",
-            "GA4 / GTM, Yandex Metrica, Search Console API",
+            "GA4 / GTM, Search Console API",
             "Magic-Link, Multi-Tenant mit RLS"
           ]
         },
@@ -663,7 +635,7 @@
           "points": [
             "Autoposting in sozialen Netzwerken",
             "Videos und Content für Social Media",
-            "Google Business Profile, Yandex Business",
+            "Google Business Profile, Bing Places",
             "Lokales SEO, AEO, schema.org"
           ]
         },
@@ -783,7 +755,52 @@
       "lead": "Ein Ansprechpartner für Design, Entwicklung, Sichtbarkeit, Integrationen, Automatisierung und Server.",
       "cta": "Briefing ausfüllen",
       "systemTitle": "Nicht nur eine Website, sondern die gesamte Online-Infrastruktur Ihres Unternehmens",
-      "systemText": "Positionierung, Website, Google Business, Yandex Business, Social Media, SEO, AEO, Analytics, CRM und Automatisierung greifen ineinander."
+      "systemText": "Positionierung, Website, Google Business Profile, Social Media, SEO, AEO, Analytics, CRM und Automatisierung greifen ineinander."
+    },
+    "prices": {
+      "eyebrow": "Preise",
+      "title": "Preise ab, netto",
+      "lead": "Richtwerte pro Paket. Der Endpreis steht nach dem Briefing fest – er hängt von Umfang, Integrationen und Zeitplan ab.",
+      "note": "Alle Preise sind „ab“-Preise, netto. Ein genaues Angebot erhalten Sie nach dem Briefing.",
+      "vatNote": "Umsatzsteuer-Hinweis folgt.",
+      "discuss": "Besprechen",
+      "duration": "Dauer",
+      "ongoing": "Betreuung nach dem Launch",
+      "homeLine": "Websites ab {{price}} netto",
+      "homeLink": "Alle Preise →"
+    },
+    "mui": {
+      "serpTitle": "Fensterbau in Hannover – Preise und Termine",
+      "chatQ": "Wie viele Anfragen kamen diese Woche über die Website?",
+      "chatA": "14 Anfragen, 9 davon aus der Suche. Zwei warten länger als einen Tag.",
+      "tgTitle": "Neue Anfrage von der Website",
+      "tgText": "Name, Kontakt und gewählte Leistung",
+      "postWhen": "Geplant · Fr 10:00"
+    },
+    "reviews": {
+      "eyebrow": "Kundenstimmen",
+      "title": "Was Kunden sagen",
+      "verified": "Verifizierter Kunde",
+      "case": "Projekt:",
+      "form": {
+        "metaTitle": "Bewertung abgeben | Pavel Levdin",
+        "title": "Bewertung abgeben",
+        "lead": "Ein paar Sätze zur Zusammenarbeit. Die Bewertung erscheint nach einer Prüfung auf der Website.",
+        "leadProject": "Bewertung zum Projekt „{{project}}“. Ein paar Sätze zur Zusammenarbeit – sie erscheint nach einer Prüfung auf der Website.",
+        "invalid": "Der Link ist ungültig. Schreiben Sie mir – ich schicke einen neuen.",
+        "name": "Name",
+        "role": "Position",
+        "company": "Unternehmen",
+        "text": "Bewertung",
+        "rating": "Bewertung (Sterne)",
+        "contact": "E-Mail für Rückfragen (wird nicht veröffentlicht)",
+        "consentPublish": "Ich bin einverstanden, dass meine Bewertung mit Name, Position und Unternehmen auf pavellevdin.ru veröffentlicht wird.",
+        "consent": "Ich stimme der Verarbeitung meiner Daten zu.",
+        "send": "Bewertung senden",
+        "success": "Danke! Ihre Bewertung wird geprüft und dann veröffentlicht.",
+        "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder per Telegram @PavelLevdin schreiben.",
+        "home": "Zur Startseite →"
+      }
     }
   }
 }

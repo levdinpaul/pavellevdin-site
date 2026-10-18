@@ -10,10 +10,16 @@ export function Counter({ value, suffix = '' }: { value: number; suffix?: string
   useEffect(() => {
     const el = ref.current;
     if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (el.getBoundingClientRect().top < window.innerHeight) return;
-    el.textContent = `0${suffix}`;
     let raf = 0;
+    let first = true;
+    // Первый колбэк IO сообщает исходное положение без принудительного layout (вместо getBoundingClientRect).
     const io = new IntersectionObserver(([e]) => {
+      if (first) {
+        first = false;
+        if (e.isIntersecting || e.boundingClientRect.top < 0) { io.disconnect(); return; }
+        el.textContent = `0${suffix}`;
+        return;
+      }
       if (!e.isIntersecting) return;
       io.disconnect();
       const start = performance.now(), dur = 1200;

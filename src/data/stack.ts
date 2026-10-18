@@ -5,7 +5,12 @@
 export interface StackItem {
   name: string;
   key: boolean;
+  /** Только для этих локалей (нет поля — для всех). */
+  locales?: readonly string[];
 }
+
+/** Технологии рынка РФ: на de/en не показываются. */
+const RU_ONLY = new Set(['Яндекс Метрика']);
 
 const KEY = ['Next.js', 'React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Docker', 'nginx', 'REST API', 'Telegram Bot API', 'Claude API', 'MCP', 'SEO'];
 const MORE = [
@@ -19,8 +24,17 @@ export const STACK: readonly StackItem[] = (() => {
   let m = 0;
   KEY.forEach((name) => {
     out.push({ name, key: true });
-    for (let i = 0; i < 2 && m < MORE.length; i++) out.push({ name: MORE[m++], key: false });
+    for (let i = 0; i < 2 && m < MORE.length; i++) out.push(more(MORE[m++]));
   });
-  while (m < MORE.length) out.push({ name: MORE[m++], key: false });
+  while (m < MORE.length) out.push(more(MORE[m++]));
   return out;
 })();
+
+function more(name: string): StackItem {
+  return RU_ONLY.has(name) ? { name, key: false, locales: ['ru'] } : { name, key: false };
+}
+
+/** Стек для конкретной локали (спираль, SEO-список, бегущая строка). */
+export function stackFor(lang: string): readonly StackItem[] {
+  return STACK.filter((item) => !item.locales || item.locales.includes(lang));
+}

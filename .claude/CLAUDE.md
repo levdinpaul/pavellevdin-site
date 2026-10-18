@@ -21,7 +21,8 @@ Project-brief. Читается при работе в этом репозито
   - **Поэтому трёхъязычную i18n (de/en/ru) и DSGVO-заготовки НЕ выпиливать** — это активы фазы 2.
     Архитектуру держать мульти-рынок / мульти-домен ready (домен — через env-константу, а не хардкод).
 
-- Контакты: Telegram + email `levdin.pavel@yandex.ru`. Город: **Hannover** (с 2026-10-18; прежний город больше не используется).
+- Контакты: Telegram + email по локали — `getContacts(lang)` в `src/constants/contacts.ts` (ru → info@pavellevdin.ru,
+  de/en → info@pavellevdin.de при `VITE_DE_MAIL_READY=true` в `env/.env`). **Телефон нигде не публикуется** (WhatsApp — только кнопкой wa.me). Город: **Hannover** (с 2026-10-18; прежний город больше не используется).
   Адрес — ИНКОГНИТО (решение Pavel 2026-10-18): улицу/индекс не публиковать нигде, только «Hannover, Germany».
 
 ## Стек
@@ -41,7 +42,7 @@ Project-brief. Читается при работе в этом репозито
   `pages/blog/*`; `pages/admin/*`.
 - `components/` — `layout/` (SiteHeader, Footer, Layout), `pl/` (ProjectCard, ServicesGrid, Integrations, Counter,
   Marquee, PageMeta+seo), `ds/CommandMenu` (⌘K), `ui/` (shadcn), `admin/`, `blog/`.
-- `data/` — **stack.ts** (реальный стек: спираль, SEO-список, бегущая строка About) + **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
+- `data/` — **pricing.json** (цены ru ₽ / eu € netto, правится без кода) + **reviews.json** (снимок одобренных отзывов, пишет `scripts/fetch-reviews.cjs` при сборке) + **stack.ts** (реальный стек: спираль, SEO-список, бегущая строка About; поле `locales`) + **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
   testimonials.ts, blog-index/loader.
 - `constants/contacts.ts` — единый источник контактов.
 - `i18n/locales/` — de.json / en.json / ru.json (держать синхронными).
@@ -53,6 +54,7 @@ Project-brief. Читается при работе в этом репозито
 - `npm run dev` — Vite dev (НЕ запускать без запроса Pavel).
 - `npm run build` — `tsc -b && vite build` (без пререндера).
 - `npm run build:static` — **прод-сборка**: vite build + SSR build + turbo-feed + `prerender.cjs` (/ru-маршруты в HTML).
+  Vite читает env только из `env/` (`envDir`): корневой `.env` — admin-сервера (NODE_ENV=development → dev-React в бандле!).
 - `npm run preview:static` — проверка пререндера (:4188), НЕ `vite preview`.
 - `npm run photo` — **замена фото «Обо мне» в одно действие**: положить файл как `_design/photo-source.<jpg|png|webp|avif>`
   и запустить — соберутся `public/about/photo-{480,720}.{avif,webp}` (≤ 90 КБ). Подробно — README.
@@ -70,6 +72,8 @@ Project-brief. Читается при работе в этом репозито
 - Процесс: `npm run build:static` → `tar czf - -C dist . > dist.tgz` → `scp` → распаковать в `dist.new`, `chown ubuntu:ubuntu`
   → `mv dist dist.bak-<дата> && mv dist.new dist` → `cd /srv/stack && docker compose restart pavellevdin` → curl всех /ru-маршрутов.
   Откат: `mv dist.bak-<дата> dist` + restart. Перед заменой dist — бэкап и сверка контента блога сервер↔репо (md5).
+- Бэкенд-файлы (`scripts/*.js`, `scripts/routes`, `scripts/lib`, `scripts/review-tokens.json`) — по одному, с бэкапом `*.bak-<дата>`;
+  отзывы — `scripts/data/reviews.json` (пишет приложение), модерация — админка → «Отзывы».
 - **НЕ трогать:** `scripts/data/` (лиды, api-keys, публикации), `.env`, `scripts/node_modules`, `/srv/stack/*` (кроме restart
   pavellevdin), другие сайты в `/srv/sites`. `htdocs/www` — старая копия HostLand (fallback в server.js).
 - GitHub (`levdinpaul/pavellevdin-site`, приватный; старый `levdinking/Code-Craft` заморожен на 05.04.2026, remote `old-levdinking`): `.github/workflows/ci.yml` только собирает, НЕ деплоит. Деплой — только с явного «деплой» Pavel.

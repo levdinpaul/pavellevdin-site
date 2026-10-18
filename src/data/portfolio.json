@@ -190,24 +190,24 @@
       "en": {
         "summary": "Website for a Russia-wide moving and freight company with a price-quote form on the first screen",
         "task": "A moving and freight company operating across Russia needed a website built to capture search leads. Visitors had to be able to leave a route and phone number right away, and each service and route needed its own landing page.",
-        "solution": "I built the site on Node/Express with the quote form right in the hero and a sticky \"Call / Get a quote\" bar at the bottom on mobile. Every service and route is a separate page aimed at a search query. A moving-tips blog and a Yandex Maps reviews widget add trust.",
+        "solution": "I built the site on Node/Express with the quote form right in the hero and a sticky \"Call / Get a quote\" bar at the bottom on mobile. Every service and route is a separate page aimed at a search query. A moving-tips blog and a map-reviews widget add trust.",
         "done": [
           "Quote form (from, to, volume, phone) with personal-data consent",
           "Separate service pages: home, office and country-house moves, groupage freight",
           "City-to-city route pages and a popular routes section",
-          "Moving-tips blog, FAQ and Yandex Maps reviews",
+          "Moving-tips blog, FAQ and map reviews",
           "Floating contact buttons (phone, email, MAX, VK) and a mobile CTA bar"
         ]
       },
       "de": {
         "summary": "Website für ein Umzugs- und Transportunternehmen in Russland, mit Preisanfrage direkt im ersten Screen",
         "task": "Ein Umzugs- und Transportunternehmen mit Einsatzgebiet in ganz Russland brauchte eine Website, die Anfragen aus der Suche einsammelt. Interessenten sollen sofort Strecke und Telefonnummer hinterlassen können, und jede Leistung und Strecke braucht eine eigene Landingpage.",
-        "solution": "Umgesetzt mit Node/Express: Das Anfrageformular steht direkt im Hero, auf dem Smartphone bleibt unten eine Leiste „Anrufen / Berechnen“ sichtbar. Jede Leistung und jede Strecke hat eine eigene Seite für die Suche. Ein Ratgeber-Blog und Bewertungen aus Yandex Maps schaffen Vertrauen.",
+        "solution": "Umgesetzt mit Node/Express: Das Anfrageformular steht direkt im Hero, auf dem Smartphone bleibt unten eine Leiste „Anrufen / Berechnen“ sichtbar. Jede Leistung und jede Strecke hat eine eigene Seite für die Suche. Ein Ratgeber-Blog und Kartenbewertungen schaffen Vertrauen.",
         "done": [
           "Anfrageformular (von, nach, Volumen, Telefon) mit Datenschutz-Einwilligung",
           "Eigene Leistungsseiten: Wohnungs-, Büro- und Datscha-Umzug, Sammelgut",
           "Streckenseiten und Übersicht beliebter Verbindungen",
-          "Ratgeber-Blog, FAQ, Bewertungen aus Yandex Maps",
+          "Ratgeber-Blog, FAQ, Kartenbewertungen",
           "Schwebende Kontaktbuttons (Telefon, E-Mail, MAX, VK) und mobile CTA-Leiste"
         ]
       }
@@ -550,11 +550,11 @@
       "en": {
         "summary": "Landing page for a house sale in Novaya Usman: room-by-room photos, video tour, floor plan, viewing requests",
         "task": "The goal was to sell one specific house and get viewing requests rather than calls asking things the listing already answers. Buyers needed to see everything about the house on one page: specs, rooms, location and price.",
-        "solution": "I built a single-page static site with a PHP enquiry form. All specs are collected in a table, the photo gallery is split by room, and the video tour loads only on click. There is also a downloadable PDF floor plan, a Yandex Maps route link and a sticky contact bar on mobile.",
+        "solution": "I built a single-page static site with a PHP enquiry form. All specs are collected in a table, the photo gallery is split by room, and the video tour loads only on click. There is also a downloadable PDF floor plan, a map route link and a sticky contact bar on mobile.",
         "done": [
           "Property spec table and a \"What's included in the price\" block",
           "Room-by-room photo gallery and a lazy-loaded video tour",
-          "Floor plan with PDF download and a Yandex Maps route",
+          "Floor plan with PDF download and a map route",
           "Viewing request form (PHP) with personal-data consent and spam protection",
           "Mobile contact bar: call, WhatsApp, MAX"
         ]
@@ -562,11 +562,11 @@
       "de": {
         "summary": "Landingpage für einen Hausverkauf in Nowaja Usman: Fotos nach Räumen, Videotour, Grundriss, Besichtigung",
         "task": "Ziel war, ein konkretes Haus zu verkaufen und Besichtigungsanfragen zu bekommen, statt Anrufe mit Fragen, die das Inserat bereits beantwortet. Käufer sollten alles Wichtige auf einer Seite finden: Eckdaten, Räume, Lage und Preis.",
-        "solution": "Umgesetzt als statische One-Page mit PHP-Anfrageformular. Alle Eckdaten stehen in einer Tabelle, die Fotogalerie ist nach Räumen gegliedert, die Videotour lädt erst auf Klick. Dazu kommen ein Grundriss als PDF, eine Route in Yandex Maps und eine feste Kontaktleiste auf dem Smartphone.",
+        "solution": "Umgesetzt als statische One-Page mit PHP-Anfrageformular. Alle Eckdaten stehen in einer Tabelle, die Fotogalerie ist nach Räumen gegliedert, die Videotour lädt erst auf Klick. Dazu kommen ein Grundriss als PDF, ein Routen-Link zur Karte und eine feste Kontaktleiste auf dem Smartphone.",
         "done": [
           "Tabelle mit Eckdaten und Block „Im Preis enthalten“",
           "Fotogalerie nach Räumen und Videotour mit Lazy Loading",
-          "Grundriss zum Download (PDF) und Route in Yandex Maps",
+          "Grundriss zum Download (PDF) und Routen-Link zur Karte",
           "Besichtigungsformular (PHP) mit Einwilligung und Spamschutz",
           "Mobile Kontaktleiste: Anruf, WhatsApp, MAX"
         ]

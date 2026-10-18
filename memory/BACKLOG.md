@@ -41,10 +41,23 @@
   (сейчас только токены/шапка/футер; amber-акценты в brief/contact остались).
 - [ ] Удалить неиспользуемые i18n-ключи старой главной (hero/about/advantages/…) и зависимость gsap.
 - [ ] GitHub Pages репо levdinking/Code-Craft больше не используется (origin → levdinpaul/pavellevdin-site).
-- [ ] (03b) micro-UI вместо картинок (окно браузера + Lighthouse, сниппет выдачи, лог API, чат с MCP) — после удаления
-  генераций блоки не пустеют (типографика), micro-UI — следующий шаг, если захочется визуала в услугах.
-- [ ] (03b) Неиспользуемые ключи pl.about.cards / pl.about.stats после упрощения «Обо мне» на главной.
+- [x] (03b→04a) micro-UI вместо картинок — сделано в 04a (главная «Что я делаю» + /services).
+- [x] (03b→04a) Ключи pl.about.cards / pl.about.stats удалены.
 - [ ] (03b) Удалить на сервере dist.bak-2026-10-18*, когда hero v4 стабилен.
+
+## 1d. После доводки 04a (2026-10-18)
+- [ ] **Почта info@pavellevdin.ru**: MX домена — HostLand (mail.pavellevdin.ru → sendmail.hostland.ru), не russh.
+  Ящик/алиас info@ создаётся в панели HostLand (доступа нет). Отправка писем о лидах готова в коде
+  (`scripts/lib/mailer.js`), но выключена, пока в серверном `.env` нет `SMTP_HOST` (+ `SMTP_PORT`, `SMTP_FROM`,
+  при необходимости `SMTP_USER/SMTP_PASS`). Варианты: SMTP HostLand с логином ящика (SPF уже include:_spf.hostland.ru)
+  или Postfix russh 172.19.0.1:587 (тогда добавить pavellevdin.ru в submission_senders и russh-IP в SPF).
+- [ ] **pavellevdin.de** — после регистрации: `env/.env` → `VITE_DE_MAIL_READY=true`, серверный `.env` → `DE_MAIL_READY=true`, ящик info@.
+- [ ] **USt-Hinweis** для de/en цен: ключ `pl.prices.vatNote` («Umsatzsteuer-Hinweis folgt» — заглушка), уточнить статус (Kleinunternehmer §19?).
+- [ ] Цены — `src/data/pricing.json` (предложение по рынку, Pavel правит без кода).
+- [ ] Отзывы: снимок одобренных попадает в статический HTML только при сборке (`scripts/fetch-reviews.cjs`);
+  новые одобренные видны сразу через /api/reviews. Новые персональные ссылки — `scripts/review-tokens.json`.
+- [ ] Если до загрузки WebGL идёт плавный программный скролл (scrollIntoView smooth) к секции ниже сцены, цель может
+  оказаться внутри выросшей сцены (браузерный smooth-scroll не знает о росте). Якоря/hash-переходы работают (top = 72).
 
 ## 1b. Найденные дефекты (2026-10-18)
 - [ ] Статья `tailwind-css-2026-architecture`: в `ru/de/en.json` нет `slug`/`published` → не пререндерится;

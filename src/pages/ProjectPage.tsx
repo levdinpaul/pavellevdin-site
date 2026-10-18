@@ -5,6 +5,7 @@ import { isOnline, projectCopy, projectImages, projects } from '@/data/projects'
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { useReveal } from '@/sections/scena/useReveal';
+import { Reviews } from '@/components/pl/Reviews';
 
 /** Страница кейса /:lang/portfolio/:slug — скриншоты реального сайта, Задача → Решение → Что сделано. */
 export function ProjectPage() {
@@ -117,6 +118,8 @@ export function ProjectPage() {
           </div>
         </section>
 
+        <div className="pl-container"><Reviews lang={lang} project={p.slug} /></div>
+
         <nav className="pl-container pl-section pl-case-nav" aria-label={t('pl.portfolio.title')}>
           <Link to={`/${lang}/portfolio/${prev.slug}`} viewTransition className="pl-tile pl-case-nav__link">
             <span className="pl-eyebrow">← {t('pl.project.prev')}</span><span className="pl-tile__title">{prev.title}</span>
@@ -131,7 +134,7 @@ export function ProjectPage() {
             <h2 className="pl-h2">{t('pl.project.ctaTitle')}</h2>
             <p className="pl-lead">{t('pl.project.ctaLead')}</p>
             <div className="pl-cta__actions">
-              <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary">{t('pl.project.ctaButton')}</Link>
+              <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary" data-magnetic="">{t('pl.project.ctaButton')}<span aria-hidden="true">→</span></Link>
             </div>
           </div>
         </section>

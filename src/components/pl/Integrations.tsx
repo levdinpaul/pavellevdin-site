@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Title } from './Title';
 
 const NODES = [
   { key: 'site', x: 82, y: 130 },
@@ -14,7 +15,7 @@ export function Integrations() {
     <div className="pl-integr">
       <div>
         <p className="pl-eyebrow" data-reveal="">{t('pl.integrations.eyebrow')}</p>
-        <h2 className="pl-h2 pl-integr__title" data-reveal="">{t('pl.integrations.title')}</h2>
+        <Title className="pl-h2 pl-integr__title" lines={[t('pl.integrations.title')]} />
         <p className="pl-lead" data-reveal="">{t('pl.integrations.lead')}</p>
       </div>
       <svg className="pl-integr__svg" viewBox="0 0 632 260" role="img" aria-label={t('pl.integrations.imageAlt')} data-reveal="">

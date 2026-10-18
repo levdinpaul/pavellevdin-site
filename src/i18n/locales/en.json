@@ -247,9 +247,6 @@
     "country": "Germany",
     "contact": "Contact",
     "email": "Email",
-    "emailValue": "levdin.pavel@yandex.ru",
-    "phone": "Phone",
-    "phoneValue": "+49 176 43141306",
     "vatId": "VAT ID",
     "vatValue": "DE [your VAT number or 'not applicable']",
     "responsible": "Responsible for content",
@@ -436,39 +433,12 @@
       "eyebrow": "About",
       "title": "I bring together design, code and business logic.",
       "lead": "I build digital systems: positioning, a fast frontend, SEO structure, analytics, social media and automation — so the project keeps working after launch.",
-      "cards": [
-        {
-          "title": "Business first",
-          "text": "Every page has a job: trust, an inquiry, a sale or automation."
-        },
-        {
-          "title": "Strong visuals",
-          "text": "A premium look, clear hierarchy, animations and careful details."
-        },
-        {
-          "title": "Solid tech foundation",
-          "text": "Speed, SEO, schema, analytics and scalable architecture."
-        }
-      ],
-      "stats": [
-        {
-          "value": "10+",
-          "label": "years of experience"
-        },
-        {
-          "value": "100/100",
-          "label": "Lighthouse target"
-        },
-        {
-          "value": "DE / EN / RU",
-          "label": "three languages"
-        },
-        {
-          "value": "1",
-          "label": "contact for everything"
-        }
-      ],
-      "more": "More about me →"
+      "more": "More about me →",
+      "facts": {
+        "years": "years in web development",
+        "projects": "projects in the portfolio",
+        "langs": "site languages: EN · DE · RU"
+      }
     },
     "work": {
       "title": "Recent projects",
@@ -497,11 +467,11 @@
         },
         {
           "title": "SEO & AI search",
-          "text": "So you get found on Google, Yandex and in AI assistant answers.",
+          "text": "So you get found on Google, Bing and in AI assistant answers.",
           "points": [
             "Technical SEO and schema.org",
             "AEO — optimization for AI search",
-            "Google Business Profile and Yandex Business",
+            "Google Business Profile and Bing Places",
             "Local SEO"
           ]
         },
@@ -511,7 +481,7 @@
           "points": [
             "Lead forms → own backend → Telegram notifications",
             "REST / Strapi API",
-            "GA4 and GTM (events, conversions), Yandex Metrica, Search Console API",
+            "GA4 and GTM (events, conversions), Search Console API",
             "Magic-link auth, multi-tenant with RLS"
           ]
         },
@@ -565,14 +535,16 @@
         }
       ],
       "more": "More about services →",
-      "open": "Learn more"
+      "open": "Learn more",
+      "eyebrow": "What I do"
     },
     "cta": {
       "title": "Ready to start your project?",
       "lead": "I usually reply within 24 hours. Available for new projects.",
       "telegram": "Telegram",
       "whatsapp": "WhatsApp",
-      "brief": "Fill out the brief"
+      "brief": "Fill out the brief",
+      "email": "Send an email"
     },
     "footer": {
       "location": "Hannover, Germany",
@@ -644,7 +616,7 @@
           "points": [
             "REST / Strapi API",
             "Forms → own backend → Telegram",
-            "GA4 / GTM, Yandex Metrica, Search Console API",
+            "GA4 / GTM, Search Console API",
             "Magic link, multi-tenant with RLS"
           ]
         },
@@ -663,7 +635,7 @@
           "points": [
             "Autoposting to social networks",
             "Video and content for social media",
-            "Google Business Profile, Yandex Business",
+            "Google Business Profile, Bing Places",
             "Local SEO, AEO, schema.org"
           ]
         },
@@ -783,7 +755,52 @@
       "lead": "One person for design, development, visibility, integrations, automation and servers.",
       "cta": "Fill out the brief",
       "systemTitle": "Not just a website, but your business's entire online infrastructure",
-      "systemText": "Positioning, website, Google Business, Yandex Business, social media, SEO, AEO, analytics, CRM and automation all work together."
+      "systemText": "Positioning, website, Google Business Profile, social media, SEO, AEO, analytics, CRM and automation all work together."
+    },
+    "prices": {
+      "eyebrow": "Pricing",
+      "title": "Prices from, net",
+      "lead": "Guide prices per package. The final price follows the brief – it depends on scope, integrations and timeline.",
+      "note": "All prices are starting prices, net. You get an exact quote after the brief.",
+      "vatNote": "VAT note to follow.",
+      "discuss": "Discuss",
+      "duration": "Timeline",
+      "ongoing": "Ongoing care after launch",
+      "homeLine": "Websites from {{price}} (net)",
+      "homeLink": "All prices →"
+    },
+    "mui": {
+      "serpTitle": "Window repair in Hannover – prices and timelines",
+      "chatQ": "How many leads came from the website this week?",
+      "chatA": "14 leads, 9 of them from search. Two have waited over a day.",
+      "tgTitle": "New lead from the website",
+      "tgText": "Name, contact and chosen service",
+      "postWhen": "Scheduled · Fri 10:00"
+    },
+    "reviews": {
+      "eyebrow": "Reviews",
+      "title": "What clients say",
+      "verified": "Verified client",
+      "case": "Case study:",
+      "form": {
+        "metaTitle": "Leave a review | Pavel Levdin",
+        "title": "Leave a review",
+        "lead": "A few sentences about working together. The review appears on the site after moderation.",
+        "leadProject": "Review for “{{project}}”. A few sentences about working together – it appears on the site after moderation.",
+        "invalid": "This link is invalid. Message me and I will send a new one.",
+        "name": "Name",
+        "role": "Position",
+        "company": "Company",
+        "text": "Review",
+        "rating": "Rating",
+        "contact": "Email for questions (not published)",
+        "consentPublish": "I agree that my review is published with my name, position and company on pavellevdin.ru.",
+        "consent": "I agree to the processing of my personal data.",
+        "send": "Send review",
+        "success": "Thank you! Your review has been sent for moderation.",
+        "error": "Sending failed. Please try again or message @PavelLevdin on Telegram.",
+        "home": "Back to home →"
+      }
     }
   }
 }

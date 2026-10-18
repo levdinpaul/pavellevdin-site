@@ -8,6 +8,10 @@ import { visualizer } from 'rollup-plugin-visualizer'
 export default defineConfig(({ command }) => ({
   base: '/',
   publicDir: 'public',
+  // Корневой .env принадлежит admin-серверу (NODE_ENV=development, секреты). Если Vite его читает,
+  // NODE_ENV из него переключает сборку на development-React (jsxDEV, ×2–3 Script Evaluation).
+  // Фронтенду нужны только VITE_* — они в env/.env.
+  envDir: path.resolve(__dirname, 'env'),
   plugins: [
     // inspectAttr — только для dev: в прод-сборке он засоряет HTML атрибутами code-path
     // и ломает дедупликацию тегов react-helmet-async (дубли <title>/<canonical>).

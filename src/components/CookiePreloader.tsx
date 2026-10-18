@@ -10,13 +10,13 @@ interface CookieConsentProps {
 const fallback = {
   de: {
     title: 'Cookies & Analyse',
-    desc: 'Notwendige Cookies sind immer aktiv. Mit „Akzeptieren“ stimmen Sie zusätzlich der Web-Analyse (Yandex.Metrica, Google Analytics) zu. Bei „Ablehnen“ bleiben nur notwendige Cookies.',
+    desc: 'Notwendige Cookies sind immer aktiv. Mit „Akzeptieren“ stimmen Sie zusätzlich der Web-Analyse (Google Analytics) zu. Bei „Ablehnen“ bleiben nur notwendige Cookies.',
     accept: 'Akzeptieren',
     decline: 'Ablehnen',
   },
   en: {
     title: 'Cookies & analytics',
-    desc: 'Necessary cookies are always on. Click “Accept” to also allow web analytics (Yandex.Metrica, Google Analytics). Choose “Decline” to keep only necessary cookies.',
+    desc: 'Necessary cookies are always on. Click “Accept” to also allow web analytics (Google Analytics). Choose “Decline” to keep only necessary cookies.',
     accept: 'Accept',
     decline: 'Decline',
   },

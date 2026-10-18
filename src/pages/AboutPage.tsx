@@ -2,15 +2,16 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
-import { CONTACTS } from '@/constants/contacts';
+import { getContacts } from '@/constants/contacts';
 import { Counter } from '@/components/pl/Counter';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE } from '@/components/pl/seo';
 import { Marquee } from '@/components/pl/Marquee';
-import { STACK } from '@/data/stack';
+import { stackFor } from '@/data/stack';
 import { ProjectCard } from '@/components/pl/ProjectCard';
 import { TelegramIcon, WhatsAppIcon } from '@/components/layout/social-icons';
 import { useReveal } from '@/sections/scena/useReveal';
+import { Title } from '@/components/pl/Title';
 
 type Group = { title: string; points: string[] };
 type Item = { title: string; text: string };
@@ -27,6 +28,7 @@ export function AboutPage() {
   const principles = t('pl.aboutPage.principles', { returnObjects: true }) as Item[];
   const featured = projects.filter((p) => p.featured).slice(0, 3);
   const url = `${SITE}/${lang}/about`;
+  const contacts = getContacts(lang);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -40,9 +42,9 @@ export function AboutPage() {
       alternateName: 'Павел Левдин',
       jobTitle: 'Web Developer',
       image: `${SITE}/about/photo-720.webp`,
-      email: `mailto:${CONTACTS.email}`,
+      email: contacts.mailto,
       address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
-      sameAs: [CONTACTS.telegram.url],
+      sameAs: [contacts.telegram.url],
       worksFor: { '@type': 'Organization', name: 'PL Innovativ Digitalbau', url: SITE },
     },
   };
@@ -84,7 +86,7 @@ export function AboutPage() {
           <div className="pl-split">
             <div>
               <p className="pl-eyebrow" data-reveal="">{t('pl.aboutPage.skillsEyebrow')}</p>
-              <h2 id="pl-skills-title" className="pl-h2" data-reveal="">{t('pl.aboutPage.skillsTitle')}</h2>
+              <Title id="pl-skills-title" className="pl-h2" lines={[t('pl.aboutPage.skillsTitle')]} />
             </div>
           </div>
           <ul className="pl-skills">
@@ -101,7 +103,7 @@ export function AboutPage() {
           <div className="pl-split">
             <div>
               <p className="pl-eyebrow" data-reveal="">{t('pl.aboutPage.processEyebrow')}</p>
-              <h2 id="pl-process-title" className="pl-h2" data-reveal="">{t('pl.aboutPage.processTitle')}</h2>
+              <Title id="pl-process-title" className="pl-h2" lines={[t('pl.aboutPage.processTitle')]} />
             </div>
           </div>
           <ol className="pl-process">
@@ -116,8 +118,8 @@ export function AboutPage() {
         </section>
 
         <section className="pl-section" aria-label={t('pl.aboutPage.stackTitle')}>
-          <div className="pl-container"><h2 className="pl-h2 pl-stack__title" data-reveal="">{t('pl.aboutPage.stackTitle')}</h2></div>
-          <Marquee items={STACK.map((item) => item.name)} label={t('pl.aboutPage.stackTitle')} />
+          <div className="pl-container"><Title className="pl-h2 pl-stack__title" lines={[t('pl.aboutPage.stackTitle')]} /></div>
+          <Marquee items={stackFor(lang).map((item) => item.name)} label={t('pl.aboutPage.stackTitle')} />
         </section>
 
         <section className="pl-container pl-section" aria-labelledby="pl-featured-title">
@@ -132,7 +134,7 @@ export function AboutPage() {
 
         <section className="pl-container pl-section" aria-labelledby="pl-principles-title">
           <p className="pl-eyebrow" data-reveal="">{t('pl.aboutPage.principlesEyebrow')}</p>
-          <h2 id="pl-principles-title" className="pl-h2 pl-mb" data-reveal="">{t('pl.aboutPage.principlesTitle')}</h2>
+          <Title id="pl-principles-title" className="pl-h2 pl-mb" lines={[t('pl.aboutPage.principlesTitle')]} />
           <ul className="pl-principles">
             {principles.map((p, i) => (
               <li key={p.title} className="pl-tile" data-reveal="">
@@ -149,10 +151,11 @@ export function AboutPage() {
             <h2 className="pl-h2">{t('pl.aboutPage.ctaTitle')}</h2>
             <p className="pl-lead">{t('pl.aboutPage.ctaLead')}</p>
             <div className="pl-cta__actions">
-              <a href={CONTACTS.telegram.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--primary"><TelegramIcon /> {CONTACTS.telegram.handle}</a>
-              <a href={CONTACTS.whatsapp.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--ghost"><WhatsAppIcon /> {CONTACTS.whatsapp.phone}</a>
+              <a href={contacts.telegram.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--primary"><TelegramIcon /> {contacts.telegram.handle}</a>
+              <a href={contacts.whatsapp.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--ghost"><WhatsAppIcon /> {t('pl.cta.whatsapp')}</a>
+              <a href={contacts.mailto} className="pl-btn pl-btn--ghost">{t('pl.cta.email')}</a>
             </div>
-            <p className="pl-cta__meta"><a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a> · {t('pl.footer.location')}</p>
+            <p className="pl-cta__meta"><a href={contacts.mailto}>{contacts.email}</a> · {t('pl.footer.location')}</p>
           </div>
         </section>
       </div>

@@ -2,32 +2,43 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
-import { CONTACTS } from '@/constants/contacts';
+import { getContacts } from '@/constants/contacts';
 import { ProjectCard } from '@/components/pl/ProjectCard';
-import { ServicesGrid } from '@/components/pl/ServicesGrid';
 import { Integrations } from '@/components/pl/Integrations';
+import { PriceLine } from '@/components/pl/Pricing';
+import { Counter } from '@/components/pl/Counter';
+import { MicroUI } from '@/components/pl/MicroUI';
+import { SERVICE_MICRO } from '@/components/pl/micro-kinds';
+import { Title } from '@/components/pl/Title';
+import { Reviews } from '@/components/pl/Reviews';
 import { useReveal } from './useReveal';
 
-/** Секции главной после сцены: Проекты (сразу после финала полёта) → Обо мне → Услуги → Интеграции → CTA. */
+type Service = { title: string; text: string };
+
+/** Секции главной после сцены: Проекты → Отзывы (если есть) → Обо мне → Что я делаю → Интеграции → CTA. */
 export function HomeSections({ lang }: { lang: string }) {
   const { t } = useTranslation();
   const root = useRef<HTMLDivElement>(null);
   useReveal(root);
 
+  const contacts = getContacts(lang);
   const work = projects.filter((p) => p.featured).slice(0, 6);
+  const services = (t('pl.services.items', { returnObjects: true }) as Service[]).slice(0, 4);
 
   return (
     <div ref={root} className="pl-main">
       <div className="pl-container">
         <section id="work" className="pl-section" aria-labelledby="pl-work-title">
-          <div className="pl-section__head" data-reveal="">
-            <h2 id="pl-work-title" className="pl-h2">{t('pl.work.title')}</h2>
-            <Link to={`/${lang}/portfolio`} className="pl-link">{t('pl.work.all')}</Link>
+          <div className="pl-section__head">
+            <Title id="pl-work-title" lines={[t('pl.work.title')]} />
+            <Link to={`/${lang}/portfolio`} viewTransition className="pl-link" data-reveal="">{t('pl.work.all')}</Link>
           </div>
           <ul className="pl-work__grid">
             {work.map((p) => <li key={p.slug} data-reveal=""><ProjectCard project={p} lang={lang} /></li>)}
           </ul>
         </section>
+
+        <Reviews lang={lang} />
 
         <section id="about" className="pl-section pl-about" aria-labelledby="pl-about-title">
           <figure className="pl-about__photo" data-reveal="">
@@ -39,17 +50,34 @@ export function HomeSections({ lang }: { lang: string }) {
           </figure>
           <div className="pl-about__text">
             <p className="pl-eyebrow" data-reveal="">{t('pl.about.eyebrow')}</p>
-            <h2 id="pl-about-title" className="pl-h2 pl-about__title" data-reveal="">{t('pl.about.title')}</h2>
+            <Title id="pl-about-title" className="pl-h2 pl-about__title" lines={[t('pl.about.title')]} />
             <p className="pl-lead" data-reveal="">{t('pl.about.lead')}</p>
-            <Link to={`/${lang}/about`} className="pl-link pl-about__more" data-reveal="">{t('pl.about.more')}</Link>
+            <dl className="pl-facts" data-reveal="">
+              <div><dt><Counter value={10} suffix="+" /></dt><dd>{t('pl.about.facts.years')}</dd></div>
+              <div><dt><Counter value={projects.length} /></dt><dd>{t('pl.about.facts.projects')}</dd></div>
+              <div><dt><Counter value={3} /></dt><dd>{t('pl.about.facts.langs')}</dd></div>
+            </dl>
+            <Link to={`/${lang}/about`} viewTransition className="pl-link pl-about__more" data-reveal="">{t('pl.about.more')}</Link>
           </div>
         </section>
 
         <section id="services" className="pl-section" aria-labelledby="pl-services-title">
-          <h2 id="pl-services-title" className="pl-h2" data-reveal="">{t('pl.services.title')}</h2>
+          <p className="pl-eyebrow" data-reveal="">{t('pl.services.eyebrow')}</p>
+          <Title id="pl-services-title" lines={[t('pl.services.title')]} />
           <p className="pl-lead pl-services__lead" data-reveal="">{t('pl.services.lead')}</p>
-          <ServicesGrid />
-          <Link to={`/${lang}/services`} className="pl-link pl-services__more">{t('pl.services.more')}</Link>
+          <ol className="pl-do">
+            {services.map((s, i) => (
+              <li key={s.title} data-reveal="">
+                <MicroUI kind={SERVICE_MICRO[i] ?? 'browser'} />
+                <h3 className="pl-srv__title">{s.title}</h3>
+                <p className="pl-srv__text">{s.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="pl-services__foot">
+            <PriceLine lang={lang} />
+            <Link to={`/${lang}/services`} viewTransition className="pl-link pl-services__more" data-reveal="">{t('pl.services.more')}</Link>
+          </div>
         </section>
 
         <section id="integrations" className="pl-section" aria-label={t('pl.integrations.eyebrow')}>
@@ -61,11 +89,12 @@ export function HomeSections({ lang }: { lang: string }) {
             <h2 id="pl-cta-title" className="pl-h2">{t('pl.cta.title')}</h2>
             <p className="pl-lead">{t('pl.cta.lead')}</p>
             <div className="pl-cta__actions">
-              <a href={CONTACTS.telegram.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--primary">{t('pl.cta.telegram')} {CONTACTS.telegram.handle}</a>
-              <a href={CONTACTS.whatsapp.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--ghost">{t('pl.cta.whatsapp')} {CONTACTS.whatsapp.phone}</a>
+              <a href={contacts.telegram.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--primary" data-magnetic="">{t('pl.cta.telegram')} {contacts.telegram.handle}<span aria-hidden="true">↗</span></a>
+              <a href={contacts.whatsapp.url} target="_blank" rel="noopener noreferrer" className="pl-btn pl-btn--ghost">{t('pl.cta.whatsapp')}</a>
+              <a href={contacts.mailto} className="pl-btn pl-btn--ghost">{t('pl.cta.email')}</a>
               <Link to={`/${lang}/brief`} className="pl-btn pl-btn--ghost">{t('pl.cta.brief')}</Link>
             </div>
-            <p className="pl-cta__meta"><a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a> · {t('pl.footer.location')}</p>
+            <p className="pl-cta__meta"><a href={contacts.mailto}>{contacts.email}</a> · {t('pl.footer.location')}</p>
           </div>
         </section>
       </div>

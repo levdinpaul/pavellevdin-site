@@ -10,7 +10,7 @@
   overflow: clip;
   isolation: isolate;
 }
-.pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 380svh); }
+.pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 610svh); }
 .pl-scene[data-motion='live'] .pl-stage {
   position: sticky;
   top: min(0px, calc(100svh - var(--scene-frame-height)));
@@ -255,7 +255,7 @@
   .pl-scene .pl-tech-fallback { gap: 8px 14px; font-size: 9px; }
 }
 @media (max-width: 767px) {
-  .pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 300svh); }
+  .pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 480svh); }
   .pl-scene .pl-hero {
     justify-content: flex-start;
     padding: clamp(132px, 20svh, 180px) 24px 138px;

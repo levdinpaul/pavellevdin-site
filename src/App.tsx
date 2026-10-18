@@ -69,6 +69,8 @@ const PortfolioPage = lazy(() => import('@/pages/PortfolioPage').then(m => ({ de
 const ProjectPage = lazy(() => import('@/pages/ProjectPage').then(m => ({ default: m.ProjectPage })));
 const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ServicesPage = lazy(() => import('@/pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
+const ReviewPage = lazy(() => import('@/pages/ReviewPage').then(m => ({ default: m.ReviewPage })));
+const AdminReviews = lazy(() => import('@/pages/admin/AdminReviews').then(m => ({ default: m.AdminReviews })));
 const ContactPage = lazy(() => import('@/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const BriefPage = lazy(() => import('@/pages/BriefPage').then(m => ({ default: m.BriefPage })));
 const BusinessCardPage = lazy(() => import('@/pages/BusinessCardPage').then(m => ({ default: m.BusinessCardPage })));
@@ -100,20 +102,30 @@ function AdminFallback() {
   );
 }
 
+// Короткая ссылка /review/<token> → /ru/review/<token>
+function ReviewRedirect() {
+  const { token } = useParams();
+  return <Navigate to={`/ru/review/${token ?? ''}`} replace />;
+}
+
 // Router-agnostic содержимое приложения: маршруты + cookie-баннер.
 // Клиент оборачивает это в <BrowserRouter>, SSR-пререндер — в <StaticRouter> (см. entry-server.tsx).
 export function AppRoutes() {
   const { consent, isLoaded, accept, decline } = useCookieConsent();
+  const { pathname } = useLocation();
+  const isRu = pathname === '/ru' || pathname.startsWith('/ru/');
 
+  // GA4 — на всех языках после согласия; Яндекс.Метрика — только на /ru (рынок РФ).
   useEffect(() => {
-    if (consent === true) loadAnalytics();
-  }, [consent]);
+    if (consent === true) loadAnalytics({ yandex: isRu });
+  }, [consent, isRu]);
 
   return (
     <>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Navigate to={`/${detectBrowserLanguage()}`} replace />} />
+        <Route path="/review/:token" element={<ReviewRedirect />} />
         <Route path="/:lang" element={<LangLayout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<AboutPage />} />
@@ -129,6 +141,7 @@ export function AppRoutes() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="imprint" element={<ImprintPage />} />
           <Route path="privacy" element={<PrivacyPage />} />
+          <Route path="review/:token" element={<ReviewPage />} />
         </Route>
         {/* Admin routes (lazy-loaded, separate layout) */}
         <Route path="/:lang/admin">
@@ -143,6 +156,7 @@ export function AppRoutes() {
               <Route path="publications/create" element={<Suspense fallback={<AdminFallback />}><AdminCreatePublication /></Suspense>} />
               <Route path="publish" element={<Suspense fallback={<AdminFallback />}><AdminManualPublish /></Suspense>} />
               <Route path="settings" element={<Suspense fallback={<AdminFallback />}><AdminSettings /></Suspense>} />
+              <Route path="reviews" element={<Suspense fallback={<AdminFallback />}><AdminReviews /></Suspense>} />
             </Route>
           </Route>
         </Route>

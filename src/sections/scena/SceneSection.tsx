@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import type { SceneGL } from './scene-gl';
-import { STACK } from '@/data/stack';
+import { stackFor } from '@/data/stack';
 import { clamp, fallbackSpiral, FINALE, FLIGHT, HERO_END, smoothstep } from './scene-model';
 import './scene.css';
 
@@ -19,6 +19,8 @@ const SECONDARY_PATH = fallbackSpiral(Math.PI);
  */
 export function SceneSection({ lang }: { lang: string }) {
   const { t } = useTranslation();
+  const stack = stackFor(lang);
+  const labelCount = stack.length;
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -81,15 +83,16 @@ export function SceneSection({ lang }: { lang: string }) {
       if (!graphics || !visible || document.hidden || disposed) return;
       const elapsed = Math.min(64, Math.max(1, time - (lastTime || time - 16)));
       lastTime = time;
-      currentProgress += (targetProgress - currentProgress) * (1 - Math.exp(-elapsed / 78));
+      // Soft follow (≈ lerp 0.06 per 60 Hz frame): the flight trails the scroll a little instead of jumping.
+      currentProgress += (targetProgress - currentProgress) * (1 - Math.exp(-elapsed / 260));
       if (Math.abs(targetProgress - currentProgress) < 0.00015) currentProgress = targetProgress;
 
-      const heroOpacity = 1 - smoothstep(0.015, HERO_END, currentProgress);
+      const heroOpacity = 1 - smoothstep(0.01, HERO_END, currentProgress);
       hero.style.opacity = heroOpacity.toFixed(3);
       hero.style.transform = `translate3d(0, ${(-28 * (1 - heroOpacity)).toFixed(2)}px, 0)`;
       hero.style.visibility = heroOpacity < 0.01 ? 'hidden' : 'visible';
       hero.inert = heroOpacity < 0.08;
-      const controlsOpacity = smoothstep(HERO_END, 0.24, currentProgress) * (1 - smoothstep(FLIGHT[1] - 0.04, FLIGHT[1], currentProgress));
+      const controlsOpacity = smoothstep(HERO_END, 0.15, currentProgress) * (1 - smoothstep(FLIGHT[1] - 0.025, FLIGHT[1], currentProgress));
       controls.style.opacity = controlsOpacity.toFixed(3);
       controls.style.visibility = controlsOpacity < 0.01 ? 'hidden' : 'visible';
       controls.inert = controlsOpacity < 0.5;
@@ -137,14 +140,20 @@ export function SceneSection({ lang }: { lang: string }) {
       try {
         const module = await import('./scene-gl');
         if (disposed || request !== generation || !media.matches) return;
-        graphics = module.createSceneGL(canvas, STACK.length, reset);
+        graphics = module.createSceneGL(canvas, labelCount, reset);
         if (!graphics) return;
         // The section grows when it goes live. If the reader has already scrolled past the
         // compact hero, keep the content they are looking at in place.
+        // Scroll anchoring is off for this one jump and the jump is instant (html has smooth scrolling),
+        // otherwise the browser and this code both compensate, or the compensation animates across the page.
         const before = section.getBoundingClientRect();
+        const pastHero = -before.top > before.height - window.innerHeight;
+        const root = document.documentElement;
+        if (pastHero) root.style.overflowAnchor = 'none';
         section.dataset.motion = 'live';
-        if (-before.top > before.height - window.innerHeight) {
-          window.scrollBy(0, section.getBoundingClientRect().height - before.height);
+        if (pastHero) {
+          window.scrollTo({ top: window.scrollY + section.getBoundingClientRect().height - before.height, behavior: 'instant' });
+          requestAnimationFrame(() => root.style.removeProperty('overflow-anchor'));
         }
         graphics.resize();
         measureProgress();
@@ -219,7 +228,7 @@ export function SceneSection({ lang }: { lang: string }) {
       media.removeEventListener('change', onMotionChange);
       reset();
     };
-  }, []);
+  }, [labelCount]);
 
   return (
     <section ref={sectionRef} className="pl-scene" aria-labelledby="pl-hero-title">
@@ -241,21 +250,21 @@ export function SceneSection({ lang }: { lang: string }) {
             </h1>
             <p className="pl-hero__lead">{t('pl.hero.lead')}</p>
             <div className="pl-hero__actions">
-              <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary">{t('pl.hero.primary')}<span aria-hidden="true">↗</span></Link>
+              <Link to={`/${lang}/brief`} className="pl-btn pl-btn--primary" data-magnetic="">{t('pl.hero.primary')}<span aria-hidden="true">↗</span></Link>
               <a href="#work" className="pl-hero__secondary">{t('pl.hero.secondary')}<span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <p className="pl-hero__scroll" aria-hidden="true"><span />{t('pl.hero.scroll')}</p>
           <ul className="pl-tech-fallback" aria-hidden="true">
-            {STACK.filter((item) => item.key).map((item) => <li key={item.name}>{item.name}</li>)}
+            {stack.filter((item) => item.key).map((item) => <li key={item.name}>{item.name}</li>)}
           </ul>
           <ul className="pl-visually-hidden" aria-label={t('pl.scene.label')}>
-            {STACK.map((item) => <li key={item.name}>{item.name}</li>)}
+            {stack.map((item) => <li key={item.name}>{item.name}</li>)}
           </ul>
         </div>
 
         <div ref={labelsRef} className="pl-tech-cloud" aria-hidden="true">
-          {STACK.map((item) => (
+          {stack.map((item) => (
             <span key={item.name} className="pl-tech" data-key={item.key ? 'true' : undefined}>{item.name}</span>
           ))}
         </div>

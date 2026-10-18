@@ -6,17 +6,18 @@ import {
   User, 
   MapPin, 
   Mail, 
-  Phone, 
   Shield, 
   FileText, 
   Scale, 
   Copyright,
   Gavel 
 } from 'lucide-react';
+import { getContacts } from '@/constants/contacts';
 
 export function ImprintPage() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'de' | 'en' | 'ru';
+  const contacts = getContacts(lang);
 
   return (
     <Layout 
@@ -90,24 +91,11 @@ export function ImprintPage() {
                   {t('imprint.email')}
                 </h2>
                 <a 
-                  href={`mailto:${t('imprint.emailValue')}`} 
+                  href={contacts.mailto} 
                   className="text-lg font-medium text-primary hover:underline transition-colors"
                 >
-                  {t('imprint.emailValue')}
+                  {contacts.email}
                 </a>
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                <Phone className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-1">
-                  {t('imprint.phone')}
-                </h2>
-                <p className="text-lg font-medium">{t('imprint.phoneValue')}</p>
               </div>
             </div>
 

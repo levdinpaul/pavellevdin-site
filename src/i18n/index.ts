@@ -48,7 +48,6 @@ const ruImprint = {
   addressLine2: "Германия",
   country: "Германия",
   email: "Email",
-  emailValue: "levdin.pavel@yandex.ru",
   lastUpdated: "Последнее обновление"
 };
 
