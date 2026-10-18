@@ -45,7 +45,7 @@ Project-brief. Читается при работе в этом репозито
   NotFound (404).
 - `components/` — `layout/` (SiteHeader, Footer, Layout), `pl/` (ProjectCard, ServicesGrid, Integrations, Counter,
   Marquee, PageMeta+seo), `ds/CommandMenu` (⌘K), `ui/` (shadcn), `PlatformRedirect`.
-- `data/` — **pricing.json** (цены ru ₽ / eu € netto, правится без кода) + **reviews.json** (снимок одобренных отзывов, пишет `scripts/fetch-reviews.cjs` при сборке) + **stack.ts** (реальный стек: спираль, SEO-список, бегущая строка About; поле `locales`) + **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
+- `data/` — **pricing.json** (единый прайс ₽ — региональные медианы, см. memory/pricing-research-regions.md; de/en — пересчёт в € по курсу ЦБ РФ: fx-rate.json при сборке + /api/fx раз в сутки; секция calculator — калькулятор /:lang/calculator; копия в pl-platform — держать в синхроне) + **reviews.json** (снимок одобренных отзывов, пишет `scripts/fetch-reviews.cjs` при сборке) + **stack.ts** (реальный стек: спираль, SEO-список, бегущая строка About; поле `locales`) + **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
   testimonials.ts.
 - `constants/contacts.ts` — единый источник контактов.
 - `i18n/locales/` — de.json / en.json / ru.json (держать синхронными).

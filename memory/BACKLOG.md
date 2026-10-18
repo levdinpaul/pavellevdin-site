@@ -22,18 +22,18 @@
   зависимости `basic-ftp`, `multer`, `tinify` (не менять без решения Pavel); на сервере — старые файлы удалённых
   маршрутов в `scripts/routes|lib` (не подключены) и `/srv/sites/pavellevdin.ru/htdocs/www`.
 
-## 1d. pl-platform (после 04b, 2026-10-19) — репо levdinpaul/pl-platform
-- [ ] **Почта**: создать ящик info@pavellevdin.ru (HostLand) и вписать SMTP_* в `~/pl-platform/prod/.env` и `.env` сайта —
-  без этого не уходят письма (сброс пароля, уведомления, КП по почте).
-- [ ] **Ключ Claude** (`ANTHROPIC_API_KEY`) — на VPS не найден; агенты работают на Gemini (ключ из pochva-bot).
-- [ ] **Telegram** платформы (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) — пусто; уведомления о лидах шлёт сайт.
-- [ ] **152-ФЗ**: копия лидов уходит на сервер в Германии → уведомить РКН о трансграничной передаче (первичная запись — в РФ).
-- [ ] Реквизиты для КП (`PL_STEUERNUMMER`, `PL_IBAN`…) и формулировка `VAT_NOTE` (§ 19 UStG / «НДС не облагается»).
-- [ ] Капча: Yandex SmartCaptcha для форм входа/регистрации (сейчас только rate-limit + honeypot).
-- [ ] Cron платформы (scheduler-tick, watchdog, sysadmin) не настроен — пайплайн запускается вручную из «Команды».
-- [ ] cms: enum `content-topic.category` (tips/news/reviews/care) → категории блога; React #418 на /admin/team.
-- [ ] Блог: компонент SEO (meta title/description) в blog-post; кнопка «разослать в соцсети» после ручной публикации.
-- [ ] Скрипт деплоя на russh (scp + atomic mv + restart) вместо ручных шагов; удалить `dist.bak-*` после стабилизации.
+## 1d. pl-platform (после 05, 2026-10-19) — репо levdinpaul/pl-platform, прод на russh
+- [ ] **Почта**: ящик info@pavellevdin.ru на HostLand → SMTP_* в `/srv/sites/pavellevdin.ru/platform/.env` и `.env` сайта;
+  проверка — `docker compose exec strapi npm run mail:test -- адрес` и `docker exec stack-pavellevdin-1 node scripts/mail-test.cjs адрес`.
+- [ ] **Telegram**: в `.env` сайта TELEGRAM_TOKEN/TELEGRAM_CHAT_ID пустые (уведомления сайта о лидах не уходили!) →
+  вписать, затем `/srv/sites/pavellevdin.ru/platform/sync-telegram.sh` (копирует в платформу) и `docker restart stack-pavellevdin-1`.
+- [ ] **VK ID**: приложение на id.vk.com, redirect `https://pavellevdin.ru/api/auth/vk/callback` → VK_CLIENT_ID/SECRET в .env платформы.
+- [ ] **Ключ Claude** (`ANTHROPIC_API_KEY`) — нет; агенты на Gemini.
+- [ ] Реквизиты КП и режим налога — админка → Настройки → «Настройки студии».
+- [ ] Цены: магазин (100 000) вышел дешевле корпоративного (120 000) — медианы; при желании поднять.
+- [ ] Google-вход создаёт аккаунт без экрана согласия ПДн (сейчас выключен — нет GOOGLE_CLIENT_ID).
+- [ ] Капча (Yandex SmartCaptcha), cron scheduler-tick/watchdog/sysadmin, enum content-topic.category, SEO-компонент blog-post.
+- [ ] Скрипт деплоя сайта на russh; удалить `dist.bak-*` после стабилизации.
 
 ## 1c. После редизайна «PL Сцена» (2026-10-18)
 - [ ] Пререндер /de и /en (сейчас SPA, только /ru в HTML) — фаза 2; hreflang уже указывает на de/en.
