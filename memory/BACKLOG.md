@@ -17,14 +17,22 @@
 Полный план P0–P8 — в истории git (`git show v2-ssr-baseline:memory/BACKLOG.md`).
 
 ## 1a. Легаси HostLand/FTP (из аудита 2026-10-18)
-- [ ] **Блог-пайплайн админки сломан на russh:** `POST /api/articles/publish/:id` (`scripts/routes/articles.js:212-234`)
-  после `npm run build` + static-html вызывает `uploadDistToFTP` → без `FTP_HOST/USER/PASSWORD` падает 500.
-  Также FTP: `image-generator.js`, `media-manager.js`, `video-generator.js` (uploadSingleFile, локальный файл удаляется!),
-  тест «ftp» в `routes/settings.js`. Перевести на локальную запись в dist/public + `build:static`.
-- [ ] Publish-роут собирает `npm run build`, а не `build:static` → после публикации статьи с админки пропадёт SSR-пререндер.
-- [ ] Удалить legacy после замены: `deploy-only.cjs`, `restart-passenger.cjs`, `ftp-list.cjs`, `add-article.cjs`,
-  `lib/ftp-upload.js`, Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
-  зависимость `basic-ftp`; `/srv/sites/pavellevdin.ru/htdocs/www` на сервере.
+- [x] Блог-пайплайн/FTP старой админки — удалён в 04b (блог и агенты теперь в pl-platform).
+- [ ] Остатки legacy: Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
+  зависимости `basic-ftp`, `multer`, `tinify` (не менять без решения Pavel); на сервере — старые файлы удалённых
+  маршрутов в `scripts/routes|lib` (не подключены) и `/srv/sites/pavellevdin.ru/htdocs/www`.
+
+## 1d. pl-platform (после 04b, 2026-10-19) — репо levdinpaul/pl-platform
+- [ ] **Почта**: создать ящик info@pavellevdin.ru (HostLand) и вписать SMTP_* в `~/pl-platform/prod/.env` и `.env` сайта —
+  без этого не уходят письма (сброс пароля, уведомления, КП по почте).
+- [ ] **Ключ Claude** (`ANTHROPIC_API_KEY`) — на VPS не найден; агенты работают на Gemini (ключ из pochva-bot).
+- [ ] **Telegram** платформы (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) — пусто; уведомления о лидах шлёт сайт.
+- [ ] **152-ФЗ**: копия лидов уходит на сервер в Германии → уведомить РКН о трансграничной передаче (первичная запись — в РФ).
+- [ ] Реквизиты для КП (`PL_STEUERNUMMER`, `PL_IBAN`…) и формулировка `VAT_NOTE` (§ 19 UStG / «НДС не облагается»).
+- [ ] Капча: Yandex SmartCaptcha для форм входа/регистрации (сейчас только rate-limit + honeypot).
+- [ ] Cron платформы (scheduler-tick, watchdog, sysadmin) не настроен — пайплайн запускается вручную из «Команды».
+- [ ] cms: enum `content-topic.category` (tips/news/reviews/care) → категории блога; React #418 на /admin/team.
+- [ ] Блог: компонент SEO (meta title/description) в blog-post; кнопка «разослать в соцсети» после ручной публикации.
 - [ ] Скрипт деплоя на russh (scp + atomic mv + restart) вместо ручных шагов; удалить `dist.bak-*` после стабилизации.
 
 ## 1c. После редизайна «PL Сцена» (2026-10-18)
