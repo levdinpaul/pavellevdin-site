@@ -10,6 +10,11 @@ module.exports = {
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
+        // «PL Сцена»: старые под-страницы красились в cyan — шкала переопределена на акцент #7AA2FF
+        cyan: {
+          50: "#F2F6FF", 100: "#E3ECFF", 200: "#CCDBFF", 300: "#B9CDFF", 400: "#9AB8FF", 500: "#7AA2FF",
+          600: "#5C86EC", 700: "#4F74D9", 800: "#3B57A8", 900: "#2C3F78", 950: "#1A2548",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

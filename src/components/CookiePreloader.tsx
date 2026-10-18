@@ -35,10 +35,10 @@ export function CookiePreloader({ onAccept, onDecline }: CookieConsentProps) {
 
   return (
     <aside
-      className="rise fixed bottom-4 left-4 right-4 z-[80] mx-auto max-w-3xl rounded-2xl border border-white/10 bg-slate-950/90 p-4 text-white shadow-2xl backdrop-blur-2xl"
+      className="rise fixed bottom-4 left-4 right-4 z-[80] mx-auto max-w-3xl rounded-2xl border border-white/10 bg-[#0E121E]/95 p-4 text-[#EEF1F8] shadow-2xl backdrop-blur-2xl"
     >
       <div className="grid gap-4 sm:grid-cols-[auto_1fr_auto] sm:items-center">
-        <div className="grid h-11 w-11 place-items-center rounded-xl bg-cyan-300/10 text-cyan-100">
+        <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#7AA2FF]/10 text-[#B9CDFF]">
           <Cookie className="h-5 w-5" />
         </div>
         <div>
@@ -46,11 +46,11 @@ export function CookiePreloader({ onAccept, onDecline }: CookieConsentProps) {
           <p className="mt-1 text-sm leading-6 text-white/62">{text.desc}</p>
         </div>
         <div className="flex gap-2">
-          <Button onClick={onAccept} className="h-10 rounded-xl bg-cyan-300 px-4 font-bold text-slate-950 hover:bg-cyan-200">
+          <Button onClick={onAccept} className="h-10 rounded-full bg-[#7AA2FF] px-5 font-semibold text-[#061022] hover:bg-[#B9CDFF]">
             <Check className="mr-2 h-4 w-4" />
             {text.accept}
           </Button>
-          <Button onClick={onDecline} variant="outline" className="h-10 rounded-xl border-white/20 bg-white/[0.04] px-4 font-bold text-white hover:bg-white hover:text-slate-950">
+          <Button onClick={onDecline} variant="outline" className="h-10 rounded-full border-white/20 bg-white/[0.04] px-5 font-semibold text-[#EEF1F8] hover:bg-white hover:text-[#0A0E1A]">
             {text.decline}
           </Button>
         </div>
