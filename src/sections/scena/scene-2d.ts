@@ -12,8 +12,11 @@ export interface ProjectedTechnology {
 export interface Scene2D {
   /** Reads the canvas size; call before the first render. */
   resize(): void;
-  /** progress — 0…1 scroll through the section, time — seconds (drives the quiet idle spin and twinkle). */
-  render(progress: number, time: number): readonly ProjectedTechnology[];
+  /**
+   * progress — 0…1 scroll through the section, time — seconds (drives the quiet idle spin and twinkle).
+   * withLabels false draws the dust only (the first frame stays cheap); the names follow from the next frame.
+   */
+  render(progress: number, time: number, withLabels?: boolean): readonly ProjectedTechnology[];
 }
 
 const MAX_DPR = 1.5;
@@ -26,8 +29,9 @@ export function createScene2D(canvas: HTMLCanvasElement, labelCount: number): Sc
   const context = canvas.getContext('2d', { alpha: true });
   if (!context) return null;
 
+  // Phones: fewer points and steady dust (no twinkle) keep each frame well inside the budget.
   const mobileDust = window.innerWidth < 768;
-  const dust = sceneDust(mobileDust ? 850 : 2000);
+  const dust = sceneDust(mobileDust ? 500 : 2000);
   const travelLength = 5 + Math.max(0, labelCount - 1) * LABEL_SPACING;
 
   // Technologies: one per depth step, spread evenly around the axis by the golden angle.
@@ -37,7 +41,7 @@ export function createScene2D(canvas: HTMLCanvasElement, labelCount: number): Sc
     radius: 2.2 + ((index * 37) % 10) / 10 * 0.9,
   }));
   const projected: ProjectedTechnology[] = labels.map(() => ({ x: 0, y: 0, scale: 1, opacity: 0 }));
-  const camera: SceneCamera = { x: 0, y: 0, z: 12, roll: 0, focal: 1, cx: 0, cy: 0, spin: 0, travel: 0 };
+  const camera: SceneCamera = { x: 0, y: 0, z: 12, roll: 0, cosRoll: 1, sinRoll: 0, focal: 1, cx: 0, cy: 0, spin: 0, travel: 0 };
   const point = { x: 0, y: 0, depth: 0 };
   let width = 1;
   let height = 1;
@@ -53,7 +57,7 @@ export function createScene2D(canvas: HTMLCanvasElement, labelCount: number): Sc
 
   return {
     resize,
-    render(progress, time) {
+    render(progress, time, withLabels = true) {
       const mobile = width < 768;
       const flight = smoothstep(FLIGHT[0], FLIGHT[1], progress);
       const travel = flight * travelLength;
@@ -62,7 +66,7 @@ export function createScene2D(canvas: HTMLCanvasElement, labelCount: number): Sc
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
       context.clearRect(0, 0, width, height);
       context.fillStyle = '#d6e0ff';
-      const twinkleTime = time * 1.6;
+      const twinkleTime = mobileDust ? null : time * 1.6;
       for (let index = 0; index < dust.count; index++) {
         if (!projectScene.dust(camera, dust, index, point)) continue;
         if (point.x < -4 || point.x > width + 4 || point.y < -4 || point.y > height + 4) continue;
@@ -73,6 +77,8 @@ export function createScene2D(canvas: HTMLCanvasElement, labelCount: number): Sc
         context.fillRect(point.x - size / 2, point.y - size / 2, size, size);
       }
       context.globalAlpha = 1;
+      canvas.dataset.ready = 'true';
+      if (!withLabels) return projected;
 
       const labelVisibility = smoothstep(FLIGHT[0] + 0.02, FLIGHT[0] + 0.05, progress) * (1 - smoothstep(FLIGHT[1] - 0.025, FLIGHT[1], progress));
       labels.forEach((label, index) => {
@@ -93,7 +99,6 @@ export function createScene2D(canvas: HTMLCanvasElement, labelCount: number): Sc
         target.opacity = visible ? clamp(opacity) : 0;
       });
 
-      canvas.dataset.ready = 'true';
       return projected;
     },
   };

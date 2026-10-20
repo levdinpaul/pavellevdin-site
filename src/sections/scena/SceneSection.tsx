@@ -9,8 +9,9 @@ import './scene.css';
 const MOTION_QUERY = '(prefers-reduced-motion: no-preference)';
 /** .pl-tech is set at twice its median size; scaling down keeps near labels sharp. */
 const LABEL_SCALE = 0.5;
-/** Frame interval of the quiet spin at rest (scroll-driven frames are not limited). */
+/** Frame interval of the quiet spin at rest: ~30 fps, phones ~24 fps (scroll-driven frames are not limited). */
 const IDLE_FRAME_MS = 33;
+const IDLE_FRAME_MS_MOBILE = 42;
 /** The opening frame of the dust, rendered into the HTML so the first screen has the spiral before any JS. */
 const STATIC_DUST = staticDustPaths();
 
@@ -56,6 +57,10 @@ export function SceneSection({ lang }: { lang: string }) {
     let lastPaint = 0;
     let idleSpin = false;
     let idleHandle = 0;
+    let initFrame = 0;
+    let initHandle = 0;
+    let labelsReady = false;
+    const idleFrameMs = window.innerWidth < 768 ? IDLE_FRAME_MS_MOBILE : IDLE_FRAME_MS;
 
     const measureProgress = () => {
       const bounds = section.getBoundingClientRect();
@@ -66,9 +71,19 @@ export function SceneSection({ lang }: { lang: string }) {
       targetProgress = range > 0 ? clamp((-bounds.top - introScroll) / range) : 0;
     };
 
+    const cancelInit = () => {
+      cancelAnimationFrame(initFrame);
+      if (typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(initHandle);
+      clearTimeout(initHandle);
+      initFrame = 0;
+      initHandle = 0;
+    };
+
     const reset = () => {
       if (frame) cancelAnimationFrame(frame);
       frame = 0;
+      cancelInit();
+      labelsReady = false;
       graphics = null;
       delete canvas.dataset.ready;
       delete document.documentElement.dataset.scene;
@@ -102,7 +117,7 @@ export function SceneSection({ lang }: { lang: string }) {
       // the page has settled after load, so it never competes with hydration and the first paint.
       if (currentProgress === targetProgress && currentProgress === overlayProgress && lastPaint) {
         if (!idleSpin) return;
-        if (time - lastPaint < IDLE_FRAME_MS) {
+        if (time - lastPaint < idleFrameMs) {
           frame = requestAnimationFrame(draw);
           return;
         }
@@ -127,7 +142,13 @@ export function SceneSection({ lang }: { lang: string }) {
         finale.style.visibility = finaleOpacity < 0.01 ? 'hidden' : 'visible';
       }
 
-      const positions = graphics.render(currentProgress, time / 1000);
+      // The first frame is dust only; the names join from the next one.
+      const positions = graphics.render(currentProgress, time / 1000, labelsReady);
+      if (!labelsReady) {
+        labelsReady = true;
+        frame = requestAnimationFrame(draw);
+        return;
+      }
       positions.forEach(({ x, y, scale, opacity }, index) => {
         const element = labelElements[index];
         if (opacity < 0.01 && element.style.visibility === 'hidden') return;
@@ -160,6 +181,18 @@ export function SceneSection({ lang }: { lang: string }) {
     };
 
     const activate = () => {
+      if (disposed || graphics || initFrame || initHandle || !media.matches) return;
+      // The canvas is created after the first paint, in an idle slot (at most 300 ms later), so hydration stays short.
+      initFrame = requestAnimationFrame(() => {
+        initFrame = 0;
+        initHandle = typeof window.requestIdleCallback === 'function'
+          ? window.requestIdleCallback(start, { timeout: 300 })
+          : window.setTimeout(start, 50);
+      });
+    };
+
+    const start = () => {
+      initHandle = 0;
       if (disposed || graphics || !media.matches) return;
       graphics = createScene2D(canvas, labelCount);
       if (!graphics) return;
@@ -214,7 +247,7 @@ export function SceneSection({ lang }: { lang: string }) {
     window.addEventListener('resize', onResize, { passive: true });
     document.addEventListener('visibilitychange', onVisibilityChange);
     media.addEventListener('change', onMotionChange);
-    // First frame right after hydration: no waiting for interaction or idle time.
+    // Starts right after hydration (next frame + idle slot ≤ 300 ms): no waiting for interaction.
     activate();
     const startIdleSpin = () => {
       idleSpin = true;

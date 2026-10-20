@@ -73,6 +73,9 @@ export interface SceneCamera {
   y: number;
   z: number;
   roll: number;
+  /** cos/sin of the roll, computed once per frame instead of once per point. */
+  cosRoll: number;
+  sinRoll: number;
   /** Focal length in px. */
   focal: number;
   /** Screen position of the spiral axis. */
@@ -104,6 +107,8 @@ export const projectScene = {
     camera.y = Math.cos(orbit) * 0.45;
     camera.z = CAMERA_START_Z - travel;
     camera.roll = Math.sin(orbit) * 0.055;
+    camera.cosRoll = Math.cos(camera.roll);
+    camera.sinRoll = Math.sin(camera.roll);
     camera.focal = FOCAL * height;
     camera.cx = width * (0.5 + (mobile ? 0 : 0.24 * introduction));
     camera.cy = height * (0.5 + (mobile ? 0.24 : 0.015) * introduction);
@@ -114,8 +119,8 @@ export const projectScene = {
     const depth = camera.z - z;
     const dx = x - camera.x;
     const dy = y - camera.y;
-    const cos = Math.cos(camera.roll);
-    const sin = Math.sin(camera.roll);
+    const cos = camera.cosRoll;
+    const sin = camera.sinRoll;
     const scale = camera.focal / Math.max(depth, 0.1);
     out.x = camera.cx + (cos * dx + sin * dy) * scale;
     out.y = camera.cy - (-sin * dx + cos * dy) * scale;
@@ -129,11 +134,13 @@ export const projectScene = {
     const radius = dust.radius[index];
     return projectScene.world(camera, Math.cos(angle) * radius, Math.sin(angle) * radius, z, out);
   },
-  dustAlpha(dust: SceneDust, index: number, depth: number, twinkleTime: number) {
+  /** twinkleTime null — steady dust (phones: no shimmer, fewer Math.sin per frame). */
+  dustAlpha(dust: SceneDust, index: number, depth: number, twinkleTime: number | null) {
     const far = 1 - depth / DUST_DEPTH;
     // Near-fade: points right at the camera dissolve instead of growing into grey squares.
     const near = smoothstep(2, 9, depth);
-    return Math.sqrt(Math.max(far, 0)) * near * (0.75 + 0.25 * Math.sin(twinkleTime + dust.phase[index]));
+    const twinkle = twinkleTime === null ? 0.875 : 0.75 + 0.25 * Math.sin(twinkleTime + dust.phase[index]);
+    return Math.sqrt(Math.max(far, 0)) * near * twinkle;
   },
   dustSize(dust: SceneDust, index: number, depth: number) {
     const near = smoothstep(2, 9, depth);
@@ -148,9 +155,9 @@ export const STATIC_DUST_EXTENT = 1.8;
  * The opening frame (progress 0, time 0) as SVG dot paths, grouped by brightness. Coordinates are
  * thousandths of the focal length around the spiral axis, so CSS can place and size it for any viewport.
  */
-export function staticDustPaths(count = 1100): { opacity: number; d: string }[] {
+export function staticDustPaths(count = 600): { opacity: number; d: string }[] {
   const dust = sceneDust(count);
-  const camera: SceneCamera = { x: 0, y: 0, z: 0, roll: 0, focal: 1000, cx: 0, cy: 0, spin: 0, travel: 0 };
+  const camera: SceneCamera = { x: 0, y: 0, z: 0, roll: 0, cosRoll: 1, sinRoll: 0, focal: 1000, cx: 0, cy: 0, spin: 0, travel: 0 };
   projectScene.camera(camera, { width: 0, height: 1000 / FOCAL, mobile: true, progress: 0, flight: 0, travel: 0, time: 0 });
   camera.cx = 0;
   camera.cy = 0;
