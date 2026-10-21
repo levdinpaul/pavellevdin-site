@@ -52,3 +52,5 @@ scripts/fx-cache.json
 # Пересоздаются при npm run build:static (check-projects.cjs, fetch-cbr-rate.cjs)
 src/data/fx-rate.json
 src/data/projects-status.json
+.cache/
+.playwright-mcp/
