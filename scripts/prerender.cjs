@@ -21,14 +21,11 @@ const PORT = 5055;
 // head (title/canonical/og/JSON-LD) по-прежнему берём из puppeteer (Helmet на клиенте).
 // Какие маршруты рендерим настоящим React SSR (renderToPipeableStream резолвит React.lazy).
 // Блог больше не на сайте — его отдаёт pl-platform (nginx), здесь не пререндерится.
-// Формы (contact/brief) — пока на puppeteer (отдельный осторожный шаг).
 function ssrLangForRoute(route) {
   // Формы (contact/brief) безопасны: неконтролируемые нативные <form>, отправка через fetch
   // в клиентском onSubmit (после гидрации) — SSR трогает только разметку, не код заявки.
-  const staticRoutes = ['/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact', '/ru/brief', '/ru/calculator', '/ru/imprint', '/ru/privacy', '/ru/business-card'];
-  if (staticRoutes.includes(route)) return 'ru';
-  if (/^\/ru\/portfolio\/[^/]+$/.test(route)) return 'ru'; // страницы кейсов
-  return null;
+  const m = route.match(/^\/(ru|de|en)(\/|$)/);
+  return m ? m[1] : null;
 }
 
 // Заменяет внутренность <div id="root">…</div> на SSR-разметку, не трогая head и скрипты.
@@ -99,7 +96,47 @@ function dedupHead(html, meta) {
   if (meta.description) {
     html = html.replace(/<\/head>/i, `    <meta name="description" content="${esc(meta.description)}" />\n  </head>`);
   }
-  return html;
+  return dedupHeadKeys(html);
+}
+
+// og:/twitter:/robots, hreflang и JSON-LD: статичные из index.html + Helmet дают по 2–3 копии — оставляем последнюю (страничную).
+function dedupHeadKeys(html) {
+  const headEnd = html.search(/<\/head>/i);
+  if (headEnd === -1) return html;
+  let head = html.slice(0, headEnd);
+  const keyOf = (tag) => {
+    const attr = (n) => (tag.match(new RegExp(`\\s${n}="([^"]*)"`, 'i')) || [])[1];
+    if (/^<meta/i.test(tag)) { const k = attr('property') || attr('name'); return k && /^(og:|twitter:|robots$)/.test(k) ? `meta:${k}` : null; }
+    if (/^<link/i.test(tag) && attr('rel') === 'alternate') { const h = attr('hreflang'); return h ? `alt:${h.toLowerCase()}` : null; }
+    if (/^<script/i.test(tag)) return `ld:${tag}`;
+    return null;
+  };
+  const re = /<meta\b[^>]*>|<link\b[^>]*>|<script type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/gi;
+  const tags = head.match(re) || [];
+  const last = new Map();
+  tags.forEach((t, i) => { const k = keyOf(t); if (k) last.set(k, i); });
+  let i = -1;
+  head = head.replace(re, (t) => { i += 1; const k = keyOf(t); return k && last.get(k) !== i ? '' : t; });
+  // og:image страницы (фото, скриншот) — не 1200×630: размеры оставляем только у фирменных og-image*.jpg
+  if (!/property="og:image" content="[^"]*\/og-image(-de|-en)?\.(jpg|png)"/.test(head)) head = head.replace(/<meta property="og:image:(width|height)"[^>]*>/g, '');
+  return head.replace(/\n\s*\n(\s*\n)+/g, '\n') + html.slice(headEnd);
+}
+
+// React 19 оставляет <title>/<meta>/<link> от Helmet прямо в SSR-теле. В head они уже есть (из puppeteer) —
+// из тела убираем (это hoistable-элементы, гидрация их не сверяет), иначе по 2–3 title/description/canonical.
+// JSON-LD <script> не hoistable: остаётся в теле (там он валиден и нужен гидрации), а его копию в head снимаем.
+function stripHoistables(body) {
+  return body
+    .replace(/<title\b[^>]*>[\s\S]*?<\/title>/gi, (t, off) => (body.lastIndexOf('<svg', off) > body.lastIndexOf('</svg>', off) ? t : ''))
+    .replace(/<meta\b[^>]*>/gi, '')
+    .replace(/<link\b[^>]*rel="(canonical|alternate)"[^>]*>/gi, '');
+}
+function dropHeadLdPresentInBody(html) {
+  const headEnd = html.search(/<\/head>/i);
+  const body = html.slice(headEnd);
+  const head = html.slice(0, headEnd)
+    .replace(/\s*<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi, (t, json) => (body.includes(json) ? '' : t));
+  return head + body;
 }
 
 // Слаги кейсов портфолио — из того же JSON, что читает React (src/data/portfolio.json)
@@ -114,12 +151,10 @@ async function run() {
     process.exit(1);
   }
 
-  // Русские маршруты — приоритет фазы 1
-  const routes = [
-    '/ru', '/ru/about', '/ru/services', '/ru/portfolio', '/ru/contact',
-    '/ru/brief', '/ru/calculator', '/ru/business-card', '/ru/imprint', '/ru/privacy',
-  ];
-  for (const slug of getProjectSlugs()) routes.push(`/ru/portfolio/${slug}`);
+  // Все локали: ru — фаза 1, de/en — тоже отдаём готовым HTML (свои title/canonical/hreflang вместо оболочки index.html)
+  const pages = ['', '/about', '/services', '/portfolio', '/contact', '/brief', '/calculator', '/business-card', '/imprint', '/privacy'];
+  for (const slug of getProjectSlugs()) pages.push(`/portfolio/${slug}`);
+  const routes = ['ru', 'de', 'en'].flatMap((l) => pages.map((p) => `/${l}${p}`));
 
   // Загружаем SSR-рендер (ESM-бандл) для маршрутов из SSR_ROUTES
   let ssrRender = null;
@@ -170,7 +205,7 @@ async function run() {
         try {
           const { html: ssrBody } = await ssrRender(route, ssrLang);
           if (ssrBody && ssrBody.length > 500) {
-            html = swapRootBody(html, ssrBody);
+            html = dropHeadLdPresentInBody(swapRootBody(html, stripHoistables(ssrBody)));
             console.log(`    ↳ SSR body (${ssrBody.length} симв.)`);
           }
         } catch (e) {

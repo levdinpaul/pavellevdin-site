@@ -1,7 +1,6 @@
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { PageMeta } from '@/components/pl/PageMeta';
 import { motion } from 'framer-motion';
-import { Layout } from '@/components/layout/Layout';
 import { 
   User, 
   MapPin, 
@@ -14,28 +13,17 @@ import {
 } from 'lucide-react';
 import { getContacts } from '@/constants/contacts';
 
+// Фиксированная дата: пререндер и клиент должны отдать одинаковую разметку (new Date() ломал гидрацию на следующий день).
+const LAST_UPDATED = new Date('2026-10-21T12:00:00Z');
+
 export function ImprintPage() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'de' | 'en' | 'ru';
   const contacts = getContacts(lang);
 
   return (
-    <Layout 
-      pageTitle={t('imprint.seo.title')} 
-      pageDescription={t('imprint.seo.description')}
-    >
-      <Helmet>
-        <title>{t('imprint.seo.title')}</title>
-        <meta name="description" content={t('imprint.seo.description')} />
-        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/imprint`} />
-        
-        <link rel="alternate" hrefLang="de" href="https://pavellevdin.ru/de/imprint" />
-        <link rel="alternate" hrefLang="en" href="https://pavellevdin.ru/en/imprint" />
-        <link rel="alternate" hrefLang="ru" href="https://pavellevdin.ru/ru/imprint" />
-        <link rel="alternate" hrefLang="x-default" href="https://pavellevdin.ru/ru/imprint" />
-        
-        <html lang={lang} />
-      </Helmet>
+    <>
+      <PageMeta lang={lang} path="/imprint" title={t('imprint.seo.title')} description={t('imprint.seo.description')} />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -180,13 +168,13 @@ export function ImprintPage() {
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
-            {t('imprint.lastUpdated')}: {new Date().toLocaleDateString(
+            {t('imprint.lastUpdated')}: {LAST_UPDATED.toLocaleDateString(
               lang === 'de' ? 'de-DE' : lang === 'ru' ? 'ru-RU' : 'en-US', 
               { year: 'numeric', month: 'long', day: 'numeric' }
             )}
           </p>
         </div>
       </motion.div>
-    </Layout>
+    </>
   );
 }

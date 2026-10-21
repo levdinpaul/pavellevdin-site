@@ -8,9 +8,9 @@ export function Home() {
   const baseUrl = 'https://pavellevdin.ru';
 
   const titles = {
-    en: 'Web Coding Hannover | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
-    ru: 'Web Coding Hannover | Сайты, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
-    de: 'Web Coding Hannover | Websites, SEO, AI Search, Google Business | PL Innovativ Digitalbau',
+    en: 'Web Coding Hannover — websites, SEO, AI search | Innovativ Digitalbau',
+    ru: 'Web Coding Hannover — сайты, SEO, AI-поиск | Innovativ Digitalbau',
+    de: 'Web Coding Hannover — Websites, SEO, KI-Suche | Innovativ Digitalbau',
   };
 
   const descriptions = {
@@ -22,12 +22,14 @@ export function Home() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: 'PL Innovativ Digitalbau',
-    founder: 'Pavel Levdin',
+    '@id': `${baseUrl}/#business`,
+    name: 'Innovativ Digitalbau',
+    founder: { '@type': 'Person', name: 'Pavel Levdin' },
     url: `${baseUrl}/${lang}`,
-    image: `${baseUrl}/og-image.png`,
+    image: `${baseUrl}/og-image.jpg`,
+    logo: `${baseUrl}/brand/logo-1200.png`,
     areaServed: ['Germany', 'Europe', 'Russia'],
-    serviceType: [
+    knowsAbout: [
       'Web development',
       'Web coding',
       'SEO',
@@ -50,7 +52,7 @@ export function Home() {
         <meta name="description" content={descriptions[lang]} />
         <meta
           name="keywords"
-          content="PL – Innovativ Digitalbau, web development, SEO, AEO, AI search optimization, Google Business Profile, React developer, Hannover web developer, автоматизация бизнеса, разработка сайтов"
+          content="Innovativ Digitalbau, web development, SEO, AEO, AI search optimization, Google Business Profile, React developer, Hannover web developer, автоматизация бизнеса, разработка сайтов"
         />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="author" content="Pavel Levdin" />

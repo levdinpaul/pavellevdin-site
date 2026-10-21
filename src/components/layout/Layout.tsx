@@ -1,13 +1,11 @@
 // src/components/layout/Layout.tsx
 
-import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { SiteHeader } from './SiteHeader';
 import { Footer } from './Footer';
 import { Children, Suspense, isValidElement, type ReactElement } from 'react';
 
 export interface LayoutProps {
-  pageTitle?: string;
-  pageDescription?: string;
   children?: React.ReactNode;
 }
 
@@ -42,7 +40,9 @@ function hasLayoutInChildren(children: React.ReactNode): boolean {
   return found;
 }
 
-export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
+export function Layout({ children }: LayoutProps) {
+  const { t } = useTranslation();
+
   // Проверка на рекурсию
   if (children && hasLayoutInChildren(children)) {
     console.error('Layout recursion detected: Layout cannot contain another Layout');
@@ -54,19 +54,13 @@ export function Layout({ pageTitle, pageDescription, children }: LayoutProps) {
     );
   }
 
-  const baseTitle = 'PL·Digitalbau — Pavel Levdin';
-  const title = pageTitle ? `${pageTitle} | ${baseTitle}` : baseTitle;
-  const description = pageDescription || 'Professional web developer specializing in modern websites and web applications.';
-
+  // title/description задаёт страница (PageMeta) — второй уровень Helmet давал дубли <title>
   return (
     <>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-      </Helmet>
+      <a href="#main" className="pl-skip">{t('pl.nav.skip')}</a>
       <div className="min-h-screen bg-background text-foreground flex flex-col">
         <SiteHeader />
-        <main className="flex-1 flex flex-col">{children}</main>
+        <main id="main" tabIndex={-1} className="flex-1 flex flex-col">{children}</main>
         <Suspense fallback={null}><Footer /></Suspense>
       </div>
     </>

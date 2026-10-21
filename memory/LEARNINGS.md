@@ -127,3 +127,20 @@
 - `entry-server.tsx` — серверный (node:stream), исключён из `tsconfig.app.json`, собирается
   `vite build --ssr` (`npm run build:ssr`). react-helmet-async@3 (форк) НЕ наполняет SSR-контекст под
   React 19 → head берём из puppeteer (Helmet на клиенте), тело `#root` — из SSR.
+
+## Валидация и SEO-head (07, 2026-10-21)
+
+- **React 19 + react-helmet-async 3**: Helmet рендерит нативные `<title>/<meta>/<link>`, React их «поднимает» в head —
+  каждый уровень Helmet (App → Layout → страница) даёт СВОЙ title. Держать title/description/canonical только на уровне
+  страницы (PageMeta). В `renderToPipeableStream` без полного документа эти теги остаются внутри `#root` — пререндер
+  вырезает их из SSR-тела (hoistable, гидрация их не сверяет), а JSON-LD `<script>` оставляет (он не hoistable → иначе mismatch).
+- **express.static на каталоге шлёт 301 на слэш** — canonical без слэша при этом указывает на редирект. Отдавать
+  `dir/index.html` своим middleware, `/x/ → 301 /x`, `redirect: false`; неизвестные пути — 404 c SPA-оболочкой (не soft-404).
+- **cors() с `callback(new Error)` даёт 500 на статику**, когда браузер шлёт Origin (module-скрипты, шрифты crossorigin):
+  чужой origin — `callback(null, false)`.
+- **Порт 4190 — «unsafe port»** у fetch (undici) и Chrome (`bad port` / ERR_UNSAFE_PORT). Локальные прогоны — на 4191.
+- **validator.w3.org** отдаёт Cloudflare-челлендж node-fetch (429), curl проходит; при ~100 запросах подряд режет и curl —
+  темп ≥ 2,5 с, партиями. PSI API без ключа — общая суточная квота, быстро кончается: для замеров нужен PSI_API_KEY или
+  локальный Lighthouse (одинаковые условия до/после; параллельная сборка/тесты занижают балл).
+- axe-core `region`/`landmark-unique`: `aria-label` на `<div>` без роли — ошибка W3C и a11y; соц-колонку делать `<nav>`,
+  `<Link><Button>` → `<Button asChild><Link>` (кнопка внутри ссылки — ошибка W3C).

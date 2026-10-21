@@ -1,6 +1,6 @@
-import { Helmet } from 'react-helmet-async';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { PageMeta } from '@/components/pl/PageMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, Check, Send, Rocket, ShoppingCart, AppWindow,
@@ -75,6 +75,12 @@ const CALC_HINT = {
   ru: 'Нужна цена «от–до» и срок с разбивкой? Откройте калькулятор',
   de: 'Preisrahmen und Dauer mit Aufschlüsselung? Zum Kostenrechner',
   en: 'Need a price range and timeline with a breakdown? Open the calculator',
+} as const;
+
+const BRIEF_META = {
+  ru: { title: 'Бриф проекта — рассчитайте стоимость | Innovativ Digitalbau', description: 'Соберите цифровой проект под ключ по шагам и узнайте ориентировочную стоимость: сайт, магазин, SEO, соцсети, аналитика, CRM и автоматизация.' },
+  de: { title: 'Projekt-Briefing — Kosten berechnen | Innovativ Digitalbau', description: 'Stellen Sie Ihr Digitalprojekt Schritt für Schritt zusammen und sehen Sie die ungefähren Kosten: Website, Shop, SEO, Social Media, Analytics, CRM und Automatisierung.' },
+  en: { title: 'Project brief — estimate the cost | Innovativ Digitalbau', description: 'Put together your digital project step by step and see the estimated cost: website, shop, SEO, social media, analytics, CRM and automation.' },
 } as const;
 
 export function BriefPage() {
@@ -172,14 +178,9 @@ export function BriefPage() {
 
   return (
     <>
-      <Helmet>
-        <html lang={lang} />
-        <title>Конструктор проекта — рассчитайте стоимость | PL Innovativ Digitalbau</title>
-        <meta name="description" content="Соберите цифровой проект под ключ по шагам и узнайте ориентировочную стоимость: сайт, магазин, SEO, соцсети, аналитика, CRM и автоматизация." />
-        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/brief`} />
-      </Helmet>
+      <PageMeta lang={lang} path="/brief" title={BRIEF_META[lang].title} description={BRIEF_META[lang].description} />
 
-      <main className="min-h-screen bg-slate-950 pt-28 text-white">
+      <div className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-24 sm:px-6 lg:px-8">
 
           <div className="relative mx-auto max-w-3xl">
@@ -199,16 +200,16 @@ export function BriefPage() {
                   Я свяжусь с вами в течение 2 часов, уточню детали и пришлю точную смету.
                 </p>
                 <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                  <Link to={`/${lang}/portfolio`}>
-                    <Button variant="outline" className="h-12 w-full rounded-xl border-white/20 bg-white/[0.05] text-white hover:bg-white hover:text-slate-950 sm:w-auto">
+                  <Button asChild variant="outline" className="h-12 w-full rounded-xl border-white/20 bg-white/[0.05] text-white hover:bg-white hover:text-slate-950 sm:w-auto">
+                    <Link to={`/${lang}/portfolio`}>
                       Посмотреть работы
-                    </Button>
-                  </Link>
-                  <a href="https://t.me/PavelLevdin" target="_blank" rel="noopener noreferrer">
-                    <Button className="h-12 w-full rounded-xl bg-cyan-300 font-bold text-slate-950 hover:bg-cyan-200 sm:w-auto">
+                    </Link>
+                  </Button>
+                  <Button asChild className="h-12 w-full rounded-xl bg-cyan-300 font-bold text-slate-950 hover:bg-cyan-200 sm:w-auto">
+                    <a href="https://t.me/PavelLevdin" target="_blank" rel="noopener noreferrer">
                       <Send className="mr-2 h-4 w-4" /> Написать в Telegram
-                    </Button>
-                  </a>
+                    </a>
+                  </Button>
                 </div>
               </motion.div>
             ) : (
@@ -376,7 +377,7 @@ export function BriefPage() {
                 <div className="sticky bottom-4 mt-8 rounded-2xl border border-white/10 bg-slate-950/85 p-4 shadow-2xl backdrop-blur-xl">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <p className="text-[11px] uppercase tracking-wide text-white/45">Ориентир</p>
+                      <p className="text-[11px] uppercase tracking-wide text-white/70">Ориентир</p>
                       <p className="font-mono text-lg font-black text-white">
                         от {fmt(totals.once)} ₽
                         {totals.monthly > 0 && <span className="text-cyan-200"> + {fmt(totals.monthly)} ₽/мес</span>}
@@ -404,7 +405,7 @@ export function BriefPage() {
             )}
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

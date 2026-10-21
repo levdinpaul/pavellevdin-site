@@ -10,6 +10,22 @@ reloadEnv();
 const app = express();
 const isProd = getEnv('NODE_ENV', 'development') === 'production';
 
+// sha256 — инлайн-скрипт сцены в index.html (data-scene); при правке скрипта пересчитать.
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'sha256-qY1jbOnafSaXD5lmQh/1RaTB1LOJbkCSfzCkM5Q3Zg0=' https://mc.yandex.ru https://yastatic.net https://www.googletagmanager.com",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https://mc.yandex.ru https://mc.yandex.com https://www.google-analytics.com https://www.googletagmanager.com",
+  "font-src 'self'",
+  "connect-src 'self' https://mc.yandex.ru https://mc.yandex.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
+  'frame-src https://mc.yandex.ru https://mc.yandex.com',
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+  'report-uri /api/csp-report',
+].join('; ');
+
 // Middleware
 app.use(cors({
   origin: function(origin, callback) {
@@ -18,7 +34,8 @@ app.use(cors({
     // Allow localhost in dev and the production domain
     const allowed = ['http://localhost:5173', 'http://localhost:5174', 'https://pavellevdin.ru', 'http://pavellevdin.ru'];
     if (allowed.includes(origin)) return callback(null, true);
-    callback(new Error('Not allowed by CORS'));
+    // Чужой origin — просто без CORS-заголовков (браузер сам заблокирует чтение ответа); не 500, иначе ломается статика
+    callback(null, false);
   },
   credentials: true,
 }));
@@ -29,7 +46,28 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  // HSTS — как у платформы на том же домене (TLS терминирует nginx)
+  if (isProd) res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+  // CSP пока Report-Only: нарушения копятся в логе контейнера (/api/csp-report), после проверки — включить строгий режим
+  res.setHeader('Content-Security-Policy-Report-Only', CSP);
   next();
+});
+
+// CSP-отчёты браузеров → лог (без ПДн: только директива и источник), не чаще 200 записей в час
+let cspBudget = 200;
+setInterval(() => { cspBudget = 200; }, 60 * 60 * 1000).unref();
+app.post('/api/csp-report', express.json({ type: ['application/csp-report', 'application/reports+json', 'application/json'], limit: '20kb' }), (req, res) => {
+  if (cspBudget > 0) {
+    cspBudget -= 1;
+    const items = Array.isArray(req.body) ? req.body.map((r) => r.body || {}) : [req.body?.['csp-report'] || {}];
+    for (const r of items) {
+      const directive = r['violated-directive'] || r.effectiveDirective || r['effective-directive'];
+      const blocked = r['blocked-uri'] || r.blockedURL;
+      const page = String(r['document-uri'] || r.documentURL || '').replace(/[?#].*$/, '');
+      console.warn('[csp]', directive, blocked, page);
+    }
+  }
+  res.status(204).end();
 });
 
 app.use(express.json({ limit: '50mb' }));
@@ -66,10 +104,25 @@ if (isProd) {
   const staticDir = candidates.find((dir) => fs.existsSync(path.join(dir, 'index.html')));
 
   if (staticDir) {
-    app.use(express.static(staticDir));
-    // SPA fallback — все не-API запросы отдают index.html
+    // Канонические URL — без слэша (canonical, hreflang, sitemap): /ru/about/ → 301 /ru/about,
+    // а /ru/about отдаём пререндером dist/ru/about/index.html напрямую (express.static сам слал 301 на слэш).
+    app.get(/^\/(ru|de|en)(\/.*)?\/$/, (req, res) => {
+      const q = req.url.slice(req.path.length);
+      res.redirect(301, req.path.replace(/\/+$/, '') + q);
+    });
+    app.use((req, res, next) => {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+      if (path.extname(req.path)) return next();
+      const file = path.join(staticDir, req.path, 'index.html');
+      if (file.startsWith(staticDir + path.sep) && fs.existsSync(file)) return res.sendFile(file);
+      next();
+    });
+    app.use(express.static(staticDir, { redirect: false }));
+    // SPA fallback. Известные маршруты SPA — 200, остальное — 404 (SPA покажет страницу «не найдено», без soft-404).
+    const SPA_ROUTE = /^\/(?:review\/[^/]+|(?:ru|de|en)(?:\/(?:about|portfolio|services|brief|calculator|business-card|contact|imprint|privacy|review\/[^/]+))?)?\/?$/;
     app.get('*', (req, res) => {
-      res.sendFile(path.join(staticDir, 'index.html'));
+      const known = SPA_ROUTE.test(req.path);
+      res.status(known ? 200 : 404).sendFile(path.join(staticDir, 'index.html'));
     });
     console.log(`Serving static files from: ${staticDir}`);
   } else {

@@ -39,96 +39,6 @@
       }
     }
   },
-  "services": {
-    "title": "Services",
-    "subtitle": "What I Can Do For You",
-    "description": "Comprehensive web development solutions tailored to your business needs",
-    "discuss": "Discuss Project",
-    "webdev": {
-      "title": "Website Development",
-      "description": "Modern, responsive websites with clean code and excellent performance",
-      "features": {
-        "responsive": "Responsive design",
-        "clean": "Clean code",
-        "seo": "SEO-friendly",
-        "fast": "Fast loading"
-      }
-    },
-    "webapp": {
-      "title": "Web Applications",
-      "description": "Complex web applications with rich functionality and intuitive interface",
-      "features": {
-        "functionality": "Rich functionality",
-        "ui": "Intuitive UI",
-        "scalable": "Scalable architecture",
-        "api": "API integration"
-      }
-    },
-    "seo": {
-      "title": "SEO and Optimization",
-      "description": "Website optimization for search engines and maximum performance",
-      "features": {
-        "technical": "Technical SEO",
-        "performance": "Performance Optimization",
-        "vitals": "Core Web Vitals",
-        "analytics": "Analytics Setup"
-      }
-    },
-    "automation": {
-      "title": "Process Automation",
-      "description": "Automation of business processes to increase efficiency",
-      "features": {
-        "workflow": "Workflow automation",
-        "data": "Data processing",
-        "integration": "Integration solutions",
-        "scripts": "Custom scripts"
-      }
-    },
-    "mvp": {
-      "title": "MVP & Startups",
-      "description": "Rapid development of minimum viable products for startups",
-      "features": {
-        "prototyping": "Rapid prototyping",
-        "lean": "Lean development",
-        "validation": "Market validation",
-        "scalable": "Scalable MVP"
-      }
-    },
-    "support": {
-      "title": "Support & Maintenance",
-      "description": "Ongoing support and updates for your projects",
-      "features": {
-        "updates": "Regular updates",
-        "bugs": "Bug fixes",
-        "monitoring": "Performance monitoring",
-        "security": "Security patches"
-      }
-    },
-    "process": {
-      "title": "How We Work",
-      "subtitle": "My development process ensures quality and transparency",
-      "steps": {
-        "discovery": {
-          "title": "Discovery",
-          "description": "Understanding your requirements"
-        },
-        "planning": {
-          "title": "Planning",
-          "description": "Creating detailed roadmap"
-        },
-        "development": {
-          "title": "Development",
-          "description": "Building with best practices"
-        },
-        "delivery": {
-          "title": "Delivery",
-          "description": "Launch and support"
-        }
-      }
-    },
-    "bottomCta": "Have a project in mind? Let's discuss how I can help.",
-    "getInTouch": "Get in Touch"
-  },
   "portfolio": {
     "title": "Portfolio",
     "subtitle": "My Recent Projects",
@@ -174,7 +84,6 @@
   },
   "advantages": {
     "title": "Why Choose Me",
-    "trusted": "Trusted by over 30 clients worldwide",
     "speed": {
       "title": "Fast Development",
       "description": "Optimal timelines without compromising quality"
@@ -195,9 +104,7 @@
   "cta": {
     "title": "Ready to start your project?",
     "subtitle": "Let's discuss how I can help bring your ideas to life",
-    "button": "Discuss Project",
-    "responseTime": "Usually respond within 24 hours",
-    "availability": "Available for new projects"
+    "button": "Discuss Project"
   },
   "contact": {
     "title": "Contact",
@@ -206,20 +113,12 @@
     "form": {
       "name": "Your Name",
       "namePlaceholder": "John Doe",
-      "message": "Your Message",
-      "messagePlaceholder": "Tell me about your project...",
       "contactMethod": "Preferred Contact Method",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
       "email": "Email",
       "send": "Send Message",
-      "sending": "Sending...",
-      "success": "Message sent successfully!",
-      "successMessage": "I will get back to you as soon as possible.",
-      "error": "Something went wrong. Please try again.",
-      "telegramUsername": "Telegram Username",
-      "whatsappNumber": "WhatsApp Number",
-      "emailAddress": "Email Address"
+      "sending": "Sending..."
     },
     "info": {
       "title": "Contact Information",
@@ -411,7 +310,15 @@
       "lang": "Change language",
       "social": "Messengers",
       "home": "Home",
-      "top": "Back to top"
+      "top": "Back to top",
+      "blog": "Blog",
+      "calc": "Calculator",
+      "brief": "Brief",
+      "card": "Business card",
+      "more": "More",
+      "login": "Log in",
+      "cabinet": "Account",
+      "skip": "Skip to content"
     },
     "hero": {
       "eyebrow": "Pavel Levdin · web developer",
@@ -755,7 +662,7 @@
       "shotAlt": "Website screenshot"
     },
     "servicesPage": {
-      "metaTitle": "Services — websites, SEO, AI automation | PL Innovativ Digitalbau",
+      "metaTitle": "Services — websites, SEO, AI automation | Innovativ Digitalbau",
       "metaDescription": "Websites and web apps with Next.js and React, SEO and AI search, APIs and integrations, AI automation and MCP, social media, Telegram bots, servers and support.",
       "eyebrow": "Services",
       "title": "Digital services from strategy to growth",

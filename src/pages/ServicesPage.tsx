@@ -52,7 +52,7 @@ export function ServicesPage() {
         },
       })),
     },
-    breadcrumbs(lang, [{ name: 'PL Innovativ Digitalbau', path: '' }, { name: t('pl.servicesPage.eyebrow'), path: '/services' }]),
+    breadcrumbs(lang, [{ name: 'Innovativ Digitalbau', path: '' }, { name: t('pl.servicesPage.eyebrow'), path: '/services' }]),
   ];
 
   return (

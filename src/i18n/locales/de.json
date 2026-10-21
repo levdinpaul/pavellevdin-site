@@ -39,105 +39,10 @@
       }
     }
   },
-  "services": {
-    "title": "Leistungen",
-    "subtitle": "Was ich für Sie tun kann",
-    "description": "Umfassende Webentwicklungslösungen, maßgeschneidert für Ihre Geschäftsanforderungen",
-    "webdev": {
-      "title": "Webentwicklung",
-      "description": "Moderne, responsive Websites mit sauberem Code und exzellenter Performance",
-      "features": {
-        "responsive": "Responsives Design",
-        "cleanCode": "Sauberer Code",
-        "seoFriendly": "SEO-freundlich",
-        "fastLoading": "Schnelle Ladezeit"
-      }
-    },
-    "webapp": {
-      "title": "Webanwendungen",
-      "description": "Komplexe Webanwendungen mit reichhaltiger Funktionalität und intuitiver Oberfläche",
-      "features": {
-        "richFunctionality": "Reichhaltige Funktionalität",
-        "intuitiveUI": "Intuitive Benutzeroberfläche",
-        "scalable": "Skalierbare Architektur",
-        "apiIntegration": "API-Integration"
-      }
-    },
-    "seo": {
-      "title": "SEO und Optimierung",
-      "description": "Website-Optimierung für Suchmaschinen und maximale Leistung",
-      "features": {
-        "technical": "Technisches SEO",
-        "performance": "Leistungsoptimierung",
-        "vitals": "Core Web Vitals",
-        "analytics": "Analytics-Einrichtung"
-      }
-    },
-    "automation": {
-      "title": "Prozessautomatisierung",
-      "description": "Automatisierung von Geschäftsprozessen zur Effizienzsteigerung",
-      "features": {
-        "workflow": "Workflow-Automatisierung",
-        "dataProcessing": "Datenverarbeitung",
-        "integration": "Integrationslösungen",
-        "scripts": "Benutzerdefinierte Skripte"
-      }
-    },
-    "mvp": {
-      "title": "MVP & Startups",
-      "description": "Schnelle Entwicklung minimal viable Produkte für Startups",
-      "features": {
-        "prototyping": "Schnelles Prototyping",
-        "lean": "Lean-Entwicklung",
-        "validation": "Marktvalidierung",
-        "scalableMvp": "Skalierbares MVP"
-      }
-    },
-    "support": {
-      "title": "Support & Wartung",
-      "description": "Kontinuierliche Unterstützung und Updates für Ihre Projekte",
-      "features": {
-        "updates": "Regelmäßige Updates",
-        "bugFixes": "Fehlerbehebungen",
-        "monitoring": "Performance-Überwachung",
-        "security": "Sicherheitspatches"
-      }
-    },
-    "process": {
-      "title": "Wie wir arbeiten",
-      "subtitle": "Mein Entwicklungsprozess garantiert Qualität und Transparenz",
-      "steps": {
-        "discovery": {
-          "step": "01",
-          "title": "Analyse",
-          "description": "Verständnis Ihrer Anforderungen"
-        },
-        "planning": {
-          "step": "02",
-          "title": "Planung",
-          "description": "Erstellung einer detaillierten Roadmap"
-        },
-        "development": {
-          "step": "03",
-          "title": "Entwicklung",
-          "description": "Entwicklung nach Best Practices"
-        },
-        "delivery": {
-          "step": "04",
-          "title": "Lieferung",
-          "description": "Launch und Support"
-        }
-      }
-    },
-    "bottomCta": "Haben Sie ein Projekt im Sinn? Lassen Sie uns besprechen, wie ich helfen kann.",
-    "getInTouch": "Kontakt aufnehmen",
-    "discussProject": "Projekt besprechen"
-  },
   "portfolio": {
     "title": "Portfolio",
     "subtitle": "Meine neuesten Projekte",
     "description": "Eine Auswahl meiner neuesten Arbeiten aus verschiedenen Branchen und Technologien",
-    "noProjects": "Keine Projekte in dieser Kategorie gefunden",
     "viewAll": "Alle Projekte ansehen",
     "viewProject": "Projekt öffnen",
     "categories": {
@@ -205,12 +110,6 @@
     "title": "Kontakt",
     "subtitle": "Kontaktieren Sie mich",
     "description": "Haben Sie eine Projektidee? Lassen Sie uns besprechen, wie ich Ihnen helfen kann, Ihre Vision Wirklichkeit werden zu lassen.",
-    "error": "Fehler beim Senden. Bitte versuchen Sie es später erneut oder kontaktieren Sie mich direkt über Telegram.",
-    "success": {
-      "title": "Nachricht gesendet!",
-      "desc": "Ich werde mich so schnell wie möglich bei Ihnen melden. Normalerweise antworte ich innerhalb von 2 Stunden.",
-      "new": "Weitere senden"
-    },
     "form": {
       "name": "Ihr Name",
       "namePlaceholder": "Max Mustermann",
@@ -411,7 +310,15 @@
       "lang": "Sprache wechseln",
       "social": "Messenger",
       "home": "Zur Startseite",
-      "top": "Nach oben"
+      "top": "Nach oben",
+      "blog": "Blog",
+      "calc": "Kostenrechner",
+      "brief": "Briefing",
+      "card": "Visitenkarte",
+      "more": "Mehr",
+      "login": "Anmelden",
+      "cabinet": "Konto",
+      "skip": "Zum Inhalt springen"
     },
     "hero": {
       "eyebrow": "Pavel Levdin · Webentwickler",
@@ -755,7 +662,7 @@
       "shotAlt": "Screenshot der Website"
     },
     "servicesPage": {
-      "metaTitle": "Leistungen – Websites, SEO & KI | PL Innovativ Digitalbau",
+      "metaTitle": "Leistungen – Websites, SEO & KI | Innovativ Digitalbau",
       "metaDescription": "Websites und Web-Apps mit Next.js und React, SEO und KI-Suche, API und Integrationen, KI-Automatisierung und MCP, Social Media, Telegram-Bots, Server, Support.",
       "eyebrow": "Leistungen",
       "title": "Digitale Leistungen von der Strategie bis zum Wachstum",
