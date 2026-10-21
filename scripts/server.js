@@ -119,7 +119,7 @@ if (isProd) {
     });
     app.use(express.static(staticDir, { redirect: false }));
     // SPA fallback. Известные маршруты SPA — 200, остальное — 404 (SPA покажет страницу «не найдено», без soft-404).
-    const SPA_ROUTE = /^\/(?:review\/[^/]+|(?:ru|de|en)(?:\/(?:about|portfolio|services|brief|calculator|business-card|contact|imprint|privacy|review\/[^/]+))?)?\/?$/;
+    const SPA_ROUTE = /^\/(?:review\/[^/]+|(?:ru|de|en)(?:\/(?:about|portfolio|services|brief|calculator|business-card|contact|imprint|privacy|review(?:\/[^/]+)?))?)?\/?$/;
     app.get('*', (req, res) => {
       const known = SPA_ROUTE.test(req.path);
       res.status(known ? 200 : 404).sendFile(path.join(staticDir, 'index.html'));

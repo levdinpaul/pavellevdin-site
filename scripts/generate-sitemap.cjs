@@ -23,6 +23,9 @@ const pages = [
 ];
 const projects = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'portfolio.json'), 'utf8'));
 for (const p of projects) pages.push([`/portfolio/${p.slug}`, 'monthly', '0.8']);
+// Посадочные страницы услуг (src/data/services-landing.json)
+const landings = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'services-landing.json'), 'utf8'));
+for (const slug of Object.keys(landings)) pages.push([`/services/${slug}`, 'monthly', '0.8']);
 
 const alternates = (p) =>
   LANGS.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${SITE}/${l}${p}"/>`).join('\n') +

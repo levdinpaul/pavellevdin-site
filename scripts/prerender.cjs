@@ -139,6 +139,12 @@ function dropHeadLdPresentInBody(html) {
   return head + body;
 }
 
+// Посадочные страницы услуг — src/data/services-landing.json
+function getServiceSlugs() {
+  const f = path.join(projectRoot, 'src', 'data', 'services-landing.json');
+  return fs.existsSync(f) ? Object.keys(JSON.parse(fs.readFileSync(f, 'utf8'))) : [];
+}
+
 // Слаги кейсов портфолио — из того же JSON, что читает React (src/data/portfolio.json)
 function getProjectSlugs() {
   const f = path.join(projectRoot, 'src', 'data', 'portfolio.json');
@@ -154,6 +160,7 @@ async function run() {
   // Все локали: ru — фаза 1, de/en — тоже отдаём готовым HTML (свои title/canonical/hreflang вместо оболочки index.html)
   const pages = ['', '/about', '/services', '/portfolio', '/contact', '/brief', '/calculator', '/business-card', '/imprint', '/privacy'];
   for (const slug of getProjectSlugs()) pages.push(`/portfolio/${slug}`);
+  for (const slug of getServiceSlugs()) pages.push(`/services/${slug}`);
   const routes = ['ru', 'de', 'en'].flatMap((l) => pages.map((p) => `/${l}${p}`));
 
   // Загружаем SSR-рендер (ESM-бандл) для маршрутов из SSR_ROUTES

@@ -10,6 +10,9 @@ import { Pricing } from '@/components/pl/Pricing';
 import { Title } from '@/components/pl/Title';
 import { PACKAGES, currencyFor, packageCopy, priceFor } from '@/data/pricing';
 import { useFxRate } from '@/data/fx';
+import { FaqSection } from '@/components/pl/TrustSections';
+import { AuditForm } from '@/components/pl/AuditForm';
+import { LANDINGS, LANDING_SLUGS } from '@/pages/ServiceLandingPage';
 
 type Item = { title: string; text: string };
 
@@ -78,6 +81,15 @@ export function ServicesPage() {
           <Integrations />
         </section>
 
+        <section className="pl-container pl-section" aria-labelledby="pl-svc-landings">
+          <h2 id="pl-svc-landings" className="pl-landing__h" data-reveal="">{t('pl.landing.listTitle')}</h2>
+          <ul className="pl-landing__other">
+            {LANDING_SLUGS.map((s) => (
+              <li key={s}><Link to={`/${lang}/services/${s}`} viewTransition>{LANDINGS[s][lang as 'ru' | 'de' | 'en'].h1}</Link></li>
+            ))}
+          </ul>
+        </section>
+
         <section className="pl-container pl-section" aria-labelledby="pl-svc-process">
           <p className="pl-eyebrow" data-reveal="">{t('pl.aboutPage.processEyebrow')}</p>
           <Title id="pl-svc-process" className="pl-h2 pl-mb" lines={[t('pl.aboutPage.processTitle')]} />
@@ -91,6 +103,10 @@ export function ServicesPage() {
             ))}
           </ol>
         </section>
+
+        <div className="pl-container"><FaqSection lang={lang} full /></div>
+
+        <div className="pl-container"><AuditForm lang={lang} /></div>
 
         <section className="pl-container pl-section">
           <div className="pl-cta-box" data-reveal="">

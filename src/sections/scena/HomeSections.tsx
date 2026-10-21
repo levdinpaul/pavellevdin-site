@@ -11,11 +11,14 @@ import { MicroUI } from '@/components/pl/MicroUI';
 import { SERVICE_MICRO } from '@/components/pl/micro-kinds';
 import { Title } from '@/components/pl/Title';
 import { Reviews } from '@/components/pl/Reviews';
+import { BlogSection } from '@/components/pl/BlogSection';
+import { ProcessSection, FaqSection, ClientsSection } from '@/components/pl/TrustSections';
+import { AuditForm } from '@/components/pl/AuditForm';
 import { useReveal } from './useReveal';
 
 type Service = { title: string; text: string };
 
-/** Секции главной после сцены: Проекты → Отзывы (если есть) → Обо мне → Что я делаю → Интеграции → CTA. */
+/** Секции главной после сцены: Проекты → Отзывы (или «С кем работаю») → Обо мне → Услуги → Блог → Как я работаю → Интеграции → FAQ → Аудит → CTA. */
 export function HomeSections({ lang }: { lang: string }) {
   const { t } = useTranslation();
   const root = useRef<HTMLDivElement>(null);
@@ -38,7 +41,7 @@ export function HomeSections({ lang }: { lang: string }) {
           </ul>
         </section>
 
-        <Reviews lang={lang} />
+        <Reviews lang={lang} fallback={<ClientsSection lang={lang} />} />
 
         <section id="about" className="pl-section pl-about" aria-labelledby="pl-about-title">
           <figure className="pl-about__photo" data-reveal="">
@@ -80,9 +83,17 @@ export function HomeSections({ lang }: { lang: string }) {
           </div>
         </section>
 
+        <BlogSection lang={lang} />
+
+        <ProcessSection />
+
         <section id="integrations" className="pl-section" aria-label={t('pl.integrations.eyebrow')}>
           <Integrations />
         </section>
+
+        <FaqSection lang={lang} />
+
+        <AuditForm lang={lang} />
 
         <section id="contact" className="pl-section" aria-labelledby="pl-cta-title">
           <div className="pl-cta-box" data-reveal="">

@@ -64,3 +64,28 @@ function loadYandex(w: any) {
     trackLinks: true,
   });
 }
+
+/** Цель аналитики: уходит в Метрику/GA4, только если они уже загружены (после согласия). Ошибки не пробрасываются. */
+export function track(event: string, params?: Record<string, unknown>) {
+  if (typeof window === 'undefined') return;
+  const w = window as any;
+  try {
+    if (typeof w.ym === 'function') w.ym(YM_ID, 'reachGoal', event, params);
+    if (typeof w.gtag === 'function') w.gtag('event', event, params);
+  } catch { /* аналитика не должна ломать интерфейс */ }
+}
+
+let clicksBound = false;
+/** Клики по Telegram / WhatsApp / почте в любом месте сайта — один делегированный слушатель. */
+export function bindContactClickGoals() {
+  if (clicksBound || typeof document === 'undefined') return;
+  clicksBound = true;
+  document.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement | null)?.closest?.('a[href]') as HTMLAnchorElement | null;
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (/^https:\/\/t\.me\//.test(href)) track('click_telegram');
+    else if (/^https:\/\/wa\.me\//.test(href)) track('click_whatsapp');
+    else if (href.startsWith('mailto:')) track('click_email');
+  }, { capture: true });
+}

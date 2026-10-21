@@ -776,6 +776,168 @@
         "error": "Sending failed. Please try again or message @PavelLevdin on Telegram.",
         "home": "Back to home →"
       }
+    },
+    "blog": {
+      "eyebrow": "Blog",
+      "title": [
+        "I write about",
+        "what I do."
+      ],
+      "all": "All articles →",
+      "read_one": "{{count}} min read",
+      "read_other": "{{count}} min read"
+    },
+    "clients": {
+      "eyebrow": "Clients",
+      "title": "Working with clients in Russia and Germany",
+      "lead": "Projects from the portfolio — each with its task, solution and stack.",
+      "ru": "Russia",
+      "de": "Germany",
+      "products": "Own products",
+      "leave": "Leave a review"
+    },
+    "process": {
+      "eyebrow": "How I work",
+      "title": "Five steps from brief to support",
+      "steps": [
+        {
+          "title": "Brief",
+          "text": "We clarify the task, audience and constraints. Result: a clear scope and estimate."
+        },
+        {
+          "title": "Prototype",
+          "text": "Page structure and key screens before development — changes are cheapest here."
+        },
+        {
+          "title": "Development",
+          "text": "Built in stages, with interim versions on a test address."
+        },
+        {
+          "title": "Launch",
+          "text": "Domain, server, analytics, speed and indexing checks, handover of access."
+        },
+        {
+          "title": "Support",
+          "text": "Updates, backups and improvements after launch — as agreed."
+        }
+      ]
+    },
+    "guarantees": {
+      "title": "Terms of work",
+      "items": [
+        {
+          "title": "Contract",
+          "text": "Scope, timeline and price are agreed in writing before work starts."
+        },
+        {
+          "title": "Payment in stages",
+          "text": "You pay for completed stages, not everything upfront."
+        },
+        {
+          "title": "Code and access are yours",
+          "text": "Code, domain, hosting and analytics are registered to you."
+        },
+        {
+          "title": "Support after launch",
+          "text": "I help with changes and updates after handover too."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Questions",
+      "title": "FAQ",
+      "more": "All questions on the services page →",
+      "items": [
+        {
+          "q": "How long does development take?",
+          "a": "A landing page usually takes 1–2 weeks, a company website 4–6 weeks, a web app from 6 weeks. I give an exact timeline after the brief."
+        },
+        {
+          "q": "How much does a website cost?",
+          "a": "“From” prices are on the services page and in the calculator. The final price depends on scope and is fixed in the contract before work starts."
+        },
+        {
+          "q": "How do payment and contract work?",
+          "a": "TODO(Pavel): payment procedure, invoicing and contract form for clients in Germany and Russia."
+        },
+        {
+          "q": "What do you need from me to start?",
+          "a": "A description of the task, examples of websites you like, existing texts and photos, and access to your domain or hosting if you already have them."
+        },
+        {
+          "q": "Who owns the code and domain?",
+          "a": "You do: domain, hosting and analytics are registered to you, and the source code is handed over after payment."
+        },
+        {
+          "q": "Do you work remotely?",
+          "a": "Yes, I am based in Hannover and work remotely with clients from Germany, Russia and other countries: calls, messengers, shared access to the test version."
+        }
+      ],
+      "extra": [
+        {
+          "q": "Can you improve an existing website?",
+          "a": "Yes. I review the code and infrastructure first, then propose improving or rebuilding — with an estimate for both options."
+        },
+        {
+          "q": "What does support include?",
+          "a": "Dependency updates, backups, uptime monitoring and small changes. Scope and price as agreed."
+        },
+        {
+          "q": "Where is enquiry data stored?",
+          "a": "Enquiries from Germany are processed under GDPR; enquiries from Russia are stored on a server in Russia (152-FZ)."
+        }
+      ]
+    },
+    "audit": {
+      "eyebrow": "Free",
+      "title": "Quick check of your website",
+      "lead": "I check HTTPS and security headers, basic SEO, mobile layout, robots.txt and sitemap. You see the result right away, details by email or Telegram.",
+      "url": "Website address",
+      "urlPh": "example.com",
+      "contact": "Email or Telegram",
+      "send": "Check website",
+      "sending": "Checking…",
+      "consent": "I agree to the processing of my data",
+      "done": "Done: {{score}}% of checks passed",
+      "issues": "Worth fixing:",
+      "clean": "No significant issues.",
+      "contactSoon": "I will send a detailed review to the contact you provided.",
+      "error": "Could not check the website. Please check the address or message me on Telegram.",
+      "limit": "Daily limit reached. Feel free to message me on Telegram."
+    },
+    "fab": {
+      "open": "Contact",
+      "close": "Close",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "form": "Send a message"
+    },
+    "reviewOpen": {
+      "project": "Project",
+      "projectOther": "Other",
+      "contact": "Email for questions (not published)",
+      "links": "No more than one link in the review."
+    },
+    "reviewSource": {
+      "kwork": "Review from Kwork",
+      "flru": "Review from FL.ru",
+      "habr": "Review from Habr Freelance",
+      "google": "Review on Google",
+      "yandex": "Review on Yandex",
+      "other": "Review from a platform"
+    },
+    "landing": {
+      "crumbs": "Navigation",
+      "price": "Price",
+      "timeline": "Timeline",
+      "cta": "Discuss your project",
+      "forWhom": "Who it is for",
+      "includes": "What is included",
+      "process": "How it works",
+      "cases": "Related projects",
+      "posts": "Related articles",
+      "other": "Other services",
+      "listTitle": "Services in detail"
     }
   }
 }

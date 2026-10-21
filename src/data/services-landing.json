@@ -1,0 +1,1323 @@
+{
+  "landing": {
+    "pricingKey": "landing",
+    "relatedProjects": [
+      "domusman",
+      "delimes",
+      "peristeen"
+    ],
+    "ru": {
+      "title": "Создание лендинга и сайта-визитки под заявки | Innovativ Digitalbau",
+      "description": "Лендинг или сайт-визитка под рекламу и поиск: адаптивная вёрстка, форма заявок с согласием по 152-ФЗ, уведомления в Telegram, Яндекс Метрика.",
+      "h1": "Лендинг и сайт-визитка для малого бизнеса",
+      "lead": "Одна страница, которая коротко объясняет предложение и ведёт к заявке. Подходит для запуска услуги, рекламной кампании или продажи конкретного объекта.",
+      "forWhom": [
+        "Частным мастерам и небольшим компаниям, которым нужен первый сайт",
+        "Под рекламную кампанию в Яндекс Директе или соцсетях",
+        "Для запуска новой услуги или проверки спроса",
+        "Для продажи одного объекта: дома, техники, оборудования"
+      ],
+      "includes": [
+        "Структура страницы под вашу услугу и аудиторию",
+        "Дизайн и адаптивная вёрстка для телефонов и компьютеров",
+        "Форма заявки с согласием на обработку ПДн и политикой по 152-ФЗ",
+        "Уведомления о заявках в Telegram и на почту",
+        "Базовое SEO: метатеги, разметка schema.org, карта сайта",
+        "Подключение Яндекс Метрики и целей на отправку формы",
+        "Публикация на домене и SSL-сертификат"
+      ],
+      "process": [
+        "Бриф: задача, аудитория, примеры, материалы",
+        "Структура и тексты блоков",
+        "Дизайн и вёрстка, согласование правок",
+        "Подключение формы, аналитики и уведомлений",
+        "Публикация и проверка на реальных устройствах"
+      ],
+      "timeline": "от 1 до 2 недель",
+      "faq": [
+        {
+          "q": "Чем лендинг отличается от сайта-визитки?",
+          "a": "Лендинг ведёт к одному действию — заявке по конкретному предложению. Сайт-визитка коротко рассказывает о компании и услугах. Технически это близкие форматы, выбор зависит от задачи."
+        },
+        {
+          "q": "Кто готовит тексты и фотографии?",
+          "a": "Структуру и тексты блоков готовлю по брифу, факты о вашей работе — от вас. Фото лучше использовать реальные; если их нет, обсудим варианты."
+        },
+        {
+          "q": "Можно ли потом расширить лендинг до полноценного сайта?",
+          "a": "Да. Страницу можно дополнить разделами услуг, портфолио и блогом или перенести на CMS, чтобы вы правили тексты сами."
+        },
+        {
+          "q": "Куда приходят заявки с формы?",
+          "a": "В Telegram и на почту. Заявки принимает собственный backend, без сторонних зарубежных сервисов форм — это важно для требований 152-ФЗ."
+        }
+      ]
+    },
+    "de": {
+      "title": "Landingpage und Visitenkarten-Website erstellen | Innovativ Digitalbau",
+      "description": "Landingpage oder kompakte Website für Kampagne und Suche: responsives Design, Anfrageformular, Benachrichtigung per E-Mail und Telegram, Analytics.",
+      "h1": "Landingpage und kompakte Website für kleine Unternehmen",
+      "lead": "Eine Seite, die Ihr Angebot klar erklärt und zur Anfrage führt. Geeignet für den Start einer Leistung, eine Werbekampagne oder den Verkauf eines konkreten Objekts.",
+      "forWhom": [
+        "Selbstständige und kleine Betriebe, die ihre erste Website brauchen",
+        "Für Kampagnen in Google Ads oder Social Media",
+        "Für den Start einer neuen Leistung oder einen Nachfragetest",
+        "Für den Verkauf eines einzelnen Objekts, etwa einer Immobilie"
+      ],
+      "includes": [
+        "Seitenstruktur passend zu Ihrer Leistung und Zielgruppe",
+        "Design und responsive Umsetzung für Smartphone und Desktop",
+        "Anfrageformular mit Datenschutzhinweis",
+        "Benachrichtigung über neue Anfragen per E-Mail und Telegram",
+        "SEO-Grundlagen: Meta-Tags, schema.org, Sitemap",
+        "Analytics mit Conversion-Tracking für das Formular",
+        "Veröffentlichung auf Ihrer Domain inklusive SSL"
+      ],
+      "process": [
+        "Briefing: Ziel, Zielgruppe, Beispiele, Materialien",
+        "Struktur und Texte der Abschnitte",
+        "Design und Umsetzung, Abstimmung von Korrekturen",
+        "Formular, Analytics und Benachrichtigungen einrichten",
+        "Veröffentlichung und Test auf echten Geräten"
+      ],
+      "timeline": "1 bis 2 Wochen",
+      "faq": [
+        {
+          "q": "Was ist der Unterschied zwischen Landingpage und Visitenkarten-Website?",
+          "a": "Eine Landingpage führt zu einer Aktion — der Anfrage zu einem konkreten Angebot. Eine Visitenkarten-Website stellt Unternehmen und Leistungen kurz vor. Technisch sind beide ähnlich, die Wahl hängt vom Ziel ab."
+        },
+        {
+          "q": "Wer liefert Texte und Fotos?",
+          "a": "Struktur und Texte erstelle ich auf Basis des Briefings, die Fakten zu Ihrer Arbeit kommen von Ihnen. Echte Fotos sind die beste Wahl; falls keine vorhanden sind, besprechen wir Alternativen."
+        },
+        {
+          "q": "Lässt sich die Landingpage später erweitern?",
+          "a": "Ja. Die Seite kann um Leistungen, Referenzen und einen Blog ergänzt oder auf ein CMS umgestellt werden, damit Sie Inhalte selbst pflegen."
+        },
+        {
+          "q": "Ist die Seite DSGVO-konform?",
+          "a": "Impressum, Datenschutzerklärung und ein Formular mit Einwilligung gehören dazu. Die rechtliche Prüfung der Texte übernimmt bei Bedarf ein Anwalt."
+        }
+      ]
+    },
+    "en": {
+      "title": "Landing page and simple business website | Innovativ Digitalbau",
+      "description": "A landing page or one-page business site for ads and search: responsive layout, lead form, email and Telegram notifications, analytics and goals.",
+      "h1": "Landing page and simple website for small businesses",
+      "lead": "One page that explains your offer clearly and leads to an enquiry. A good fit for launching a service, running an ad campaign or selling a specific item.",
+      "forWhom": [
+        "Freelancers and small companies that need a first website",
+        "Ad campaigns in search or social media",
+        "Launching a new service or testing demand",
+        "Selling a single item such as a house or equipment"
+      ],
+      "includes": [
+        "Page structure built around your service and audience",
+        "Design and responsive layout for mobile and desktop",
+        "Lead form with consent and privacy policy",
+        "Lead notifications to Telegram and email",
+        "SEO basics: meta tags, schema.org markup, sitemap",
+        "Analytics with a goal for form submissions",
+        "Publishing on your domain with SSL"
+      ],
+      "process": [
+        "Brief: goal, audience, examples, materials",
+        "Structure and section copy",
+        "Design and build, review of changes",
+        "Form, analytics and notifications setup",
+        "Launch and testing on real devices"
+      ],
+      "timeline": "1 to 2 weeks",
+      "faq": [
+        {
+          "q": "What is the difference between a landing page and a business card site?",
+          "a": "A landing page leads to one action: an enquiry about a specific offer. A business card site briefly presents the company and its services. Technically they are similar; the choice depends on your goal."
+        },
+        {
+          "q": "Who provides texts and photos?",
+          "a": "I prepare the structure and copy based on the brief; the facts about your work come from you. Real photos work best; if you have none, we discuss options."
+        },
+        {
+          "q": "Can the landing page grow into a full website later?",
+          "a": "Yes. You can add services, case studies and a blog, or move it to a CMS so you can edit content yourself."
+        },
+        {
+          "q": "Where do form enquiries go?",
+          "a": "To Telegram and email. Enquiries are received by your own backend, not by a third-party form service."
+        }
+      ]
+    }
+  },
+  "nextjs-website": {
+    "pricingKey": "business-site",
+    "relatedProjects": [
+      "vl-innovativbau",
+      "mp-innovativbau",
+      "med-agency"
+    ],
+    "ru": {
+      "title": "Корпоративный сайт на Next.js и CMS | Innovativ Digitalbau",
+      "description": "Корпоративный сайт на Next.js с headless CMS Strapi: тексты и кейсы меняете сами, блог, мультиязычность, техническое SEO, формы заявок и аналитика.",
+      "h1": "Корпоративный сайт на Next.js с удобной CMS",
+      "lead": "Многостраничный сайт компании, где услуги, кейсы и статьи вы редактируете сами в админке. Next.js отдаёт поисковикам готовый HTML, а страницы открываются без лишних задержек.",
+      "forWhom": [
+        "Компаниям с несколькими направлениями услуг и регионами работы",
+        "Тем, кто хочет сам менять тексты, кейсы и новости без разработчика",
+        "Бизнесу, которому нужен сайт на нескольких языках",
+        "Тем, кто переезжает с конструктора или устаревшей CMS"
+      ],
+      "includes": [
+        "Структура разделов и отдельные страницы под каждую услугу",
+        "Дизайн и вёрстка на Next.js (App Router, SSR/SSG)",
+        "Headless CMS Strapi: страницы, услуги, кейсы, блог",
+        "Мультиязычность с hreflang по запросу",
+        "Техническое SEO: метатеги, schema.org, карта сайта, Яндекс Вебмастер",
+        "Формы заявок с согласием по 152-ФЗ и уведомлениями в Telegram",
+        "Развёртывание в Docker на вашем сервере или VPS"
+      ],
+      "process": [
+        "Бриф и анализ: услуги, конкуренты, поисковые запросы",
+        "Структура сайта и прототип ключевых страниц",
+        "Дизайн и разработка, подключение CMS",
+        "Наполнение, SEO-настройка и аналитика",
+        "Запуск, обучение работе с админкой"
+      ],
+      "timeline": "от 4 до 6 недель",
+      "faq": [
+        {
+          "q": "Зачем Next.js, если есть WordPress или Тильда?",
+          "a": "Next.js отдаёт страницы готовым HTML, что удобно для индексации, и не зависит от плагинов конструктора. Контент при этом редактируется в CMS, как в привычных системах."
+        },
+        {
+          "q": "Смогу ли я сам менять тексты?",
+          "a": "Да. Услуги, кейсы, статьи и картинки редактируются в админке Strapi. После запуска покажу, как это делать."
+        },
+        {
+          "q": "Где будет размещён сайт?",
+          "a": "На вашем сервере или VPS в Docker. Для сайтов, которые собирают персональные данные россиян, выбираем сервер в РФ — этого требует 152-ФЗ."
+        },
+        {
+          "q": "Можно ли перенести контент со старого сайта?",
+          "a": "Да, переносим тексты и страницы и настраиваем редиректы со старых адресов, чтобы не потерять позиции в поиске."
+        }
+      ]
+    },
+    "de": {
+      "title": "Unternehmenswebsite mit Next.js und CMS | Innovativ Digitalbau",
+      "description": "Unternehmenswebsite mit Next.js und Headless CMS Strapi: Inhalte selbst pflegen, Blog, Mehrsprachigkeit, technisches SEO, Formulare und Analytics.",
+      "h1": "Unternehmenswebsite mit Next.js und Headless CMS",
+      "lead": "Eine mehrseitige Firmenwebsite, auf der Sie Leistungen, Referenzen und Beiträge selbst im CMS bearbeiten. Next.js liefert fertiges HTML für Suchmaschinen und schnelle Seitenaufrufe.",
+      "forWhom": [
+        "Unternehmen mit mehreren Leistungsbereichen oder Standorten",
+        "Teams, die Texte, Referenzen und News selbst pflegen möchten",
+        "Betriebe, die eine mehrsprachige Website brauchen",
+        "Wechsel von Baukasten oder veraltetem CMS"
+      ],
+      "includes": [
+        "Seitenstruktur mit eigener Seite für jede Leistung",
+        "Design und Umsetzung mit Next.js (App Router, SSR/SSG)",
+        "Headless CMS Strapi für Seiten, Leistungen, Referenzen und Blog",
+        "Mehrsprachigkeit mit hreflang auf Wunsch",
+        "Technisches SEO: Meta-Tags, schema.org, Sitemap, Search Console",
+        "Impressum, Datenschutzerklärung und Formulare mit Einwilligung",
+        "Deployment mit Docker auf Ihrem Server oder VPS"
+      ],
+      "process": [
+        "Briefing und Analyse: Leistungen, Wettbewerb, Suchanfragen",
+        "Seitenstruktur und Prototyp der wichtigsten Seiten",
+        "Design und Entwicklung, Anbindung des CMS",
+        "Inhalte, SEO-Einrichtung und Analytics",
+        "Launch und Einweisung in das CMS"
+      ],
+      "timeline": "4 bis 6 Wochen",
+      "faq": [
+        {
+          "q": "Warum Next.js statt WordPress?",
+          "a": "Next.js liefert Seiten als fertiges HTML aus und kommt ohne Plugin-Abhängigkeiten aus. Inhalte pflegen Sie trotzdem bequem in einem CMS."
+        },
+        {
+          "q": "Kann ich Inhalte selbst ändern?",
+          "a": "Ja. Leistungen, Referenzen, Beiträge und Bilder bearbeiten Sie in Strapi. Nach dem Launch zeige ich Ihnen die wichtigsten Abläufe."
+        },
+        {
+          "q": "Wo wird die Website gehostet?",
+          "a": "Auf Ihrem Server oder einem VPS mit Docker. Für Kunden in Deutschland empfehle ich einen Server in der EU."
+        },
+        {
+          "q": "Werden Inhalte der alten Website übernommen?",
+          "a": "Ja. Texte und Seiten werden übernommen, alte URLs per Weiterleitung auf die neuen Seiten umgeleitet, damit Rankings erhalten bleiben."
+        }
+      ]
+    },
+    "en": {
+      "title": "Business website with Next.js and CMS | Innovativ Digitalbau",
+      "description": "A business website built with Next.js and the Strapi headless CMS: edit content yourself, blog, multilingual pages, technical SEO, forms and analytics.",
+      "h1": "Business website with Next.js and a headless CMS",
+      "lead": "A multi-page company website where you edit services, case studies and articles yourself in the CMS. Next.js serves ready HTML to search engines and loads pages quickly.",
+      "forWhom": [
+        "Companies with several service lines or locations",
+        "Teams that want to update texts, case studies and news themselves",
+        "Businesses that need a multilingual website",
+        "Moving away from a site builder or an outdated CMS"
+      ],
+      "includes": [
+        "Site structure with a dedicated page for each service",
+        "Design and build with Next.js (App Router, SSR/SSG)",
+        "Strapi headless CMS for pages, services, case studies and blog",
+        "Multilingual pages with hreflang on request",
+        "Technical SEO: meta tags, schema.org, sitemap, Search Console",
+        "Lead forms with consent and notifications",
+        "Docker deployment on your server or VPS"
+      ],
+      "process": [
+        "Brief and research: services, competitors, search queries",
+        "Site structure and prototype of key pages",
+        "Design and development, CMS setup",
+        "Content, SEO setup and analytics",
+        "Launch and CMS walkthrough"
+      ],
+      "timeline": "4 to 6 weeks",
+      "faq": [
+        {
+          "q": "Why Next.js instead of WordPress?",
+          "a": "Next.js serves pages as ready HTML and does not depend on plugins. You still edit content comfortably in a CMS."
+        },
+        {
+          "q": "Can I edit the content myself?",
+          "a": "Yes. Services, case studies, articles and images are edited in Strapi. After launch I walk you through the main tasks."
+        },
+        {
+          "q": "Where is the website hosted?",
+          "a": "On your server or a VPS with Docker. The location is chosen based on your market and data protection rules."
+        },
+        {
+          "q": "Can content from the old site be moved?",
+          "a": "Yes. Texts and pages are migrated and old URLs are redirected to the new ones to keep search rankings."
+        }
+      ]
+    }
+  },
+  "online-shop": {
+    "pricingKey": "shop",
+    "relatedProjects": [
+      "delimes"
+    ],
+    "ru": {
+      "title": "Разработка интернет-магазина под ваш каталог | Innovativ Digitalbau",
+      "description": "Интернет-магазин под ваш ассортимент: каталог, корзина, оплата и доставка, импорт товаров и остатков, SEO-структура категорий и уведомления о заказах.",
+      "h1": "Интернет-магазин под ваш каталог и процессы",
+      "lead": "Магазин с каталогом, корзиной, оплатой и доставкой, который учитывает, как у вас устроены товары, остатки и обработка заказов.",
+      "forWhom": [
+        "Магазинам, которые выходят в онлайн или уходят с маркетплейса на свой сайт",
+        "Тем, кому тесно в конструкторе: нужен свой каталог и импорт",
+        "Нишевым магазинам с небольшим, но сложным ассортиментом",
+        "Производителям, которые продают напрямую"
+      ],
+      "includes": [
+        "Каталог с категориями, фильтрами и карточками товаров",
+        "Корзина и оформление заказа",
+        "Подключение онлайн-оплаты и способов доставки",
+        "Импорт товаров и остатков из файла или по API",
+        "SEO-структура категорий и разметка товаров schema.org",
+        "Уведомления о заказах в Telegram и на почту",
+        "Политика конфиденциальности и согласие на обработку ПДн по 152-ФЗ"
+      ],
+      "process": [
+        "Бриф: ассортимент, оплата, доставка, учёт",
+        "Структура каталога и сценарий заказа",
+        "Дизайн и разработка",
+        "Интеграции: оплата, доставка, импорт, уведомления",
+        "Тестовые заказы, запуск и обучение"
+      ],
+      "timeline": "от 6 недель",
+      "faq": [
+        {
+          "q": "Какие платёжные системы можно подключить?",
+          "a": "Подключаю платёжный сервис, с которым у вас есть договор, через его API. Выбор зависит от вашей формы бизнеса и условий сервиса."
+        },
+        {
+          "q": "Можно ли загружать товары из 1С или таблицы?",
+          "a": "Импорт из файла (CSV, Excel) или по API — да. Обмен с конкретной учётной системой оцениваем после брифа, когда понятен формат данных."
+        },
+        {
+          "q": "Чем свой магазин отличается от маркетплейса?",
+          "a": "Свой магазин — это ваш канал продаж, клиентская база и правила оформления. Маркетплейс даёт трафик, но условия задаёт площадка. Часто их используют вместе."
+        },
+        {
+          "q": "Можно ли начать с небольшого каталога?",
+          "a": "Да. Можно запустить магазин с основными категориями и расширять каталог и функции постепенно."
+        }
+      ]
+    },
+    "de": {
+      "title": "Online-Shop entwickeln — passend zu Ihrem Sortiment",
+      "description": "Online-Shop für Ihr Sortiment: Katalog, Warenkorb, Zahlung und Versand, Import von Produkten und Beständen, SEO-Kategorien und Bestellbenachrichtigungen.",
+      "h1": "Online-Shop passend zu Sortiment und Abläufen",
+      "lead": "Ein Shop mit Katalog, Warenkorb, Zahlung und Versand, der berücksichtigt, wie Ihre Produkte, Bestände und Bestellprozesse organisiert sind.",
+      "forWhom": [
+        "Händler, die online starten oder neben Marktplätzen einen eigenen Shop möchten",
+        "Shops, die an die Grenzen eines Baukastens stoßen",
+        "Nischenhändler mit kleinem, aber erklärungsbedürftigem Sortiment",
+        "Hersteller mit Direktvertrieb"
+      ],
+      "includes": [
+        "Katalog mit Kategorien, Filtern und Produktseiten",
+        "Warenkorb und Checkout",
+        "Anbindung von Zahlungsanbieter und Versandarten",
+        "Import von Produkten und Beständen per Datei oder API",
+        "SEO-Struktur der Kategorien und Produkt-Markup (schema.org)",
+        "Bestellbenachrichtigungen per E-Mail und Telegram",
+        "Impressum, Datenschutzerklärung und Einwilligungen nach DSGVO"
+      ],
+      "process": [
+        "Briefing: Sortiment, Zahlung, Versand, Warenwirtschaft",
+        "Katalogstruktur und Bestellablauf",
+        "Design und Entwicklung",
+        "Integrationen: Zahlung, Versand, Import, Benachrichtigungen",
+        "Testbestellungen, Launch und Einweisung"
+      ],
+      "timeline": "ab 6 Wochen",
+      "faq": [
+        {
+          "q": "Welche Zahlungsanbieter sind möglich?",
+          "a": "Ich binde den Anbieter an, mit dem Sie einen Vertrag haben, über dessen API. Die Wahl hängt von Ihrer Unternehmensform und den Konditionen ab."
+        },
+        {
+          "q": "Können Produkte aus einer Tabelle oder Warenwirtschaft importiert werden?",
+          "a": "Import per CSV, Excel oder API ist möglich. Die Anbindung an ein bestimmtes System prüfen wir nach dem Briefing anhand des Datenformats."
+        },
+        {
+          "q": "Brauche ich AGB und Widerrufsbelehrung?",
+          "a": "Für einen Shop in Deutschland ja. Ich setze die Seiten technisch um; die Texte sollten von einem Anwalt oder einem Rechtstexte-Dienst stammen."
+        },
+        {
+          "q": "Kann ich mit einem kleinen Sortiment starten?",
+          "a": "Ja. Der Shop kann mit den wichtigsten Kategorien starten und schrittweise erweitert werden."
+        }
+      ]
+    },
+    "en": {
+      "title": "Online shop development for your catalogue | Innovativ Digitalbau",
+      "description": "An online shop built around your products: catalogue, cart, payment and shipping, product and stock import, SEO category structure and order notifications.",
+      "h1": "Online shop built around your catalogue and processes",
+      "lead": "A shop with catalogue, cart, payment and shipping that follows how your products, stock and order handling actually work.",
+      "forWhom": [
+        "Retailers going online or adding their own shop next to marketplaces",
+        "Shops that have outgrown a site builder",
+        "Niche stores with a small but complex range",
+        "Manufacturers selling directly"
+      ],
+      "includes": [
+        "Catalogue with categories, filters and product pages",
+        "Cart and checkout",
+        "Payment provider and shipping options",
+        "Product and stock import from a file or via API",
+        "SEO category structure and schema.org product markup",
+        "Order notifications to Telegram and email",
+        "Privacy policy and consent for personal data"
+      ],
+      "process": [
+        "Brief: range, payment, shipping, stock management",
+        "Catalogue structure and order flow",
+        "Design and development",
+        "Integrations: payment, shipping, import, notifications",
+        "Test orders, launch and walkthrough"
+      ],
+      "timeline": "from 6 weeks",
+      "faq": [
+        {
+          "q": "Which payment providers can be connected?",
+          "a": "I connect the provider you have a contract with via its API. The choice depends on your business type and the provider terms."
+        },
+        {
+          "q": "Can products be imported from a spreadsheet or ERP?",
+          "a": "Import from CSV, Excel or an API is possible. A connection to a specific system is assessed after the brief, once the data format is clear."
+        },
+        {
+          "q": "How is my own shop different from a marketplace?",
+          "a": "Your own shop is your sales channel, customer base and checkout rules. A marketplace brings traffic, but the platform sets the terms. Many businesses use both."
+        },
+        {
+          "q": "Can I start with a small catalogue?",
+          "a": "Yes. The shop can launch with the main categories and grow step by step."
+        }
+      ]
+    }
+  },
+  "web-app": {
+    "pricingKey": "web-app",
+    "relatedProjects": [
+      "vestora-life",
+      "fithilf",
+      "polaris"
+    ],
+    "ru": {
+      "title": "Веб-приложение и личный кабинет под задачу | Innovativ Digitalbau",
+      "description": "Веб-приложение и личный кабинет клиента: роли и авторизация, PostgreSQL, API и интеграции, админка и отчёты, PWA, развёртывание на вашем сервере.",
+      "h1": "Веб-приложение и личный кабинет для бизнеса",
+      "lead": "Кабинет клиента, внутренний сервис или собственный продукт — с авторизацией, ролями, базой данных и интеграциями. Разрабатываю под ваш процесс, а не подгоняю процесс под готовое решение.",
+      "forWhom": [
+        "Компаниям, которым нужен личный кабинет для клиентов или партнёров",
+        "Тем, кто ведёт процессы в таблицах и хочет перенести их в сервис",
+        "Основателям, которые запускают собственный онлайн-продукт",
+        "Тем, кому нужна своя админка с отчётами"
+      ],
+      "includes": [
+        "Проектирование сценариев, ролей и структуры данных",
+        "Авторизация: вход по ссылке на почту, через Google, по паролю",
+        "База данных PostgreSQL, при необходимости — изоляция данных через RLS",
+        "API и интеграции с внешними сервисами",
+        "Админка, отчёты, выгрузка в PDF и Excel",
+        "PWA: установка на телефон, уведомления",
+        "Развёртывание в Docker на вашем сервере"
+      ],
+      "process": [
+        "Бриф и описание сценариев пользователей",
+        "Прототип ключевых экранов и модель данных",
+        "Разработка по этапам с промежуточными показами",
+        "Тестирование и перенос данных",
+        "Запуск, документация и сопровождение"
+      ],
+      "timeline": "от 6 недель, точный срок — после брифа",
+      "faq": [
+        {
+          "q": "Можно ли начать с минимальной версии?",
+          "a": "Да, так обычно и делаю: сначала основные сценарии, затем развитие по обратной связи пользователей."
+        },
+        {
+          "q": "Кому принадлежит код?",
+          "a": "Код и данные — ваши. Приложение разворачивается на вашем сервере, доступы передаются вам."
+        },
+        {
+          "q": "Как обеспечивается защита данных?",
+          "a": "Разграничение ролей, хранение данных в PostgreSQL, при необходимости — изоляция данных пользователей на уровне базы (RLS), резервные копии. Для ПДн россиян — сервер в РФ по 152-ФЗ."
+        },
+        {
+          "q": "Нужно ли мобильное приложение?",
+          "a": "Часто достаточно PWA: веб-приложение устанавливается на главный экран телефона и работает как приложение без публикации в сторах."
+        }
+      ]
+    },
+    "de": {
+      "title": "Web-App und Kundenportal individuell entwickeln | Innovativ Digitalbau",
+      "description": "Web-App und Kundenportal: Rollen und Login, PostgreSQL, API und Integrationen, Admin-Bereich und Reports, PWA, Deployment auf Ihrem eigenen Server.",
+      "h1": "Web-App und Kundenportal für Ihr Unternehmen",
+      "lead": "Kundenportal, internes Tool oder eigenes Produkt — mit Login, Rollen, Datenbank und Integrationen. Entwickelt nach Ihrem Ablauf statt nach den Grenzen einer Standardlösung.",
+      "forWhom": [
+        "Unternehmen, die ein Portal für Kunden oder Partner brauchen",
+        "Teams, die Abläufe aus Tabellen in eine Anwendung überführen möchten",
+        "Gründer, die ein eigenes Online-Produkt starten",
+        "Betriebe, die einen eigenen Admin-Bereich mit Reports brauchen"
+      ],
+      "includes": [
+        "Konzeption von Abläufen, Rollen und Datenmodell",
+        "Login per Magic Link, Google oder Passwort",
+        "PostgreSQL-Datenbank, bei Bedarf mit Datentrennung per RLS",
+        "API und Anbindung externer Dienste",
+        "Admin-Bereich, Reports, Export als PDF und Excel",
+        "PWA: Installation auf dem Smartphone, Benachrichtigungen",
+        "Deployment mit Docker auf Ihrem Server"
+      ],
+      "process": [
+        "Briefing und Beschreibung der Nutzerabläufe",
+        "Prototyp der wichtigsten Screens und Datenmodell",
+        "Entwicklung in Etappen mit Zwischenständen",
+        "Tests und Datenübernahme",
+        "Launch, Dokumentation und Betreuung"
+      ],
+      "timeline": "ab 6 Wochen, genauer Zeitplan nach dem Briefing",
+      "faq": [
+        {
+          "q": "Kann ich mit einer ersten Version starten?",
+          "a": "Ja, das ist der übliche Weg: zuerst die Kernfunktionen, danach die Weiterentwicklung anhand von Nutzerfeedback."
+        },
+        {
+          "q": "Wem gehört der Code?",
+          "a": "Code und Daten gehören Ihnen. Die Anwendung läuft auf Ihrem Server, alle Zugänge werden übergeben."
+        },
+        {
+          "q": "Wie werden Daten geschützt?",
+          "a": "Rollen und Berechtigungen, Daten in PostgreSQL, bei Bedarf Trennung der Nutzerdaten auf Datenbankebene (RLS) und regelmäßige Backups. Hosting in der EU ist möglich."
+        },
+        {
+          "q": "Brauche ich eine native App?",
+          "a": "Oft reicht eine PWA: Die Web-App wird auf dem Startbildschirm installiert und funktioniert wie eine App, ohne Veröffentlichung im App Store."
+        }
+      ]
+    },
+    "en": {
+      "title": "Custom web app and client portal development | Innovativ Digitalbau",
+      "description": "Web app and client portal: roles and login, PostgreSQL, API and integrations, admin area and reports, PWA, deployment on your own server, built for your process",
+      "h1": "Web app and client portal for your business",
+      "lead": "A client portal, internal tool or your own product, with login, roles, a database and integrations. Built around your process rather than the limits of an off-the-shelf tool.",
+      "forWhom": [
+        "Companies that need a portal for clients or partners",
+        "Teams moving processes from spreadsheets into an application",
+        "Founders launching their own online product",
+        "Businesses that need their own admin area with reports"
+      ],
+      "includes": [
+        "Design of user flows, roles and data model",
+        "Login via magic link, Google or password",
+        "PostgreSQL database, with row-level security when needed",
+        "API and integrations with external services",
+        "Admin area, reports, export to PDF and Excel",
+        "PWA: install on the phone, notifications",
+        "Docker deployment on your server"
+      ],
+      "process": [
+        "Brief and description of user flows",
+        "Prototype of key screens and data model",
+        "Development in stages with regular demos",
+        "Testing and data migration",
+        "Launch, documentation and support"
+      ],
+      "timeline": "from 6 weeks; exact timeline after the brief",
+      "faq": [
+        {
+          "q": "Can we start with a first version?",
+          "a": "Yes, that is the usual approach: core features first, then further development based on user feedback."
+        },
+        {
+          "q": "Who owns the code?",
+          "a": "The code and data are yours. The app runs on your server and all access is handed over."
+        },
+        {
+          "q": "How is data protected?",
+          "a": "Roles and permissions, data in PostgreSQL, row-level security where needed, and regular backups. The hosting location is chosen to fit your data protection rules."
+        },
+        {
+          "q": "Do I need a native mobile app?",
+          "a": "Often a PWA is enough: the web app is installed on the home screen and works like an app without going through app stores."
+        }
+      ]
+    }
+  },
+  "telegram-bot": {
+    "pricingKey": "integrations",
+    "relatedProjects": [
+      "vestora-life"
+    ],
+    "ru": {
+      "title": "Разработка Telegram-бота для бизнеса | Innovativ Digitalbau",
+      "description": "Telegram-бот для бизнеса: уведомления о заявках и заказах, ответы на типовые вопросы, команды и статусы, связка с сайтом, CRM и вашей базой данных.",
+      "h1": "Telegram-бот для заявок, уведомлений и клиентов",
+      "lead": "Бот, который сообщает о новых заявках, отвечает на типовые вопросы и связывает Telegram с вашим сайтом, CRM или базой данных.",
+      "forWhom": [
+        "Тем, кто хочет получать заявки с сайта сразу в Telegram",
+        "Компаниям, которые часто отвечают клиентам на одни и те же вопросы",
+        "Командам, которым нужны статусы и напоминания в мессенджере",
+        "Сервисам, где Telegram — основной канал общения с клиентами"
+      ],
+      "includes": [
+        "Сценарий бота: команды, меню, ответы",
+        "Уведомления о заявках, заказах и событиях",
+        "Связка с сайтом, CRM или базой данных по API",
+        "Ограничение доступа: кто и какие команды может использовать",
+        "Админ-команды для сотрудников",
+        "Размещение на вашем сервере и мониторинг работы"
+      ],
+      "process": [
+        "Бриф: какие задачи бот решает и для кого",
+        "Сценарий диалогов и список команд",
+        "Разработка и подключение интеграций",
+        "Тестирование на реальных сценариях",
+        "Запуск и инструкция для сотрудников"
+      ],
+      "timeline": "от 3 дней для бота уведомлений; сложные сценарии — после брифа",
+      "faq": [
+        {
+          "q": "Что бот умеет кроме уведомлений?",
+          "a": "Принимать заявки, показывать статусы, отвечать на типовые вопросы, присылать напоминания, работать с данными вашей системы по API. Набор функций определяется задачей."
+        },
+        {
+          "q": "Нужен ли для бота отдельный сервер?",
+          "a": "Бот работает на сервере постоянно. Его можно разместить рядом с сайтом на вашем VPS — отдельный сервер обычно не нужен."
+        },
+        {
+          "q": "Можно ли подключить к боту AI?",
+          "a": "Да, например для ответов по вашей базе знаний или разбора входящих сообщений. Это отдельная задача — см. AI-автоматизацию."
+        },
+        {
+          "q": "Как бот работает с персональными данными?",
+          "a": "Если бот собирает ПДн, нужно согласие пользователя и хранение данных россиян на сервере в РФ по 152-ФЗ. Это закладываем в сценарий."
+        }
+      ]
+    },
+    "de": {
+      "title": "Telegram-Bot für Unternehmen entwickeln | Innovativ Digitalbau",
+      "description": "Telegram-Bot für Unternehmen: Benachrichtigungen zu Anfragen und Bestellungen, Antworten auf Standardfragen, Status und Befehle, Anbindung an Website und CRM.",
+      "h1": "Telegram-Bot für Anfragen, Benachrichtigungen und Kunden",
+      "lead": "Ein Bot, der über neue Anfragen informiert, Standardfragen beantwortet und Telegram mit Ihrer Website, Ihrem CRM oder Ihrer Datenbank verbindet.",
+      "forWhom": [
+        "Unternehmen, die Website-Anfragen sofort in Telegram erhalten möchten",
+        "Betriebe, die Kunden oft dieselben Fragen beantworten",
+        "Teams, die Status und Erinnerungen im Messenger brauchen",
+        "Dienste, bei denen Telegram der Hauptkanal zu Kunden ist"
+      ],
+      "includes": [
+        "Bot-Konzept: Befehle, Menüs, Antworten",
+        "Benachrichtigungen zu Anfragen, Bestellungen und Ereignissen",
+        "Anbindung an Website, CRM oder Datenbank per API",
+        "Zugriffsrechte: wer welche Befehle nutzen darf",
+        "Admin-Befehle für Mitarbeitende",
+        "Betrieb auf Ihrem Server mit Monitoring"
+      ],
+      "process": [
+        "Briefing: welche Aufgaben der Bot übernimmt",
+        "Dialogablauf und Befehlsliste",
+        "Entwicklung und Integrationen",
+        "Tests mit realen Abläufen",
+        "Launch und Anleitung für Ihr Team"
+      ],
+      "timeline": "ab 3 Tagen für einen Benachrichtigungs-Bot; komplexere Abläufe nach Briefing",
+      "faq": [
+        {
+          "q": "Was kann der Bot außer Benachrichtigungen?",
+          "a": "Anfragen entgegennehmen, Status anzeigen, Standardfragen beantworten, erinnern und per API mit Ihren Systemen arbeiten. Der Umfang richtet sich nach Ihrer Aufgabe."
+        },
+        {
+          "q": "Braucht der Bot einen eigenen Server?",
+          "a": "Der Bot läuft dauerhaft auf einem Server. Meist kann er auf demselben VPS wie Ihre Website betrieben werden."
+        },
+        {
+          "q": "Lässt sich KI einbinden?",
+          "a": "Ja, etwa für Antworten aus Ihrer Wissensbasis oder die Vorsortierung eingehender Nachrichten. Das ist eine eigene Aufgabe — siehe KI-Automatisierung."
+        },
+        {
+          "q": "Ist ein Telegram-Bot DSGVO-konform nutzbar?",
+          "a": "Telegram ist ein Dienst außerhalb der EU. Welche Daten über den Bot laufen, legen wir sparsam fest und dokumentieren es in der Datenschutzerklärung."
+        }
+      ]
+    },
+    "en": {
+      "title": "Telegram bot development for business | Innovativ Digitalbau",
+      "description": "A Telegram bot for your business: notifications about leads and orders, answers to common questions, commands and statuses, connection to your website and CRM.",
+      "h1": "Telegram bot for leads, notifications and customers",
+      "lead": "A bot that reports new enquiries, answers common questions and connects Telegram with your website, CRM or database.",
+      "forWhom": [
+        "Businesses that want website leads delivered to Telegram",
+        "Teams that answer the same customer questions again and again",
+        "Teams that need statuses and reminders in a messenger",
+        "Services where Telegram is the main customer channel"
+      ],
+      "includes": [
+        "Bot design: commands, menus, replies",
+        "Notifications about leads, orders and events",
+        "Connection to your website, CRM or database via API",
+        "Access control: who can use which commands",
+        "Admin commands for staff",
+        "Hosting on your server with monitoring"
+      ],
+      "process": [
+        "Brief: which tasks the bot handles and for whom",
+        "Conversation flow and command list",
+        "Development and integrations",
+        "Testing with real scenarios",
+        "Launch and guide for your team"
+      ],
+      "timeline": "from 3 days for a notification bot; complex flows after the brief",
+      "faq": [
+        {
+          "q": "What can the bot do besides notifications?",
+          "a": "Take enquiries, show statuses, answer common questions, send reminders and work with your system data via API. The feature set depends on the task."
+        },
+        {
+          "q": "Does the bot need its own server?",
+          "a": "The bot runs continuously on a server. It can usually share the VPS that hosts your website."
+        },
+        {
+          "q": "Can AI be added to the bot?",
+          "a": "Yes, for example to answer from your knowledge base or to sort incoming messages. That is a separate task, see AI automation."
+        },
+        {
+          "q": "What about personal data?",
+          "a": "If the bot collects personal data, users give consent and only the data that is needed is stored. This is part of the bot design."
+        }
+      ]
+    }
+  },
+  "crm-integration": {
+    "pricingKey": "integrations",
+    "relatedProjects": [],
+    "ru": {
+      "title": "Интеграция сайта с CRM: заявки, сделки, уведомления",
+      "description": "CRM-интеграция: передача заявок с сайта в CRM, создание сделок и контактов, уведомления в Telegram, связка сервисов через API без ручного копирования.",
+      "h1": "Интеграция сайта с CRM и другими сервисами",
+      "lead": "Заявки с сайта, бота и форм попадают в CRM автоматически: создаётся контакт и сделка, ответственный получает уведомление. Без ручного копирования и потерянных обращений.",
+      "forWhom": [
+        "Тем, кто переносит заявки из почты в CRM вручную",
+        "Компаниям с несколькими источниками заявок: сайт, бот, мессенджеры",
+        "Тем, кому нужны UTM-метки и источник заявки в карточке сделки",
+        "Командам, где важно быстро реагировать на новые обращения"
+      ],
+      "includes": [
+        "Аудит текущих источников заявок и полей CRM",
+        "Передача заявок с сайта в CRM по API: контакт, сделка, задача",
+        "Сохранение источника и UTM-меток",
+        "Уведомления ответственным в Telegram или на почту",
+        "Обработка ошибок: заявка не теряется, если CRM недоступна",
+        "Связка других сервисов через API: аналитика, таблицы, мессенджеры"
+      ],
+      "process": [
+        "Бриф: какие данные откуда и куда передаются",
+        "Схема полей и сценариев",
+        "Разработка и настройка интеграции",
+        "Тестовые заявки и проверка на каждом этапе",
+        "Запуск и короткая инструкция"
+      ],
+      "timeline": "от 3 дней",
+      "faq": [
+        {
+          "q": "С какими CRM можно работать?",
+          "a": "С любой CRM, у которой есть API для создания контактов и сделок. Конкретную систему и её тариф проверяем на этапе брифа."
+        },
+        {
+          "q": "Что будет, если CRM временно недоступна?",
+          "a": "Заявка сохраняется на стороне сайта и отправляется повторно, а вам приходит уведомление. Обращение не пропадает."
+        },
+        {
+          "q": "Можно ли передавать заявки из Telegram-бота?",
+          "a": "Да, бот передаёт данные в CRM так же, как форма на сайте."
+        },
+        {
+          "q": "Где хранятся данные заявок?",
+          "a": "В вашей CRM и на вашем сервере. Для ПДн россиян требуется хранение в РФ по 152-ФЗ — это учитываем при выборе схемы."
+        }
+      ]
+    },
+    "de": {
+      "title": "CRM-Integration: Anfragen, Deals, Benachrichtigungen",
+      "description": "CRM-Integration für Ihre Website: Anfragen automatisch ins CRM, Kontakte und Deals anlegen, Hinweise per Telegram oder E-Mail, Dienste per API verbinden.",
+      "h1": "Website mit CRM und weiteren Diensten verbinden",
+      "lead": "Anfragen aus Website, Bot und Formularen landen automatisch im CRM: Kontakt und Deal werden angelegt, die zuständige Person wird benachrichtigt. Ohne manuelles Kopieren.",
+      "forWhom": [
+        "Betriebe, die Anfragen von Hand aus E-Mails ins CRM übertragen",
+        "Unternehmen mit mehreren Anfragequellen: Website, Bot, Messenger",
+        "Teams, die Quelle und UTM-Parameter im Deal sehen möchten",
+        "Vertriebsteams, die schnell auf neue Anfragen reagieren müssen"
+      ],
+      "includes": [
+        "Analyse der Anfragequellen und CRM-Felder",
+        "Übertragung von Anfragen per API: Kontakt, Deal, Aufgabe",
+        "Speicherung von Quelle und UTM-Parametern",
+        "Benachrichtigungen per Telegram oder E-Mail",
+        "Fehlerbehandlung: keine verlorene Anfrage bei CRM-Ausfall",
+        "Anbindung weiterer Dienste per API: Analytics, Tabellen, Messenger"
+      ],
+      "process": [
+        "Briefing: welche Daten von wo nach wo",
+        "Feld-Mapping und Abläufe",
+        "Entwicklung und Einrichtung",
+        "Testanfragen und Prüfung jedes Schritts",
+        "Livegang und kurze Anleitung"
+      ],
+      "timeline": "ab 3 Tagen",
+      "faq": [
+        {
+          "q": "Welche CRM-Systeme werden unterstützt?",
+          "a": "Jedes CRM mit einer API zum Anlegen von Kontakten und Deals. Das konkrete System und seinen Tarif prüfen wir im Briefing."
+        },
+        {
+          "q": "Was passiert, wenn das CRM nicht erreichbar ist?",
+          "a": "Die Anfrage wird auf Website-Seite gespeichert und erneut gesendet, Sie erhalten eine Benachrichtigung."
+        },
+        {
+          "q": "Können Anfragen aus einem Telegram-Bot übertragen werden?",
+          "a": "Ja, der Bot überträgt Daten genauso ins CRM wie ein Website-Formular."
+        },
+        {
+          "q": "Was ist mit der DSGVO?",
+          "a": "Für die Datenübertragung an das CRM ist in der Regel ein Auftragsverarbeitungsvertrag mit dem Anbieter nötig; die Datenschutzerklärung wird entsprechend ergänzt."
+        }
+      ]
+    },
+    "en": {
+      "title": "CRM integration: leads, deals and notifications | Innovativ Digitalbau",
+      "description": "CRM integration for your website: leads sent to your CRM automatically, contacts and deals created, Telegram or email notifications, services connected via API.",
+      "h1": "Connect your website to your CRM and other services",
+      "lead": "Leads from your website, bot and forms reach your CRM automatically: a contact and a deal are created and the right person is notified. No manual copying.",
+      "forWhom": [
+        "Teams that copy leads from email into the CRM by hand",
+        "Companies with several lead sources: website, bot, messengers",
+        "Teams that want lead source and UTM tags in each deal",
+        "Sales teams that need to react quickly to new enquiries"
+      ],
+      "includes": [
+        "Review of lead sources and CRM fields",
+        "Lead transfer via API: contact, deal, task",
+        "Lead source and UTM tags saved",
+        "Notifications to Telegram or email",
+        "Error handling: no lost leads when the CRM is down",
+        "Other services connected via API: analytics, spreadsheets, messengers"
+      ],
+      "process": [
+        "Brief: which data goes where",
+        "Field mapping and flows",
+        "Development and setup",
+        "Test leads and checks at every step",
+        "Go-live and a short guide"
+      ],
+      "timeline": "from 3 days",
+      "faq": [
+        {
+          "q": "Which CRMs are supported?",
+          "a": "Any CRM with an API for creating contacts and deals. We check the specific system and plan during the brief."
+        },
+        {
+          "q": "What if the CRM is temporarily down?",
+          "a": "The lead is stored on the website side and resent, and you receive a notification."
+        },
+        {
+          "q": "Can leads from a Telegram bot be sent to the CRM?",
+          "a": "Yes, the bot sends data to the CRM the same way a website form does."
+        },
+        {
+          "q": "Where is lead data stored?",
+          "a": "In your CRM and on your server. The setup follows the data protection rules of your market."
+        }
+      ]
+    }
+  },
+  "ai-automation": {
+    "pricingKey": "ai",
+    "relatedProjects": [
+      "vestora-life"
+    ],
+    "ru": {
+      "title": "AI-автоматизация и MCP-серверы для бизнеса | Innovativ Digitalbau",
+      "description": "AI-автоматизация рутины: обработка текстов и документов, отчёты, распознавание чеков, собственный MCP-сервер для данных бизнеса и контроль расходов на модели.",
+      "h1": "AI-автоматизация и собственные MCP-серверы",
+      "lead": "Передаю повторяющиеся задачи AI-пайплайнам: подготовка текстов и документов, разбор входящих данных, отчёты. MCP-сервер подключает данные вашего бизнеса к AI-ассистентам с контролем доступа.",
+      "forWhom": [
+        "Тем, кто тратит часы на однотипные тексты, письма и документы",
+        "Компаниям, которые хотят спрашивать AI-ассистента о своих данных",
+        "Командам, которым нужны регулярные отчёты без ручной сборки",
+        "Тем, кто хочет контролировать расходы на AI-модели"
+      ],
+      "includes": [
+        "Разбор процесса и выбор задач, где автоматизация оправдана",
+        "AI-пайплайн под задачу: тексты, документы, коммерческие предложения, отчёты",
+        "Распознавание документов и чеков с проверкой человеком",
+        "Собственный MCP-сервер для подключения данных бизнеса к AI-ассистентам",
+        "Выбор моделей и контроль расходов (Claude API, OpenAI API, OpenRouter)",
+        "Журнал запросов и ограничение доступа к данным"
+      ],
+      "process": [
+        "Разбор процесса: что делается вручную и сколько это занимает",
+        "Прототип на реальных примерах",
+        "Разработка пайплайна и интеграций",
+        "Проверка качества результатов и настройка",
+        "Запуск, инструкция и мониторинг расходов"
+      ],
+      "timeline": "от 1 недели",
+      "faq": [
+        {
+          "q": "Что такое MCP?",
+          "a": "Model Context Protocol — открытый стандарт, по которому AI-ассистенты подключаются к внешним данным и инструментам. Собственный MCP-сервер даёт ассистенту доступ только к тем данным и действиям, которые вы разрешили."
+        },
+        {
+          "q": "Можно ли полностью доверить AI работу с клиентами?",
+          "a": "Не стоит. AI хорошо готовит черновики, разбирает данные и ускоряет рутину, но важные решения и ответы клиентам лучше оставлять с проверкой человеком."
+        },
+        {
+          "q": "Сколько стоит использование моделей?",
+          "a": "Зависит от объёма и выбранной модели. Закладываю учёт расходов и лимиты, чтобы затраты были предсказуемыми."
+        },
+        {
+          "q": "Куда уходят данные?",
+          "a": "Запросы обрабатывает провайдер модели. Перед запуском определяем, какие данные можно передавать, а персональные данные по возможности обезличиваем."
+        }
+      ]
+    },
+    "de": {
+      "title": "KI-Automatisierung und MCP-Server für Unternehmen",
+      "description": "KI-Automatisierung für Routineaufgaben: Texte und Dokumente, Reports, Belegerkennung, eigener MCP-Server für Unternehmensdaten und Kostenkontrolle für Modelle.",
+      "h1": "KI-Automatisierung und eigene MCP-Server",
+      "lead": "Wiederkehrende Aufgaben übernehmen KI-Pipelines: Texte und Dokumente vorbereiten, eingehende Daten sortieren, Reports erstellen. Ein MCP-Server verbindet Ihre Unternehmensdaten kontrolliert mit KI-Assistenten.",
+      "forWhom": [
+        "Betriebe, die viel Zeit mit gleichartigen Texten und Dokumenten verbringen",
+        "Unternehmen, die KI-Assistenten Fragen zu eigenen Daten stellen möchten",
+        "Teams, die regelmäßige Reports ohne Handarbeit brauchen",
+        "Unternehmen, die KI-Kosten im Blick behalten wollen"
+      ],
+      "includes": [
+        "Prozessanalyse und Auswahl sinnvoller Automatisierungen",
+        "KI-Pipeline für Texte, Dokumente, Angebote und Reports",
+        "Erkennung von Dokumenten und Belegen mit menschlicher Prüfung",
+        "Eigener MCP-Server für die Anbindung von Unternehmensdaten",
+        "Modellauswahl und Kostenkontrolle (Claude API, OpenAI API, OpenRouter)",
+        "Protokollierung und Zugriffsbeschränkung"
+      ],
+      "process": [
+        "Prozessanalyse: was manuell passiert und wie lange es dauert",
+        "Prototyp mit echten Beispielen",
+        "Entwicklung der Pipeline und Integrationen",
+        "Qualitätsprüfung und Feinabstimmung",
+        "Livegang, Anleitung und Kostenmonitoring"
+      ],
+      "timeline": "ab 1 Woche",
+      "faq": [
+        {
+          "q": "Was ist MCP?",
+          "a": "Das Model Context Protocol ist ein offener Standard, über den KI-Assistenten auf externe Daten und Werkzeuge zugreifen. Ein eigener MCP-Server gibt nur die Daten und Aktionen frei, die Sie erlauben."
+        },
+        {
+          "q": "Kann KI die Kundenkommunikation komplett übernehmen?",
+          "a": "Davon rate ich ab. KI erstellt gute Entwürfe und beschleunigt Routine, wichtige Entscheidungen und Kundenantworten sollte ein Mensch prüfen."
+        },
+        {
+          "q": "Was kosten die KI-Modelle im Betrieb?",
+          "a": "Das hängt von Volumen und Modell ab. Kostenerfassung und Limits sorgen für planbare Ausgaben."
+        },
+        {
+          "q": "Wie steht es um Datenschutz?",
+          "a": "Vor dem Start legen wir fest, welche Daten übertragen werden dürfen, und anonymisieren personenbezogene Daten, wo möglich. Mit dem Modellanbieter ist in der Regel ein AV-Vertrag nötig."
+        }
+      ]
+    },
+    "en": {
+      "title": "AI automation and MCP servers for business | Innovativ Digitalbau",
+      "description": "AI automation for routine work: texts and documents, reports, receipt recognition, your own MCP server for business data, and cost control for AI models.",
+      "h1": "AI automation and custom MCP servers",
+      "lead": "Repetitive tasks are handled by AI pipelines: drafting texts and documents, sorting incoming data, building reports. An MCP server connects your business data to AI assistants with access control.",
+      "forWhom": [
+        "Teams spending hours on similar texts, emails and documents",
+        "Companies that want to ask AI assistants about their own data",
+        "Teams that need regular reports without manual work",
+        "Businesses that want to keep AI costs under control"
+      ],
+      "includes": [
+        "Process review and choice of tasks worth automating",
+        "AI pipeline for texts, documents, proposals and reports",
+        "Document and receipt recognition with human review",
+        "Your own MCP server to connect business data to AI assistants",
+        "Model selection and cost control (Claude API, OpenAI API, OpenRouter)",
+        "Request logging and data access limits"
+      ],
+      "process": [
+        "Process review: what is done manually and how long it takes",
+        "Prototype on real examples",
+        "Pipeline and integration development",
+        "Quality checks and tuning",
+        "Go-live, guide and cost monitoring"
+      ],
+      "timeline": "from 1 week",
+      "faq": [
+        {
+          "q": "What is MCP?",
+          "a": "The Model Context Protocol is an open standard that lets AI assistants connect to external data and tools. Your own MCP server exposes only the data and actions you allow."
+        },
+        {
+          "q": "Can AI handle customer communication on its own?",
+          "a": "I do not recommend it. AI is good at drafts and routine work, but important decisions and customer replies should be reviewed by a person."
+        },
+        {
+          "q": "How much do the AI models cost to run?",
+          "a": "It depends on volume and model. Cost tracking and limits keep spending predictable."
+        },
+        {
+          "q": "Where does the data go?",
+          "a": "Requests are processed by the model provider. Before launch we define which data may be sent and anonymise personal data where possible."
+        }
+      ]
+    }
+  },
+  "seo": {
+    "pricingKey": "seo-care",
+    "relatedProjects": [
+      "kub-perevozki",
+      "anapa-manipulyator",
+      "vl-innovativbau"
+    ],
+    "ru": {
+      "title": "SEO-продвижение в Яндексе, Google и AI-поиске | Innovativ Digitalbau",
+      "description": "SEO для Яндекса и Google и оптимизация под AI-поиск (AEO): технический аудит, семантика, посадочные страницы, schema.org, Яндекс Бизнес, ежемесячный отчёт.",
+      "h1": "SEO и AI-поиск: Яндекс, Google и AI-ассистенты",
+      "lead": "Техническая оптимизация, структура и контент, чтобы сайт находили в Яндексе, Google и чтобы его цитировали AI-ассистенты. Работа ведётся помесячно с отчётом о сделанном.",
+      "forWhom": [
+        "Сайтам, которые получают мало заявок из поиска",
+        "Локальному бизнесу, которому важны запросы по городу и региону",
+        "Компаниям после запуска нового сайта или переезда на другой движок",
+        "Тем, кто хочет, чтобы их сайт упоминали в ответах AI-поиска"
+      ],
+      "includes": [
+        "Технический аудит: индексация, скорость, ошибки, дубли",
+        "Семантика и структура: посадочная страница под каждую услугу и регион",
+        "Метатеги, разметка schema.org, перелинковка",
+        "Настройка Яндекс Вебмастера, Метрики и Google Search Console",
+        "Яндекс Бизнес и Google Business Profile",
+        "AEO: структура ответов и FAQ для цитирования AI-ассистентами",
+        "Ежемесячный отчёт о работах и динамике"
+      ],
+      "process": [
+        "Аудит сайта и анализ конкурентов в выдаче",
+        "План работ на первые месяцы",
+        "Технические исправления и новые посадочные страницы",
+        "Контент и разметка",
+        "Ежемесячный отчёт и корректировка плана"
+      ],
+      "timeline": "аудит и стартовая настройка — от 1 недели, далее помесячно",
+      "faq": [
+        {
+          "q": "Гарантируете ли вы попадание в топ?",
+          "a": "Нет. Позиции зависят от поисковых систем, конкурентов и истории сайта, и гарантировать их честно нельзя. Я отвечаю за качество и объём работ и показываю динамику в отчётах."
+        },
+        {
+          "q": "Когда появятся первые результаты?",
+          "a": "Технические исправления обычно отражаются в индексе в течение нескольких недель. Рост по конкурентным запросам — дело нескольких месяцев."
+        },
+        {
+          "q": "Что такое AEO и AI-поиск?",
+          "a": "AEO (Answer Engine Optimization) — оптимизация под системы, которые дают готовый ответ: Алиса, нейропоиск, ChatGPT и другие. Помогают чёткая структура страниц, FAQ и разметка."
+        },
+        {
+          "q": "Можно ли продвигать сайт на конструкторе?",
+          "a": "Частично: тексты, структуру и метатеги — да. Технические ограничения платформы иногда мешают, тогда предлагаю варианты переноса."
+        }
+      ]
+    },
+    "de": {
+      "title": "SEO und AI Search: Google und KI-Antworten | Innovativ Digitalbau",
+      "description": "SEO für Google und Optimierung für KI-Suche (AEO): technisches Audit, Keywords, Landingpages je Leistung, schema.org, Google Business Profile, Monatsreport.",
+      "h1": "SEO und AI Search für Google und KI-Assistenten",
+      "lead": "Technische Optimierung, Struktur und Inhalte, damit Ihre Website in Google gefunden und von KI-Assistenten zitiert werden kann. Die Betreuung läuft monatlich mit Report.",
+      "forWhom": [
+        "Websites, die wenig Anfragen über die Suche erhalten",
+        "Lokale Betriebe, für die Suchanfragen nach Stadt und Region zählen",
+        "Unternehmen nach einem Relaunch oder CMS-Wechsel",
+        "Unternehmen, die in Antworten von KI-Suchen auftauchen möchten"
+      ],
+      "includes": [
+        "Technisches Audit: Indexierung, Ladezeit, Fehler, Duplikate",
+        "Keywords und Struktur: eigene Seite je Leistung und Region",
+        "Meta-Tags, schema.org-Markup, interne Verlinkung",
+        "Einrichtung von Google Search Console und Analytics",
+        "Google Business Profile und Bing Places",
+        "AEO: Antwortstruktur und FAQ für KI-Assistenten",
+        "Monatlicher Report über Maßnahmen und Entwicklung"
+      ],
+      "process": [
+        "Website-Audit und Wettbewerbsanalyse in der Suche",
+        "Maßnahmenplan für die ersten Monate",
+        "Technische Korrekturen und neue Landingpages",
+        "Inhalte und Markup",
+        "Monatlicher Report und Anpassung des Plans"
+      ],
+      "timeline": "Audit und Einrichtung ab 1 Woche, danach monatlich",
+      "faq": [
+        {
+          "q": "Garantieren Sie Platz 1 bei Google?",
+          "a": "Nein. Rankings hängen von Google, Wettbewerb und Historie der Website ab und lassen sich seriös nicht garantieren. Ich stehe für Qualität und Umfang der Arbeit und zeige die Entwicklung im Report."
+        },
+        {
+          "q": "Wann sind erste Ergebnisse sichtbar?",
+          "a": "Technische Korrekturen wirken meist innerhalb einiger Wochen im Index. Bessere Rankings bei umkämpften Begriffen brauchen mehrere Monate."
+        },
+        {
+          "q": "Was bedeutet AEO?",
+          "a": "Answer Engine Optimization ist die Optimierung für Systeme, die direkte Antworten geben, etwa Google AI Overviews, ChatGPT oder Perplexity. Klare Seitenstruktur, FAQ und Markup helfen dabei."
+        },
+        {
+          "q": "Funktioniert SEO auch mit einem Baukasten?",
+          "a": "Teilweise: Texte, Struktur und Meta-Tags ja. Technische Grenzen der Plattform können stören; dann schlage ich Alternativen vor."
+        }
+      ]
+    },
+    "en": {
+      "title": "SEO and AI search for Google and Yandex | Innovativ Digitalbau",
+      "description": "SEO for Google and Yandex plus optimisation for AI search (AEO): technical audit, keywords, service pages, schema.org, business profiles, monthly report.",
+      "h1": "SEO and AI search: Google, Yandex and AI assistants",
+      "lead": "Technical optimisation, structure and content so your site can be found in search and cited by AI assistants. Work runs monthly with a report on what was done.",
+      "forWhom": [
+        "Websites that get few leads from search",
+        "Local businesses that rely on city and region searches",
+        "Companies after a relaunch or a CMS change",
+        "Businesses that want to appear in AI search answers"
+      ],
+      "includes": [
+        "Technical audit: indexing, speed, errors, duplicates",
+        "Keywords and structure: a landing page per service and region",
+        "Meta tags, schema.org markup, internal linking",
+        "Google Search Console, Yandex Webmaster and analytics setup",
+        "Google Business Profile and Yandex Business",
+        "AEO: answer structure and FAQ for AI assistants",
+        "Monthly report on work done and trends"
+      ],
+      "process": [
+        "Site audit and competitor review in search results",
+        "Work plan for the first months",
+        "Technical fixes and new landing pages",
+        "Content and markup",
+        "Monthly report and plan updates"
+      ],
+      "timeline": "audit and setup from 1 week, then monthly",
+      "faq": [
+        {
+          "q": "Do you guarantee top rankings?",
+          "a": "No. Rankings depend on search engines, competitors and the site history, so they cannot honestly be guaranteed. I am responsible for the quality and scope of work and show progress in reports."
+        },
+        {
+          "q": "When will I see first results?",
+          "a": "Technical fixes usually show in the index within a few weeks. Growth on competitive queries takes several months."
+        },
+        {
+          "q": "What is AEO?",
+          "a": "Answer Engine Optimization targets systems that give direct answers, such as AI overviews, ChatGPT or Perplexity. Clear page structure, FAQ and markup help."
+        },
+        {
+          "q": "Does SEO work on a site builder?",
+          "a": "Partly: copy, structure and meta tags, yes. Platform limits can get in the way; in that case I suggest migration options."
+        }
+      ]
+    }
+  },
+  "support": {
+    "pricingKey": "care",
+    "relatedProjects": [
+      "vl-innovativbau",
+      "mp-innovativbau"
+    ],
+    "ru": {
+      "title": "Техническая поддержка и хостинг сайта | Innovativ Digitalbau",
+      "description": "Поддержка и хостинг сайта: обновления, резервные копии, мониторинг доступности, SSL, перенос на VPS, мелкие доработки и новые страницы по запросу.",
+      "h1": "Поддержка и хостинг сайта после запуска",
+      "lead": "Слежу, чтобы сайт работал: обновления, резервные копии, мониторинг, SSL. Доработки и новые страницы — по запросу, без поиска нового подрядчика.",
+      "forWhom": [
+        "Владельцам сайтов, которым некому поручить обновления и бэкапы",
+        "Тем, кто хочет переехать с shared-хостинга на собственный VPS",
+        "Компаниям, которые регулярно добавляют страницы и контент",
+        "Тем, у кого сайт делал подрядчик, который больше недоступен"
+      ],
+      "includes": [
+        "Размещение на VPS в Docker, nginx, SSL-сертификаты",
+        "Обновления зависимостей и исправление уязвимостей",
+        "Резервные копии и проверка восстановления",
+        "Мониторинг доступности и реакция на сбои",
+        "Перенос сайта с shared-хостинга на VPS",
+        "Мелкие доработки и новые страницы по запросу",
+        "Актуализация политики и согласия по 152-ФЗ"
+      ],
+      "process": [
+        "Аудит сайта и сервера, доступы",
+        "Настройка бэкапов и мониторинга",
+        "Перенос или приведение сервера в порядок",
+        "Регулярные обновления по графику",
+        "Доработки по запросу и краткий отчёт"
+      ],
+      "timeline": "подключение — после аудита сайта, далее помесячно",
+      "faq": [
+        {
+          "q": "Можно ли взять на поддержку сайт, который делал не я?",
+          "a": "Да, после аудита. Смотрю код, сервер и зависимости и говорю, что нужно привести в порядок перед подключением."
+        },
+        {
+          "q": "Где размещается сайт?",
+          "a": "На VPS в Docker. Для сайтов, которые собирают ПДн россиян, — сервер в РФ по требованиям 152-ФЗ."
+        },
+        {
+          "q": "Что входит в поддержку, а что оплачивается отдельно?",
+          "a": "Обновления, бэкапы, мониторинг и SSL входят в тариф. Новые разделы и крупные доработки оцениваются отдельно, мелкие задачи — почасово."
+        },
+        {
+          "q": "Как быстро вы реагируете на сбой?",
+          "a": "Мониторинг присылает уведомление о недоступности сайта, и я начинаю разбираться. Конкретные сроки реакции фиксируем в договоре."
+        }
+      ]
+    },
+    "de": {
+      "title": "Website-Wartung und Hosting | Innovativ Digitalbau",
+      "description": "Wartung und Hosting Ihrer Website: Updates, Backups, Monitoring, SSL, Umzug auf einen VPS, kleine Anpassungen und neue Seiten auf Anfrage.",
+      "h1": "Wartung und Hosting nach dem Launch",
+      "lead": "Ich sorge dafür, dass Ihre Website läuft: Updates, Backups, Monitoring, SSL. Anpassungen und neue Seiten auf Anfrage, ohne neuen Dienstleister suchen zu müssen.",
+      "forWhom": [
+        "Website-Betreiber ohne Zuständigen für Updates und Backups",
+        "Unternehmen, die vom Shared Hosting auf einen eigenen VPS wechseln möchten",
+        "Betriebe, die regelmäßig neue Seiten und Inhalte ergänzen",
+        "Websites, deren ursprünglicher Entwickler nicht mehr erreichbar ist"
+      ],
+      "includes": [
+        "Hosting auf einem VPS mit Docker, nginx und SSL-Zertifikaten",
+        "Updates von Abhängigkeiten und Sicherheitskorrekturen",
+        "Backups mit Wiederherstellungstest",
+        "Verfügbarkeitsmonitoring und Reaktion auf Störungen",
+        "Umzug vom Shared Hosting auf einen VPS",
+        "Kleine Anpassungen und neue Seiten auf Anfrage",
+        "Auftragsverarbeitungsvertrag (AVV) für das Hosting"
+      ],
+      "process": [
+        "Audit von Website und Server, Zugänge",
+        "Backups und Monitoring einrichten",
+        "Umzug oder Bereinigung des Servers",
+        "Regelmäßige Updates nach Plan",
+        "Anpassungen auf Anfrage mit kurzem Report"
+      ],
+      "timeline": "Start nach dem Website-Audit, danach monatlich",
+      "faq": [
+        {
+          "q": "Übernehmen Sie auch Websites anderer Entwickler?",
+          "a": "Ja, nach einem Audit. Ich prüfe Code, Server und Abhängigkeiten und sage Ihnen, was vor der Übernahme zu tun ist."
+        },
+        {
+          "q": "Wo wird die Website gehostet?",
+          "a": "Auf einem VPS mit Docker. Für Kunden in Deutschland empfehle ich einen Server in der EU."
+        },
+        {
+          "q": "Was ist enthalten, was wird extra berechnet?",
+          "a": "Updates, Backups, Monitoring und SSL sind enthalten. Neue Bereiche und größere Anpassungen werden separat kalkuliert, kleine Aufgaben nach Stundensatz."
+        },
+        {
+          "q": "Wie schnell reagieren Sie auf einen Ausfall?",
+          "a": "Das Monitoring meldet die Störung, und ich beginne mit der Analyse. Konkrete Reaktionszeiten halten wir im Vertrag fest."
+        }
+      ]
+    },
+    "en": {
+      "title": "Website maintenance and hosting | Innovativ Digitalbau",
+      "description": "Website maintenance and hosting: updates, backups, uptime monitoring, SSL, migration to a VPS, small changes and new pages on request. Monthly support.",
+      "h1": "Website maintenance and hosting after launch",
+      "lead": "I keep your website running: updates, backups, monitoring, SSL. Changes and new pages on request, without looking for a new contractor.",
+      "forWhom": [
+        "Site owners with nobody in charge of updates and backups",
+        "Businesses moving from shared hosting to their own VPS",
+        "Companies that regularly add pages and content",
+        "Sites whose original developer is no longer available"
+      ],
+      "includes": [
+        "VPS hosting with Docker, nginx and SSL certificates",
+        "Dependency updates and security fixes",
+        "Backups with restore testing",
+        "Uptime monitoring and incident response",
+        "Migration from shared hosting to a VPS",
+        "Small changes and new pages on request",
+        "Legal pages kept up to date"
+      ],
+      "process": [
+        "Site and server audit, access handover",
+        "Backups and monitoring setup",
+        "Migration or server clean-up",
+        "Scheduled updates",
+        "Changes on request with a short report"
+      ],
+      "timeline": "onboarding after a site audit, then monthly",
+      "faq": [
+        {
+          "q": "Do you take over sites built by other developers?",
+          "a": "Yes, after an audit. I review the code, server and dependencies and tell you what needs fixing first."
+        },
+        {
+          "q": "Where is the website hosted?",
+          "a": "On a VPS with Docker. The server location is chosen to fit your market and data protection rules."
+        },
+        {
+          "q": "What is included and what costs extra?",
+          "a": "Updates, backups, monitoring and SSL are included. New sections and larger changes are quoted separately; small tasks are billed hourly."
+        },
+        {
+          "q": "How fast do you respond to an outage?",
+          "a": "Monitoring sends an alert and I start investigating. Specific response times are agreed in the contract."
+        }
+      ]
+    }
+  }
+}

@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "prerender": "node scripts/prerender.cjs",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-server",
-    "build:static": "node scripts/check-projects.cjs && node scripts/fetch-reviews.cjs && node scripts/fetch-cbr-rate.cjs && node scripts/generate-sitemap.cjs && tsc -b && vite build && npm run build:ssr && node scripts/generate-turbo-feed.cjs && node scripts/prerender.cjs",
+    "build:static": "node scripts/check-projects.cjs && node scripts/fetch-reviews.cjs && node scripts/fetch-posts.cjs && node scripts/fetch-cbr-rate.cjs && node scripts/generate-sitemap.cjs && tsc -b && vite build && npm run build:ssr && node scripts/generate-turbo-feed.cjs && node scripts/prerender.cjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview:static": "node scripts/serve-static.cjs",
