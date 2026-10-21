@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { PACKAGES } from '@/data/pricing';
 
 const API_BASE = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || '';
 const LEAD_ENDPOINT = `${API_BASE}/api/lead`;
@@ -38,18 +39,20 @@ interface Module {
   icon: typeof Rocket;
 }
 
-// Цены «от» — по анализу рынка РФ 2026 (нижняя граница качественного исполнителя)
+// Цены «от» (₽): разработка, интеграции и SEO — из единого прайса src/data/pricing.json (медиана регионального рынка РФ),
+// остальные модули — собственные ориентиры калькулятора.
+const rub = (id: string, fallback: number) => PACKAGES.find((p) => p.id === id)?.price.ru ?? fallback;
 const MODULES: Module[] = [
-  { id: 'landing', group: 'dev', title: 'Лендинг / одностраничник', desc: 'Дизайн, адаптив, быстрая загрузка, форма заявок', from: 40000, icon: LayoutIcon },
-  { id: 'corporate', group: 'dev', title: 'Корпоративный сайт', desc: 'Многостраничник: услуги, блог, кейсы, формы', from: 120000, icon: Globe },
-  { id: 'shop', group: 'dev', title: 'Интернет-магазин', desc: 'Каталог, корзина, оплата, админка', from: 300000, icon: ShoppingCart },
-  { id: 'webapp', group: 'dev', title: 'Веб-приложение / MVP', desc: 'Личный кабинет, логика, API, интеграции', from: 800000, icon: AppWindow },
+  { id: 'landing', group: 'dev', title: 'Лендинг / одностраничник', desc: 'Дизайн, адаптив, быстрая загрузка, форма заявок', from: rub('landing', 45000), icon: LayoutIcon },
+  { id: 'corporate', group: 'dev', title: 'Корпоративный сайт', desc: 'Многостраничник: услуги, блог, кейсы, формы', from: rub('business-site', 120000), icon: Globe },
+  { id: 'shop', group: 'dev', title: 'Интернет-магазин', desc: 'Каталог, корзина, оплата, админка', from: rub('shop', 100000), icon: ShoppingCart },
+  { id: 'webapp', group: 'dev', title: 'Веб-приложение / MVP', desc: 'Личный кабинет, логика, API, интеграции', from: rub('web-app', 180000), icon: AppWindow },
   { id: 'localbiz', group: 'setup', title: 'Google + Яндекс Бизнес', desc: 'Профили, карты, категории, фото, отзывы', from: 8000, icon: Search },
   { id: 'social', group: 'setup', title: 'Оформление соцсетей', desc: 'Визуал, шапки, настройка бизнес-аккаунтов', from: 15000, icon: Share2 },
   { id: 'analytics', group: 'setup', title: 'Веб-аналитика', desc: 'Яндекс.Метрика + GA4, цели и события', from: 15000, icon: LineChart },
-  { id: 'crm', group: 'setup', title: 'CRM и автоматизация', desc: 'Интеграция CRM, боты, автоворонки (при наличии нужного обеспечения)', from: 60000, icon: Bot },
+  { id: 'crm', group: 'setup', title: 'CRM и автоматизация', desc: 'Интеграция CRM, боты, автоворонки (при наличии нужного обеспечения)', from: rub('integrations', 25000), icon: Bot },
   { id: 'content', group: 'setup', title: 'Контент / копирайтинг', desc: 'Тексты под задачи и SEO, пакет страниц', from: 15000, icon: PenLine },
-  { id: 'seo', group: 'monthly', title: 'SEO-продвижение', desc: 'Ключи, структура, ссылки, рост позиций', from: 40000, monthly: true, icon: TrendingUp },
+  { id: 'seo', group: 'monthly', title: 'SEO-продвижение', desc: 'Ключи, структура, ссылки, рост позиций', from: rub('seo-care', 25000), monthly: true, icon: TrendingUp },
 ];
 
 interface Goal { id: string; title: string; preselect: string[]; icon: typeof Rocket }
@@ -65,6 +68,14 @@ const BUDGETS = ['до 50 000 ₽', '50 000 – 150 000 ₽', '150 000 – 500 0
 const DEADLINES = ['Срочно (1–2 недели)', '2–4 недели', '1–2 месяца', 'Гибко'];
 
 const STEP_TITLES = ['Что нужно?', 'Соберите проект', 'Детали', 'Контакт'];
+
+// Точный расчёт «от–до» со сроком и разбивкой — в калькуляторе (/calculator, общий модуль src/lib/calculator.ts).
+// Здесь — только ориентир «от» по пакетам для брифа.
+const CALC_HINT = {
+  ru: 'Нужна цена «от–до» и срок с разбивкой? Откройте калькулятор',
+  de: 'Preisrahmen und Dauer mit Aufschlüsselung? Zum Kostenrechner',
+  en: 'Need a price range and timeline with a breakdown? Open the calculator',
+} as const;
 
 export function BriefPage() {
   const { i18n } = useTranslation();
@@ -216,6 +227,16 @@ export function BriefPage() {
                     />
                   </div>
                 </div>
+
+                {step === 0 && (
+                  <Link
+                    to={`/${lang}/calculator`}
+                    className="mb-6 flex items-center justify-between gap-3 rounded-2xl border border-cyan-300/25 bg-cyan-300/[0.06] p-4 text-sm text-cyan-50 transition hover:border-cyan-300/50"
+                  >
+                    <span>{CALC_HINT[lang]}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                )}
 
                 <AnimatePresence mode="wait">
                   {/* ШАГ 1 — цель */}

@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const { sendTelegramMessage } = require('../lib/telegram');
 const { createRateLimiter, clientIp } = require('../lib/rate-limit');
 const { authMiddleware } = require('../middleware/auth');
+const { isPlatformRequest } = require('../lib/platform');
 
 // Отзывы хранятся на РФ-сервере рядом с лидами. Публично отдаются только одобренные (status: approved).
 const DATA_DIR = path.join(__dirname, '..', 'data');
@@ -109,7 +110,8 @@ publicRouter.post('/review', limiter, async (req, res) => {
 });
 
 // ── Модерация (админка) ──
-adminRouter.use(authMiddleware);
+// Старая админка (JWT) или сервер платформы (модерация в /ru/admin/reviews pl-platform)
+adminRouter.use((req, res, next) => (isPlatformRequest(req) ? next() : authMiddleware(req, res, next)));
 
 adminRouter.get('/', (req, res) => {
   const { tokens = [] } = readJson(TOKENS_FILE, {});

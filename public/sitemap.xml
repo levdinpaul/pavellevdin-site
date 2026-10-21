@@ -151,6 +151,36 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pavellevdin.ru/ru/brief"/>
   </url>
   <url>
+    <loc>https://pavellevdin.ru/ru/calculator</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pavellevdin.ru/ru/calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pavellevdin.ru/de/calculator"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pavellevdin.ru/en/calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pavellevdin.ru/ru/calculator"/>
+  </url>
+  <url>
+    <loc>https://pavellevdin.ru/de/calculator</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pavellevdin.ru/ru/calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pavellevdin.ru/de/calculator"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pavellevdin.ru/en/calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pavellevdin.ru/ru/calculator"/>
+  </url>
+  <url>
+    <loc>https://pavellevdin.ru/en/calculator</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pavellevdin.ru/ru/calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pavellevdin.ru/de/calculator"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pavellevdin.ru/en/calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pavellevdin.ru/ru/calculator"/>
+  </url>
+  <url>
     <loc>https://pavellevdin.ru/ru/contact</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>

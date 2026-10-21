@@ -4,6 +4,7 @@ const path = require('path');
 const { sendTelegramMessage } = require('../lib/telegram');
 const { createRateLimiter, clientIp } = require('../lib/rate-limit');
 const { sendMail, leadMailbox } = require('../lib/mailer');
+const { forwardLead } = require('../lib/platform');
 
 const router = express.Router();
 
@@ -88,6 +89,13 @@ router.post('/', limiter, async (req, res) => {
     await sendMail({ to: leadMailbox(lead.language), subject: `Новая заявка (${lead.type}) — ${lead.name}`, text, replyTo });
   } catch (err) {
     console.error('Не удалось отправить лид на почту:', err.message);
+  }
+
+  // 4) Копия в CRM платформы (pl-platform, тот же сервер в РФ); без scripts/platform.json выключено
+  try {
+    await forwardLead(lead);
+  } catch (err) {
+    console.error('Не удалось передать лид в CRM платформы:', err.message);
   }
 
   res.json({ ok: true });

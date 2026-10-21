@@ -17,15 +17,23 @@
 Полный план P0–P8 — в истории git (`git show v2-ssr-baseline:memory/BACKLOG.md`).
 
 ## 1a. Легаси HostLand/FTP (из аудита 2026-10-18)
-- [ ] **Блог-пайплайн админки сломан на russh:** `POST /api/articles/publish/:id` (`scripts/routes/articles.js:212-234`)
-  после `npm run build` + static-html вызывает `uploadDistToFTP` → без `FTP_HOST/USER/PASSWORD` падает 500.
-  Также FTP: `image-generator.js`, `media-manager.js`, `video-generator.js` (uploadSingleFile, локальный файл удаляется!),
-  тест «ftp» в `routes/settings.js`. Перевести на локальную запись в dist/public + `build:static`.
-- [ ] Publish-роут собирает `npm run build`, а не `build:static` → после публикации статьи с админки пропадёт SSR-пререндер.
-- [ ] Удалить legacy после замены: `deploy-only.cjs`, `restart-passenger.cjs`, `ftp-list.cjs`, `add-article.cjs`,
-  `lib/ftp-upload.js`, Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
-  зависимость `basic-ftp`; `/srv/sites/pavellevdin.ru/htdocs/www` на сервере.
-- [ ] Скрипт деплоя на russh (scp + atomic mv + restart) вместо ручных шагов; удалить `dist.bak-*` после стабилизации.
+- [x] Блог-пайплайн/FTP старой админки — удалён в 04b (блог и агенты теперь в pl-platform).
+- [ ] Остатки legacy: Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
+  зависимости `basic-ftp`, `multer`, `tinify` (не менять без решения Pavel); на сервере — старые файлы удалённых
+  маршрутов в `scripts/routes|lib` (не подключены) и `/srv/sites/pavellevdin.ru/htdocs/www`.
+
+## 1d. pl-platform (после 05, 2026-10-19) — репо levdinpaul/pl-platform, прод на russh
+- [ ] **Почта**: ящик info@pavellevdin.ru на HostLand → SMTP_* в `/srv/sites/pavellevdin.ru/platform/.env` и `.env` сайта;
+  проверка — `docker compose exec strapi npm run mail:test -- адрес` и `docker exec stack-pavellevdin-1 node scripts/mail-test.cjs адрес`.
+- [ ] **Telegram**: в `.env` сайта TELEGRAM_TOKEN/TELEGRAM_CHAT_ID пустые (уведомления сайта о лидах не уходили!) →
+  вписать, затем `/srv/sites/pavellevdin.ru/platform/sync-telegram.sh` (копирует в платформу) и `docker restart stack-pavellevdin-1`.
+- [ ] **VK ID**: приложение на id.vk.com, redirect `https://pavellevdin.ru/api/auth/vk/callback` → VK_CLIENT_ID/SECRET в .env платформы.
+- [ ] **Ключ Claude** (`ANTHROPIC_API_KEY`) — нет; агенты на Gemini.
+- [ ] Реквизиты КП и режим налога — админка → Настройки → «Настройки студии».
+- [ ] Цены: магазин (100 000) вышел дешевле корпоративного (120 000) — медианы; при желании поднять.
+- [ ] Google-вход создаёт аккаунт без экрана согласия ПДн (сейчас выключен — нет GOOGLE_CLIENT_ID).
+- [ ] Капча (Yandex SmartCaptcha), cron scheduler-tick/watchdog/sysadmin, enum content-topic.category, SEO-компонент blog-post.
+- [ ] Скрипт деплоя сайта на russh; удалить `dist.bak-*` после стабилизации.
 
 ## 1c. После редизайна «PL Сцена» (2026-10-18)
 - [ ] Пререндер /de и /en (сейчас SPA, только /ru в HTML) — фаза 2; hreflang уже указывает на de/en.

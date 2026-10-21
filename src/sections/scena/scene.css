@@ -1,4 +1,5 @@
-/* The compact static hero is the default. Only a successfully created scene expands it. */
+/* The compact static hero is the default. The tall scroll geometry is on when <html data-scene="live">:
+   set by the inline script in index.html before the first paint (motion allowed) and removed if the canvas fails. */
 .pl-scene {
   --scene-frame-height: max(100svh, 560px);
   position: relative;
@@ -10,8 +11,8 @@
   overflow: clip;
   isolation: isolate;
 }
-.pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 610svh); }
-.pl-scene[data-motion='live'] .pl-stage {
+:root[data-scene='live'] .pl-scene { height: calc(var(--scene-frame-height) + 405svh); }
+:root[data-scene='live'] .pl-scene .pl-stage {
   position: sticky;
   top: min(0px, calc(100svh - var(--scene-frame-height)));
   height: var(--scene-frame-height);
@@ -31,20 +32,37 @@
     radial-gradient(ellipse 36% 48% at 76% 49%, rgba(55, 84, 151, 0.11), transparent 80%),
     var(--bg-0);
 }
-.pl-scene__fallback {
-  z-index: 1;
-  color: rgba(138, 174, 255, 0.2);
-  opacity: 1;
-  transition: opacity 700ms ease;
-}
-.pl-scene[data-motion='live'] .pl-scene__fallback { opacity: 0; }
+.pl-scene__fallback,
 .pl-gl {
   z-index: 1;
-  display: block;
   top: max(0px, calc(var(--scene-frame-height) - 100svh));
   height: 100svh;
+}
+/* Server-rendered opening frame of the dust; the canvas draws the same frame and fades in over it. */
+.pl-scene__fallback {
+  overflow: hidden;
+  color: #d6e0ff;
+  transition: opacity 300ms ease;
+}
+.pl-scene__fallback svg {
+  position: absolute;
+  /* Same anchor as the canvas camera on the first frame; 1 unit = focal length (1.0255 × viewport height). */
+  left: 74%;
+  top: 51.5%;
+  width: calc(3.6 * 102.55svh);
+  height: calc(3.6 * 102.55svh);
+  transform: translate(-50%, -50%);
+}
+.pl-scene:has(.pl-gl[data-ready='true']) .pl-scene__fallback {
+  /* Hidden after the fade so the large SVG is not repainted with every canvas frame. */
   opacity: 0;
-  transition: opacity 700ms ease;
+  visibility: hidden;
+  transition: opacity 300ms ease, visibility 0s 300ms;
+}
+.pl-gl {
+  display: block;
+  opacity: 0;
+  transition: opacity 300ms ease;
 }
 .pl-gl[data-ready='true'] { opacity: 1; }
 .pl-scene__vignette {
@@ -159,7 +177,7 @@
   z-index: 3;
   pointer-events: none;
 }
-.pl-scene[data-motion='live'] .pl-tech-cloud { display: block; }
+:root[data-scene='live'] .pl-scene .pl-tech-cloud { display: block; }
 .pl-scene .pl-tech {
   position: absolute;
   top: 0;
@@ -205,7 +223,7 @@
   visibility: hidden;
   pointer-events: none;
 }
-.pl-scene[data-motion='live'] .pl-scene__finale { display: flex; }
+:root[data-scene='live'] .pl-scene .pl-scene__finale { display: flex; }
 .pl-scene__finale p { margin: 0 0 20px; color: var(--accent); font: 400 12px/1.4 var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; }
 .pl-scene__finale .pl-scene__finale-title {
   margin: 0;
@@ -228,7 +246,7 @@
   opacity: 0;
   visibility: hidden;
 }
-.pl-scene[data-motion='live'] .pl-scene__controls { display: flex; }
+:root[data-scene='live'] .pl-scene .pl-scene__controls { display: flex; }
 .pl-scene__controls p {
   margin: 0;
   color: var(--ink-3);
@@ -255,7 +273,7 @@
   .pl-scene .pl-tech-fallback { gap: 8px 14px; font-size: 9px; }
 }
 @media (max-width: 767px) {
-  .pl-scene[data-motion='live'] { height: calc(var(--scene-frame-height) + 480svh); }
+  :root[data-scene='live'] .pl-scene { height: calc(var(--scene-frame-height) + 320svh); }
   .pl-scene .pl-hero {
     justify-content: flex-start;
     padding: clamp(132px, 20svh, 180px) 24px 138px;
@@ -270,7 +288,7 @@
   .pl-scene .pl-hero__scroll { left: 24px; bottom: 31px; max-width: calc(100% - 48px); font-size: 11px; }
   .pl-scene .pl-tech-fallback { right: 24px; bottom: 66px; left: 24px; justify-content: flex-start; gap: 7px 15px; }
   .pl-scene__atmosphere { background: radial-gradient(ellipse 60% 36% at 70% 75%, rgba(55, 84, 151, 0.12), transparent 80%), var(--bg-0); }
-  .pl-scene__fallback { opacity: 0.6; transform: translateY(23%); }
+  .pl-scene__fallback svg { left: 50%; top: 74%; }
   .pl-scene__controls { top: calc(93px + max(0px, var(--scene-frame-height) - 100svh)); right: 24px; left: 24px; }
   .pl-scene__controls p { font-size: 11px; }
   .pl-scene__controls a { gap: 8px; font-size: 11px; }
@@ -297,8 +315,8 @@
   .pl-scene__controls p { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pl-scene[data-motion='live'] { height: auto; }
-  .pl-scene[data-motion='live'] .pl-stage { position: relative; height: auto; }
+  :root[data-scene='live'] .pl-scene { height: auto; }
+  :root[data-scene='live'] .pl-scene .pl-stage { position: relative; height: auto; }
   .pl-scene .pl-hero { opacity: 1 !important; transform: none !important; visibility: visible !important; }
   .pl-gl, .pl-tech-cloud, .pl-scene__controls, .pl-scene__finale { display: none !important; }
   .pl-scene__fallback { opacity: 1 !important; }

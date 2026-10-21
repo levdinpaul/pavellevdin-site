@@ -1,5 +1,35 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-19 — промпт 05 «доводка», задеплоено
+- **Платформа переехала в РФ** (152-ФЗ): russh `/srv/sites/pavellevdin.ru/platform` (compose pl-prod, pl-web в сети stack_web),
+  дамп → restore, количество записей во всех таблицах совпало, 30 файлов медиа; стек на VPS удалён, архив
+  `~/archive/pl-platform-2026-10-19` на VPS. Бэкап 03:20 на russh. Лиды всех языков снова идут в CRM. «TEST live» удалён.
+- **Цены**: региональные медианы РФ (27 источников, memory/pricing-research-regions.md), € = ₽ по курсу ЦБ РФ.
+- **Калькулятор** /:lang/calculator → сохранить/отправить через кабинет (вход с возвратом), заявка + лид с разбивкой,
+  «Сделать КП из расчёта», Telegram.
+- **Вход**: пароль, магическая ссылка (15 мин), VK ID (скрыт без ключей), согласие ПДн с датой.
+- SMTP-переменные + mail:test (сайт и платформа), Telegram-уведомления платформы, cron агентов пн/чт 07:00 (draft),
+  раздел «Блог» в админке (ручная публикация), налоговая строка/реквизиты КП в настройках, #418 исправлена,
+  с сайта удалены basic-ftp/multer/tinify, lint 0.
+
+## Сессия 2026-10-19 (ночь) — промпт 04b «платформа», задеплоено (тег v6-platform-04b; репо levdinpaul/pl-platform)
+- **pl-platform** (форк MP: Next 16 + Strapi 4.25 + Postgres) — кабинет клиента, админка (лиды, «Проекты», КП, письма,
+  «Отзывы», CRM-задачи, SEO, пользователи, настройки студии, «Команда» AI-агентов), блог. Прод — VPS 212.227.100.97
+  (`~/pl-platform/prod`, compose `pl-prod`), наружу только edge :8443 (TLS + пин, только russh). На pavellevdin.ru nginx russh
+  отдаёт платформе `/(ru|de|en)/(login|register|…|cabinet|admin|blog|portal|datenwiderruf)`, её `/api/*`, `/_pl/`, `/_next/`,
+  `/uploads/`; всё остальное — сайту. Бэкап конфига: `/srv/stack/nginx/pavellevdin.ru.conf.bak-2026-10-19-pre04b`.
+- **Блог**: 5 статей перенесены в Strapi с ТЕМИ ЖЕ slug (старые URL живы без 301; Tailwind-статья — черновиком, как была),
+  sitemap `/ru/blog/sitemap.xml` (в robots.txt), x-default → ru; category/tag → 301 на ленту.
+- **Лиды**: сайт пишет в `scripts/data/leads.jsonl` (РФ), затем копия в CRM (`scripts/lib/platform.js`, конфиг
+  `scripts/platform.json` вне git). Старый файл перенесён (1 строка, тестовая), не менялся (md5 сверен).
+- **Отзывы**: модерация — /ru/admin/reviews платформы (через `/api/site-admin/reviews` сайта по токену).
+- **Сайт**: удалены старый блог и старая админка Vite с FTP/HostLand-пайплайном; пути платформы открываются полной
+  загрузкой (`PlatformRedirect`, защита от цикла), «Личный кабинет» в футере. Бэкапы: `backup-2026-10-19-pre04b.tgz`,
+  `dist.bak-2026-10-19-pre04b`, `*.bak-2026-10-19-pre04b` у server.js / lead.js / reviews.js.
+- **Агенты**: AI-агенты блога — веб/SEO/автоматизация, ru — источник, публикация только черновиками (`AUTO_PUBLISH=false`);
+  Claude-агенты `pl-*` (21) в `.claude/agents` обоих репо.
+- Админ платформы: info@pavellevdin.ru (ссылка установки пароля — `~/pl-platform/prod/admin-reset-link.secret` на VPS).
+
 ## Сессия 2026-10-18 (ночь) — промпт 04a «доводка сайта», задеплоено (тег v5-site-fixes)
 - **Спираль медленнее**: сцена 610svh (mobile 480svh, ×1.6), таймлайн HERO_END 0.095 / FLIGHT [0.075, 0.9] /
   FINALE [0.9, 0.9375] — hero и финал по абсолютной прокрутке как раньше, полёт длиннее; следование за скроллом

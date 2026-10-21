@@ -35,34 +35,19 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '50mb' }));
 
 // Routes
-const authRoutes = require('./routes/auth');
-const statsRoutes = require('./routes/stats');
-const articlesRoutes = require('./routes/articles');
-const socialRoutes = require('./routes/social');
-const pipelineRoutes = require('./routes/pipeline');
-const publicationsRoutes = require('./routes/publications');
-const settingsRoutes = require('./routes/settings');
-const bufferRoutes = require('./routes/buffer');
-const mediaRoutes = require('./routes/media');
+// Блог, кабинет и админка переехали на pl-platform (Next.js, тот же домен) — старый FTP/HostLand-пайплайн
+// (auth/stats/articles/social/pipeline/publications/settings/buffer/media) удалён. Здесь остаются лиды и отзывы.
 const leadRoutes = require('./routes/lead');
 const reviewRoutes = require('./routes/reviews');
-const { authMiddleware } = require('./middleware/auth');
+const fxRoutes = require('./routes/fx');
 
 // Public routes
-app.use('/api/auth', authRoutes);
 app.use('/api/lead', leadRoutes);
+app.use('/api/fx', fxRoutes); // курс EUR/RUB ЦБ РФ для цен de/en (кэш сутки)
 app.use('/api', reviewRoutes.publicRouter);
 app.use('/api/admin/reviews', reviewRoutes.adminRouter);
-
-// Protected routes
-app.use('/api/stats', authMiddleware, statsRoutes);
-app.use('/api/articles', authMiddleware, articlesRoutes);
-app.use('/api/social', authMiddleware, socialRoutes);
-app.use('/api/pipeline', authMiddleware, pipelineRoutes);
-app.use('/api/publications', authMiddleware, publicationsRoutes);
-app.use('/api/settings', authMiddleware, settingsRoutes);
-app.use('/api/buffer', authMiddleware, bufferRoutes);
-app.use('/api/media', authMiddleware, mediaRoutes);
+// Тот же роутер под путём, который nginx оставляет сайту (/api/admin/* уходит платформе)
+app.use('/api/site-admin/reviews', reviewRoutes.adminRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

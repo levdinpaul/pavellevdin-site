@@ -11,6 +11,8 @@ Crawl-delay: 1
 
 # Main sitemap
 Sitemap: https://pavellevdin.ru/sitemap.xml
+# Блог (pl-platform): все статьи на ru/de/en с hreflang
+Sitemap: https://pavellevdin.ru/ru/blog/sitemap.xml
 
 # Additional sitemaps for different content types (if applicable)
 # Sitemap: https://pavellevdin.ru/sitemap-images.xml

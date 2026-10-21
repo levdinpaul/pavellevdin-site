@@ -1,4 +1,4 @@
-import { useTheme } from '@/hooks/useTheme';
+import { useTheme } from '@/hooks/theme-context';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,

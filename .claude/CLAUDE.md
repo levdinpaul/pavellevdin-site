@@ -30,25 +30,28 @@ Project-brief. Читается при работе в этом репозито
   react-router-dom 7 + react-i18next (de/en/ru) + recharts + RHF + Zod v4 + react-helmet-async + three 0.186.1 (только сцена, лениво).
 - **Дизайн «PL Сцена»** (с 2026-10-18): тёмная палитра #060810 / акцент #7AA2FF, шрифт Onest (self-host).
   Токены — `src/index.css` (:root), классы `pl-*` — `src/styles/pl.css`.
-- **Бэкенд (админка):** Node + Express (`scripts/server.js`) — auth, stats, публикации.
-  В коде ещё легаси **FTP/HostLand** (`basic-ftp`, см. BACKLOG 1a), сжатие картинок **Tinify**, загрузки `multer`,
-  уведомления в **Telegram** (`notify-telegram.js`). CORS бэка завязан на `pavellevdin.ru`.
+- **Бэкенд сайта:** Node + Express (`scripts/server.js`) — только лиды (`routes/lead.js`), отзывы (`routes/reviews.js`),
+  раздача статики. Уведомления в **Telegram**. CORS бэка завязан на `pavellevdin.ru`.
+- **Блог, кабинет, админка, вход/регистрация** — отдельное приложение **pl-platform** (Next.js + Strapi) на том же домене:
+  nginx отдаёт ему `/(ru|de|en)/(blog|cabinet|admin|login|register|…-password)`. В SPA сайта эти пути ловит
+  `components/PlatformRedirect` (полная перезагрузка; ссылки — обычный `<a href>`, список — `lib/platform-paths.ts`).
+  Старый блог/админка и FTP/HostLand-пайплайн удалены (2026-10-18).
 
 ## Структура (src/)
 - `sections/scena/` — главная: SceneSection (минималистичный hero + спиральный полёт с названиями технологий), scene-gl.ts (three, import()),
   scene-model.ts (данные и SVG-фолбэк), scene.css (изолированные стили сцены),
   HomeSections (Обо мне / Проекты / Услуги / Интеграции / CTA), useReveal.
 - `pages/` — Home, About, Services, Portfolio, Project (кейс /portfolio/:slug), Contact, Brief, Imprint, Privacy;
-  `pages/blog/*`; `pages/admin/*`.
+  NotFound (404).
 - `components/` — `layout/` (SiteHeader, Footer, Layout), `pl/` (ProjectCard, ServicesGrid, Integrations, Counter,
-  Marquee, PageMeta+seo), `ds/CommandMenu` (⌘K), `ui/` (shadcn), `admin/`, `blog/`.
-- `data/` — **pricing.json** (цены ru ₽ / eu € netto, правится без кода) + **reviews.json** (снимок одобренных отзывов, пишет `scripts/fetch-reviews.cjs` при сборке) + **stack.ts** (реальный стек: спираль, SEO-список, бегущая строка About; поле `locales`) + **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
-  testimonials.ts, blog-index/loader.
+  Marquee, PageMeta+seo), `ds/CommandMenu` (⌘K), `ui/` (shadcn), `PlatformRedirect`.
+- `data/` — **pricing.json** (единый прайс ₽ — региональные медианы, см. memory/pricing-research-regions.md; de/en — пересчёт в € по курсу ЦБ РФ: fx-rate.json при сборке + /api/fx раз в сутки; секция calculator — калькулятор /:lang/calculator; копия в pl-platform — держать в синхроне) + **reviews.json** (снимок одобренных отзывов, пишет `scripts/fetch-reviews.cjs` при сборке) + **stack.ts** (реальный стек: спираль, SEO-список, бегущая строка About; поле `locales`) + **portfolio.json** (11 проектов; читают React, prerender, sitemap) + projects.ts, projects-status.json,
+  testimonials.ts.
 - `constants/contacts.ts` — единый источник контактов.
 - `i18n/locales/` — de.json / en.json / ru.json (держать синхронными).
-- `content/blog/` — статьи блога.
-- `scripts/` — admin Express-сервер, prerender.cjs (SSR), check-projects, generate-sitemap, build-photo, notify-telegram;
-  legacy FTP: deploy-only, add-article, restart-passenger, ftp-list.
+- `content/blog/` — снимок статей блога (сам блог — на pl-platform); читают только `generate-sitemap` и `generate-turbo-feed`.
+- `scripts/` — Express-сервер (лиды/отзывы), prerender.cjs (SSR), check-projects, generate-sitemap, generate-turbo-feed,
+  fetch-reviews, build-photo, notify-telegram, serve-static.
 
 ## Команды
 - `npm run dev` — Vite dev (НЕ запускать без запроса Pavel).
@@ -61,8 +64,7 @@ Project-brief. Читается при работе в этом репозито
 - Картинки сайта: генерировать по правилам глобального CLAUDE.md в едином стиле (см. README «Иллюстрации»);
   исходники — `_design/generated/` (вне git). Скриншоты проектов и фото Pavel НЕ заменять генерацией.
 - `npm run lint` — eslint.
-- `npm run admin-server` — Node admin-бэкенд.
-- ~~`node scripts/deploy-only.cjs`~~ — legacy FTP-деплой на HostLand, НЕ использовать.
+- `npm run admin-server` — Node-бэкенд сайта (лиды, отзывы, статика).
 
 ## Деплой (прод)
 - Сервер **russh** (`ssh russh`, root; hostname host1890270-1). Git на сервере нет — только копия файлов.

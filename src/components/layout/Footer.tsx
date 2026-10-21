@@ -16,9 +16,12 @@ export function Footer() {
     { to: `/${lang}/about`, label: t('pl.footer.about') },
     { to: `/${lang}/services`, label: t('pl.nav.services') },
     { to: `/${lang}/portfolio`, label: t('pl.nav.portfolio') },
-    { to: `/${lang}/blog`, label: t('pl.footer.blog') },
+    // Блог и кабинет отдаёт pl-platform (nginx) → обычная ссылка, полная загрузка страницы.
+    { to: `/${lang}/blog`, label: t('pl.footer.blog'), external: true },
     { to: `/${lang}/brief`, label: t('pl.footer.brief') },
+    { to: `/${lang}/calculator`, label: t('pl.footer.calc') },
     { to: `/${lang}/business-card`, label: t('pl.footer.card') },
+    { to: `/${lang}/cabinet`, label: t('pl.footer.cabinet'), external: true },
   ];
 
   return (
@@ -34,7 +37,11 @@ export function Footer() {
           <div>
             <p className="pl-footer__label">{t('pl.footer.pages')}</p>
             <ul className="pl-footer__list">
-              {pages.map((p) => <li key={p.to}><Link to={p.to} viewTransition>{p.label}</Link></li>)}
+              {pages.map((p) => (
+                <li key={p.to}>
+                  {p.external ? <a href={p.to}>{p.label}</a> : <Link to={p.to} viewTransition>{p.label}</Link>}
+                </li>
+              ))}
             </ul>
           </div>
 

@@ -16,6 +16,7 @@ const pages = [
   ['/services', 'weekly', '0.95'],
   ['/portfolio', 'monthly', '0.9'],
   ['/brief', 'monthly', '0.85'],
+  ['/calculator', 'monthly', '0.85'],
   ['/contact', 'monthly', '0.85'],
   ['/blog', 'weekly', '0.75'],
   ['/business-card', 'monthly', '0.6'],
