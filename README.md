@@ -37,6 +37,13 @@ React 19 + Vite 7 + TypeScript + Tailwind 3.4 + react-i18next (ru / de / en) + �
 `_design/og/og.html` → скриншот 1200×630 → `public/og-image.{png,jpg}`.
 Старые генерации лежат в `_design/generated/` (вне git). Скриншоты реальных проектов и фото Павла не заменяются.
 
+## Бренд
+
+Бренд — **Innovativ Digitalbau**, знак «Кладка PL», подпись — Pavel Levdin. Правила, цвета и все файлы
+(SVG в кривых, PNG, фавиконки, обложки соцсетей, OG) — [`brand/README.md`](brand/README.md).
+На сайте знак рисует `src/components/layout/BrandMark.tsx` (тот же компонент — в pl-platform), логотипы для писем
+и Google — `public/brand/` (`logo-horizontal@2x.png`, `logo-1200.png`), OG по языку — `public/og-image{,-de,-en}.jpg`.
+
 ## Деплой
 
 Прод — сервер russh, docker-сервис `pavellevdin`. Процедура (бэкап → atomic `mv dist` → restart → проверка → откат)
