@@ -908,7 +908,32 @@
       "clean": "Серьёзных замечаний нет.",
       "contactSoon": "Подробный разбор пришлю по указанному контакту.",
       "error": "Не получилось проверить сайт. Проверьте адрес или напишите мне в Telegram.",
-      "limit": "Лимит проверок на сегодня исчерпан. Напишите мне в Telegram."
+      "limit": "Лимит проверок на сегодня исчерпан. Напишите мне в Telegram.",
+      "hints": {
+        "status": "Главная должна отвечать 200",
+        "https": "Сайт должен открываться по HTTPS",
+        "httpRedirect": "http:// должен перенаправлять на https://",
+        "responseTime": "Сервер должен отвечать быстрее 0,8 с",
+        "redirects": "Лишние редиректы замедляют загрузку",
+        "hsts": "Заголовок Strict-Transport-Security",
+        "xcto": "Заголовок X-Content-Type-Options: nosniff",
+        "csp": "Заголовок Content-Security-Policy",
+        "referrer": "Заголовок Referrer-Policy",
+        "title": "Title 10–70 символов",
+        "description": "Meta description 70–170 символов",
+        "h1": "Ровно один заголовок H1",
+        "canonical": "Canonical-ссылка",
+        "indexable": "Страница не должна быть закрыта noindex",
+        "lang": "Атрибут lang у <html>",
+        "og": "Open Graph (og:title, og:image) для соцсетей и мессенджеров",
+        "schema": "Структурированные данные schema.org",
+        "alt": "Alt-текст у всех картинок",
+        "viewport": "Meta viewport для мобильных",
+        "htmlSize": "HTML главной легче 300 КБ",
+        "robots": "Файл robots.txt",
+        "sitemap": "Карта сайта sitemap.xml",
+        "pagespeed": "PageSpeed (мобильный) от 80"
+      }
     },
     "fab": {
       "open": "Связаться",

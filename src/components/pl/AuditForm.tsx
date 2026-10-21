@@ -58,7 +58,7 @@ export function AuditForm({ lang }: { lang: string }) {
             {issues.length ? (
               <>
                 <p>{t('pl.audit.issues')}</p>
-                <ul>{issues.map((c) => <li key={c.id}>{c.hint} <span className="pl-audit__val">({c.value})</span></li>)}</ul>
+                <ul>{issues.map((c) => <li key={c.id}>{t(`pl.audit.hints.${c.id}`, { defaultValue: c.hint })}{/\d/.test(c.value) && <span className="pl-audit__val"> ({c.value})</span>}</li>)}</ul>
               </>
             ) : <p>{t('pl.audit.clean')}</p>}
             <p className="pl-audit__note">{t('pl.audit.contactSoon')}</p>

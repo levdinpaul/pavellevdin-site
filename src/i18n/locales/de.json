@@ -906,7 +906,32 @@
       "clean": "Keine wesentlichen Auffälligkeiten.",
       "contactSoon": "Eine ausführliche Auswertung sende ich an den angegebenen Kontakt.",
       "error": "Die Website konnte nicht geprüft werden. Bitte Adresse prüfen oder mir auf Telegram schreiben.",
-      "limit": "Das Tageslimit ist erreicht. Schreiben Sie mir gern auf Telegram."
+      "limit": "Das Tageslimit ist erreicht. Schreiben Sie mir gern auf Telegram.",
+      "hints": {
+        "status": "Startseite sollte mit 200 antworten",
+        "https": "Website sollte per HTTPS erreichbar sein",
+        "httpRedirect": "http:// sollte auf https:// weiterleiten",
+        "responseTime": "Serverantwort unter 0,8 s",
+        "redirects": "Unnötige Weiterleitungen verlangsamen das Laden",
+        "hsts": "Header Strict-Transport-Security",
+        "xcto": "Header X-Content-Type-Options: nosniff",
+        "csp": "Header Content-Security-Policy",
+        "referrer": "Header Referrer-Policy",
+        "title": "Title mit 10–70 Zeichen",
+        "description": "Meta-Description mit 70–170 Zeichen",
+        "h1": "Genau eine H1-Überschrift",
+        "canonical": "Canonical-Link",
+        "indexable": "Seite sollte nicht auf noindex stehen",
+        "lang": "lang-Attribut am <html>",
+        "og": "Open Graph (og:title, og:image) für Social Media und Messenger",
+        "schema": "Strukturierte Daten (schema.org)",
+        "alt": "Alt-Text bei allen Bildern",
+        "viewport": "Meta-Viewport für Mobilgeräte",
+        "htmlSize": "HTML der Startseite unter 300 KB",
+        "robots": "Datei robots.txt",
+        "sitemap": "Sitemap sitemap.xml",
+        "pagespeed": "PageSpeed (mobil) ab 80"
+      }
     },
     "fab": {
       "open": "Kontakt",

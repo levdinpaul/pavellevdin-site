@@ -306,3 +306,6 @@
 .pl-field select option { background: var(--bg-2); color: var(--ink-1); }
 .pl-review__src { font: 400 12px/1.4 var(--font-body); color: var(--ink-3); }
 .pl-clients__review { margin-top: 8px; }
+#clients .pl-lead { margin-top: 16px; }
+.pl-terms li { align-content: start; }
+.pl-field input::placeholder { color: var(--ink-3); }

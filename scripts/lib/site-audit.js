@@ -102,7 +102,7 @@ async function auditSite(input) {
     add('httpRedirect', http.finalUrl.protocol === 'https:', http.chain.map((c) => c.status).join('→'), 'http:// должен перенаправлять на https://');
   } catch { add('httpRedirect', null, '—'); }
   const ttfb = chain[chain.length - 1].ms;
-  add('responseTime', ttfb < 800, `${ttfb} мс`, 'Сервер должен отвечать быстрее 0,8 с');
+  add('responseTime', ttfb < 800, `${ttfb} ms`, 'Сервер должен отвечать быстрее 0,8 с');
   add('redirects', chain.length <= 2, `${chain.length - 1}`, 'Лишние редиректы замедляют загрузку');
 
   // Заголовки безопасности
@@ -113,9 +113,9 @@ async function auditSite(input) {
 
   // SEO
   const title = decode(pick(html, /<title[^>]*>([\s\S]*?)<\/title>/i));
-  add('title', Boolean(title) && title.length >= 10 && title.length <= 70, title ? `${title.length} симв.` : 'нет', 'Title 10–70 символов, уникальный для страницы');
+  add('title', Boolean(title) && title.length >= 10 && title.length <= 70, title ? `${title.length}` : 'нет', 'Title 10–70 символов, уникальный для страницы');
   const desc = decode(pick(html, /<meta[^>]+name=["']description["'][^>]*content=["']([^"']*)["']/i) || pick(html, /<meta[^>]+content=["']([^"']*)["'][^>]*name=["']description["']/i));
-  add('description', Boolean(desc) && desc.length >= 70 && desc.length <= 170, desc ? `${desc.length} симв.` : 'нет', 'Meta description 70–170 символов');
+  add('description', Boolean(desc) && desc.length >= 70 && desc.length <= 170, desc ? `${desc.length}` : 'нет', 'Meta description 70–170 символов');
   const h1 = count(html, /<h1[\s>]/gi);
   add('h1', h1 === 1, `${h1}`, 'Ровно один заголовок H1');
   const canonical = pick(html, /<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || pick(html, /<link[^>]+href=["']([^"']+)["'][^>]*rel=["']canonical["']/i);
@@ -129,12 +129,12 @@ async function auditSite(input) {
   add('schema', ldTypes.length > 0 && !ldTypes.includes('ошибка JSON'), ldTypes.join(', ') || 'нет', 'Структурированные данные schema.org (Organization/LocalBusiness)');
   const imgs = [...html.matchAll(/<img\b[^>]*>/gi)].map((m) => m[0]);
   const noAlt = imgs.filter((t) => !/\salt=/i.test(t)).length;
-  add('alt', noAlt === 0, `${noAlt} из ${imgs.length} без alt`, 'У картинок должен быть alt');
+  add('alt', noAlt === 0, `${noAlt}/${imgs.length}`, 'У картинок должен быть alt');
 
   // Мобильная версия
   add('viewport', /<meta[^>]+name=["']viewport["'][^>]*width=device-width/i.test(html), /name=["']viewport/i.test(html) ? 'есть' : 'нет', 'Meta viewport width=device-width');
   const kb = Math.round(Buffer.byteLength(html) / 1024);
-  add('htmlSize', kb < 300, `${kb} КБ`, 'HTML главной легче 300 КБ');
+  add('htmlSize', kb < 300, `${kb} KB`, 'HTML главной легче 300 КБ');
 
   // robots.txt / sitemap
   let sitemapUrl = `${origin}/sitemap.xml`;
@@ -151,7 +151,7 @@ async function auditSite(input) {
   } catch { add('sitemap', false, 'нет', 'Карта сайта sitemap.xml'); }
 
   const speed = await psi(finalUrl.href);
-  if (speed) add('pagespeed', speed.score >= 80, `${speed.score}/100 (LCP ${(speed.lcp / 1000).toFixed(1)} с)`, 'PageSpeed (мобильный) от 80');
+  if (speed) add('pagespeed', speed.score >= 80, `${speed.score}/100 (LCP ${(speed.lcp / 1000).toFixed(1)} s)`, 'PageSpeed (мобильный) от 80');
 
   const rated = checks.filter((c) => c.ok !== null);
   const score = Math.round((rated.filter((c) => c.ok).length / rated.length) * 100);

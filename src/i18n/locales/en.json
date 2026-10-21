@@ -906,7 +906,32 @@
       "clean": "No significant issues.",
       "contactSoon": "I will send a detailed review to the contact you provided.",
       "error": "Could not check the website. Please check the address or message me on Telegram.",
-      "limit": "Daily limit reached. Feel free to message me on Telegram."
+      "limit": "Daily limit reached. Feel free to message me on Telegram.",
+      "hints": {
+        "status": "Home page should return 200",
+        "https": "Site should be served over HTTPS",
+        "httpRedirect": "http:// should redirect to https://",
+        "responseTime": "Server response under 0.8 s",
+        "redirects": "Extra redirects slow down loading",
+        "hsts": "Strict-Transport-Security header",
+        "xcto": "X-Content-Type-Options: nosniff header",
+        "csp": "Content-Security-Policy header",
+        "referrer": "Referrer-Policy header",
+        "title": "Title of 10–70 characters",
+        "description": "Meta description of 70–170 characters",
+        "h1": "Exactly one H1 heading",
+        "canonical": "Canonical link",
+        "indexable": "Page should not be set to noindex",
+        "lang": "lang attribute on <html>",
+        "og": "Open Graph (og:title, og:image) for social and messengers",
+        "schema": "Structured data (schema.org)",
+        "alt": "Alt text on all images",
+        "viewport": "Mobile meta viewport",
+        "htmlSize": "Home page HTML under 300 KB",
+        "robots": "robots.txt file",
+        "sitemap": "sitemap.xml",
+        "pagespeed": "PageSpeed (mobile) of 80+"
+      }
     },
     "fab": {
       "open": "Contact",
