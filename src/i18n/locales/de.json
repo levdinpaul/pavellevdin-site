@@ -659,7 +659,10 @@
       "ctaButton": "Projekt besprechen",
       "previewNote": "Projekt in Entwicklung – Preview-Zugang ist freigeschaltet.",
       "metaSuffix": "Case Study von Pavel Levdin",
-      "shotAlt": "Screenshot der Website"
+      "shotAlt": "Screenshot der Website",
+      "facts": "Überprüfbare Fakten",
+      "langs": "Sprachen",
+      "factsNote": "Lighthouse (mobil und Desktop) der Live-Website {{url}}, gemessen am {{date}}. Auf pagespeed.web.dev nachprüfbar — Werte können leicht abweichen."
     },
     "servicesPage": {
       "metaTitle": "Leistungen – Websites, SEO & KI | Innovativ Digitalbau",

@@ -18,7 +18,8 @@ const AUDITS_FILE = path.join(DATA_DIR, 'audits.jsonl');
 const limiter = createRateLimiter({ windowMs: 24 * 60 * 60 * 1000, max: 3 });
 const MIN_FILL_MS = 4000;
 
-const enabled = () => getEnv('AUDIT_ENABLED', 'false') === 'true';
+// Включён по умолчанию; аварийно выключить — AUDIT_ENABLED=false в .env
+const enabled = () => getEnv('AUDIT_ENABLED', 'true') !== 'false';
 const clip = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 

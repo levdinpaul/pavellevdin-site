@@ -659,7 +659,10 @@
       "ctaButton": "Обсудить проект",
       "previewNote": "Проект в разработке — открыт превью-доступ.",
       "metaSuffix": "кейс Павла Левдина",
-      "shotAlt": "Скриншот сайта"
+      "shotAlt": "Скриншот сайта",
+      "facts": "Проверяемые факты",
+      "langs": "Языки",
+      "factsNote": "Lighthouse (мобильный и десктоп) живого сайта {{url}}, замер {{date}}. Повторите на pagespeed.web.dev — цифры могут немного отличаться."
     },
     "servicesPage": {
       "metaTitle": "Услуги — сайты, SEO, интеграции и AI-автоматизация | Innovativ Digitalbau",

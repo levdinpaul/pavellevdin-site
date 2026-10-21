@@ -659,7 +659,10 @@
       "ctaButton": "Discuss a project",
       "previewNote": "Project in development — preview access is open.",
       "metaSuffix": "case study by Pavel Levdin",
-      "shotAlt": "Website screenshot"
+      "shotAlt": "Website screenshot",
+      "facts": "Verifiable facts",
+      "langs": "Languages",
+      "factsNote": "Lighthouse (mobile and desktop) of the live site {{url}}, measured {{date}}. Re-check on pagespeed.web.dev — numbers may vary slightly."
     },
     "servicesPage": {
       "metaTitle": "Services — websites, SEO, AI automation | Innovativ Digitalbau",

@@ -28,7 +28,7 @@ function encodeHeader(value) {
 
 function buildMessage({ from, to, subject, text, replyTo }) {
   const headers = [
-    `From: PL Innovativ Digitalbau <${from}>`,
+    `From: Innovativ Digitalbau <${from}>`,
     `To: <${to}>`,
     `Subject: ${encodeHeader(subject)}`,
     `Date: ${new Date().toUTCString()}`,
