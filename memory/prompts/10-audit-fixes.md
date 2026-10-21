@@ -76,6 +76,18 @@ B6. **Прочее:**
    - вход через Google сейчас выключен, но создаёт аккаунт без согласия ПДн — если включат, должен вести на тот же шаг согласия, что VK complete;
    - README: строка crontab для `review-requests-cron.sh` (на russh я её уже установил: ежедневно 10:15).
 
+## C. Telegram с российского сервера (оба репо) — ВАЖНО
+С russh `api.telegram.org` недоступен (curl → таймаут, `fetch failed` из pl-web; google.com при этом 200). Значит уведомления
+сайта и платформы в Telegram не дойдут, даже когда токен вписан. Решение — ретранслятор на немецком VPS (его поднимает Claude в claude.ai),
+код должен уметь слать через него:
+- единая переменная `TELEGRAM_API_BASE` (по умолчанию `https://api.telegram.org`); все вызовы `https://api.telegram.org/bot…`
+  заменить на `${TELEGRAM_API_BASE}/bot…`. Сайт: `scripts/notify-telegram.js`, `scripts/lib/telegram.js`, `scripts/welcome-post.js`.
+  Платформа: `web/src/app/api/cron/scheduler-tick`, `pipeline-watchdog`, `api/contact`, `api/data-deletion`, `lib/sysadmin/checks/engagement.ts`,
+  `lib/notifications/{admin,support}-telegram.ts`, `lib/publishing/telegram-publisher.ts` — лучше через один хелпер `telegramApiUrl(method)`;
+- опционально заголовок `X-Relay-Key` из `TELEGRAM_RELAY_KEY` (если задан) — ретранслятор пускает только с ним;
+- таймаут 10 с и понятная ошибка в лог (без токена в тексте ошибки);
+- `.env.example` / README обоих репо — описать переменные.
+
 ## Пункты, которые ждут Pavel (НЕ выдумывать)
 - FAQ «Оплата и договор» — `TODO(Pavel)`, на главной из-за этого 5 вопросов вместо 6. Оставить скрытым, пока Pavel не даст текст.
 - USt-Hinweis в de — заглушка «Umsatzsteuer-Hinweis folgt», ждёт решения по налогу.
@@ -108,7 +120,7 @@ web/src/app/[locale]/(admin)/admin/**, web/src/app/[locale]/portal/page.tsx, web
 - i18n три локали синхронны в обоих репо.
 - Сайт: деплой на russh по процессу из CLAUDE.md (бэкап dist → замена → restart → curl всех /ru-маршрутов + /de /en).
 - Платформа: только `git push` ветки и merge в main — **сборку и выкатку платформы делает Claude в claude.ai** (VPS → russh), не ты.
-- Обновлены LAST_SESSION и LEARNINGS, отчёт Pavel: что сделано по каждому пункту A1–A8, B1–B6.
+- Обновлены LAST_SESSION и LEARNINGS, отчёт Pavel: что сделано по каждому пункту A1–A8, B1–B6, C.
 
 [Правила]
 - Сначала план, потом правки; маленькие коммиты conventional commits; теги `v11-audit` (сайт) и `v11-audit` (платформа) после мержа.
