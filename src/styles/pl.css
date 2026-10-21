@@ -36,6 +36,8 @@
 .pl-logo { display: flex; align-items: center; gap: 12px; min-height: 44px; color: var(--ink-1); text-decoration: none; }
 .pl-logo:hover { color: var(--ink-1); }
 .pl-logo__text { display: grid; gap: 3px; }
+.pl-logo__mark { flex-shrink: 0; display: block; color: var(--ink-1); transition: transform 300ms cubic-bezier(.3,1.4,.5,1); }
+.pl-logo:hover .pl-logo__mark { transform: translateY(-1px) scale(1.04); }
 .pl-logo__name { font: 500 15px/1 var(--font-body); letter-spacing: -0.02em; }
 .pl-logo__sub { font: 400 10px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .pl-nav { display: flex; align-items: center; gap: 24px; }
@@ -184,7 +186,9 @@
 .pl-footer { position: relative; z-index: 1; margin-top: clamp(80px, 12vh, 140px); background: var(--bg-0); }
 .pl-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; padding: 40px 0 32px; border-top: 1px solid var(--line); }
 .pl-footer__brand { display: grid; align-content: start; gap: 10px; }
-.pl-footer__name { font: 600 13px/1 var(--font-body); letter-spacing: 0.1em; color: var(--ink-1); }
+.pl-footer__logo { display: flex; align-items: center; gap: 12px; }
+.pl-footer__mark { flex-shrink: 0; display: block; color: var(--ink-1); }
+.pl-footer__name { font: 600 17px/1 var(--font-body); letter-spacing: -0.02em; color: var(--ink-1); }
 .pl-footer__sub { font: 400 12px/1.4 var(--font-body); color: var(--ink-3); }
 .pl-footer__label { margin: 0 0 14px; font: 500 11px/1 var(--font-body); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); }
 .pl-footer__list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }

@@ -15,7 +15,10 @@ interface PageMetaProps {
 }
 
 /** title/description/canonical + hreflang (de/en/ru, x-default → ru) + OG + JSON-LD для страниц «PL Сцена». */
-export function PageMeta({ lang, path, title, description, image = '/og-image.jpg', jsonLd, noindex }: PageMetaProps) {
+/** OG-картинка бренда по языку (public/og-image*.jpg, исходники — brand/social). */
+const defaultOg = (lang: string) => (lang === 'de' ? '/og-image-de.jpg' : lang === 'en' ? '/og-image-en.jpg' : '/og-image.jpg');
+
+export function PageMeta({ lang, path, title, description, image, jsonLd, noindex }: PageMetaProps) {
   const url = `${SITE}/${lang}${path}`;
   const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   return (
@@ -29,7 +32,9 @@ export function PageMeta({ lang, path, title, description, image = '/og-image.jp
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
-      <meta property="og:image" content={image.startsWith('http') ? image : `${SITE}${image}`} />
+      <meta property="og:image" content={(() => { const img = image ?? defaultOg(lang); return img.startsWith('http') ? img : `${SITE}${img}`; })()} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       {noindex && <meta name="robots" content="noindex, follow" />}
       {ld.map((o, i) => <script key={i} type="application/ld+json">{JSON.stringify(o)}</script>)}
     </Helmet>
