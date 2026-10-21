@@ -27,7 +27,7 @@ Project-brief. Читается при работе в этом репозито
 
 ## Стек
 - **Фронт:** React 19 + Vite 7 + TypeScript 5 + Tailwind 3.4 + shadcn/ui (Radix) + framer-motion +
-  react-router-dom 7 + react-i18next (de/en/ru) + recharts + RHF + Zod v4 + react-helmet-async + three 0.186.1 (только сцена, лениво).
+  react-router-dom 7 + react-i18next (de/en/ru) + recharts + RHF + Zod v4 + react-helmet-async. Сцена главной — canvas 2D без зависимостей (three.js удалён в 06).
 - **Дизайн «PL Сцена»** (с 2026-10-18): тёмная палитра #060810 / акцент #7AA2FF, шрифт Onest (self-host).
   Токены — `src/index.css` (:root), классы `pl-*` — `src/styles/pl.css`.
 - **Бэкенд сайта:** Node + Express (`scripts/server.js`) — только лиды (`routes/lead.js`), отзывы (`routes/reviews.js`),
@@ -38,8 +38,8 @@ Project-brief. Читается при работе в этом репозито
   Старый блог/админка и FTP/HostLand-пайплайн удалены (2026-10-18).
 
 ## Структура (src/)
-- `sections/scena/` — главная: SceneSection (минималистичный hero + спиральный полёт с названиями технологий), scene-gl.ts (three, import()),
-  scene-model.ts (данные и SVG-фолбэк), scene.css (изолированные стили сцены),
+- `sections/scena/` — главная: SceneSection (минималистичный hero + спиральный полёт с названиями технологий), scene-2d.ts (canvas 2D: пыль спирали + проекция названий),
+  scene-model.ts (камера, пыль, статичный SVG-кадр для SSR), scene.css (изолированные стили сцены),
   HomeSections (Обо мне / Проекты / Услуги / Интеграции / CTA), useReveal.
 - `pages/` — Home, About, Services, Portfolio, Project (кейс /portfolio/:slug), Contact, Brief, Imprint, Privacy;
   NotFound (404).
