@@ -56,7 +56,7 @@ export function ContactFab({ lang }: { lang: string }) {
         <li><a href={contacts.whatsapp.url} target="_blank" rel="noopener noreferrer"><WhatsAppIcon />{t('pl.fab.whatsapp')}</a></li>
         <li><Link to={`/${lang}/contact`}><span aria-hidden="true">✉</span>{t('pl.fab.form')}</Link></li>
       </ul>
-      <button type="button" className="pl-fab__btn" aria-expanded={open} aria-controls="pl-fab-list" onClick={() => setOpen((o) => !o)}>
+      <button type="button" className="pl-fab__btn" aria-label={open ? t('pl.fab.close') : t('pl.fab.open')} aria-expanded={open} aria-controls="pl-fab-list" onClick={() => setOpen((o) => !o)}>
         <span aria-hidden="true">{open ? '×' : '✆'}</span>
         <span className="pl-fab__label">{open ? t('pl.fab.close') : t('pl.fab.open')}</span>
       </button>
