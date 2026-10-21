@@ -220,18 +220,17 @@ export function SiteHeader() {
 
       <button ref={topRef} type="button" className="pl-chip pl-totop" data-visible="false" aria-label={t('pl.nav.top')} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>↑</button>
 
-      {menuOpen && (
-        <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')}>
-          <a href={account.to} className="pl-login pl-menu__login" data-auth={authed}>{accountInner}</a>
-          {mobile.map((l) => <NavLink key={l.to} item={l} current={isActive(l.match)} />)}
-          <Link to={`/${lang}/brief`} className="pl-menu__cta">{t('pl.nav.cta')}</Link>
-          <span className="pl-langs pl-menu__langs" role="group" aria-label={t('pl.nav.lang')}>
-            {LANGS.map((l) => (
-              <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
-            ))}
-          </span>
-        </nav>
-      )}
+      {/* Меню всегда в DOM (aria-controls у «···» должен указывать на существующий элемент), закрытое — hidden */}
+      <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')} hidden={!menuOpen}>
+        <a href={account.to} className="pl-login pl-menu__login" data-auth={authed}>{accountInner}</a>
+        {mobile.map((l) => <NavLink key={l.to} item={l} current={isActive(l.match)} />)}
+        <Link to={`/${lang}/brief`} className="pl-menu__cta">{t('pl.nav.cta')}</Link>
+        <span className="pl-langs pl-menu__langs" role="group" aria-label={t('pl.nav.lang')}>
+          {LANGS.map((l) => (
+            <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
+          ))}
+        </span>
+      </nav>
 
       <CommandMenu
         open={cmdOpen}
