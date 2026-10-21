@@ -179,7 +179,7 @@ export function BriefPage() {
         <link rel="canonical" href={`https://pavellevdin.ru/${lang}/brief`} />
       </Helmet>
 
-      <main className="min-h-screen bg-slate-950 pt-28 text-white">
+      <div className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-24 sm:px-6 lg:px-8">
 
           <div className="relative mx-auto max-w-3xl">
@@ -404,7 +404,7 @@ export function BriefPage() {
             )}
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Layout } from '@/components/layout/Layout';
 import { 
   User, 
   MapPin, 
@@ -14,16 +13,16 @@ import {
 } from 'lucide-react';
 import { getContacts } from '@/constants/contacts';
 
+// Фиксированная дата: пререндер и клиент должны отдать одинаковую разметку (new Date() ломал гидрацию на следующий день).
+const LAST_UPDATED = new Date('2026-10-21T12:00:00Z');
+
 export function ImprintPage() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'de' | 'en' | 'ru';
   const contacts = getContacts(lang);
 
   return (
-    <Layout 
-      pageTitle={t('imprint.seo.title')} 
-      pageDescription={t('imprint.seo.description')}
-    >
+    <>
       <Helmet>
         <title>{t('imprint.seo.title')}</title>
         <meta name="description" content={t('imprint.seo.description')} />
@@ -180,13 +179,13 @@ export function ImprintPage() {
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
-            {t('imprint.lastUpdated')}: {new Date().toLocaleDateString(
+            {t('imprint.lastUpdated')}: {LAST_UPDATED.toLocaleDateString(
               lang === 'de' ? 'de-DE' : lang === 'ru' ? 'ru-RU' : 'en-US', 
               { year: 'numeric', month: 'long', day: 'numeric' }
             )}
           </p>
         </div>
       </motion.div>
-    </Layout>
+    </>
   );
 }

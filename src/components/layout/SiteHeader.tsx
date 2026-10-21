@@ -4,22 +4,32 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CommandMenu, type CommandLabels } from '@/components/ds/CommandMenu';
 import { getContacts } from '@/constants/contacts';
 import { startPointerEffects } from '@/lib/pointer-effects';
+import { useAuthFlag } from '@/hooks/useAuthFlag';
 import { isPlatformPath } from '@/lib/platform-paths';
-import { InstagramIcon, TelegramIcon, WhatsAppIcon } from './social-icons';
+import { InstagramIcon, TelegramIcon, UserIcon, WhatsAppIcon } from './social-icons';
 
 const LANGS = ['ru', 'de', 'en'] as const;
 type Lang = (typeof LANGS)[number];
 
 // Подписи ⌘K-меню (перенесены из прежнего SiteNav без изменений).
-const CMD: Record<Lang, CommandLabels & { blog: string; brief: string }> = {
-  ru: { placeholder: 'Куда? Поиск или команда…', sections: 'Разделы', actions: 'Действия', navigate: '↑↓ НАВИГАЦИЯ', open: '↵ ОТКРЫТЬ', notFound: '// ничего не найдено — 404', blog: 'Блог', brief: 'Рассчитать проект' },
-  de: { placeholder: 'Wohin? Suchen oder Befehl…', sections: 'Sektionen', actions: 'Aktionen', navigate: '↑↓ NAVIGIEREN', open: '↵ ÖFFNEN', notFound: '// nichts gefunden — 404', blog: 'Blog', brief: 'Projekt konfigurieren' },
-  en: { placeholder: 'Where to? Search or command…', sections: 'Sections', actions: 'Actions', navigate: '↑↓ NAVIGATE', open: '↵ OPEN', notFound: '// nothing found — 404', blog: 'Blog', brief: 'Configure project' },
+const CMD: Record<Lang, CommandLabels & { brief: string }> = {
+  ru: { placeholder: 'Куда? Поиск или команда…', sections: 'Разделы', actions: 'Действия', navigate: '↑↓ НАВИГАЦИЯ', open: '↵ ОТКРЫТЬ', notFound: '// ничего не найдено — 404', brief: 'Рассчитать проект' },
+  de: { placeholder: 'Wohin? Suchen oder Befehl…', sections: 'Sektionen', actions: 'Aktionen', navigate: '↑↓ NAVIGIEREN', open: '↵ ÖFFNEN', notFound: '// nichts gefunden — 404', brief: 'Projekt konfigurieren' },
+  en: { placeholder: 'Where to? Search or command…', sections: 'Sections', actions: 'Actions', navigate: '↑↓ NAVIGATE', open: '↵ OPEN', notFound: '// nothing found — 404', brief: 'Configure project' },
 };
 
+interface NavItem { to: string; label: string; match: string; className?: string }
+
+/** Ссылка меню: страницы платформы (блог, вход, кабинет) — обычный <a> с полной загрузкой, остальное — SPA-Link. */
+function NavLink({ item, current }: { item: NavItem; current?: boolean }) {
+  const ariaCurrent = current ? 'page' as const : undefined;
+  if (isPlatformPath(item.to)) return <a href={item.to} className={item.className} aria-current={ariaCurrent}>{item.label}</a>;
+  return <Link to={item.to} viewTransition className={item.className} aria-current={ariaCurrent}>{item.label}</Link>;
+}
+
 /**
- * Шапка «PL Сцена» без плашек: лого-текст, меню, RU / DE / EN текстом, CTA-ссылка, «···»-меню на узких экранах,
- * соц-колонка справа (кроме главной).
+ * Шапка «PL Сцена» без плашек: лого-текст, меню (страницы футера; редкие — в «Ещё ▾»), RU / DE / EN текстом,
+ * «Войти» ↔ «Кабинет» (cookie-флаг платформы), CTA-ссылка, «···»-меню на узких экранах, соц-колонка справа (кроме главной).
  * На главной прозрачная поверх hero, после первого экрана — фон + blur + граница.
  * На остальных страницах фон сразу (решается по pathname — одинаково на сервере и клиенте).
  */
@@ -32,7 +42,10 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const topRef = useRef<HTMLButtonElement>(null);
+  const moreRef = useRef<HTMLDivElement>(null);
+  const authed = useAuthFlag();
 
   // Наклон карточек и магнит CTA — один делегированный слушатель на весь сайт
   useEffect(() => { startPointerEffects(); }, []);
@@ -63,7 +76,13 @@ export function SiteHeader() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setCmdOpen((o) => !o); }
-      if (e.key === 'Escape') { setCmdOpen(false); setMenuOpen(false); }
+      if (e.key === 'Escape') {
+        setCmdOpen(false);
+        setMenuOpen(false);
+        // «Ещё»: Esc закрывает и возвращает фокус на кнопку, если он был внутри выпадашки
+        if (moreRef.current?.contains(document.activeElement)) moreRef.current.querySelector('button')?.focus();
+        setMoreOpen(false);
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -76,6 +95,7 @@ export function SiteHeader() {
     setPrevRoute(routeKey);
     setMenuOpen(false);
     setCmdOpen(false);
+    setMoreOpen(false);
   }
 
   useEffect(() => {
@@ -88,6 +108,15 @@ export function SiteHeader() {
     return () => document.removeEventListener('pointerdown', onDown);
   }, [menuOpen]);
 
+  // «Ещё ▾» закрывается кликом мимо и уходом фокуса из выпадашки (Tab дальше по шапке)
+  useEffect(() => {
+    if (!moreOpen) return;
+    const onOutside = (e: Event) => { if (!moreRef.current?.contains(e.target as Node)) setMoreOpen(false); };
+    document.addEventListener('pointerdown', onOutside);
+    document.addEventListener('focusin', onOutside);
+    return () => { document.removeEventListener('pointerdown', onOutside); document.removeEventListener('focusin', onOutside); };
+  }, [moreOpen]);
+
   const switchLang = (next: Lang) => {
     if (next === lang) return;
     i18n.changeLanguage(next);
@@ -96,13 +125,35 @@ export function SiteHeader() {
   };
   const cycleLang = () => switchLang(LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length]);
 
-  const links = [
-    { to: `/${lang}/about`, label: t('pl.nav.about'), match: '/about' },
-    { to: `/${lang}/portfolio`, label: t('pl.nav.portfolio'), match: '/portfolio' },
-    { to: `/${lang}/services`, label: t('pl.nav.services'), match: '/services' },
-    { to: `/${lang}/contact`, label: t('pl.nav.contact'), match: '/contact' },
-  ];
+  const about: NavItem = { to: `/${lang}/about`, label: t('pl.nav.about'), match: '/about' };
+  const portfolio: NavItem = { to: `/${lang}/portfolio`, label: t('pl.nav.portfolio'), match: '/portfolio' };
+  const services: NavItem = { to: `/${lang}/services`, label: t('pl.nav.services'), match: '/services' };
+  const blog: NavItem = { to: `/${lang}/blog`, label: t('pl.nav.blog'), match: '/blog' };
+  const calc: NavItem = { to: `/${lang}/calculator`, label: t('pl.nav.calc'), match: '/calculator' };
+  const contact: NavItem = { to: `/${lang}/contact`, label: t('pl.nav.contact'), match: '/contact' };
+  const brief: NavItem = { to: `/${lang}/brief`, label: t('pl.nav.brief'), match: '/brief' };
+  const card: NavItem = { to: `/${lang}/business-card`, label: t('pl.nav.card'), match: '/business-card' };
+  // Калькулятор в основной строке с 1360px, уже — в «Ещё» (переключение в pl.css)
+  const primary: NavItem[] = [about, portfolio, services, blog, { ...calc, className: 'pl-nav__wide' }, contact];
+  const more: NavItem[] = [{ ...calc, className: 'pl-more__narrow' }, brief, card];
+  // Мобильное меню — все страницы футера (кабинет — кнопкой «Войти/Кабинет» вверху)
+  const mobile: NavItem[] = [about, services, portfolio, blog, brief, calc, card, contact];
   const isActive = (match: string | null) => match !== null && location.pathname.startsWith(`/${lang}${match}`);
+  const moreActive = more.some((l) => isActive(l.match));
+
+  const account: NavItem = authed
+    ? { to: `/${lang}/cabinet`, label: t('pl.nav.cabinet'), match: '/cabinet' }
+    : { to: `/${lang}/login`, label: t('pl.nav.login'), match: '/login' };
+  // Обе подписи лежат в одной ячейке grid — ширина не меняется при переключении после гидрации (CLS 0)
+  const accountInner = (
+    <>
+      <UserIcon />
+      <span className="pl-login__labels">
+        <span aria-hidden={authed}>{t('pl.nav.login')}</span>
+        <span aria-hidden={!authed}>{t('pl.nav.cabinet')}</span>
+      </span>
+    </>
+  );
 
   const contacts = getContacts(lang);
   const social = [
@@ -131,9 +182,24 @@ export function SiteHeader() {
           </Link>
 
           <nav className="pl-nav" aria-label={t('pl.nav.menu')}>
-            {links.map((l) => (
-              <Link key={l.to} to={l.to} viewTransition aria-current={isActive(l.match) ? 'page' : undefined}>{l.label}</Link>
-            ))}
+            {primary.map((l) => <NavLink key={l.to} item={l} current={isActive(l.match)} />)}
+            <div className="pl-more" ref={moreRef}>
+              <button
+                type="button"
+                className="pl-more__btn"
+                aria-expanded={moreOpen}
+                aria-controls="pl-more-list"
+                data-active={moreActive || undefined}
+                onClick={() => setMoreOpen((o) => !o)}
+              >
+                {t('pl.nav.more')}<span aria-hidden="true" className="pl-more__caret">▾</span>
+              </button>
+              <ul id="pl-more-list" className="pl-more__list" hidden={!moreOpen}>
+                {more.map((l) => (
+                  <li key={l.to} className={l.className}><NavLink item={{ ...l, className: undefined }} current={isActive(l.match)} /></li>
+                ))}
+              </ul>
+            </div>
           </nav>
 
           <div className="pl-header__actions">
@@ -142,6 +208,7 @@ export function SiteHeader() {
                 <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
               ))}
             </span>
+            <a href={account.to} className="pl-login" data-auth={authed}>{accountInner}</a>
             <Link to={`/${lang}/brief`} viewTransition className="pl-header__cta">{t('pl.nav.cta')}</Link>
             <button
               type="button"
@@ -159,7 +226,8 @@ export function SiteHeader() {
 
       {menuOpen && (
         <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')}>
-          {links.map((l) => <Link key={l.to} to={l.to} viewTransition>{l.label}</Link>)}
+          <a href={account.to} className="pl-login pl-menu__login" data-auth={authed}>{accountInner}</a>
+          {mobile.map((l) => <NavLink key={l.to} item={l} current={isActive(l.match)} />)}
           <Link to={`/${lang}/brief`} className="pl-menu__cta">{t('pl.nav.cta')}</Link>
           <span className="pl-langs pl-menu__langs" role="group" aria-label={t('pl.nav.lang')}>
             {LANGS.map((l) => (
@@ -182,12 +250,16 @@ export function SiteHeader() {
         open={cmdOpen}
         onClose={() => setCmdOpen(false)}
         sections={[
-          { id: '/services', label: t('pl.nav.services'), hint: '01–08' },
-          { id: '/portfolio', label: t('pl.nav.portfolio') },
-          { id: '/blog', label: cmd.blog },
-          { id: '/contact', label: t('pl.nav.contact') },
+          { id: '/about', label: about.label },
+          { id: '/portfolio', label: portfolio.label },
+          { id: '/services', label: services.label, hint: '01–08' },
+          { id: '/blog', label: blog.label },
+          { id: '/calculator', label: calc.label },
+          { id: '/contact', label: contact.label },
+          { id: '/business-card', label: card.label },
         ]}
         actions={[
+          { label: account.label, glyph: '◉', onSelect: () => go(account.match) },
           { label: cmd.brief, glyph: '▦', kbd: 'B', onSelect: () => go('/brief') },
           { label: 'DE / EN / RU', glyph: '⇄', onSelect: cycleLang },
         ]}

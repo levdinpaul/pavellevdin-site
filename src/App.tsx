@@ -42,19 +42,14 @@ function LangLayout() {
     }
   }, [i18n, lang]);
   
-  const seoData = {
-    en: { lang: 'en', title: 'Pavel Levdin - Web Coding, SEO, AI Search and Automation' },
-    ru: { lang: 'ru', title: 'Павел Левдин - веб-кодинг, SEO, AI Search и автоматизация' },
-    de: { lang: 'de', title: 'Pavel Levdin - Web Coding, SEO, AI Search und Automation' },
-  };
-  
-  const currentSeo = seoData[lang as keyof typeof seoData] || seoData.de;
-  
+  // title/description/canonical — только на уровне страницы (PageMeta/Helmet страницы): с React 19 каждый уровень Helmet
+  // давал свой <title> в head и в теле пререндера.
+  const htmlLang = lang && ['de', 'en', 'ru'].includes(lang) ? lang : 'ru';
+
   return (
     <>
       <Helmet>
-        <html lang={currentSeo.lang} />
-        <title>{currentSeo.title}</title>
+        <html lang={htmlLang} />
       </Helmet>
       <Layout>
         <Suspense fallback={<PageFallback />}>

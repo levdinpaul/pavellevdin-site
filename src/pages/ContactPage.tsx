@@ -117,7 +117,7 @@ export function ContactPage() {
         <link rel="canonical" href={`https://pavellevdin.ru/${lang}/contact`} />
       </Helmet>
 
-      <main className="min-h-screen bg-slate-950 pt-28 text-white">
+      <div className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
           <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -196,7 +196,7 @@ export function ContactPage() {
             </motion.form>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

@@ -103,7 +103,7 @@ export function BusinessCardPage() {
         <link rel="canonical" href={`https://pavellevdin.ru/${lang}/business-card`} />
       </Helmet>
 
-      <main className="min-h-screen bg-slate-950 pt-28 text-white">
+      <div className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
           <div className="absolute inset-0 bg-dot-grid opacity-25" />
 
@@ -185,7 +185,7 @@ export function BusinessCardPage() {
             </motion.div>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

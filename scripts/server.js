@@ -66,10 +66,25 @@ if (isProd) {
   const staticDir = candidates.find((dir) => fs.existsSync(path.join(dir, 'index.html')));
 
   if (staticDir) {
-    app.use(express.static(staticDir));
-    // SPA fallback — все не-API запросы отдают index.html
+    // Канонические URL — без слэша (canonical, hreflang, sitemap): /ru/about/ → 301 /ru/about,
+    // а /ru/about отдаём пререндером dist/ru/about/index.html напрямую (express.static сам слал 301 на слэш).
+    app.get(/^\/(ru|de|en)(\/.*)?\/$/, (req, res) => {
+      const q = req.url.slice(req.path.length);
+      res.redirect(301, req.path.replace(/\/+$/, '') + q);
+    });
+    app.use((req, res, next) => {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+      if (path.extname(req.path)) return next();
+      const file = path.join(staticDir, req.path, 'index.html');
+      if (file.startsWith(staticDir + path.sep) && fs.existsSync(file)) return res.sendFile(file);
+      next();
+    });
+    app.use(express.static(staticDir, { redirect: false }));
+    // SPA fallback. Известные маршруты SPA — 200, остальное — 404 (SPA покажет страницу «не найдено», без soft-404).
+    const SPA_ROUTE = /^\/(?:review\/[^/]+|(?:ru|de|en)(?:\/(?:about|portfolio|services|brief|calculator|business-card|contact|imprint|privacy|review\/[^/]+))?)?\/?$/;
     app.get('*', (req, res) => {
-      res.sendFile(path.join(staticDir, 'index.html'));
+      const known = SPA_ROUTE.test(req.path);
+      res.status(known ? 200 : 404).sendFile(path.join(staticDir, 'index.html'));
     });
     console.log(`Serving static files from: ${staticDir}`);
   } else {
