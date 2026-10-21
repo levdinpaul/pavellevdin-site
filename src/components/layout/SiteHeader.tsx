@@ -175,7 +175,7 @@ export function SiteHeader() {
     <>
       <header className="pl-header" data-solid={!isHome || scrolled || menuOpen}>
         <div className="pl-header__inner">
-          <Link to={`/${lang}`} viewTransition className="pl-logo" aria-label={t('pl.nav.home')}>
+          <Link to={`/${lang}`} viewTransition className="pl-logo">
             <BrandMark className="pl-logo__mark" size={32} />
             <span className="pl-logo__text">
               <span className="pl-logo__name">Innovativ Digitalbau</span>
@@ -241,11 +241,11 @@ export function SiteHeader() {
 
       {/* На главной контакты есть в CTA и футере — без боковой колонки */}
       {!isHome && (
-        <div className="pl-social" aria-label={t('pl.nav.social')}>
+        <nav className="pl-social" aria-label={t('pl.nav.social')}>
           {social.map((s) => (
             <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>{s.icon}</a>
           ))}
-        </div>
+        </nav>
       )}
 
       <CommandMenu

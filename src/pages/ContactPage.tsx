@@ -1,6 +1,6 @@
-import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { PageMeta } from '@/components/pl/PageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, MessageCircle, Send, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -19,16 +19,17 @@ const LEAD_ENDPOINT = `${API_BASE}/api/lead`;
 const copy = {
   de: {
     title: 'Kontakt | Pavel Levdin',
-    desc: 'Kontakt fuer Websites, SEO, Google Business, Social Media, Analytics, API und Automatisierung.',
+    desc: 'Kontakt für Websites, SEO, Google Business, Social Media, Analytics, API und Automatisierung.',
     badge: 'Antwort normalerweise innerhalb von 24 Stunden',
     h1: 'Lass uns dein digitales System planen.',
-    sub: 'Schreib kurz, was du brauchst. Fuer groessere Projekte kannst du direkt den Konfigurator nutzen.',
+    sub: 'Schreib kurz, was du brauchst. Für größere Projekte kannst du direkt den Konfigurator nutzen.',
     name: 'Name',
     contact: 'Email, Telegram oder WhatsApp',
     message: 'Nachricht',
     send: 'Nachricht senden',
-    brief: 'Konfigurator oeffnen',
+    brief: 'Konfigurator öffnen',
     success: 'Danke. Deine Nachricht ist angekommen.',
+    error: 'Senden fehlgeschlagen. Schreib mir direkt in Telegram: @PavelLevdin',
     consent: 'Ich stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu.',
     consentLink: 'Datenschutz',
     whatsapp: 'Nachricht in WhatsApp',
@@ -45,6 +46,7 @@ const copy = {
     send: 'Send message',
     brief: 'Open configurator',
     success: 'Thank you. Your message has arrived.',
+    error: 'Sending failed. Message me directly on Telegram: @PavelLevdin',
     consent: 'I agree to the processing of my data to handle this request.',
     consentLink: 'Privacy Policy',
     whatsapp: 'Message on WhatsApp',
@@ -61,6 +63,7 @@ const copy = {
     send: 'Отправить сообщение',
     brief: 'Открыть конфигуратор',
     success: 'Спасибо. Сообщение отправлено.',
+    error: 'Не удалось отправить. Напишите мне в Telegram: @PavelLevdin',
     consent: 'Я согласен на обработку персональных данных для обработки заявки.',
     consentLink: 'Политика конфиденциальности',
     whatsapp: 'Написать в WhatsApp',
@@ -110,12 +113,7 @@ export function ContactPage() {
 
   return (
     <>
-      <Helmet>
-        <html lang={lang} />
-        <title>{text.title}</title>
-        <meta name="description" content={text.desc} />
-        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/contact`} />
-      </Helmet>
+      <PageMeta lang={lang} path="/contact" title={text.title} description={text.desc} />
 
       <div className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
@@ -183,15 +181,15 @@ export function ContactPage() {
                     {text.send}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
-                  <Link to={`/${lang}/brief`}>
-                    <Button type="button" variant="outline" className="h-12 w-full rounded-xl border-white/20 bg-white/[0.05] text-white hover:bg-white hover:text-slate-950">
+                  <Button asChild variant="outline" className="h-12 w-full rounded-xl border-white/20 bg-white/[0.05] text-white hover:bg-white hover:text-slate-950">
+                    <Link to={`/${lang}/brief`}>
                       <MessageCircle className="mr-2 h-5 w-5" />
                       {text.brief}
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </div>
-                {status === 'success' && <p className="rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-200">{text.success}</p>}
-                {status === 'error' && <p className="rounded-xl bg-red-400/10 p-3 text-sm text-red-200">Form error. Telegram: @PavelLevdin</p>}
+                {status === 'success' && <p role="status" className="rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-200">{text.success}</p>}
+                {status === 'error' && <p role="alert" className="rounded-xl bg-red-400/10 p-3 text-sm text-red-200">{text.error}</p>}
               </div>
             </motion.form>
           </div>

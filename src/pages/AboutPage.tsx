@@ -45,7 +45,7 @@ export function AboutPage() {
       email: contacts.mailto,
       address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
       sameAs: [contacts.telegram.url],
-      worksFor: { '@type': 'Organization', name: 'PL Innovativ Digitalbau', url: SITE },
+      worksFor: { '@type': 'Organization', name: 'Innovativ Digitalbau', url: SITE, logo: `${SITE}/brand/logo-1200.png` },
     },
   };
 
@@ -117,7 +117,7 @@ export function AboutPage() {
           </ol>
         </section>
 
-        <section className="pl-section" aria-label={t('pl.aboutPage.stackTitle')}>
+        <section className="pl-section">
           <div className="pl-container"><Title className="pl-h2 pl-stack__title" lines={[t('pl.aboutPage.stackTitle')]} /></div>
           <Marquee items={stackFor(lang).map((item) => item.name)} label={t('pl.aboutPage.stackTitle')} />
         </section>

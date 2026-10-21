@@ -1,5 +1,5 @@
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { PageMeta } from '@/components/pl/PageMeta';
 import { motion } from 'framer-motion';
 import { getEmail } from '@/constants/contacts';
 import {
@@ -356,16 +356,7 @@ export function PrivacyPage() {
 
   return (
     <>
-      <Helmet>
-        <title>{text.seoTitle}</title>
-        <meta name="description" content={text.seoDesc} />
-        <link rel="canonical" href={`https://${SITE}/${lang}/privacy`} />
-        <link rel="alternate" hrefLang="ru" href={`https://${SITE}/ru/privacy`} />
-        <link rel="alternate" hrefLang="en" href={`https://${SITE}/en/privacy`} />
-        <link rel="alternate" hrefLang="de" href={`https://${SITE}/de/privacy`} />
-        <link rel="alternate" hrefLang="x-default" href={`https://${SITE}/ru/privacy`} />
-        <html lang={lang} />
-      </Helmet>
+      <PageMeta lang={lang} path="/privacy" title={text.seoTitle} description={text.seoDesc} />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -405,7 +396,7 @@ export function PrivacyPage() {
             <div className="mt-4 border-t border-border/50 pt-6">
               <p className="text-sm text-muted-foreground">
                 {text.contactLabel}:{' '}
-                <a href={`mailto:${OPERATOR_EMAIL}`} className="text-primary hover:underline">{OPERATOR_EMAIL}</a>
+                <a href={`mailto:${OPERATOR_EMAIL}`} className="text-primary underline underline-offset-2">{OPERATOR_EMAIL}</a>
               </p>
             </div>
           </div>

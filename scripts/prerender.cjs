@@ -117,8 +117,8 @@ function dedupHeadKeys(html) {
   tags.forEach((t, i) => { const k = keyOf(t); if (k) last.set(k, i); });
   let i = -1;
   head = head.replace(re, (t) => { i += 1; const k = keyOf(t); return k && last.get(k) !== i ? '' : t; });
-  // og:image от страницы может отличаться размером от статичных 1200×630 — размеры оставляем только для og-image.*
-  if (!/property="og:image" content="[^"]*\/og-image\.(jpg|png)"/.test(head)) head = head.replace(/<meta property="og:image:(width|height)"[^>]*>/g, '');
+  // og:image страницы (фото, скриншот) — не 1200×630: размеры оставляем только у фирменных og-image*.jpg
+  if (!/property="og:image" content="[^"]*\/og-image(-de|-en)?\.(jpg|png)"/.test(head)) head = head.replace(/<meta property="og:image:(width|height)"[^>]*>/g, '');
   return head.replace(/\n\s*\n(\s*\n)+/g, '\n') + html.slice(headEnd);
 }
 

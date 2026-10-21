@@ -68,7 +68,7 @@ export function Footer() {
         <div className="pl-footer__bottom">
           <span>{t('pl.brandSub')}</span>
           <span className="pl-footer__hint">{t('pl.footer.cmdHint')}</span>
-          <span>© {year} PL Innovativ Digitalbau. {t('pl.footer.rights')}</span>
+          <span>© {year} Innovativ Digitalbau. {t('pl.footer.rights')}</span>
         </div>
       </div>
     </footer>

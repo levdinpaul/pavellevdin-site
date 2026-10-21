@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { BrandMark } from '@/components/layout/BrandMark';
 import { Counter } from './Counter';
 import type { MicroKind } from './micro-kinds';
 
@@ -67,7 +68,7 @@ export function MicroUI({ kind }: { kind: MicroKind }) {
 
       {kind === 'telegram' && (
         <div className="pl-mui__notice pl-mui__step">
-          <span className="pl-mui__avatar">PL</span>
+          <span className="pl-mui__avatar"><BrandMark size={16} /></span>
           <span>
             <strong>{t('pl.mui.tgTitle')}</strong>
             <span className="pl-mui__muted">{t('pl.mui.tgText')}</span>

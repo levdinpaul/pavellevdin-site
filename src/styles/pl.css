@@ -447,3 +447,4 @@
 }
 .pl-skip:focus { transform: none; }
 #main:focus { outline: none; }
+.pl-page--vt { view-transition-name: pl-page; }

@@ -49,7 +49,7 @@ export function Reviews({ lang, project }: { lang: string; project?: string }) {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     '@id': `${SITE}/#business`,
-    name: 'PL Innovativ Digitalbau',
+    name: 'Innovativ Digitalbau',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: (rated.reduce((s, r) => s + (r.rating || 0), 0) / rated.length).toFixed(1),

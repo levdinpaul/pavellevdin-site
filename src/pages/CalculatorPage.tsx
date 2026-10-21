@@ -211,7 +211,7 @@ export function CalculatorPage() {
     return '';
   };
   const busy = status.kind === 'busy';
-  const jsonLd = breadcrumbs(lang, [{ name: 'PL Innovativ Digitalbau', path: '' }, { name: t('pl.calc.eyebrow'), path: '/calculator' }]);
+  const jsonLd = breadcrumbs(lang, [{ name: 'Innovativ Digitalbau', path: '' }, { name: t('pl.calc.eyebrow'), path: '/calculator' }]);
 
   return (
     <>

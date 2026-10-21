@@ -1,5 +1,5 @@
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { PageMeta } from '@/components/pl/PageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Globe2, Mail, MapPin, MessageCircle, Send, Share2, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ const copy = {
     desc: 'Online-Visitenkarte von Pavel Levdin: Webentwicklung, SEO, Google Business, Social Media und Automation.',
     role: 'Web Coding, SEO, AI Search und digitale Business-Systeme',
     h1: 'Pavel Levdin',
-    sub: 'Ich baue schnelle Websites, Web-Apps und komplette Online-Infrastrukturen fuer Unternehmen: Google Business, Social Media, Analytics, APIs, CRM und Automatisierung.',
+    sub: 'Ich baue schnelle Websites, Web-Apps und komplette Online-Infrastrukturen für Unternehmen: Google Business, Social Media, Analytics, APIs, CRM und Automatisierung.',
     project: 'Projekt starten',
     brief: 'Konfigurator',
     save: 'Kontakt speichern',
@@ -50,7 +50,7 @@ const vcardFor = (lang: string, email: string, telegram: string) => `BEGIN:VCARD
 VERSION:3.0
 N:Levdin;Pavel;;;
 FN:Pavel Levdin
-ORG:PL Innovativ Digitalbau
+ORG:Innovativ Digitalbau
 TITLE:Web Developer / Digital Business Systems
 EMAIL:${email}
 URL:https://pavellevdin.ru/${lang}
@@ -96,12 +96,7 @@ export function BusinessCardPage() {
 
   return (
     <>
-      <Helmet>
-        <html lang={lang} />
-        <title>{text.title}</title>
-        <meta name="description" content={text.desc} />
-        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/business-card`} />
-      </Helmet>
+      <PageMeta lang={lang} path="/business-card" title={text.title} description={text.desc} />
 
       <div className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
@@ -111,24 +106,24 @@ export function BusinessCardPage() {
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}>
               <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-bold text-cyan-100">
 
-                PL Innovativ Digitalbau
+                Innovativ Digitalbau
               </span>
               <h1 className="text-5xl font-black leading-none md:text-7xl">{text.h1}</h1>
               <p className="mt-4 text-xl font-semibold text-cyan-100/82">{text.role}</p>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/64">{text.sub}</p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link to={`/${lang}/contact`}>
-                  <Button className="h-12 w-full rounded-xl bg-cyan-300 px-6 font-black text-slate-950 hover:bg-cyan-200 sm:w-auto">
+                <Button asChild className="h-12 w-full rounded-xl bg-cyan-300 px-6 font-black text-slate-950 hover:bg-cyan-200 sm:w-auto">
+                  <Link to={`/${lang}/contact`}>
                     {text.project}
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link to={`/${lang}/brief`}>
-                  <Button variant="outline" className="h-12 w-full rounded-xl border-white/18 bg-white/[0.06] px-6 font-bold text-white hover:bg-white hover:text-slate-950 sm:w-auto">
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="h-12 w-full rounded-xl border-white/18 bg-white/[0.06] px-6 font-bold text-white hover:bg-white hover:text-slate-950 sm:w-auto">
+                  <Link to={`/${lang}/brief`}>
                     {text.brief}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </motion.div>
 
@@ -145,7 +140,7 @@ export function BusinessCardPage() {
                       PL
                     </div>
                     <h2 className="mt-5 text-3xl font-black">Pavel Levdin</h2>
-                    <p className="mt-1 text-cyan-100/70">PL Innovativ Digitalbau</p>
+                    <p className="mt-1 text-cyan-100/70">Innovativ Digitalbau</p>
                   </div>
                   <button onClick={shareCard} className="rounded-xl border border-white/10 bg-white/[0.08] p-3 text-white/70 transition hover:bg-white/[0.12] hover:text-white" aria-label="Share">
                     <Share2 className="h-5 w-5" />

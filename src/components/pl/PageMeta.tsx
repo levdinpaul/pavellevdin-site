@@ -21,6 +21,8 @@ const defaultOg = (lang: string) => (lang === 'de' ? '/og-image-de.jpg' : lang =
 export function PageMeta({ lang, path, title, description, image, jsonLd, noindex }: PageMetaProps) {
   const url = `${SITE}/${lang}${path}`;
   const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+  const img = image ?? defaultOg(lang);
+  const imgUrl = img.startsWith('http') ? img : `${SITE}${img}`;
   return (
     <Helmet>
       <title>{title}</title>
@@ -32,9 +34,14 @@ export function PageMeta({ lang, path, title, description, image, jsonLd, noinde
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
-      <meta property="og:image" content={(() => { const img = image ?? defaultOg(lang); return img.startsWith('http') ? img : `${SITE}${img}`; })()} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image" content={imgUrl} />
+      {/* 1200×630 — только у фирменных OG; у фото/скриншотов страницы размеры другие */}
+      {!image && <meta property="og:image:width" content="1200" />}
+      {!image && <meta property="og:image:height" content="630" />}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={imgUrl} />
       {noindex && <meta name="robots" content="noindex, follow" />}
       {ld.map((o, i) => <script key={i} type="application/ld+json">{JSON.stringify(o)}</script>)}
     </Helmet>

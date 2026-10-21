@@ -1,5 +1,5 @@
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { PageMeta } from '@/components/pl/PageMeta';
 import { motion } from 'framer-motion';
 import { 
   User, 
@@ -23,18 +23,7 @@ export function ImprintPage() {
 
   return (
     <>
-      <Helmet>
-        <title>{t('imprint.seo.title')}</title>
-        <meta name="description" content={t('imprint.seo.description')} />
-        <link rel="canonical" href={`https://pavellevdin.ru/${lang}/imprint`} />
-        
-        <link rel="alternate" hrefLang="de" href="https://pavellevdin.ru/de/imprint" />
-        <link rel="alternate" hrefLang="en" href="https://pavellevdin.ru/en/imprint" />
-        <link rel="alternate" hrefLang="ru" href="https://pavellevdin.ru/ru/imprint" />
-        <link rel="alternate" hrefLang="x-default" href="https://pavellevdin.ru/ru/imprint" />
-        
-        <html lang={lang} />
-      </Helmet>
+      <PageMeta lang={lang} path="/imprint" title={t('imprint.seo.title')} description={t('imprint.seo.description')} />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

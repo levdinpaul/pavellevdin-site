@@ -28,7 +28,7 @@ export function PortfolioPage() {
         itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/${lang}/portfolio/${p.slug}`, name: p.title })),
       },
     },
-    breadcrumbs(lang, [{ name: 'PL Innovativ Digitalbau', path: '' }, { name: t('pl.portfolio.title'), path: '/portfolio' }]),
+    breadcrumbs(lang, [{ name: 'Innovativ Digitalbau', path: '' }, { name: t('pl.portfolio.title'), path: '/portfolio' }]),
   ];
 
   return (
@@ -50,7 +50,7 @@ export function PortfolioPage() {
         </section>
         <section className="pl-container">
           <ul className="pl-work__grid">
-            {list.map((p, i) => <li key={p.slug} data-reveal=""><ProjectCard project={p} lang={lang} eager={i < 3} /></li>)}
+            {list.map((p, i) => <li key={p.slug} data-reveal=""><ProjectCard project={p} lang={lang} eager={i < 3} headingLevel={2} /></li>)}
           </ul>
         </section>
       </div>

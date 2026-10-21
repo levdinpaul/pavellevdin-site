@@ -58,7 +58,7 @@ export function ProjectPage() {
       creator: { '@type': 'Person', name: 'Pavel Levdin', url: `${SITE}/${lang}/about` },
       ...(status !== 'preview' ? { sameAs: p.url } : {}),
     },
-    breadcrumbs(lang, [{ name: 'PL Innovativ Digitalbau', path: '' }, { name: t('pl.portfolio.title'), path: '/portfolio' }, { name: p.title, path }]),
+    breadcrumbs(lang, [{ name: 'Innovativ Digitalbau', path: '' }, { name: t('pl.portfolio.title'), path: '/portfolio' }, { name: p.title, path }]),
   ];
 
   return (
@@ -66,7 +66,7 @@ export function ProjectPage() {
       <PageMeta lang={lang} path={path} title={`${p.title} — ${t('pl.project.metaSuffix')}`} description={copy.summary} image={img.desktop} jsonLd={jsonLd} />
       <div className="pl-readbar" aria-hidden="true"><div ref={bar} /></div>
 
-      <div ref={root} className="pl-page" style={{ viewTransitionName: 'pl-page' }}>
+      <div ref={root} className="pl-page pl-page--vt">
         <section className="pl-container pl-case-hero">
           <Link to={`/${lang}/portfolio`} className="pl-link pl-case-hero__back">{t('pl.project.back')}</Link>
           <p className="pl-eyebrow">{t(`pl.portfolio.filters.${p.category}`)}</p>
