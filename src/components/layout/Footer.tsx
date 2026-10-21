@@ -1,3 +1,4 @@
+import { BrandMark } from './BrandMark';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
@@ -29,7 +30,7 @@ export function Footer() {
       <div className="pl-container">
         <div className="pl-footer__grid">
           <div className="pl-footer__brand">
-            <span className="pl-footer__name">PL · Innovativ Digitalbau</span>
+            <span className="pl-footer__logo"><BrandMark className="pl-footer__mark" size={36} /><span className="pl-footer__name">Innovativ Digitalbau</span></span>
             <span className="pl-footer__sub">{t('pl.brandSub')}</span>
             <span className="pl-footer__sub">Pavel Levdin · {t('pl.footer.location')}</span>
           </div>

@@ -1,3 +1,4 @@
+import { BrandMark } from './BrandMark';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -124,6 +125,7 @@ export function SiteHeader() {
       <header className="pl-header" data-solid={!isHome || scrolled || menuOpen}>
         <div className="pl-header__inner">
           <Link to={`/${lang}`} viewTransition className="pl-logo" aria-label={t('pl.nav.home')}>
+            <BrandMark className="pl-logo__mark" size={32} />
             <span className="pl-logo__text">
               <span className="pl-logo__name">Innovativ Digitalbau</span>
               <span className="pl-logo__sub">{t('pl.brandSub')}</span>
