@@ -258,6 +258,44 @@
 .pl-integr__node { fill: var(--bg-0); stroke: var(--line-2); stroke-width: 1; }
 .pl-integr__label { fill: var(--ink-1); font: 400 22px var(--font-body); }
 
+/* ── Анимация схемы интеграций: цикл 5 с (сайт → CRM/Telegram → AI → волна) ── */
+.pl-integr__svg { --integr-t: 5s; }
+.pl-integr__svg * { animation-duration: var(--integr-t); animation-iteration-count: infinite; animation-timing-function: cubic-bezier(.45,0,.25,1); }
+.pl-integr__svg[data-live='false'] * { animation-play-state: paused; }
+.pl-integr__pulse { fill: none; stroke: var(--accent-strong); stroke-width: 2.4; stroke-linecap: round;
+  stroke-dasharray: 18 200; stroke-dashoffset: 18; opacity: 0; filter: drop-shadow(0 0 4px rgba(122,162,255,.85)); }
+.pl-integr__pulse--site-crm, .pl-integr__pulse--site-tg { animation-name: pl-integr-pulse-a; }
+.pl-integr__pulse--crm-ai, .pl-integr__pulse--tg-ai { animation-name: pl-integr-pulse-b; }
+.pl-integr__pulse--site-tg, .pl-integr__pulse--tg-ai { animation-delay: .12s; }
+@keyframes pl-integr-pulse-a { 0%, 6% { stroke-dashoffset: 18; opacity: 0; } 8% { opacity: 1; } 28% { stroke-dashoffset: -100; opacity: 1; } 30%, 100% { stroke-dashoffset: -100; opacity: 0; } }
+@keyframes pl-integr-pulse-b { 0%, 40% { stroke-dashoffset: 18; opacity: 0; } 42% { opacity: 1; } 62% { stroke-dashoffset: -100; opacity: 1; } 64%, 100% { stroke-dashoffset: -100; opacity: 0; } }
+
+.pl-integr__n .pl-integr__node { transition: none; }
+.pl-integr__n--site .pl-integr__node { animation-name: pl-integr-lit-site; }
+.pl-integr__n--crm .pl-integr__node, .pl-integr__n--telegram .pl-integr__node { animation-name: pl-integr-lit-mid; }
+.pl-integr__n--ai .pl-integr__node { animation-name: pl-integr-lit-ai; }
+@keyframes pl-integr-lit-site { 0% { stroke: var(--line-2); fill: var(--bg-0); } 3%, 10% { stroke: var(--accent); fill: rgba(122,162,255,.10); } 22%, 100% { stroke: var(--line-2); fill: var(--bg-0); } }
+@keyframes pl-integr-lit-mid { 0%, 26% { stroke: var(--line-2); fill: var(--bg-0); } 30%, 40% { stroke: var(--accent); fill: rgba(122,162,255,.10); } 54%, 100% { stroke: var(--line-2); fill: var(--bg-0); } }
+@keyframes pl-integr-lit-ai { 0%, 60% { stroke: var(--line-2); fill: var(--bg-0); } 64%, 80% { stroke: var(--accent-strong); fill: rgba(122,162,255,.16); } 94%, 100% { stroke: var(--line-2); fill: var(--bg-0); } }
+
+.pl-integr__aiglow { opacity: 0; animation-name: pl-integr-glow; }
+@keyframes pl-integr-glow { 0%, 60% { opacity: 0; } 68%, 78% { opacity: 1; } 96%, 100% { opacity: 0; } }
+.pl-integr__ring { fill: none; stroke: var(--accent); stroke-width: 1; opacity: 0; transform-box: fill-box; transform-origin: center; animation-name: pl-integr-ring; }
+.pl-integr__ring--2 { animation-delay: .35s; }
+@keyframes pl-integr-ring { 0%, 63% { opacity: 0; transform: scale(1); } 65% { opacity: .55; transform: scale(1); } 85%, 100% { opacity: 0; transform: scale(1.32, 1.6); } }
+
+.pl-integr__badge { opacity: 0; transform-box: fill-box; transform-origin: center; animation-name: pl-integr-pop; }
+.pl-integr__badge rect { fill: var(--accent); }
+.pl-integr__badge text { fill: var(--ink-inverse); font: 600 12px var(--font-body); }
+.pl-integr__dot { fill: var(--accent-strong); opacity: 0; transform-box: fill-box; transform-origin: center; animation-name: pl-integr-pop; animation-delay: .12s; }
+@keyframes pl-integr-pop { 0%, 27% { opacity: 0; transform: scale(.4) translateY(4px); } 31% { opacity: 1; transform: scale(1.08) translateY(0); } 34%, 46% { opacity: 1; transform: scale(1); } 54%, 100% { opacity: 0; transform: scale(.9) translateY(-4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-integr__svg * { animation: none !important; }
+  .pl-integr__pulse, .pl-integr__aiglow, .pl-integr__ring, .pl-integr__badge, .pl-integr__dot { display: none; }
+  .pl-integr__line { stroke: var(--line-acc); }
+}
+
 /* кейс */
 .pl-case-hero { display: grid; gap: 16px; margin-bottom: 40px; }
 .pl-case-hero__back { justify-self: start; margin-bottom: 8px; }
