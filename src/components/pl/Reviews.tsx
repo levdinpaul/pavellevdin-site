@@ -18,6 +18,9 @@ export interface Review {
   lang?: string;
   verified: boolean;
   date: string;
+  /** site — по личной ссылке, open — открытая форма, остальное — площадки (вносит Pavel из админки) */
+  source?: string;
+  sourceUrl?: string;
 }
 
 const API_BASE = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || '';
@@ -28,7 +31,7 @@ const API_BASE = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_
  * после загрузки страницы подтягиваются свежие одобренные отзывы из /api/reviews.
  * JSON-LD Review/AggregateRating — только при ≥ 3 отзывах с оценкой.
  */
-export function Reviews({ lang, project }: { lang: string; project?: string }) {
+export function Reviews({ lang, project, fallback = null }: { lang: string; project?: string; fallback?: React.ReactNode }) {
   const { t } = useTranslation();
   const [all, setAll] = useState<Review[]>(snapshot as Review[]);
 
@@ -41,10 +44,13 @@ export function Reviews({ lang, project }: { lang: string; project?: string }) {
     return () => { cancelled = true; };
   }, []);
 
-  const list = project ? all.filter((r) => r.project === project) : all;
-  if (!list.length) return null;
+  // Проверенные клиенты первыми, затем по дате (новые выше)
+  const list = (project ? all.filter((r) => r.project === project) : all)
+    .slice().sort((a, b) => Number(b.verified) - Number(a.verified) || b.date.localeCompare(a.date));
+  if (!list.length) return <>{fallback}</>;
 
-  const rated = list.filter((r) => typeof r.rating === 'number');
+  // Рейтинг в JSON-LD — только по отзывам, оставленным на сайте (у площадок свой рейтинг)
+  const rated = list.filter((r) => typeof r.rating === 'number' && (!r.source || r.source === 'site' || r.source === 'open'));
   const jsonLd = rated.length >= 3 ? {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -83,12 +89,18 @@ export function Reviews({ lang, project }: { lang: string; project?: string }) {
               </figure>
               <div className="pl-review__meta">
                 {r.verified && <span className="pl-review__badge">{t('pl.reviews.verified')}</span>}
+                {r.source && !['site', 'open'].includes(r.source) && (
+                  r.sourceUrl
+                    ? <a href={r.sourceUrl} target="_blank" rel="nofollow noopener noreferrer" className="pl-link">{t(`pl.reviewSource.${r.source}`)} ↗</a>
+                    : <span className="pl-review__src">{t(`pl.reviewSource.${r.source}`)}</span>
+                )}
                 {caseStudy && !project && <Link to={`/${lang}/portfolio/${caseStudy.slug}`} viewTransition className="pl-link">{t('pl.reviews.case')} {caseStudy.title} →</Link>}
               </div>
             </li>
           );
         })}
       </ul>
+      <Link to={`/${lang}/review`} className="pl-btn pl-btn--ghost pl-clients__review" data-reveal="">{t('pl.clients.leave')}</Link>
     </section>
   );
 }

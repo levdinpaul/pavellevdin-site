@@ -3,6 +3,7 @@
 import { useTranslation } from 'react-i18next';
 import { SiteHeader } from './SiteHeader';
 import { Footer } from './Footer';
+import { ContactFab } from '@/components/pl/ContactFab';
 import { Children, Suspense, isValidElement, type ReactElement } from 'react';
 
 export interface LayoutProps {
@@ -41,7 +42,8 @@ function hasLayoutInChildren(children: React.ReactNode): boolean {
 }
 
 export function Layout({ children }: LayoutProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
 
   // Проверка на рекурсию
   if (children && hasLayoutInChildren(children)) {
@@ -63,6 +65,7 @@ export function Layout({ children }: LayoutProps) {
         <main id="main" tabIndex={-1} className="flex-1 flex flex-col">{children}</main>
         <Suspense fallback={null}><Footer /></Suspense>
       </div>
+      <ContactFab lang={lang} />
     </>
   );
 }

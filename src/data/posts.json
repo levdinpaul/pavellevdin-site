@@ -1,0 +1,89 @@
+{
+  "ru": [
+    {
+      "slug": "typescript-5-7-polnoye-rukovodstvo",
+      "title": "TypeScript 5.7: полное руководство для веб-разработчиков",
+      "excerpt": "Разбор ключевых нововведений TypeScript 5.7: от перезаписи относительных импортов до V8 Compile Caching. Как писать типобезопасный код быстрее и надёжнее в 2026 году.",
+      "publishedAt": "2026-04-02T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:15.881Z",
+      "readMinutes": 6,
+      "image": "https://pavellevdin.ru/uploads/medium_og_typescript_5_7_a5e1aa5937.jpg"
+    },
+    {
+      "slug": "lighthouse-100-kak-dostich-idealnoy-proizvoditelnosti",
+      "title": "Lighthouse 100: как достичь идеальной производительности",
+      "excerpt": "Полное руководство по достижению 100 баллов в Google Lighthouse. Оптимизация LCP, INP, CLS и всех метрик для максимальной скорости сайта.",
+      "publishedAt": "2026-03-31T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:14.811Z",
+      "readMinutes": 6,
+      "image": "https://pavellevdin.ru/uploads/medium_og_lighthouse_100_034c098f7d.jpg"
+    },
+    {
+      "slug": "nextjs-15-server-components-polnoe-rukovodstvo",
+      "title": "Next.js 15: Полное руководство по Server Components",
+      "excerpt": "Разбираем React Server Components в Next.js 15: архитектура, гидратация, кэширование и практические паттерны для production-приложений.",
+      "publishedAt": "2026-03-30T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:15.184Z",
+      "readMinutes": 6,
+      "image": "https://pavellevdin.ru/uploads/medium_og_nextjs_15_server_components_complete_guide_3cd0da18d1.jpg"
+    }
+  ],
+  "de": [
+    {
+      "slug": "typescript-5-7-vollstaendige-anleitung",
+      "title": "TypeScript 5.7: Vollständige Anleitung für Webentwickler",
+      "excerpt": "Tiefgehender Einblick in TypeScript 5.7: von Pfad-Umschreibung bis V8 Compile Caching. Wie man in 2026 typsicheren Code schneller und zuverlässiger schreibt.",
+      "publishedAt": "2026-04-02T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:15.884Z",
+      "readMinutes": 6,
+      "image": null
+    },
+    {
+      "slug": "lighthouse-100-perfekte-performance-erreichen",
+      "title": "Lighthouse 100: Wie man perfekte Performance erreicht",
+      "excerpt": "Vollständige Anleitung zum Erreichen von 100 Punkten in Google Lighthouse. Optimierung von LCP, INP, CLS und aller Metriken für maximale Website-Geschwindigkeit.",
+      "publishedAt": "2026-03-31T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:14.809Z",
+      "readMinutes": 6,
+      "image": null
+    },
+    {
+      "slug": "nextjs-15-server-components-komplette-anleitung",
+      "title": "Next.js 15: Komplette Anleitung zu Server Components",
+      "excerpt": "Tiefgehender Einblick in React Server Components in Next.js 15: Architektur, Hydration, Caching und Produktionsmuster für moderne Webanwendungen.",
+      "publishedAt": "2026-03-30T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:15.186Z",
+      "readMinutes": 6,
+      "image": null
+    }
+  ],
+  "en": [
+    {
+      "slug": "typescript-5-7-complete-guide",
+      "title": "TypeScript 5.7: Complete Guide for Web Developers",
+      "excerpt": "Deep dive into TypeScript 5.7 features: from path rewriting to V8 Compile Caching. How to write type-safe code faster and more reliably in 2026.",
+      "publishedAt": "2026-04-02T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:15.848Z",
+      "readMinutes": 6,
+      "image": null
+    },
+    {
+      "slug": "lighthouse-100-how-to-achieve-perfect-performance",
+      "title": "Lighthouse 100: How to Achieve Perfect Performance",
+      "excerpt": "Complete guide to reaching 100 points in Google Lighthouse. Optimizing LCP, INP, CLS and all metrics for maximum website speed.",
+      "publishedAt": "2026-03-31T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:14.777Z",
+      "readMinutes": 6,
+      "image": null
+    },
+    {
+      "slug": "nextjs-15-server-components-complete-guide",
+      "title": "Next.js 15: Complete Guide to Server Components",
+      "excerpt": "Deep dive into React Server Components in Next.js 15: architecture, hydration, caching, and production patterns for modern web apps.",
+      "publishedAt": "2026-03-30T09:00:00.000Z",
+      "updatedAt": "2026-10-18T21:33:15.153Z",
+      "readMinutes": 6,
+      "image": null
+    }
+  ]
+}

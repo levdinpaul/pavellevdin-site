@@ -23,6 +23,7 @@ export function Footer() {
     { to: `/${lang}/calculator`, label: t('pl.footer.calc') },
     { to: `/${lang}/business-card`, label: t('pl.footer.card') },
     { to: `/${lang}/cabinet`, label: t('pl.footer.cabinet'), external: true },
+    { to: `/${lang}/review`, label: t('pl.clients.leave') },
   ];
 
   return (

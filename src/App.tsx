@@ -65,6 +65,7 @@ const PortfolioPage = lazy(() => import('@/pages/PortfolioPage').then(m => ({ de
 const ProjectPage = lazy(() => import('@/pages/ProjectPage').then(m => ({ default: m.ProjectPage })));
 const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ServicesPage = lazy(() => import('@/pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
+const ServiceLandingPage = lazy(() => import('@/pages/ServiceLandingPage').then(m => ({ default: m.ServiceLandingPage })));
 const ReviewPage = lazy(() => import('@/pages/ReviewPage').then(m => ({ default: m.ReviewPage })));
 const ContactPage = lazy(() => import('@/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const BriefPage = lazy(() => import('@/pages/BriefPage').then(m => ({ default: m.BriefPage })));
@@ -111,6 +112,8 @@ export function AppRoutes() {
           <Route path="portfolio" element={<PortfolioPage />} />
           <Route path="portfolio/:slug" element={<ProjectPage />} />
           <Route path="services" element={<ServicesPage />} />
+          <Route path="services/:slug" element={<ServiceLandingPage />} />
+          <Route path="review" element={<ReviewPage />} />
           <Route path="brief" element={<BriefPage />} />
           <Route path="calculator" element={<CalculatorPage />} />
           <Route path="business-card" element={<BusinessCardPage />} />

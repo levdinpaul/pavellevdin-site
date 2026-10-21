@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { track } from '@/lib/analytics';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { breadcrumbs } from '@/components/pl/seo';
@@ -63,15 +64,6 @@ function writeDraft(d: Draft) {
   }
 }
 
-function track(event: string, params?: Record<string, unknown>) {
-  const w = window as unknown as { ym?: (...a: unknown[]) => void; gtag?: (...a: unknown[]) => void };
-  try {
-    if (typeof w.ym === 'function') w.ym(108284704, 'reachGoal', event, params);
-    if (typeof w.gtag === 'function') w.gtag('event', event, params);
-  } catch {
-    /* аналитика не ломает калькулятор */
-  }
-}
 
 async function isLoggedIn(): Promise<boolean> {
   try {

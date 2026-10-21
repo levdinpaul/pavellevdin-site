@@ -78,10 +78,12 @@ app.use(express.json({ limit: '50mb' }));
 const leadRoutes = require('./routes/lead');
 const reviewRoutes = require('./routes/reviews');
 const fxRoutes = require('./routes/fx');
+const auditRoutes = require('./routes/audit');
 
 // Public routes
 app.use('/api/lead', leadRoutes);
 app.use('/api/fx', fxRoutes); // курс EUR/RUB ЦБ РФ для цен de/en (кэш сутки)
+app.use('/api/audit', auditRoutes); // бесплатный экспресс-аудит сайта (выключить: AUDIT_ENABLED=false)
 app.use('/api', reviewRoutes.publicRouter);
 app.use('/api/admin/reviews', reviewRoutes.adminRouter);
 // Тот же роутер под путём, который nginx оставляет сайту (/api/admin/* уходит платформе)
@@ -119,7 +121,7 @@ if (isProd) {
     });
     app.use(express.static(staticDir, { redirect: false }));
     // SPA fallback. Известные маршруты SPA — 200, остальное — 404 (SPA покажет страницу «не найдено», без soft-404).
-    const SPA_ROUTE = /^\/(?:review\/[^/]+|(?:ru|de|en)(?:\/(?:about|portfolio|services|brief|calculator|business-card|contact|imprint|privacy|review\/[^/]+))?)?\/?$/;
+    const SPA_ROUTE = /^\/(?:review\/[^/]+|(?:ru|de|en)(?:\/(?:about|portfolio|services|brief|calculator|business-card|contact|imprint|privacy|review(?:\/[^/]+)?))?)?\/?$/;
     app.get('*', (req, res) => {
       const known = SPA_ROUTE.test(req.path);
       res.status(known ? 200 : 404).sendFile(path.join(staticDir, 'index.html'));

@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CommandMenu, type CommandLabels } from '@/components/ds/CommandMenu';
-import { getContacts } from '@/constants/contacts';
 import { startPointerEffects } from '@/lib/pointer-effects';
+import { bindContactClickGoals } from '@/lib/analytics';
 import { useAuthFlag } from '@/hooks/useAuthFlag';
 import { isPlatformPath } from '@/lib/platform-paths';
-import { InstagramIcon, TelegramIcon, UserIcon, WhatsAppIcon } from './social-icons';
+import { UserIcon } from './social-icons';
 
 const LANGS = ['ru', 'de', 'en'] as const;
 type Lang = (typeof LANGS)[number];
@@ -30,7 +30,7 @@ function NavLink({ item, current }: { item: NavItem; current?: boolean }) {
 
 /**
  * Шапка «PL Сцена» без плашек: лого-текст, меню (страницы футера; редкие — в «Ещё ▾»), RU / DE / EN текстом,
- * «Войти» ↔ «Кабинет» (cookie-флаг платформы), CTA-ссылка, «···»-меню на узких экранах, соц-колонка справа (кроме главной).
+ * «Войти» ↔ «Кабинет» (cookie-флаг платформы), CTA-ссылка, «···»-меню на узких экранах. Связь — плавающая кнопка (ContactFab).
  * На главной прозрачная поверх hero, после первого экрана — фон + blur + граница.
  * На остальных страницах фон сразу (решается по pathname — одинаково на сервере и клиенте).
  */
@@ -49,7 +49,7 @@ export function SiteHeader() {
   const authed = useAuthFlag();
 
   // Наклон карточек и магнит CTA — один делегированный слушатель на весь сайт
-  useEffect(() => { startPointerEffects(); }, []);
+  useEffect(() => { startPointerEffects(); bindContactClickGoals(); }, []);
 
   // Кнопка «наверх» — пишем в DOM напрямую, без ре-рендеров
   useEffect(() => {
@@ -156,12 +156,6 @@ export function SiteHeader() {
     </>
   );
 
-  const contacts = getContacts(lang);
-  const social = [
-    { href: contacts.telegram.url, label: 'Telegram', icon: <TelegramIcon /> },
-    { href: contacts.whatsapp.url, label: 'WhatsApp', icon: <WhatsAppIcon /> },
-    { href: contacts.instagram, label: 'Instagram', icon: <InstagramIcon /> },
-  ].filter((s) => s.href);
 
   const cmd = CMD[lang];
   // Блог/кабинет живут на платформе (pl-platform) — туда только полной загрузкой страницы, не через SPA-роутер.
@@ -226,27 +220,17 @@ export function SiteHeader() {
 
       <button ref={topRef} type="button" className="pl-chip pl-totop" data-visible="false" aria-label={t('pl.nav.top')} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>↑</button>
 
-      {menuOpen && (
-        <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')}>
-          <a href={account.to} className="pl-login pl-menu__login" data-auth={authed}>{accountInner}</a>
-          {mobile.map((l) => <NavLink key={l.to} item={l} current={isActive(l.match)} />)}
-          <Link to={`/${lang}/brief`} className="pl-menu__cta">{t('pl.nav.cta')}</Link>
-          <span className="pl-langs pl-menu__langs" role="group" aria-label={t('pl.nav.lang')}>
-            {LANGS.map((l) => (
-              <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
-            ))}
-          </span>
-        </nav>
-      )}
-
-      {/* На главной контакты есть в CTA и футере — без боковой колонки */}
-      {!isHome && (
-        <nav className="pl-social" aria-label={t('pl.nav.social')}>
-          {social.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>{s.icon}</a>
+      {/* Меню всегда в DOM (aria-controls у «···» должен указывать на существующий элемент), закрытое — hidden */}
+      <nav id="pl-menu" className="pl-menu" aria-label={t('pl.nav.menu')} hidden={!menuOpen}>
+        <a href={account.to} className="pl-login pl-menu__login" data-auth={authed}>{accountInner}</a>
+        {mobile.map((l) => <NavLink key={l.to} item={l} current={isActive(l.match)} />)}
+        <Link to={`/${lang}/brief`} className="pl-menu__cta">{t('pl.nav.cta')}</Link>
+        <span className="pl-langs pl-menu__langs" role="group" aria-label={t('pl.nav.lang')}>
+          {LANGS.map((l) => (
+            <button key={l} type="button" lang={l} aria-pressed={l === lang} onClick={() => switchLang(l)}>{l.toUpperCase()}</button>
           ))}
-        </nav>
-      )}
+        </span>
+      </nav>
 
       <CommandMenu
         open={cmdOpen}

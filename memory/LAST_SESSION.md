@@ -1,5 +1,19 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-21 — анимация интеграций, 07 «меню + валидация», 08 «бренд», 09/09b «доверие и лиды»
+- **Выкачено на сайт** (бэкап `dist.bak-2026-10-21-1504-pre07`, `scripts/server.js.bak-2026-10-21-1504-pre07`; теги v8-menu-validate, v9-brand):
+  анимация схемы интеграций; меню = страницы футера + «Ещё ▾» (калькулятор в строке с 1360 px), «Войти» ↔ «Кабинет» по cookie
+  `pl_auth=1` (ширина не меняется, CLS 0), skip-link, один `<main>`/`<title>`; пререндер всех 63 маршрутов ru/de/en;
+  URL без слэша (200), `/x/` → 301, мусор — 404; HSTS + CSP Report-Only (`[csp]` в логе контейнера); CORS без 500;
+  бренд «Кладка PL» везде, имя «Innovativ Digitalbau», JSON-LD logo `/brand/logo-1200.png`. Итоги — memory/validation-2026-10.md.
+- **pl-platform (не выкачено — сборку на VPS авто-режим не пустил)**: ветка `auth-flag-07` — флаг `pl_auth` в session.ts +
+  бренд (знак, иконки, письма с `/brand/logo-horizontal@2x.png` вместо битого `/icon-192.png`, PDF КП/писем с логотипом,
+  OG по языку); ветка `trust-09` — редизайн блога в стиле PL, админка отзывов (ссылки, импорт), авто-просьба об отзыве.
+- **09/09b (ветка trust-09 сайта)**: блог на главной (`scripts/fetch-posts.cjs` → `src/data/posts.json`), «С кем работаю» пока нет
+  отзывов, процесс + условия, FAQ (FAQPage), экспресс-аудит (`/api/audit`, `scripts/lib/site-audit.js`, лимит 3/сутки, SSRF-защита,
+  выкл. `AUDIT_ENABLED=false`), плавающая кнопка связи, 9 посадочных `/:lang/services/<slug>`, открытая форма `/:lang/review`,
+  токены отзывов для 11 проектов, импорт отзывов с площадок (API), факты PageSpeed на кейсах (`scripts/measure-pagespeed.mjs`).
+
 ## Сессия 2026-10-19 — промпт 05 «доводка», задеплоено
 - **Платформа переехала в РФ** (152-ФЗ): russh `/srv/sites/pavellevdin.ru/platform` (compose pl-prod, pl-web в сети stack_web),
   дамп → restore, количество записей во всех таблицах совпало, 30 файлов медиа; стек на VPS удалён, архив

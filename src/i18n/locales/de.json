@@ -659,7 +659,10 @@
       "ctaButton": "Projekt besprechen",
       "previewNote": "Projekt in Entwicklung – Preview-Zugang ist freigeschaltet.",
       "metaSuffix": "Case Study von Pavel Levdin",
-      "shotAlt": "Screenshot der Website"
+      "shotAlt": "Screenshot der Website",
+      "facts": "Überprüfbare Fakten",
+      "langs": "Sprachen",
+      "factsNote": "Lighthouse (mobil und Desktop) der Live-Website {{url}}, gemessen am {{date}}. Auf pagespeed.web.dev nachprüfbar — Werte können leicht abweichen."
     },
     "servicesPage": {
       "metaTitle": "Leistungen – Websites, SEO & KI | Innovativ Digitalbau",
@@ -776,6 +779,193 @@
         "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder per Telegram @PavelLevdin schreiben.",
         "home": "Zur Startseite →"
       }
+    },
+    "blog": {
+      "eyebrow": "Blog",
+      "title": [
+        "Ich schreibe über das,",
+        "was ich mache."
+      ],
+      "all": "Alle Artikel →",
+      "read_one": "{{count}} Min. Lesezeit",
+      "read_other": "{{count}} Min. Lesezeit"
+    },
+    "clients": {
+      "eyebrow": "Kunden",
+      "title": "Ich arbeite mit Kunden in Russland und Deutschland",
+      "lead": "Projekte aus dem Portfolio — jedes mit Aufgabe, Lösung und Stack.",
+      "ru": "Russland",
+      "de": "Deutschland",
+      "products": "Eigene Produkte",
+      "leave": "Bewertung abgeben"
+    },
+    "process": {
+      "eyebrow": "Ablauf",
+      "title": "Fünf Schritte vom Briefing bis zum Support",
+      "steps": [
+        {
+          "title": "Briefing",
+          "text": "Wir klären Aufgabe, Zielgruppe und Rahmenbedingungen. Ergebnis: klarer Leistungsumfang und Kostenschätzung."
+        },
+        {
+          "title": "Prototyp",
+          "text": "Seitenstruktur und zentrale Screens vor der Entwicklung — Änderungen sind hier am günstigsten."
+        },
+        {
+          "title": "Entwicklung",
+          "text": "Umsetzung in Etappen, Zwischenstände auf einer Testadresse."
+        },
+        {
+          "title": "Launch",
+          "text": "Domain, Server, Analytics, Prüfung von Geschwindigkeit und Indexierung, Übergabe der Zugänge."
+        },
+        {
+          "title": "Support",
+          "text": "Updates, Backups und Weiterentwicklung nach dem Launch — nach Vereinbarung."
+        }
+      ]
+    },
+    "guarantees": {
+      "title": "Arbeitsbedingungen",
+      "items": [
+        {
+          "title": "Vertrag",
+          "text": "Umfang, Termine und Preis werden vor Projektstart schriftlich festgehalten."
+        },
+        {
+          "title": "Zahlung in Etappen",
+          "text": "Sie zahlen für abgeschlossene Etappen, nicht alles im Voraus."
+        },
+        {
+          "title": "Code und Zugänge gehören Ihnen",
+          "text": "Code, Domain, Hosting und Analytics laufen auf Ihren Namen."
+        },
+        {
+          "title": "Support nach dem Launch",
+          "text": "Auch nach der Übergabe helfe ich bei Änderungen und Updates."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Fragen",
+      "title": "Häufige Fragen",
+      "more": "Alle Fragen auf der Leistungsseite →",
+      "items": [
+        {
+          "q": "Wie lange dauert die Entwicklung?",
+          "a": "Eine Landingpage meist 1–2 Wochen, eine Unternehmenswebsite 4–6 Wochen, eine Web-App ab 6 Wochen. Den genauen Termin nenne ich nach dem Briefing."
+        },
+        {
+          "q": "Was kostet eine Website?",
+          "a": "Ab-Preise stehen auf der Leistungsseite und im Kostenrechner. Der Endpreis hängt vom Umfang ab und wird vor Projektstart vertraglich festgelegt."
+        },
+        {
+          "q": "Wie laufen Zahlung und Vertrag?",
+          "a": "TODO(Pavel): Zahlungsablauf, Rechnungsstellung und Vertragsform für Kunden in Deutschland und Russland."
+        },
+        {
+          "q": "Was brauchen Sie von mir zum Start?",
+          "a": "Eine Beschreibung der Aufgabe, Beispiele für Websites, die Ihnen gefallen, vorhandene Texte und Fotos sowie Zugänge zu Domain oder Hosting, falls vorhanden."
+        },
+        {
+          "q": "Wem gehören Code und Domain?",
+          "a": "Ihnen: Domain, Hosting und Analytics werden auf Sie registriert, der Quellcode wird nach Bezahlung übergeben."
+        },
+        {
+          "q": "Arbeiten Sie remote?",
+          "a": "Ja, ich sitze in Hannover und arbeite remote mit Kunden aus Deutschland, Russland und anderen Ländern: Calls, Messenger, gemeinsamer Zugriff auf die Testversion."
+        }
+      ],
+      "extra": [
+        {
+          "q": "Können Sie eine bestehende Website weiterentwickeln?",
+          "a": "Ja. Zuerst prüfe ich Code und Infrastruktur, dann schlage ich Weiterentwicklung oder Neuaufbau vor — mit Schätzung für beide Varianten."
+        },
+        {
+          "q": "Was umfasst der Support?",
+          "a": "Updates von Abhängigkeiten, Backups, Verfügbarkeitsmonitoring und kleinere Änderungen. Umfang und Preis nach Vereinbarung."
+        },
+        {
+          "q": "Wo werden Anfragedaten gespeichert?",
+          "a": "Anfragen aus Deutschland werden gemäß DSGVO verarbeitet; Anfragen aus Russland auf einem Server in Russland (152-FZ)."
+        }
+      ]
+    },
+    "audit": {
+      "eyebrow": "Kostenlos",
+      "title": "Schnell-Check Ihrer Website",
+      "lead": "Ich prüfe HTTPS und Sicherheits-Header, Basis-SEO, mobile Darstellung, robots.txt und Sitemap. Das Ergebnis sehen Sie sofort, Details per E-Mail oder Telegram.",
+      "url": "Website-Adresse",
+      "urlPh": "example.de",
+      "contact": "E-Mail oder Telegram",
+      "send": "Website prüfen",
+      "sending": "Wird geprüft…",
+      "consent": "Ich stimme der Verarbeitung meiner Daten zu",
+      "done": "Fertig: {{score}} % der Prüfungen bestanden",
+      "issues": "Was verbessert werden sollte:",
+      "clean": "Keine wesentlichen Auffälligkeiten.",
+      "contactSoon": "Eine ausführliche Auswertung sende ich an den angegebenen Kontakt.",
+      "error": "Die Website konnte nicht geprüft werden. Bitte Adresse prüfen oder mir auf Telegram schreiben.",
+      "limit": "Das Tageslimit ist erreicht. Schreiben Sie mir gern auf Telegram.",
+      "hints": {
+        "status": "Startseite sollte mit 200 antworten",
+        "https": "Website sollte per HTTPS erreichbar sein",
+        "httpRedirect": "http:// sollte auf https:// weiterleiten",
+        "responseTime": "Serverantwort unter 0,8 s",
+        "redirects": "Unnötige Weiterleitungen verlangsamen das Laden",
+        "hsts": "Header Strict-Transport-Security",
+        "xcto": "Header X-Content-Type-Options: nosniff",
+        "csp": "Header Content-Security-Policy",
+        "referrer": "Header Referrer-Policy",
+        "title": "Title mit 10–70 Zeichen",
+        "description": "Meta-Description mit 70–170 Zeichen",
+        "h1": "Genau eine H1-Überschrift",
+        "canonical": "Canonical-Link",
+        "indexable": "Seite sollte nicht auf noindex stehen",
+        "lang": "lang-Attribut am <html>",
+        "og": "Open Graph (og:title, og:image) für Social Media und Messenger",
+        "schema": "Strukturierte Daten (schema.org)",
+        "alt": "Alt-Text bei allen Bildern",
+        "viewport": "Meta-Viewport für Mobilgeräte",
+        "htmlSize": "HTML der Startseite unter 300 KB",
+        "robots": "Datei robots.txt",
+        "sitemap": "Sitemap sitemap.xml",
+        "pagespeed": "PageSpeed (mobil) ab 80"
+      }
+    },
+    "fab": {
+      "open": "Kontakt",
+      "close": "Schließen",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "form": "Nachricht schreiben"
+    },
+    "reviewOpen": {
+      "project": "Projekt",
+      "projectOther": "Sonstiges",
+      "contact": "E-Mail für Rückfragen (wird nicht veröffentlicht)",
+      "links": "Höchstens ein Link in der Bewertung."
+    },
+    "reviewSource": {
+      "kwork": "Bewertung von Kwork",
+      "flru": "Bewertung von FL.ru",
+      "habr": "Bewertung von Habr Freelance",
+      "google": "Bewertung bei Google",
+      "yandex": "Bewertung bei Yandex",
+      "other": "Bewertung von einer Plattform"
+    },
+    "landing": {
+      "crumbs": "Navigation",
+      "price": "Preis",
+      "timeline": "Dauer",
+      "cta": "Projekt besprechen",
+      "forWhom": "Für wen",
+      "includes": "Leistungsumfang",
+      "process": "Ablauf",
+      "cases": "Passende Projekte",
+      "posts": "Artikel zum Thema",
+      "other": "Weitere Leistungen",
+      "listTitle": "Leistungen im Detail"
     }
   }
 }

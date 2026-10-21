@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { isOnline, projectCopy, projectImages, projects } from '@/data/projects';
 import { PageMeta } from '@/components/pl/PageMeta';
+import pagespeed from '@/data/pagespeed.json';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { useReveal } from '@/sections/scena/useReveal';
 import { Reviews } from '@/components/pl/Reviews';
@@ -61,6 +62,9 @@ export function ProjectPage() {
     breadcrumbs(lang, [{ name: 'Innovativ Digitalbau', path: '' }, { name: t('pl.portfolio.title'), path: '/portfolio' }, { name: p.title, path }]),
   ];
 
+  // Замер Lighthouse живого сайта (scripts/measure-pagespeed.mjs → src/data/pagespeed.json), с датой — проверяемый факт
+  const speed = (pagespeed as Record<string, { mobile: number; desktop: number; date: string; url: string; langs?: string }>)[p.slug];
+
   return (
     <>
       <PageMeta lang={lang} path={path} title={`${p.title} — ${t('pl.project.metaSuffix')}`} description={copy.summary} image={img.desktop} jsonLd={jsonLd} />
@@ -108,6 +112,17 @@ export function ProjectPage() {
             <p className="pl-eyebrow pl-case-stack">{t('pl.project.stack')}</p>
             <ul className="pl-tags">{p.stack.map((s) => <li key={s}>{s}</li>)}</ul>
           </div>
+          {speed && (
+            <div className="pl-tile pl-case-grid__wide" data-reveal="">
+              <p className="pl-eyebrow">{t('pl.project.facts')}</p>
+              <dl className="pl-landing__facts pl-case-facts">
+                <div><dt>PageSpeed {t('pl.project.mobile')}</dt><dd>{speed.mobile}</dd></div>
+                <div><dt>PageSpeed {t('pl.project.desktop')}</dt><dd>{speed.desktop}</dd></div>
+                <div><dt>{t('pl.project.langs')}</dt><dd>{speed.langs ?? '—'}</dd></div>
+              </dl>
+              <p className="pl-note">{t('pl.project.factsNote', { date: speed.date, url: speed.url })}</p>
+            </div>
+          )}
         </section>
 
         <section className="pl-container pl-section" aria-label={t('pl.project.gallery')}>

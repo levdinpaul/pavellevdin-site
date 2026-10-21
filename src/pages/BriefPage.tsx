@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { track } from '@/lib/analytics';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -15,16 +16,7 @@ import { PACKAGES } from '@/data/pricing';
 
 const API_BASE = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || '';
 const LEAD_ENDPOINT = `${API_BASE}/api/lead`;
-const YM_ID = 108284704;
 
-// Аналитика: события отправляются в Метрику/GA только если они уже загружены (после согласия)
-function track(event: string, params?: Record<string, unknown>) {
-  const w = window as unknown as { ym?: (...a: unknown[]) => void; gtag?: (...a: unknown[]) => void };
-  try {
-    if (typeof w.ym === 'function') w.ym(YM_ID, 'reachGoal', event, params);
-    if (typeof w.gtag === 'function') w.gtag('event', event, params);
-  } catch { /* аналитика не должна ломать форму */ }
-}
 
 const fmt = (n: number) => n.toLocaleString('ru-RU');
 
