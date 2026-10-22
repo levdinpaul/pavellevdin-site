@@ -1,112 +1,55 @@
 # BACKLOG — PL – Innovativ Digitalbau
 
 Дальнейшие задачи. Приоритет сверху вниз внутри секций. Контекст сделанного — в `LAST_SESSION.md`.
+Почищено 2026-10-22 (аудит 10): закрытые пункты удалены — история в git (`git show v10-trust:memory/BACKLOG.md`).
 
 ---
 
-## 0. Открытые решения (нужен ввод Pavel)
-- [x] **Git-гигиена** — закрыто 2026-10-18: мусор убран, main = redesign-digitalbau (ff), теги `pre-merge-2026-10`/`v2-ssr-baseline`.
-- [ ] **Освободить RAM** — сборки/npm ci на ПК убиваются при нехватке памяти.
-- [ ] **Картинки 2 карточек** — подключить playwright-MCP (снять скрины живых сайтов VL Innovativbau и KUB Perevozki) или дать готовые. В `src/data/projects.ts` у обоих `image: ''`.
-
----
-
-## 1. ~~Миграция Vite SPA → Next.js 15~~ — ОТМЕНЕНО (2026-07-09)
-Решено остаться на **React 19 + Vite + собственный SSR-пререндер** (`src/entry-server.tsx` + `scripts/prerender.cjs`,
-`npm run build:static`): проблема «CSR невидим для ботов» закрыта — /ru-выдача отдаётся готовым HTML.
-Полный план P0–P8 — в истории git (`git show v2-ssr-baseline:memory/BACKLOG.md`).
-
-## 1a. Легаси HostLand/FTP (из аудита 2026-10-18)
-- [x] Блог-пайплайн/FTP старой админки — удалён в 04b (блог и агенты теперь в pl-platform).
-- [ ] Остатки legacy: Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
-  зависимости `basic-ftp`, `multer`, `tinify` (не менять без решения Pavel); на сервере — старые файлы удалённых
-  маршрутов в `scripts/routes|lib` (не подключены) и `/srv/sites/pavellevdin.ru/htdocs/www`.
-
-## 1d. pl-platform (после 05, 2026-10-19) — репо levdinpaul/pl-platform, прод на russh
-- [ ] **Почта**: ящик info@pavellevdin.ru на HostLand → SMTP_* в `/srv/sites/pavellevdin.ru/platform/.env` и `.env` сайта;
-  проверка — `docker compose exec strapi npm run mail:test -- адрес` и `docker exec stack-pavellevdin-1 node scripts/mail-test.cjs адрес`.
-- [ ] **Telegram**: в `.env` сайта TELEGRAM_TOKEN/TELEGRAM_CHAT_ID пустые (уведомления сайта о лидах не уходили!) →
-  вписать, затем `/srv/sites/pavellevdin.ru/platform/sync-telegram.sh` (копирует в платформу) и `docker restart stack-pavellevdin-1`.
+## 0. Ждут решения / действий Pavel (НЕ выдумывать)
+- [ ] **FAQ «Оплата и договор»** — ответ `TODO(Pavel)` в `pl.faq` (на главной из-за этого 5 вопросов вместо 6, вопрос скрыт).
+- [ ] **USt-Hinweis** для de/en цен: ключ `pl.prices.vatNote` («Umsatzsteuer-Hinweis folgt» — заглушка), статус налога (Kleinunternehmer §19?).
+- [ ] **Почта info@pavellevdin.ru**: MX — HostLand; ящик создаётся в панели HostLand. Отправка писем (лиды, аудит, отзывы)
+  готова в коде (`scripts/lib/mailer.js`), выключена, пока в серверном `.env` нет `SMTP_HOST` (+ `SMTP_PORT`, `SMTP_FROM`,
+  `SMTP_USER/SMTP_PASS`). То же — `.env` платформы (письма кабинета и просьбы об отзыве).
+- [ ] **Telegram-бот**: токен/чат — в `.env` сайта и платформы. Транспорт готов: ретранслятор (README, «Telegram через ретранслятор»).
 - [ ] **VK ID**: приложение на id.vk.com, redirect `https://pavellevdin.ru/api/auth/vk/callback` → VK_CLIENT_ID/SECRET в .env платформы.
-- [ ] **Ключ Claude** (`ANTHROPIC_API_KEY`) — нет; агенты на Gemini.
-- [ ] Реквизиты КП и режим налога — админка → Настройки → «Настройки студии».
-- [ ] Цены: магазин (100 000) вышел дешевле корпоративного (120 000) — медианы; при желании поднять.
-- [ ] Google-вход создаёт аккаунт без экрана согласия ПДн (сейчас выключен — нет GOOGLE_CLIENT_ID).
-- [ ] Капча (Yandex SmartCaptcha), cron scheduler-tick/watchdog/sysadmin, enum content-topic.category, SEO-компонент blog-post.
-- [ ] Скрипт деплоя сайта на russh; удалить `dist.bak-*` после стабилизации.
-
-## 1c. После редизайна «PL Сцена» (2026-10-18)
-- [ ] Пререндер /de и /en (сейчас SPA, только /ru в HTML) — фаза 2; hreflang уже указывает на de/en.
-- [ ] Две `<title>` внутри `#root` в пререндере (React 19 + Helmet в SSR) — было и до редизайна; убрать из SSR-тела.
-- [ ] Polaris: публично только экран входа — снять скриншоты из авторизованной сессии или сделать лендинг.
-- [ ] Opora Life (vestoralife.de): на скриншоте приложения в hero ещё «Vestora Life» — привести бренд к одному.
-- [ ] med-agency (превью): стоит `index, follow` — поставить noindex; языки RU/EN/TG.
-- [ ] kub-perevozki: на мобайле `.sticky-cta` и cookie-баннер шире экрана (~590px). delimes (GermanyShop): кнопка
-  «Как это работает» белым по белому. — баги на сайтах клиентов/своих, не в портфолио.
-- [ ] Вложенные <main> (и footer в imprint) внутри старых под-страниц contact/brief/business-card/imprint — семантика.
-- [ ] Ленивая подгрузка de/en локалей (≈15 КБ gzip из initial-чанка) — если понадобится ещё перф.
-- [ ] Под-страницы contact / brief / business-card / imprint / privacy / blog — внутренняя вёрстка в новом стиле
-  (сейчас только токены/шапка/футер; amber-акценты в brief/contact остались).
-- [ ] Удалить неиспользуемые i18n-ключи старой главной (hero/about/advantages/…) и зависимость gsap.
-- [ ] GitHub Pages репо levdinking/Code-Craft больше не используется (origin → levdinpaul/pavellevdin-site).
-- [x] (03b→04a) micro-UI вместо картинок — сделано в 04a (главная «Что я делаю» + /services).
-- [x] (03b→04a) Ключи pl.about.cards / pl.about.stats удалены.
-- [ ] (03b) Удалить на сервере dist.bak-2026-10-18*, когда hero v4 стабилен.
-
-## 1d. После доводки 04a (2026-10-18)
-- [ ] **Почта info@pavellevdin.ru**: MX домена — HostLand (mail.pavellevdin.ru → sendmail.hostland.ru), не russh.
-  Ящик/алиас info@ создаётся в панели HostLand (доступа нет). Отправка писем о лидах готова в коде
-  (`scripts/lib/mailer.js`), но выключена, пока в серверном `.env` нет `SMTP_HOST` (+ `SMTP_PORT`, `SMTP_FROM`,
-  при необходимости `SMTP_USER/SMTP_PASS`). Варианты: SMTP HostLand с логином ящика (SPF уже include:_spf.hostland.ru)
-  или Postfix russh 172.19.0.1:587 (тогда добавить pavellevdin.ru в submission_senders и russh-IP в SPF).
 - [ ] **pavellevdin.de** — после регистрации: `env/.env` → `VITE_DE_MAIL_READY=true`, серверный `.env` → `DE_MAIL_READY=true`, ящик info@.
-- [ ] **USt-Hinweis** для de/en цен: ключ `pl.prices.vatNote` («Umsatzsteuer-Hinweis folgt» — заглушка), уточнить статус (Kleinunternehmer §19?).
-- [ ] Цены — `src/data/pricing.json` (предложение по рынку, Pavel правит без кода).
+- [ ] Реквизиты КП и режим налога — админка платформы → Настройки → «Настройки студии».
+- [ ] Цены: магазин (100 000) дешевле корпоративного (120 000) — медианы; при желании поднять (`src/data/pricing.json` + копия в pl-platform).
+- [ ] **Освободить RAM** на ПК — сборки/Lighthouse/npm ci убиваются при нехватке памяти.
+
+## 1. Сайт — открытые задачи
+- [ ] **PDF-отчёт экспресс-аудита** (сейчас клиенту уходит текстовое письмо на его языке) — отложено в аудите 10.
+- [ ] **CSP → enforce**: сейчас `Content-Security-Policy-Report-Only` + `/api/csp-report` (лог `[csp]`). Через 1–2 недели
+  без нарушений в логах — переключить на `Content-Security-Policy`.
+- [ ] Ленивая подгрузка de/en локалей (≈12 КБ gzip в initial-чанке) — мобильный Lighthouse главной.
+- [ ] Факты PageSpeed на кейсах — `src/data/pagespeed.json`, перемер раз в квартал (`scripts/measure-pagespeed.mjs`, README).
+- [ ] OG-картинки кейсов/«Обо мне» — webp 1200×750 / 720×998; для соцсетей лучше jpg 1200×630.
+- [ ] Длины title/description: /ru/services title 73, calculator description ~185, imprint description короткий.
+- [ ] W3C-валидация en-страниц (в 07 упёрлись в лимит validator.w3.org).
+- [ ] Легаси на сервере: Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
+  старые файлы удалённых маршрутов в `scripts/routes|lib`, `/srv/sites/pavellevdin.ru/htdocs/www` (не трогать без решения Pavel).
+- [ ] Удалить на сервере старые `dist.bak-*` и `scripts/*.bak-*`, когда релиз стабилен.
+- [ ] Скрипт деплоя сайта (сейчас — ручная последовательность из CLAUDE.md).
 - [ ] Отзывы: снимок одобренных попадает в статический HTML только при сборке (`scripts/fetch-reviews.cjs`);
-  новые одобренные видны сразу через /api/reviews. Новые персональные ссылки — `scripts/review-tokens.json`.
-- [ ] Если до загрузки WebGL идёт плавный программный скролл (scrollIntoView smooth) к секции ниже сцены, цель может
-  оказаться внутри выросшей сцены (браузерный smooth-scroll не знает о росте). Якоря/hash-переходы работают (top = 72).
+  новые одобренные видны сразу через /api/reviews.
+- [ ] Если до старта сцены идёт программный smooth-scroll к секции ниже, цель может оказаться внутри выросшей сцены.
 
-## 1b. Найденные дефекты (2026-10-18)
-- [ ] Статья `tailwind-css-2026-architecture`: в `ru/de/en.json` нет `slug`/`published` → не пререндерится;
-  старый URL `/ru/blog/tailwind-css-2026-architecture/` (был заглушкой) — решить: 301 на новый slug.
-- [ ] `/images/projects/socialhub.png` (`src/data/projects.ts:90`) — файла нет.
-- [ ] Lint: 21 error (react-hooks/set-state-in-effect в Header/SiteNav/CommandMenu/useAdmin/usePipelinePolling/PlatformPreview;
-  no-unused-expressions CommandMenu:87,114; only-export-components в shadcn ui + useTheme; purity sidebar:611;
-  no-unused-vars ApiKeyManager:36; no-explicit-any в `PL Digitalbau Design System/` — добавить в eslint ignores). CI lint не гоняет.
+## 2. Портфолио — проекты клиентов (не код сайта)
+- [ ] Polaris: публично только экран входа — скриншоты из авторизованной сессии или лендинг.
+- [ ] Opora Life (vestoralife.de): на скриншоте в hero ещё «Vestora Life» — привести бренд к одному.
+- [ ] med-agency (превью): `index, follow` — поставить noindex.
+- [ ] kub-perevozki: на мобайле `.sticky-cta` и cookie-баннер шире экрана (~590px). delimes: кнопка «Как это работает» белым по белому.
 
----
+## 3. pl-platform
+- [ ] Капча (Yandex SmartCaptcha), cron scheduler-tick/watchdog/sysadmin, enum content-topic.category, SEO-компонент blog-post.
+- [ ] Ключ Claude (`ANTHROPIC_API_KEY`) — нет; агенты на Gemini.
+- [ ] Статья Next.js 15 — в CMS обложка «Astro 5».
+- [ ] Telegram-бот: аватар через BotFather `/setuserpic` — `brand/social/avatar-1024.png`.
 
-## 2. SEO / GEO роадмап (из @seo-specialist; часть закрывается миграцией)
-**Quick wins (часть сделана):** ✅ город в title, ✅ OG→DE, ✅ schema расширена. Осталось:
-- [ ] robots.txt + sitemap с allow AI-ботов (делается в P5).
-- [ ] FAQ-блоки с FAQPage schema на Home (5-6 вопросов, answer-first ≤60 слов).
-- [ ] Google Business Profile (Бремен) + NAP-консистентность → @google-business-local.
-
-**P1 структура/доверие:**
-- [ ] Отдельные SEO-лендинги под топ-ключи: `/webentwicklung-bremen`, `/webdesign-bremen`, `/onlineshop-erstellen-bremen`, `/seo-bremen`, `/next-js-entwickler`, `/automatisierung-kmu` (H1 «[Leistung] in Bremen — [Nutzen]», 600-1000 слов, FAQ, кейс, Service schema).
-- [ ] Страница цен `/preise` (прозрачность = отстройка; «ab»-цены + 4-шаговый процесс).
-- [ ] Локальная страница `/standort-bremen` (NAP, районы, LocalBusiness schema).
-- [ ] Кейсы с измеримыми цифрами (Lighthouse, % роста) + Review schema.
-- [ ] Внутренняя перелинковка hub-and-spoke.
-
-**Контент-план блога (первые 8, под информационные ключи + AEO):**
-1. Was kostet eine Website 2026? (Bremen) · 2. React/Next.js vs WordPress · 3. Core Web Vitals → Lighthouse 100/100 · 4. Was ist AEO/GEO? · 5. DSGVO-konforme Website Checkliste · 6. Geschäftsprozesse automatisieren (KMU) · 7. Wie lange dauert eine Website? · 8. Mehrsprachige Website (i18n). Каждая: answer-first, таблица/цифры, FAQ-блок, BlogPosting+FAQPage schema, ссылка на коммерческий лендинг.
-
-**Конкуренты (слабые места = наши ниши):** jannisbrandt/vibit/webdesign-bremen (WordPress, нет блога/schema/FAQ/кейсов с цифрами), exovia/sf-harbour (не местные, размытая гео). Свободно: современный стек+локальность Bremen+контент, прозрачные цены, GEO/AEO-ниша.
-
----
-
-## 3. Визуал P2 (wow-слой)
-- [ ] Terminal-caret в Hero eyebrow (`caret-blink` уже в tailwind.config) — dev-signature.
-- [ ] Count-up метрик (Hero/TechStack/Advantages) при useInView.
-- [ ] Magnetic hover на 2 главных CTA (Hero + финальный).
-- [ ] `useReducedMotion()` для всех framer-анимаций (сейчас только CSS media-query).
-- [ ] Advantages: заменить «4 звезды»-заглушку на 3 крупных mono-числа (реальный proof).
-- [ ] Hero cleanup: упростить hero-noise/hero-network (мельтешит) → статичный dot-grid (designer рекомендовал).
-- [ ] Testimonials — проверить на новой палитре, причесать.
-
----
-
-## Как продолжить
-Следующий `/begin` подтянет этот файл. Рекомендованный порядок: редизайн (отдельная задача) → легаси FTP-пайплайн (1a) → дефекты (1b) → SEO (2).
+## 4. SEO / GEO (фаза 1 — Яндекс, РФ; фаза 2 — DE, Hannover)
+- [ ] Яндекс Бизнес / Вебмастер / Турбо — проверить индексацию после 09 (посадочные услуг, FAQ).
+- [ ] Кейсы с измеримыми цифрами роста (позиции, заявки) — только с данными клиента, не выдумывать.
+- [ ] Контент-план блога (платформа): цены на сайт 2026, Next.js vs WordPress, Core Web Vitals, AEO/GEO,
+  152-ФЗ/DSGVO-чек-лист, автоматизация, сроки разработки, мультиязычность — answer-first, FAQ, ссылка на посадочную.
+- [ ] Фаза 2: немецкие посадочные под Hannover, Google Business Profile, NAP (без адреса и телефона).
