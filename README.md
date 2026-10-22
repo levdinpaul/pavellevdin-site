@@ -19,6 +19,12 @@ React 19 + Vite 7 + TypeScript + Tailwind 3.4 + react-i18next (ru / de / en) + �
   Его читают React, `scripts/prerender.cjs` (страницы кейсов) и `scripts/generate-sitemap.cjs`.
   Скриншоты реальных сайтов: `public/images/portfolio/<slug>/{desktop,desktop-2,mobile}.webp`.
 - **Статус «онлайн»** — `src/data/projects-status.json`, пишет `scripts/check-projects.cjs` при сборке.
+  Его, `fx-rate.json` и `services-landing-index.json` на чистой машине создаёт `scripts/ensure-build-data.cjs` (prebuild).
+- **Факты PageSpeed на кейсах** — `src/data/pagespeed.json` (медиана 3 прогонов Lighthouse 12, mobile/desktop, с датой).
+  Перемер: `npm i lighthouse@12` в любой папке, затем
+  `LIGHTHOUSE_CLI=<папка>/node_modules/lighthouse/cli/index.js node scripts/measure-pagespeed.mjs [slug …]`.
+  Не измерился — у кейса нет блока; цифры руками не вписывать.
+- **Sitemap** — `public/sitemap.xml` генерируется при сборке (`scripts/generate-sitemap.cjs`), в git не хранится.
 - **Тексты** — `src/i18n/locales/{ru,de,en}.json`, ключи нового дизайна под `pl.*` (структура одинакова во всех локалях).
 - **Контакты** — единый источник `src/constants/contacts.ts`.
 
