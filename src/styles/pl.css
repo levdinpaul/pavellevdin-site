@@ -246,7 +246,6 @@
 .pl-stats--big strong { font-size: clamp(30px, 3.4vw, 44px); }
 .pl-split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 32px; margin-bottom: 36px; }
 .pl-split:has(> :only-child) { grid-template-columns: 1fr; }
-.pl-gen-frame img, .pl-integr__media img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid rgba(122,162,255,0.4); filter: brightness(0.95); box-shadow: 0 0 32px -10px rgba(122,162,255,0.5); }
 .pl-skills, .pl-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 0; padding: 0; list-style: none; }
 .pl-skills { grid-template-columns: repeat(4, 1fr); }
 .pl-principles { grid-template-columns: repeat(4, 1fr); }
