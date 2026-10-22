@@ -31,7 +31,7 @@ export function createScene2D(canvas: HTMLCanvasElement, labelCount: number): Sc
 
   // Phones: fewer points and steady dust (no twinkle) keep each frame well inside the budget.
   const mobileDust = window.innerWidth < 768;
-  const dust = sceneDust(mobileDust ? 500 : 2000);
+  const dust = sceneDust(mobileDust ? 700 : 2000);
   const travelLength = 5 + Math.max(0, labelCount - 1) * LABEL_SPACING;
 
   // Technologies: one per depth step, spread evenly around the axis by the golden angle.
