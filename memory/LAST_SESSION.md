@@ -1,5 +1,19 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-22 — промпт 10 «исправления по аудиту 01–09b», сайт выкачен (тег v11-audit в обоих репо)
+- **Выкачено на сайт** (бэкап `dist.bak-2026-10-22-1911-pre10` + `scripts/{lib/telegram,routes/audit,lib/fx,notify-telegram,welcome-post}.js.bak-2026-10-22-1911-pre10`;
+  `scripts/lib/audit-i18n.js` новый): 90/90 маршрутов 200, OG главной по языку, stats.html/og-image.png/manifest.json → 404, sitemap 91 URL,
+  getMe через ретранслятор из контейнера → `PL_Innovativbau_bot`.
+- **Сайт (A1–A8, C)**: puppeteer в devDependencies, prebuild `ensure-build-data.cjs`, sitemap не в git, CI = npm ci + lint + build + build:static
+  (зелёный); главная через PageMeta; visualizer только ANALYZE=1; gsap/ThemeToggle/мёртвый CSS/старые i18n-ключи (−150 ключей)/manifest.json/
+  browserconfig.xml/photo-800 удалены; `scripts/data/` вне git; цель `contact_submit`; «Оставить отзыв» в мобильном меню; кейс → посадочные услуги
+  (индекс `services-landing-index.json`, /services больше не тянет полный JSON); пыль 700 (×4 CPU: 60/58 fps); письмо аудита на ru/de/en;
+  PageSpeed на 5 кейсах (vl 52/77, mp 35/58, vestora 44/89, kub 59/89, fithilf 95/98 — 2026-10-22, локальный Lighthouse при нехватке RAM;
+  polaris, peristeen, delimes, domusman, anapa не измерены — замер снят по памяти); Telegram — `scripts/lib/telegram.js` (TELEGRAM_API_BASE, X-Relay-Key, 10 с).
+- **Платформа (B1–B6, C)** — merge 298cf03, тег v11-audit, НЕ собрана/выкачена (делает Claude в claude.ai): lock, тесты 73/73, lint 0 errors,
+  остатки MP, i18n админки, manifest, /set-password → кабинет, «Удалить мои данные», лимит AI (по умолчанию 2000/мес — проверить счётчик
+  pipeline-logs до выкатки), Google-вход через согласие ПДн, Telegram-хелпер (web + cms → нужен ребилд Strapi), infra/russh + infra/vps.
+
 ## Сессия 2026-10-21 — анимация интеграций, 07 «меню + валидация», 08 «бренд», 09/09b «доверие и лиды»
 - **Выкачено на сайт** (бэкап `dist.bak-2026-10-21-1504-pre07`, `scripts/server.js.bak-2026-10-21-1504-pre07`; теги v8-menu-validate, v9-brand):
   анимация схемы интеграций; меню = страницы футера + «Ещё ▾» (калькулятор в строке с 1360 px), «Войти» ↔ «Кабинет» по cookie

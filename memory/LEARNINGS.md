@@ -144,3 +144,19 @@
   локальный Lighthouse (одинаковые условия до/после; параллельная сборка/тесты занижают балл).
 - axe-core `region`/`landmark-unique`: `aria-label` на `<div>` без роли — ошибка W3C и a11y; соц-колонку делать `<nav>`,
   `<Link><Button>` → `<Button asChild><Link>` (кнопка внутри ссылки — ошибка W3C).
+
+## Аудит 10 (2026-10-22)
+- **CI на чистой машине**: зависимость, которая лежит только в `scripts/node_modules` (puppeteer), локально «работает» —
+  Node ищет модули вверх от файла скрипта; в CI её нет. Проверять сборку свежим клоном / CI, а не рабочей копией.
+- Файлы из .gitignore, которые импортирует TS (`fx-rate.json`, `projects-status.json`), ломают `tsc -b` на чистой машине →
+  `prebuild`/`predev` (`scripts/ensure-build-data.cjs`) создаёт безопасные значения, существующие не трогает.
+- puppeteer ≥ 24: `executablePath()` асинхронный — без `await` в аргумент уходит «[object Promise]», и Lighthouse молча
+  берёт другой Chrome или висит. Chrome for Testing 150 под Lighthouse 12 на Windows виснет → `CHROME_PATH` к системному Chrome.
+- Lighthouse на ПК с < 1,5 ГБ свободной памяти: прогоны по 3 мин и выше, фоновые задачи снимаются Claude Code.
+  Замер по 10 сайтам — отдельно от сборок/агентов; цифры зависят от машины (mobile ниже, чем на PSI).
+- JSON-импорт в Vite с `json.stringify: true` не тришейкается: общий большой JSON (посадочные услуг, ~23 КБ gzip) в
+  нескольких чанках → лёгкий индекс, генерируемый при сборке (`services-landing-index.json`).
+- С russh `api.telegram.org` недоступен: Bot API — только через `TELEGRAM_API_BASE` (ретранслятор, `X-Relay-Key`).
+  Проверка из контейнера: `docker exec -w /home/host1731061/pavellevdin.ru/projects/app stack-pavellevdin-1 node -e …getMe…`.
+- Python-heredoc в Git Bash: `\n` внутри `"""…"""` легко превращается в реальный перевод строки в JS-строке —
+  многострочный код писать Write/Edit, не через heredoc-replace.
