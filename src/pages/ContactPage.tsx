@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { getContacts } from '@/constants/contacts';
+import { track } from '@/lib/analytics';
 
 // Относительный путь: в dev идёт через vite-прокси на localhost:3001, в prod — same-origin.
 // Для отдельного API-хоста задайте VITE_API_URL.
@@ -106,6 +107,7 @@ export function ContactPage() {
       if (!response.ok) throw new Error('Form submit failed');
       form.reset();
       setStatus('success');
+      track('contact_submit');
     } catch {
       setStatus('error');
     }

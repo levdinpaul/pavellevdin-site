@@ -17,7 +17,8 @@ export default defineConfig(({ command }) => ({
     // и ломает дедупликацию тегов react-helmet-async (дубли <title>/<canonical>).
     ...(command === 'serve' ? [inspectAttr()] : []),
     react(),
-    ...(command === 'build' ? [visualizer({ open: false, filename: 'dist/stats.html' })] : []),
+    // Карта бандла — только по запросу (ANALYZE=1 npm run build), иначе stats.html попадает в dist и на прод.
+    ...(command === 'build' && process.env.ANALYZE === '1' ? [visualizer({ open: false, filename: 'stats.html' })] : []),
   ],
   // JSON-локали → JSON.parse("…"): парсится быстрее объектного литерала (меньше Script Evaluation)
   json: { stringify: true },
@@ -29,7 +30,6 @@ export default defineConfig(({ command }) => ({
           if (!id.includes('node_modules')) return;
           // Изолируем ТОЛЬКО «листовые» ленивые библиотеки: они импортируют react в один
           // сторону, но vendor их не импортирует → циклов между чанками нет.
-          if (id.includes('gsap')) return 'gsap';
           if (id.includes('framer-motion') || id.includes('motion-dom') || id.includes('motion-utils')) return 'motion';
           if (id.includes('recharts') || id.includes('d3-') || id.includes('victory')) return 'charts';
           // Ядро, нужное на КАЖДОЙ странице (в т.ч. при гидрации главной) — держим одним

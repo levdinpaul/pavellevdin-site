@@ -12,7 +12,7 @@ import { PACKAGES, currencyFor, packageCopy, priceFor } from '@/data/pricing';
 import { useFxRate } from '@/data/fx';
 import { FaqSection } from '@/components/pl/TrustSections';
 import { AuditForm } from '@/components/pl/AuditForm';
-import { LANDINGS, LANDING_SLUGS } from '@/pages/ServiceLandingPage';
+import { LANDING_INDEX, LANDING_SLUGS } from '@/data/landing-index';
 
 type Item = { title: string; text: string };
 
@@ -85,7 +85,7 @@ export function ServicesPage() {
           <h2 id="pl-svc-landings" className="pl-landing__h" data-reveal="">{t('pl.landing.listTitle')}</h2>
           <ul className="pl-landing__other">
             {LANDING_SLUGS.map((s) => (
-              <li key={s}><Link to={`/${lang}/services/${s}`} viewTransition>{LANDINGS[s][lang as 'ru' | 'de' | 'en'].h1}</Link></li>
+              <li key={s}><Link to={`/${lang}/services/${s}`} viewTransition>{LANDING_INDEX[s].h1[lang as 'ru' | 'de' | 'en']}</Link></li>
             ))}
           </ul>
         </section>

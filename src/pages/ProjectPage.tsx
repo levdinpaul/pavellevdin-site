@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { isOnline, projectCopy, projectImages, projects } from '@/data/projects';
 import { PageMeta } from '@/components/pl/PageMeta';
 import pagespeed from '@/data/pagespeed.json';
+import { LANDING_INDEX, landingsForProject } from '@/data/landing-index';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { useReveal } from '@/sections/scena/useReveal';
 import { Reviews } from '@/components/pl/Reviews';
@@ -63,6 +64,7 @@ export function ProjectPage() {
   ];
 
   // Замер Lighthouse живого сайта (scripts/measure-pagespeed.mjs → src/data/pagespeed.json), с датой — проверяемый факт
+  const services = landingsForProject(p.slug);
   const speed = (pagespeed as Record<string, { mobile: number; desktop: number; date: string; url: string; langs?: string }>)[p.slug];
 
   return (
@@ -111,6 +113,16 @@ export function ProjectPage() {
             <ul className="pl-checklist pl-checklist--cols">{copy.done.map((d) => <li key={d}>{d}</li>)}</ul>
             <p className="pl-eyebrow pl-case-stack">{t('pl.project.stack')}</p>
             <ul className="pl-tags">{p.stack.map((s) => <li key={s}>{s}</li>)}</ul>
+            {services.length > 0 && (
+              <>
+                <p className="pl-eyebrow pl-case-stack">{t('pl.project.services')}</p>
+                <ul className="pl-case-services">
+                  {services.map((s) => (
+                    <li key={s}><Link to={`/${lang}/services/${s}`} viewTransition>{LANDING_INDEX[s].h1[lang as 'ru' | 'de' | 'en']}{' '}→</Link></li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
           {speed && (
             <div className="pl-tile pl-case-grid__wide" data-reveal="">

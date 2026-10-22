@@ -34,4 +34,7 @@ async function fetchCbrEur({ timeoutMs = 8000 } = {}) {
   return rate;
 }
 
-module.exports = { CBR_URL, isFxRate, fetchCbrEur };
+/** Резервный курс ЦБ на случай, когда нет ни сети, ни кэша (сборка) — обновлять изредка. */
+const FALLBACK_FX = { eurRub: 93.0417, date: '2026-10-21' };
+
+module.exports = { CBR_URL, FALLBACK_FX, isFxRate, fetchCbrEur };

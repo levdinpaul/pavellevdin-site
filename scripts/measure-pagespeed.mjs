@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Замер Lighthouse (performance, mobile + desktop) живых сайтов из портфолио → src/data/pagespeed.json.
 // Запускается вручную (не в сборке): node scripts/measure-pagespeed.mjs [slug ...]. Медиана из 3 прогонов.
-// Chrome — из puppeteer (scripts/node_modules); Lighthouse 12 — путь к CLI в LIGHTHOUSE_CLI (npm i lighthouse@12 где угодно).
+// Chrome — из puppeteer (devDependency); Lighthouse 12 — путь к CLI в LIGHTHOUSE_CLI (npm i lighthouse@12 где угодно).
 // Сайты в статусе preview не меряются: цифры должны быть проверяемыми на pagespeed.web.dev.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,8 +11,10 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const require = createRequire(path.join(root, 'scripts', 'package.json'));
-const chrome = require('puppeteer').executablePath();
+const require = createRequire(path.join(root, 'package.json'));
+// puppeteer ≥ 24: executablePath() асинхронный — без await в --chrome-path попадал «[object Promise]»
+// CHROME_PATH — свой Chrome (на Windows Chrome for Testing из puppeteer под Lighthouse 12 зависает — берите системный)
+const chrome = process.env.CHROME_PATH || await require('puppeteer').executablePath();
 const out = path.join(root, 'src', 'data', 'pagespeed.json');
 const RUNS = 3;
 const LH = process.env.LIGHTHOUSE_CLI;

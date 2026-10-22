@@ -1,1 +1,32 @@
-{}
+{
+  "vl-innovativbau": {
+    "url": "vl-innovativbau.de",
+    "mobile": 52,
+    "desktop": 77,
+    "date": "2026-10-22"
+  },
+  "mp-innovativbau": {
+    "url": "mp-innovativbau.de",
+    "mobile": 35,
+    "desktop": 58,
+    "date": "2026-10-22"
+  },
+  "vestora-life": {
+    "url": "vestoralife.de",
+    "mobile": 44,
+    "desktop": 89,
+    "date": "2026-10-22"
+  },
+  "kub-perevozki": {
+    "url": "kub-perevozki.ru",
+    "mobile": 59,
+    "desktop": 89,
+    "date": "2026-10-22"
+  },
+  "fithilf": {
+    "url": "fithilf.vl-innovativbau.de",
+    "mobile": 95,
+    "desktop": 98,
+    "date": "2026-10-22"
+  }
+}

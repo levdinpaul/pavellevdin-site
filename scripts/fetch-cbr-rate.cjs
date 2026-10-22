@@ -4,18 +4,15 @@
 // Сборка не падает без сети. Источники по порядку:
 //   1) свежий курс cbr-xml-daily.ru (сохраняется и в кэш);
 //   2) последний сохранённый курс — кэш вне git: .cache/fx-rate.json (FX_CACHE — другой путь);
-//   3) зашитый резервный курс FALLBACK_FX ниже (с датой) — обновлять изредка.
+//   3) зашитый резервный курс FALLBACK_FX из lib/fx.js (с датой) — обновлять изредка.
 // В лог пишется, какой источник использован.
 const fs = require('fs');
 const path = require('path');
-const { fetchCbrEur, isFxRate } = require('./lib/fx.js');
+const { fetchCbrEur, isFxRate, FALLBACK_FX } = require('./lib/fx.js');
 
 const root = path.join(__dirname, '..');
 const out = path.join(root, 'src', 'data', 'fx-rate.json');
 const cacheFile = process.env.FX_CACHE ? path.resolve(process.env.FX_CACHE) : path.join(root, '.cache', 'fx-rate.json');
-
-/** Резервный курс ЦБ на случай, когда нет ни сети, ни кэша. */
-const FALLBACK_FX = { eurRub: 93.0417, date: '2026-10-21' };
 
 function readRate(file) {
   try {
@@ -45,7 +42,7 @@ function write(file, rate) {
       [readRate(out), 'прежний src/data/fx-rate.json'],
     ].filter(([rate]) => rate);
     candidates.sort((a, b) => b[0].date.localeCompare(a[0].date));
-    const [rate, source] = candidates[0] ?? [FALLBACK_FX, 'зашитый резервный курс (scripts/fetch-cbr-rate.cjs)'];
+    const [rate, source] = candidates[0] ?? [FALLBACK_FX, 'зашитый резервный курс (scripts/lib/fx.js)'];
     write(out, rate);
     console.warn(`⚠ Курс ЦБ недоступен (${e.message}) — использован ${source}: 1 € = ${rate.eurRub} ₽ на ${rate.date}`);
   }

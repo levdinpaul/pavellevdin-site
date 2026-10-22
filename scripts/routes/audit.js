@@ -4,6 +4,7 @@ const path = require('path');
 const { sendTelegramMessage } = require('../lib/telegram');
 const { createRateLimiter, clientIp } = require('../lib/rate-limit');
 const { sendMail, leadMailbox, mailConfigured } = require('../lib/mailer');
+const { reportText, clientMail, labelRu } = require('../lib/audit-i18n');
 const { forwardLead } = require('../lib/platform');
 const { auditSite } = require('../lib/site-audit');
 const { getEnv } = require('../lib/env');
@@ -22,20 +23,6 @@ const MIN_FILL_MS = 4000;
 const enabled = () => getEnv('AUDIT_ENABLED', 'true') !== 'false';
 const clip = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-const LABELS = {
-  status: 'Ответ сервера', https: 'HTTPS', httpRedirect: 'Редирект http → https', responseTime: 'Время ответа', redirects: 'Цепочка редиректов',
-  hsts: 'HSTS', xcto: 'X-Content-Type-Options', csp: 'Content-Security-Policy', referrer: 'Referrer-Policy',
-  title: 'Title', description: 'Meta description', h1: 'H1', canonical: 'Canonical', indexable: 'Индексация', lang: 'Язык страницы',
-  og: 'Open Graph', schema: 'Schema.org', alt: 'Alt у картинок', viewport: 'Мобильный viewport', htmlSize: 'Вес HTML',
-  robots: 'robots.txt', sitemap: 'sitemap.xml', pagespeed: 'PageSpeed (моб.)',
-};
-const mark = (ok) => (ok === true ? '✅' : ok === false ? '⚠️' : '—');
-
-function reportText(r) {
-  const lines = r.checks.map((c) => `${mark(c.ok)} ${LABELS[c.id] || c.id}: ${c.value}${c.ok === false && c.hint ? ` — ${c.hint}` : ''}`);
-  return [`Экспресс-аудит ${r.url}`, `Итог: ${r.score}% проверок пройдено`, '', ...lines].join('\n');
-}
 
 // GET /api/audit/status — включён ли аудит (форма на сайте показывается только при true)
 router.get('/status', (req, res) => res.json({ enabled: enabled() }));
@@ -79,7 +66,7 @@ router.post('/', limiter, async (req, res) => {
     console.error('Не удалось записать аудит:', err.message);
   }
 
-  const failed = report.checks.filter((c) => c.ok === false).map((c) => LABELS[c.id] || c.id);
+  const failed = report.checks.filter((c) => c.ok === false).map((c) => labelRu(c.id));
   try {
     await sendTelegramMessage([
       `🔎 <b>Заявка на аудит</b> — ${esc(report.url)}`,
@@ -96,7 +83,8 @@ router.post('/', limiter, async (req, res) => {
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
   try {
     if (mailConfigured()) {
-      if (isEmail) await sendMail({ to: contact, subject: `Экспресс-аудит ${new URL(report.url).host} — Innovativ Digitalbau`, text: `${reportText(report)}\n\nВопросы — ответьте на это письмо или в Telegram @PavelLevdin.\nPavel Levdin · Innovativ Digitalbau · pavellevdin.ru`, replyTo: leadMailbox(lang) });
+      // Клиенту — на языке формы (ru/de/en); копия на ящик заявок — ru
+      if (isEmail) await sendMail({ to: contact, ...clientMail(report, lang), replyTo: leadMailbox(lang) });
       await sendMail({ to: leadMailbox(lang), subject: `Аудит: ${report.url}`, text: `${contact}\n\n${reportText(report)}`, replyTo: isEmail ? contact : undefined });
     }
   } catch (err) {
