@@ -13,7 +13,8 @@ import { fileURLToPath } from 'node:url';
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(path.join(root, 'package.json'));
 // puppeteer ≥ 24: executablePath() асинхронный — без await в --chrome-path попадал «[object Promise]»
-const chrome = await require('puppeteer').executablePath();
+// CHROME_PATH — свой Chrome (на Windows Chrome for Testing из puppeteer под Lighthouse 12 зависает — берите системный)
+const chrome = process.env.CHROME_PATH || await require('puppeteer').executablePath();
 const out = path.join(root, 'src', 'data', 'pagespeed.json');
 const RUNS = 3;
 const LH = process.env.LIGHTHOUSE_CLI;
