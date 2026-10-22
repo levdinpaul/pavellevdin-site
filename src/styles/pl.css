@@ -343,6 +343,8 @@
 .pl-case-grid .pl-eyebrow { margin-bottom: 10px; }
 .pl-case-text { margin: 0; font: 400 16px/1.6 var(--font-body); color: var(--ink-2); }
 .pl-case-stack { margin-top: 24px; }
+.pl-case-services { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 8px 0 0; padding: 0; list-style: none; }
+.pl-case-services a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .pl-gallery { display: grid; grid-template-columns: 1fr 260px; align-items: start; gap: 20px; }
 .pl-gallery figure { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; }
 .pl-gallery img { display: block; width: 100%; height: auto; }
