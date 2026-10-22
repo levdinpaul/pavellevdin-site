@@ -52,5 +52,9 @@ scripts/fx-cache.json
 # Пересоздаются при npm run build:static (check-projects.cjs, fetch-cbr-rate.cjs)
 src/data/fx-rate.json
 src/data/projects-status.json
+# Генерируется при сборке (generate-sitemap.cjs → public/ → dist/)
+public/sitemap.xml
+# Карта бандла (ANALYZE=1)
+stats.html
 .cache/
 .playwright-mcp/
