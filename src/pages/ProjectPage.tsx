@@ -118,7 +118,7 @@ export function ProjectPage() {
                 <p className="pl-eyebrow pl-case-stack">{t('pl.project.services')}</p>
                 <ul className="pl-case-services">
                   {services.map((s) => (
-                    <li key={s}><Link to={`/${lang}/services/${s}`} viewTransition>{LANDING_INDEX[s].h1[lang as 'ru' | 'de' | 'en']} →</Link></li>
+                    <li key={s}><Link to={`/${lang}/services/${s}`} viewTransition>{LANDING_INDEX[s].h1[lang as 'ru' | 'de' | 'en']}{' '}→</Link></li>
                   ))}
                 </ul>
               </>
