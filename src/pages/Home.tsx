@@ -1,6 +1,6 @@
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { HomeScena } from '@/sections/scena/HomeScena';
+import { PageMeta } from '@/components/pl/PageMeta';
 
 export function Home() {
   const { i18n } = useTranslation();
@@ -26,7 +26,7 @@ export function Home() {
     name: 'Innovativ Digitalbau',
     founder: { '@type': 'Person', name: 'Pavel Levdin' },
     url: `${baseUrl}/${lang}`,
-    image: `${baseUrl}/og-image.jpg`,
+    image: `${baseUrl}${lang === 'de' ? '/og-image-de.jpg' : lang === 'en' ? '/og-image-en.jpg' : '/og-image.jpg'}`,
     logo: `${baseUrl}/brand/logo-1200.png`,
     areaServed: ['Germany', 'Europe', 'Russia'],
     knowsAbout: [
@@ -46,27 +46,8 @@ export function Home() {
 
   return (
     <>
-      <Helmet>
-        <html lang={lang} />
-        <title>{titles[lang]}</title>
-        <meta name="description" content={descriptions[lang]} />
-        <meta
-          name="keywords"
-          content="Innovativ Digitalbau, web development, SEO, AEO, AI search optimization, Google Business Profile, React developer, Hannover web developer, автоматизация бизнеса, разработка сайтов"
-        />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <meta name="author" content="Pavel Levdin" />
-        <meta property="og:title" content={titles[lang]} />
-        <meta property="og:description" content={descriptions[lang]} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${baseUrl}/${lang}`} />
-        <meta property="og:image" content={`${baseUrl}/og-image.png`} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={titles[lang]} />
-        <meta name="twitter:description" content={descriptions[lang]} />
-        <link rel="canonical" href={`${baseUrl}/${lang}`} />
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      </Helmet>
+      {/* OG/twitter-картинка по языку, canonical и hreflang — из PageMeta; keywords/author — в index.html */}
+      <PageMeta lang={lang} path="" title={titles[lang]} description={descriptions[lang]} jsonLd={jsonLd} />
 
       <HomeScena />
     </>
