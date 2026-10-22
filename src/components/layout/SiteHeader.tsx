@@ -134,11 +134,12 @@ export function SiteHeader() {
   const contact: NavItem = { to: `/${lang}/contact`, label: t('pl.nav.contact'), match: '/contact' };
   const brief: NavItem = { to: `/${lang}/brief`, label: t('pl.nav.brief'), match: '/brief' };
   const card: NavItem = { to: `/${lang}/business-card`, label: t('pl.nav.card'), match: '/business-card' };
+  const review: NavItem = { to: `/${lang}/review`, label: t('pl.clients.leave'), match: '/review' };
   // Калькулятор в основной строке с 1360px, уже — в «Ещё» (переключение в pl.css)
   const primary: NavItem[] = [about, portfolio, services, blog, { ...calc, className: 'pl-nav__wide' }, contact];
   const more: NavItem[] = [{ ...calc, className: 'pl-more__narrow' }, brief, card];
   // Мобильное меню — все страницы футера (кабинет — кнопкой «Войти/Кабинет» вверху)
-  const mobile: NavItem[] = [about, services, portfolio, blog, brief, calc, card, contact];
+  const mobile: NavItem[] = [about, services, portfolio, blog, brief, calc, card, contact, review];
   const isActive = (match: string | null) => match !== null && location.pathname.startsWith(`/${lang}${match}`);
   const moreActive = more.some((l) => isActive(l.match));
 
