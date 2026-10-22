@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const FormData = require('form-data');
+const { telegramCall } = require('./lib/telegram');
 
 // ================= CONSTANTS =================
 const VK_API_VERSION = '5.199';
@@ -73,10 +74,8 @@ async function checkImage(url) {
 
 // ================= TELEGRAM =================
 async function sendTelegram(photoUrl, caption) {
-  const url = photoUrl
-    ? `https://api.telegram.org/bot${TOKEN}/sendPhoto`
-    : `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
+  // Через TELEGRAM_API_BASE / TELEGRAM_RELAY_KEY (lib/telegram.js) — с russh api.telegram.org напрямую недоступен
+  const method = photoUrl ? 'sendPhoto' : 'sendMessage';
   const data = photoUrl
     ? {
         chat_id: CHAT_ID,
@@ -92,10 +91,9 @@ async function sendTelegram(photoUrl, caption) {
 
   for (let i = 0; i < 3; i++) {
     try {
-      const res = await axios.post(url, data);
-      return res.data;
+      return await telegramCall(method, data, { token: TOKEN });
     } catch (err) {
-      log(`⚠️ Telegram retry ${i + 1}`);
+      log(`⚠️ Telegram retry ${i + 1}: ${err.message}`);
       await new Promise(r => setTimeout(r, 2000));
     }
   }

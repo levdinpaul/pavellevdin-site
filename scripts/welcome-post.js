@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
+const { telegramCall } = require('./lib/telegram');
 
 const scriptDir = __dirname;
 const projectRoot = path.join(scriptDir, '..');
@@ -85,49 +85,15 @@ if (!text || text.trim().length === 0) {
 console.log('📨 Отправка приветственного поста...');
 console.log(`📊 Длина текста: ${text.length} символов`);
 
-// HTTP запрос
-const data = JSON.stringify({
+// Через TELEGRAM_API_BASE / TELEGRAM_RELAY_KEY (lib/telegram.js) — с russh api.telegram.org напрямую недоступен
+telegramCall('sendMessage', {
   chat_id: CHAT_ID,
   text: text,
   parse_mode: 'HTML',
   disable_web_page_preview: false
-});
-
-const options = {
-  hostname: 'api.telegram.org',
-  port: 443,
-  path: `/bot${TOKEN}/sendMessage`,
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Content-Length': Buffer.byteLength(data)
-  }
-};
-
-const req = https.request(options, (res) => {
-  let responseData = '';
-
-  res.on('data', (chunk) => {
-    responseData += chunk;
-  });
-
-  res.on('end', () => {
-    try {
-      const result = JSON.parse(responseData);
-      if (result.ok) {
-        console.log('✅ Пост успешно опубликован!');
-      } else {
-        console.error('❌ Ошибка Telegram:', result.description);
-      }
-    } catch (e) {
-      console.error('❌ Ошибка парсинга ответа:', responseData);
-    }
-  });
-});
-
-req.on('error', (error) => {
-  console.error('❌ Ошибка сети:', error.message);
-});
-
-req.write(data);
-req.end();
+}, { token: TOKEN })
+  .then((result) => {
+    if (result.ok) console.log('✅ Пост успешно опубликован!');
+    else console.error('❌ Ошибка Telegram:', result.description);
+  })
+  .catch((error) => console.error('❌', error.message));

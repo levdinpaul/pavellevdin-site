@@ -48,3 +48,22 @@ React 19 + Vite 7 + TypeScript + Tailwind 3.4 + react-i18next (ru / de / en) + �
 
 Прод — сервер russh, docker-сервис `pavellevdin`. Процедура (бэкап → atomic `mv dist` → restart → проверка → откат)
 описана в `.claude/CLAUDE.md`, раздел «Деплой».
+
+## Telegram через ретранслятор
+
+С russh `api.telegram.org` недоступен (таймаут), поэтому уведомления о лидах, отзывах и аудитах уходят через
+ретранслятор на немецком VPS:
+
+```
+stack-pavellevdin-1 ──http──▶ tg-relay:18081 (контейнер pl-tg-tunnel на russh, SSH-туннель;
+                                              ключ ограничен permitopen="127.0.0.1:18081")
+                     ──ssh──▶ VPS: pl-tg-relay (nginx 127.0.0.1:18081, пускает только с X-Relay-Key)
+                     ──https─▶ api.telegram.org
+```
+
+- Код: все вызовы Bot API — через `scripts/lib/telegram.js` (`telegramApiUrl(method)`, `telegramCall()`), таймаут 10 с,
+  в тексте ошибки нет токена.
+- Переменные (`.env`, образец — `.env.example`): `TELEGRAM_API_BASE` (по умолчанию `https://api.telegram.org`;
+  на проде `http://tg-relay:18081`), `TELEGRAM_RELAY_KEY` (если задан — заголовок `X-Relay-Key`).
+- Файлы туннеля и шаблон конфига ретранслятора лежат в репозитории pl-platform: `infra/russh/`, `infra/vps/tg-relay.conf.example`.
+- Проверка с сервера: `docker exec stack-pavellevdin-1 node -e "…getMe…"` → 200 и имя бота.
