@@ -87,6 +87,12 @@ B6. **Прочее:**
 - опционально заголовок `X-Relay-Key` из `TELEGRAM_RELAY_KEY` (если задан) — ретранслятор пускает только с ним;
 - таймаут 10 с и понятная ошибка в лог (без токена в тексте ошибки);
 - `.env.example` / README обоих репо — описать переменные.
+- **Инфраструктура уже поднята (2026-10-22, Claude в claude.ai):** на VPS контейнер `pl-tg-relay` (nginx, 127.0.0.1:18081, проверка `X-Relay-Key`,
+  конфиг `~claudeuser/pl-tg-relay/relay.conf`); на russh `platform/docker-compose.override.yml` + `platform/tg-tunnel/run.sh` — контейнер
+  `pl-tg-tunnel` (сервис `tg-relay`, сети default + stack_web), SSH-ключ ограничен `permitopen="127.0.0.1:18081"`.
+  В `.env` сайта и платформы уже есть `TELEGRAM_API_BASE=http://tg-relay:18081` и `TELEGRAM_RELAY_KEY`. Проверено: getMe из
+  `stack-pavellevdin-1` и `pl-web` → 200 `PL_Innovativbau_bot`. Твоя часть — только код + описать схему в README платформы
+  (файлы override/run.sh скопировать с сервера в `infra/russh/`, конфиг ретранслятора — шаблоном `infra/vps/tg-relay.conf.example` без ключа).
 
 ## Пункты, которые ждут Pavel (НЕ выдумывать)
 - FAQ «Оплата и договор» — `TODO(Pavel)`, на главной из-за этого 5 вопросов вместо 6. Оставить скрытым, пока Pavel не даст текст.
