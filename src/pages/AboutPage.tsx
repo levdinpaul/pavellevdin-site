@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
-import { getContacts } from '@/constants/contacts';
+import { getContacts, getSameAs } from '@/constants/contacts';
 import { Counter } from '@/components/pl/Counter';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE } from '@/components/pl/seo';
@@ -44,7 +44,7 @@ export function AboutPage() {
       image: `${SITE}/about/photo-720.webp`,
       email: contacts.mailto,
       address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
-      sameAs: [contacts.telegram.url],
+      sameAs: getSameAs(),
       worksFor: { '@type': 'Organization', name: 'Innovativ Digitalbau', url: SITE, logo: `${SITE}/brand/logo-1200.png` },
     },
   };

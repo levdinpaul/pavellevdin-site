@@ -589,8 +589,8 @@
           "a": "“From” prices are on the services page and in the calculator. The final price depends on scope and is fixed in the contract before work starts."
         },
         {
-          "q": "How do payment and contract work?",
-          "a": "TODO(Pavel): payment procedure, invoicing and contract form for clients in Germany and Russia."
+          "q": "How does payment work, and is there a contract?",
+          "a": "Yes, I always work under a contract that fixes the scope, timeline and price — so both sides are protected. Payment is split in half: 50% before the start, 50% after delivery and your acceptance. I divide larger projects into phases, and you accept and pay for each phase separately — you only pay for the next one once you are happy with the previous one. Revisions within the agreed scope are included in the price. Companies receive a proper invoice and an acceptance certificate."
         },
         {
           "q": "What do you need from me to start?",
@@ -661,6 +661,9 @@
         "sitemap": "sitemap.xml",
         "pagespeed": "PageSpeed (mobile) of 80+"
       }
+    },
+    "rail": {
+      "label": "Social networks"
     },
     "fab": {
       "open": "Contact",
