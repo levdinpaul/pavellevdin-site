@@ -6,7 +6,12 @@
 ---
 
 ## 0. Ждут решения / действий Pavel (НЕ выдумывать)
-- [ ] **FAQ «Оплата и договор»** — ответ `TODO(Pavel)` в `pl.faq` (на главной из-за этого 5 вопросов вместо 6, вопрос скрыт).
+- [ ] **Ссылки соцсетей** VK / Дзен / GitHub / RuTube — прислать; вписать в `CHANNELS` (`src/constants/contacts.ts`), панель
+  и `sameAs` подхватят сами. Сейчас в панели: Telegram, WhatsApp, YouTube, почта.
+- [ ] FAQ de: «die nächste Phase zahlen Sie erst, wenn Sie mit der vorherigen zufrieden sind» — лектор советует для DE (фаза 2)
+  юридически безопаснее «…erst nach Abnahme der vorherigen» (UWG: «zufrieden» читается как гарантия). Решить до запуска .de.
+- [ ] Фаза 2 (DE): Impressum ссылается на § 5 DDG, а он требует ladungsfähige Anschrift — с решением «адрес инкогнито»
+  несовместимо. До запуска .de — c/o-адрес/Impressum-Service или решение юриста (pl-legal-de).
 - [ ] **USt-Hinweis** для de/en цен: ключ `pl.prices.vatNote` («Umsatzsteuer-Hinweis folgt» — заглушка), статус налога (Kleinunternehmer §19?).
 - [ ] **Почта info@pavellevdin.ru**: MX — HostLand; ящик создаётся в панели HostLand. Отправка писем (лиды, аудит, отзывы)
   готова в коде (`scripts/lib/mailer.js`), выключена, пока в серверном `.env` нет `SMTP_HOST` (+ `SMTP_PORT`, `SMTP_FROM`,
@@ -22,11 +27,7 @@
 - [ ] **PDF-отчёт экспресс-аудита** (сейчас клиенту уходит текстовое письмо на его языке) — отложено в аудите 10.
 - [ ] **CSP → enforce**: сейчас `Content-Security-Policy-Report-Only` + `/api/csp-report` (лог `[csp]`). Через 1–2 недели
   без нарушений в логах — переключить на `Content-Security-Policy`.
-- [ ] Ленивая подгрузка de/en локалей (≈12 КБ gzip в initial-чанке) — мобильный Lighthouse главной.
 - [ ] Факты PageSpeed на кейсах — `src/data/pagespeed.json`, перемер раз в квартал (`scripts/measure-pagespeed.mjs`, README).
-- [ ] OG-картинки кейсов/«Обо мне» — webp 1200×750 / 720×998; для соцсетей лучше jpg 1200×630.
-- [ ] Длины title/description: /ru/services title 73, calculator description ~185, imprint description короткий.
-- [ ] W3C-валидация en-страниц (в 07 упёрлись в лимит validator.w3.org).
 - [ ] Легаси на сервере: Passenger-`server.js` в корне app, `tmp/restart.txt`, fallback `htdocs/www` в `scripts/server.js`,
   старые файлы удалённых маршрутов в `scripts/routes|lib`, `/srv/sites/pavellevdin.ru/htdocs/www` (не трогать без решения Pavel).
 - [ ] Удалить на сервере старые `dist.bak-*` и `scripts/*.bak-*`, когда релиз стабилен.

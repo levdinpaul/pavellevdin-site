@@ -2,10 +2,10 @@
   "imprint": {
     "seo": {
       "title": "Imprint | Pavel Levdin",
-      "description": "Contact and legal information according to German law."
+      "description": "Legal notice and contact details: Pavel Levdin, web development, SEO and automation, based in Hannover, Germany. Reach me by e-mail or Telegram."
     },
     "title": "Imprint",
-    "legalNotice": "Information according to § 5 TMG",
+    "legalNotice": "Information according to § 5 DDG",
     "owner": "Owner",
     "ownerName": "Pavel Levdin",
     "address": "Address",
@@ -419,7 +419,7 @@
     },
     "calc": {
       "metaTitle": "Website cost calculator — price range and timeline | Pavel Levdin",
-      "metaDescription": "Estimate the cost of a website, online shop or web app: project type, pages, languages, CMS, blog, CRM, Telegram bot, AI, SEO and rush delivery. Price range and timeline in a minute.",
+      "metaDescription": "Estimate the cost of a website, shop or web app: project type, pages, languages, CMS, CRM, Telegram bot, AI and SEO. Price range and timeline in a minute.",
       "eyebrow": "Calculator",
       "title": "What your project costs",
       "lead": "Four steps: project type, pages, options — and right away a “from–to” range, the timeline and a breakdown. Prices come from the same price list as the services page.",
@@ -589,8 +589,8 @@
           "a": "“From” prices are on the services page and in the calculator. The final price depends on scope and is fixed in the contract before work starts."
         },
         {
-          "q": "How do payment and contract work?",
-          "a": "TODO(Pavel): payment procedure, invoicing and contract form for clients in Germany and Russia."
+          "q": "How does payment work, and is there a contract?",
+          "a": "Yes, I always work under a contract that fixes the scope, timeline and price — so both sides are protected. Payment is split in half: 50% before the start, 50% after delivery and your acceptance. I divide larger projects into phases, and you accept and pay for each phase separately — you only pay for the next one once you are happy with the previous one. Revisions within the agreed scope are included in the price. Companies receive a proper invoice and an acceptance certificate."
         },
         {
           "q": "What do you need from me to start?",
@@ -661,6 +661,9 @@
         "sitemap": "sitemap.xml",
         "pagespeed": "PageSpeed (mobile) of 80+"
       }
+    },
+    "rail": {
+      "label": "Social networks"
     },
     "fab": {
       "open": "Contact",

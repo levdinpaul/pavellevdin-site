@@ -1,5 +1,21 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-24 — промпт 11 «соц-панель, FAQ оплаты, SEO-хвосты» (ветка social-faq-11 → main, тег v12-social), НЕ выкачено
+- **A. Соц-панель** `components/pl/SocialRail.tsx` + `.pl-rail` (pl.css; мёртвый `.pl-social` удалён): fixed справа по центру, ≥1024 px;
+  на 1024–1279 поле `.pl-container` 68 px, чтобы панель не наезжала. ContactFab теперь только <1024 px. Каналы — `CHANNELS` в
+  `contacts.ts` (+youtube @PaulLevdin; vk/dzen/github/rutube пустые → не выводятся), `getSocialLinks`/`getSameAs`;
+  sameAs главной и About = Telegram + YouTube. Цель `social_click {network}` (data-social / youtube / vk) в `bindContactClickGoals`.
+- **B. FAQ** «Оплата и договор» — текст Pavel (ru), de вычитан pl-lektor-de (Ich-Form, «Phasen», «ordnungsgemäße Rechnung»), en — в Ich-Form;
+  фильтр TODO снят → 6 вопросов на главной и в FAQPage (ru/de/en проверено в пререндере).
+- **C.** title /ru/services 57; description калькулятора ≤160 (ru/de/en); описание реквизитов расширено; § 5 TMG → § 5 DDG.
+  Ленивые локали: de/en — отдельные чанки (`ensureLocale`/`setLanguage` в `i18n/index.ts`), main.tsx ждёт локаль пути до гидрации,
+  entry-server ждёт setLanguage; гонки/вход через «/» исправлены по code-review. OG: `npm run og` (scripts/build-og.cjs) →
+  `public/og/<slug>.jpg` + `about.jpg` 1200×630, check-projects падает без OG кейса. W3C: 30/30 en-страниц — 0 ошибок (validator.w3.org).
+  Метрика 108284704 не тронута.
+- Проверено: npm ci, build, build:static 90/90, lint — зелёные; puppeteer 1024/1280/1440/1920 + 390: панель не пересекает контент,
+  консоль чистая, переключение RU/EN/DE и «/» → /en, /de на нужном языке.
+- `src/data/posts.json` в рабочей копии меняет fetch-posts при сборке — не коммитился.
+
 ## Сессия 2026-10-22 — промпт 10 «исправления по аудиту 01–09b», сайт выкачен (тег v11-audit в обоих репо)
 - **Выкачено на сайт** (бэкап `dist.bak-2026-10-22-1911-pre10` + `scripts/{lib/telegram,routes/audit,lib/fx,notify-telegram,welcome-post}.js.bak-2026-10-22-1911-pre10`;
   `scripts/lib/audit-i18n.js` новый): 90/90 маршрутов 200, OG главной по языку, stats.html/og-image.png/manifest.json → 404, sitemap 91 URL,

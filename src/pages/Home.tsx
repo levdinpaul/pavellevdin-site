@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { HomeScena } from '@/sections/scena/HomeScena';
 import { PageMeta } from '@/components/pl/PageMeta';
+import { getSameAs } from '@/constants/contacts';
 
 export function Home() {
   const { i18n } = useTranslation();
@@ -41,7 +42,7 @@ export function Home() {
       'CRM automation',
       'API integrations',
     ],
-    sameAs: ['https://t.me/PavelLevdin'],
+    sameAs: getSameAs(),
   };
 
   return (

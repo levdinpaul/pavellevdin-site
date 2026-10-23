@@ -10,6 +10,7 @@ import { PlatformRedirect } from '@/components/PlatformRedirect';
 import { CookiePreloader } from '@/components/CookiePreloader';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
 import { loadAnalytics } from '@/lib/analytics';
+import { setLanguage } from '@/i18n';
 import './App.css';
 
 function ScrollToTop() {
@@ -37,9 +38,7 @@ function LangLayout() {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    if (lang && ['de', 'en', 'ru'].includes(lang) && i18n.language !== lang) {
-      i18n.changeLanguage(lang);
-    }
+    if (lang && ['de', 'en', 'ru'].includes(lang)) void setLanguage(lang);
   }, [i18n, lang]);
   
   // title/description/canonical — только на уровне страницы (PageMeta/Helmet страницы): с React 19 каждый уровень Helmet

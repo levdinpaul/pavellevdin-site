@@ -28,6 +28,32 @@ export function InstagramIcon({ size = 18 }: IconProps) {
   );
 }
 
+export function YouTubeIcon({ size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2.5" y="5" width="19" height="14" rx="4" />
+      <path d="M10 9.2v5.6l4.8-2.8L10 9.2Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function VkIcon({ size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12.8 18C6.4 18 2.7 13.6 2.5 6.3h3.2c.1 5.4 2.5 7.6 4.4 8.1V6.3h3v4.6c1.9-.2 3.8-2.3 4.5-4.6h3c-.5 2.8-2.6 4.9-4.1 5.8 1.5.7 3.9 2.6 4.8 5.9h-3.3c-.7-2.2-2.5-3.9-4.9-4.2V18h-.3Z" />
+    </svg>
+  );
+}
+
+export function MailIcon({ size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
 // Человек — «Кабинет» в шапке.
 export function UserIcon({ size = 16 }: IconProps) {
   return (

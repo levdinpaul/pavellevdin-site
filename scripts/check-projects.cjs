@@ -10,6 +10,13 @@ const projects = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'port
 const outFile = path.join(root, 'src', 'data', 'projects-status.json');
 const prev = fs.existsSync(outFile) ? JSON.parse(fs.readFileSync(outFile, 'utf8')) : {};
 
+// OG-картинка кейса (1200×630 jpg) обязательна — без неё соцсети покажут обрезанный кадр.
+const noOg = projects.filter((p) => !fs.existsSync(path.join(root, 'public', 'og', `${p.slug}.jpg`))).map((p) => p.slug);
+if (noOg.length) {
+  console.error(`❌ Нет OG-картинки для: ${noOg.join(', ')} — запустите npm run og`);
+  process.exit(1);
+}
+
 async function check(url) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 10000);

@@ -76,7 +76,8 @@ export function track(event: string, params?: Record<string, unknown>) {
 }
 
 let clicksBound = false;
-/** Клики по Telegram / WhatsApp / почте в любом месте сайта — один делегированный слушатель. */
+/** Клики по Telegram / WhatsApp / почте в любом месте сайта — один делегированный слушатель.
+ *  Ссылки соц-панели (data-social) и YouTube/VK дополнительно дают social_click { network }. */
 export function bindContactClickGoals() {
   if (clicksBound || typeof document === 'undefined') return;
   clicksBound = true;
@@ -84,6 +85,9 @@ export function bindContactClickGoals() {
     const a = (e.target as HTMLElement | null)?.closest?.('a[href]') as HTMLAnchorElement | null;
     if (!a) return;
     const href = a.getAttribute('href') || '';
+    const network = a.dataset.social
+      || (/^https:\/\/(www\.)?youtube\.com\//.test(href) ? 'youtube' : /^https:\/\/(www\.)?vk\.com\//.test(href) ? 'vk' : '');
+    if (network) track('social_click', { network });
     if (/^https:\/\/t\.me\//.test(href)) track('click_telegram');
     else if (/^https:\/\/wa\.me\//.test(href)) track('click_whatsapp');
     else if (href.startsWith('mailto:')) track('click_email');

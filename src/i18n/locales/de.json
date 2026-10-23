@@ -2,10 +2,10 @@
   "imprint": {
     "seo": {
       "title": "Impressum | Pavel Levdin",
-      "description": "Kontakt- und rechtliche Informationen gemäß § 5 TMG."
+      "description": "Impressum nach § 5 DDG: Pavel Levdin, Webentwicklung, SEO und Automatisierung, Hannover. Kontakt per E-Mail und Telegram."
     },
     "title": "Impressum",
-    "legalNotice": "Angaben gemäß § 5 TMG",
+    "legalNotice": "Angaben gemäß § 5 DDG",
     "owner": "Inhaber",
     "ownerName": "Pavel Levdin",
     "address": "Anschrift",
@@ -419,7 +419,7 @@
     },
     "calc": {
       "metaTitle": "Website-Kostenrechner — Preisrahmen und Zeitplan | Pavel Levdin",
-      "metaDescription": "Kosten für Website, Online-Shop oder Web-App berechnen: Projekttyp, Seiten, Mehrsprachigkeit, CMS, Blog, CRM, Telegram-Bot, KI, SEO und Express. Preisrahmen und Dauer in einer Minute.",
+      "metaDescription": "Kosten für Website, Online-Shop oder Web-App berechnen: Projekttyp, Seiten, Sprachen, CMS, CRM, Telegram-Bot, KI und SEO. Preisrahmen und Dauer in einer Minute.",
       "eyebrow": "Rechner",
       "title": "Was kostet Ihr Projekt",
       "lead": "Vier Schritte: Projekttyp, Seiten, Optionen — und sofort ein Preisrahmen „von–bis“, die Dauer und die Aufschlüsselung. Preise aus derselben Preisliste wie auf der Leistungsseite.",
@@ -589,8 +589,8 @@
           "a": "Ab-Preise stehen auf der Leistungsseite und im Kostenrechner. Der Endpreis hängt vom Umfang ab und wird vor Projektstart vertraglich festgelegt."
         },
         {
-          "q": "Wie laufen Zahlung und Vertrag?",
-          "a": "TODO(Pavel): Zahlungsablauf, Rechnungsstellung und Vertragsform für Kunden in Deutschland und Russland."
+          "q": "Wie läuft die Bezahlung ab und gibt es einen Vertrag?",
+          "a": "Ja, ich arbeite immer mit Vertrag: Darin halten wir Leistungsumfang, Zeitplan und Preis fest – so sind beide Seiten abgesichert. Bezahlt wird in zwei Raten: 50 % vor Projektstart, 50 % nach Fertigstellung und Ihrer Abnahme. Größere Projekte teile ich in Phasen auf, die Sie jeweils einzeln abnehmen und bezahlen – die nächste Phase zahlen Sie erst, wenn Sie mit der vorherigen zufrieden sind. Korrekturen innerhalb des vereinbarten Umfangs sind im Preis enthalten. Unternehmen erhalten eine ordnungsgemäße Rechnung und ein Abnahmeprotokoll."
         },
         {
           "q": "Was brauchen Sie von mir zum Start?",
@@ -661,6 +661,9 @@
         "sitemap": "Sitemap sitemap.xml",
         "pagespeed": "PageSpeed (mobil) ab 80"
       }
+    },
+    "rail": {
+      "label": "Soziale Netzwerke"
     },
     "fab": {
       "open": "Kontakt",

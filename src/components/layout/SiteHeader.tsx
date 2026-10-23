@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CommandMenu, type CommandLabels } from '@/components/ds/CommandMenu';
 import { startPointerEffects } from '@/lib/pointer-effects';
 import { bindContactClickGoals } from '@/lib/analytics';
+import { ensureLocale } from '@/i18n';
 import { useAuthFlag } from '@/hooks/useAuthFlag';
 import { isPlatformPath } from '@/lib/platform-paths';
 import { UserIcon } from './social-icons';
@@ -118,11 +119,18 @@ export function SiteHeader() {
     return () => { document.removeEventListener('pointerdown', onOutside); document.removeEventListener('focusin', onOutside); };
   }, [moreOpen]);
 
-  const switchLang = (next: Lang) => {
+  // Сначала догружаем пакет языка, потом навигация (язык ставит LangLayout). Устаревшие клики отбрасываем,
+  // путь берём актуальный — за время загрузки пользователь мог уйти на другую страницу.
+  const switchSeq = useRef(0);
+  const switchLang = async (next: Lang) => {
     if (next === lang) return;
-    i18n.changeLanguage(next);
-    const rest = location.pathname.replace(/^\/(ru|de|en)(?=\/|$)/, '');
-    navigate(`/${next}${rest || ''}${location.hash}`);
+    const id = ++switchSeq.current;
+    await ensureLocale(next);
+    if (id !== switchSeq.current) return;
+    const { pathname, hash } = window.location;
+    if (pathname.startsWith(`/${next}/`) || pathname === `/${next}`) return;
+    const rest = pathname.replace(/^\/(ru|de|en)(?=\/|$)/, '');
+    navigate(`/${next}${rest || ''}${hash}`);
   };
   const cycleLang = () => switchLang(LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length]);
 

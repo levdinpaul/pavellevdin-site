@@ -4,9 +4,8 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import enTranslations from './locales/en.json';
+// ru (фаза 1, fallback) — в стартовом бандле; de/en подгружаются отдельными чанками через ensureLocale().
 import ruTranslations from './locales/ru.json';
-import deTranslations from './locales/de.json';
 
 // Русские тексты для privacy и imprint (если их нет в ru.json)
 const ruPrivacy = {
@@ -58,10 +57,36 @@ const ruWithPrivacy = {
 };
 
 const resources = {
-  en: { translation: enTranslations },
   ru: { translation: ruWithPrivacy },
-  de: { translation: deTranslations },
 } as any;
+
+const loaders: Record<string, () => Promise<{ default: unknown }>> = {
+  de: () => import('./locales/de.json'),
+  en: () => import('./locales/en.json'),
+};
+
+/** Догружает ресурсы языка (de/en), если их ещё нет; true — пакет только что добавлен. Вызывать ДО гидрации/рендера. */
+export async function ensureLocale(lang: string): Promise<boolean> {
+  const load = loaders[lang];
+  if (!load || i18n.hasResourceBundle(lang, 'translation')) return false;
+  const mod = await load();
+  i18n.addResourceBundle(lang, 'translation', mod.default, true, true);
+  return true;
+}
+
+let langSeq = 0;
+/**
+ * Смена языка с предварительной загрузкой ресурсов — без кадра с fallback-текстами. Идемпотентна.
+ * Побеждает последний ВЫЗОВ (а не последняя загрузка): /ru → /en → «Назад» не оставит en на /ru.
+ * Детектор мог уже выставить язык без ресурсов (вход через «/») — после загрузки пакета changeLanguage
+ * вызываем и при совпадении языка: addResourceBundle сам компоненты не перерисовывает.
+ */
+export async function setLanguage(lang: string): Promise<void> {
+  const id = ++langSeq;
+  const fresh = await ensureLocale(lang);
+  if (id !== langSeq) return;
+  if (fresh || i18n.language !== lang) await i18n.changeLanguage(lang);
+}
 
 i18n
   .use(LanguageDetector)
@@ -70,11 +95,12 @@ i18n
     resources,
     fallbackLng: 'ru',
     debug: false,
-    // Ресурсы заданы инлайн (без async-backend), поэтому инициализируем СИНХРОННО
+    // Ресурсы ru заданы инлайн (без async-backend), поэтому инициализируем СИНХРОННО
     // и БЕЗ Suspense. Иначе при гидрации пререндера useTranslation() успевал «подвиснуть»
     // на async-init → клиент рендерил Suspense-fallback (спиннер) вместо контента →
     // hydration mismatch → React перерисовывал всё дерево → LCP скакал на момент гидрации
     // (~12.6s на мобиле). Синхронный init без Suspense убирает рассинхрон.
+    // de/en: main.tsx и entry-server ждут ensureLocale() до рендера — разметка совпадает с пререндером.
     initImmediate: false,
     react: {
       useSuspense: false,

@@ -38,15 +38,12 @@ export function ProcessSection() {
   );
 }
 
-/** Ответы-заглушки «TODO(Pavel)…» не показываем и не отдаём в FAQPage, пока Pavel их не заполнит. */
-const filled = (q: Qa) => !q.a.startsWith('TODO');
-
 /** FAQ: на главной 6 вопросов (short), на /services — все. JSON-LD FAQPage — по показанным вопросам. */
 export function FaqSection({ lang, full = false }: { lang: string; full?: boolean }) {
   const { t } = useTranslation();
   const base = t('pl.faq.items', { returnObjects: true }) as Qa[];
   const extra = full ? (t('pl.faq.extra', { returnObjects: true }) as Qa[]) : [];
-  const items = [...base, ...extra].filter(filled);
+  const items = [...base, ...extra];
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

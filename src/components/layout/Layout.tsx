@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { SiteHeader } from './SiteHeader';
 import { Footer } from './Footer';
 import { ContactFab } from '@/components/pl/ContactFab';
+import { SocialRail } from '@/components/pl/SocialRail';
 import { Children, Suspense, isValidElement, type ReactElement } from 'react';
 
 export interface LayoutProps {
@@ -65,6 +66,7 @@ export function Layout({ children }: LayoutProps) {
         <main id="main" tabIndex={-1} className="flex-1 flex flex-col">{children}</main>
         <Suspense fallback={null}><Footer /></Suspense>
       </div>
+      <SocialRail lang={lang} />
       <ContactFab lang={lang} />
     </>
   );

@@ -19,11 +19,37 @@ const CHANNELS = {
   telegram: { url: 'https://t.me/PavelLevdin', handle: '@PavelLevdin' },
   whatsapp: { url: 'https://wa.me/4917643141306' },
   instagram: '',
+  youtube: 'https://www.youtube.com/@PaulLevdin',
+  vk: '',
+  dzen: '',
+  github: '',
+  rutube: '',
 } as const;
 
 export function getContacts(lang: string) {
   const email = getEmail(lang);
   return { ...CHANNELS, email, mailto: `mailto:${email}` };
+}
+
+export type SocialNetwork = 'telegram' | 'whatsapp' | 'youtube' | 'vk' | 'email';
+
+/** Каналы для соц-панели в порядке показа; пустые пропускаются. */
+export function getSocialLinks(lang: string): { network: SocialNetwork; label: string; url: string }[] {
+  const c = getContacts(lang);
+  const all: { network: SocialNetwork; label: string; url: string }[] = [
+    { network: 'telegram', label: 'Telegram', url: c.telegram.url },
+    { network: 'whatsapp', label: 'WhatsApp', url: c.whatsapp.url },
+    { network: 'youtube', label: 'YouTube', url: c.youtube },
+    { network: 'vk', label: 'VK', url: c.vk },
+    { network: 'email', label: 'E-mail', url: c.mailto },
+  ];
+  return all.filter((x) => x.url);
+}
+
+/** Публичные профили для JSON-LD sameAs — только непустые (без мессенджера с номером и почты). */
+export function getSameAs(): string[] {
+  const { telegram, youtube, vk, dzen, github, rutube, instagram } = CHANNELS;
+  return [telegram.url, youtube, vk, dzen, github, rutube, instagram].filter(Boolean) as string[];
 }
 
 export type Contacts = ReturnType<typeof getContacts>;

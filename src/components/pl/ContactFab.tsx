@@ -5,7 +5,7 @@ import { getContacts } from '@/constants/contacts';
 import { TelegramIcon, WhatsAppIcon } from '@/components/layout/social-icons';
 
 /**
- * Плавающая кнопка связи: Telegram / WhatsApp / форма. На главной скрыта, пока виден hero (первый экран);
+ * Плавающая кнопка связи (только <1024 px — на desktop SocialRail): Telegram / WhatsApp / форма. На главной скрыта, пока виден hero (первый экран);
  * не показывается на страницах с формой (контакты, бриф) и прячется, когда в кадре CTA-блок (#contact).
  */
 export function ContactFab({ lang }: { lang: string }) {

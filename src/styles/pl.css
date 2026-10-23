@@ -100,16 +100,23 @@
 @media (min-width: 560px) { .pl-menu__langs { display: none; } }
 @media (max-width: 419px) { .pl-logo__sub { display: none; } }
 
-/* соц-колонка справа — только на широких экранах */
-.pl-social { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 45; display: none; flex-direction: column; gap: 10px; }
-@media (min-width: 1290px) { .pl-social { display: flex; } }
-.pl-social a {
-  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
-  border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2);
-  background: var(--surface-glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  transition: transform 260ms var(--ease-pl), border-color 260ms, color 260ms;
+/* Соц-панель справа по центру — только desktop (на мобильном — ContactFab). z-index: выше секций, ниже шапки/⌘K/модалок. */
+.pl-rail { position: fixed; right: 12px; top: 50%; transform: translateY(-50%); z-index: 45; display: none; }
+@media (min-width: 1024px) { .pl-rail { display: block; } }
+.pl-rail ul {
+  display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 6px; list-style: none; max-width: 48px;
+  background: rgba(10,14,26,.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--line); border-radius: 999px;
 }
-.pl-social a:hover { transform: scale(1.12); border-color: var(--line-acc); color: var(--accent); }
+.pl-rail a {
+  display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+  border-radius: 999px; color: var(--ink-2); transition: color 200ms var(--ease-pl), background-color 200ms var(--ease-pl);
+}
+.pl-rail a:hover { color: var(--accent); background: var(--accent-ghost); }
+.pl-rail a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .pl-rail a { transition: none; } }
+/* 1024–1279: поля контейнера (4vw) уже ширины панели — расширяем, чтобы панель не наезжала на текст */
+@media (min-width: 1024px) and (max-width: 1279px) { .pl-container { padding-inline: 68px; } }
 
 /* Раскладка действий используется также на странице обо мне. */
 .pl-hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
