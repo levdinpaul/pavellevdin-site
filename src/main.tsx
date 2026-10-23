@@ -22,7 +22,9 @@ const app = (
 // даём браузеру покрасить контент сразу, а интерактив «доезжает» в простое (cap 1.5s).
 // Язык из пути: ресурсы de/en грузятся отдельным чанком — дожидаемся их до гидрации/рендера.
 const pathLang = /^\/(de|en|ru)(?=\/|$)/.exec(window.location.pathname)?.[1];
-const ready = pathLang ? setLanguage(pathLang).catch(() => {}) : Promise.resolve();
+const ready = pathLang
+  ? setLanguage(pathLang).catch((e) => console.error('[i18n] locale chunk failed', pathLang, e))
+  : Promise.resolve();
 
 if (rootElement.hasChildNodes()) {
   // startTransition: первичная гидрация идёт с time-slicing (как в Next.js) — React уступает поток

@@ -30,7 +30,9 @@ async function cases() {
 
 async function about() {
   const src = path.join(root, 'public', 'about', 'photo-720.webp');
-  const photo = await sharp(src).resize({ height: H }).toBuffer();
+  // Фото по высоте кадра; шире 560 px (горизонтальный исходник после `npm run photo`) — кадрируем, чтобы осталось место логотипу
+  let photo = await sharp(src).resize({ height: H }).toBuffer();
+  if ((await sharp(photo).metadata()).width > 560) photo = await sharp(photo).resize(560, H, { fit: 'cover' }).toBuffer();
   const { width } = await sharp(photo).metadata();
   // Тонкая акцентная линия слева от фото — в цвет --accent
   const line = Buffer.from(`<svg width="${W}" height="${H}"><rect x="${W - width - 1}" y="0" width="1" height="${H}" fill="#7AA2FF" fill-opacity="0.5"/></svg>`);

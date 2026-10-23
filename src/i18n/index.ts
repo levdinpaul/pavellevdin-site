@@ -65,18 +65,27 @@ const loaders: Record<string, () => Promise<{ default: unknown }>> = {
   en: () => import('./locales/en.json'),
 };
 
-/** Догружает ресурсы языка (de/en), если их ещё нет. Вызывать ДО гидрации/рендера и до changeLanguage. */
-export async function ensureLocale(lang: string): Promise<void> {
+/** Догружает ресурсы языка (de/en), если их ещё нет; true — пакет только что добавлен. Вызывать ДО гидрации/рендера. */
+export async function ensureLocale(lang: string): Promise<boolean> {
   const load = loaders[lang];
-  if (!load || i18n.hasResourceBundle(lang, 'translation')) return;
+  if (!load || i18n.hasResourceBundle(lang, 'translation')) return false;
   const mod = await load();
   i18n.addResourceBundle(lang, 'translation', mod.default, true, true);
+  return true;
 }
 
-/** Смена языка с предварительной загрузкой ресурсов — без кадра с fallback-текстами. */
+let langSeq = 0;
+/**
+ * Смена языка с предварительной загрузкой ресурсов — без кадра с fallback-текстами. Идемпотентна.
+ * Побеждает последний ВЫЗОВ (а не последняя загрузка): /ru → /en → «Назад» не оставит en на /ru.
+ * Детектор мог уже выставить язык без ресурсов (вход через «/») — после загрузки пакета changeLanguage
+ * вызываем и при совпадении языка: addResourceBundle сам компоненты не перерисовывает.
+ */
 export async function setLanguage(lang: string): Promise<void> {
-  await ensureLocale(lang);
-  if (i18n.language !== lang) await i18n.changeLanguage(lang);
+  const id = ++langSeq;
+  const fresh = await ensureLocale(lang);
+  if (id !== langSeq) return;
+  if (fresh || i18n.language !== lang) await i18n.changeLanguage(lang);
 }
 
 i18n
