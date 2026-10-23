@@ -36,8 +36,9 @@ export function PageMeta({ lang, path, title, description, image, jsonLd, noinde
       <meta property="og:url" content={url} />
       <meta property="og:image" content={imgUrl} />
       {/* 1200×630 — только у фирменных OG; у фото/скриншотов страницы размеры другие */}
-      {!image && <meta property="og:image:width" content="1200" />}
-      {!image && <meta property="og:image:height" content="630" />}
+      {/* Все OG-картинки — 1200×630 jpg (бренд: public/og-image*.jpg; кейсы и «Обо мне»: public/og/, npm run og) */}
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />

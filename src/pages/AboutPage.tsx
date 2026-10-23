@@ -51,7 +51,7 @@ export function AboutPage() {
 
   return (
     <>
-      <PageMeta lang={lang} path="/about" title={t('pl.aboutPage.metaTitle')} description={t('pl.aboutPage.metaDescription')} image="/about/photo-720.webp" jsonLd={jsonLd} />
+      <PageMeta lang={lang} path="/about" title={t('pl.aboutPage.metaTitle')} description={t('pl.aboutPage.metaDescription')} image="/og/about.jpg" jsonLd={jsonLd} />
 
       <div ref={root} className="pl-page">
         <section className="pl-container pl-about-hero">

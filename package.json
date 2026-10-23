@@ -16,6 +16,7 @@
     "preview": "vite preview",
     "preview:static": "node scripts/serve-static.cjs",
     "photo": "node scripts/build-photo.cjs",
+    "og": "node scripts/build-og.cjs",
     "fx": "node scripts/fetch-cbr-rate.cjs",
     "admin-server": "node scripts/server.js",
     "mail:test": "node scripts/mail-test.cjs"

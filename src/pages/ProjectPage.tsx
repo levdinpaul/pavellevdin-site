@@ -69,7 +69,7 @@ export function ProjectPage() {
 
   return (
     <>
-      <PageMeta lang={lang} path={path} title={`${p.title} — ${t('pl.project.metaSuffix')}`} description={copy.summary} image={img.desktop} jsonLd={jsonLd} />
+      <PageMeta lang={lang} path={path} title={`${p.title} — ${t('pl.project.metaSuffix')}`} description={copy.summary} image={`/og/${p.slug}.jpg`} jsonLd={jsonLd} />
       <div className="pl-readbar" aria-hidden="true"><div ref={bar} /></div>
 
       <div ref={root} className="pl-page pl-page--vt">
