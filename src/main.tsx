@@ -2,7 +2,7 @@ import React, { startTransition } from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
-import './i18n';
+import { setLanguage } from './i18n';
 import './index.css';
 
 const rootElement = document.getElementById('root')!;
@@ -20,15 +20,19 @@ const app = (
 // а гидрация React — самая тяжёлая задача при загрузке (~1.7s на 4× throttle мобиле) и,
 // запускаясь до первого paint, отодвигает LCP/FCP. Отложив её за requestIdleCallback,
 // даём браузеру покрасить контент сразу, а интерактив «доезжает» в простое (cap 1.5s).
+// Язык из пути: ресурсы de/en грузятся отдельным чанком — дожидаемся их до гидрации/рендера.
+const pathLang = /^\/(de|en|ru)(?=\/|$)/.exec(window.location.pathname)?.[1];
+const ready = pathLang ? setLanguage(pathLang).catch(() => {}) : Promise.resolve();
+
 if (rootElement.hasChildNodes()) {
   // startTransition: первичная гидрация идёт с time-slicing (как в Next.js) — React уступает поток
   // каждые ~5 мс, вместо одной длинной задачи (TBT); Suspense-границы гидрируются по отдельности.
-  const hydrate = () => startTransition(() => { ReactDOM.hydrateRoot(rootElement, app); });
+  const hydrate = () => { ready.then(() => startTransition(() => { ReactDOM.hydrateRoot(rootElement, app); })); };
   if ('requestIdleCallback' in window) {
     requestIdleCallback(hydrate, { timeout: 1500 });
   } else {
     setTimeout(hydrate, 200);
   }
 } else {
-  ReactDOM.createRoot(rootElement).render(app);
+  ready.then(() => ReactDOM.createRoot(rootElement).render(app));
 }

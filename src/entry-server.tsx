@@ -6,7 +6,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from '@/hooks/useTheme';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { AppRoutes } from './App';
-import i18n from './i18n';
+import { setLanguage } from './i18n';
 
 export interface RenderResult {
   html: string;
@@ -28,7 +28,7 @@ export interface RenderResult {
  * страницы с async-данными потребуют отдельной сериализации стейта (блог теперь на pl-platform).
  */
 export async function render(url: string, lang: string): Promise<RenderResult> {
-  await i18n.changeLanguage(lang);
+  await setLanguage(lang);
 
   const helmetContext: { helmet?: any } = {};
   const app = (

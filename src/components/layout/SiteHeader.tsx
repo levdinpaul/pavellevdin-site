@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CommandMenu, type CommandLabels } from '@/components/ds/CommandMenu';
 import { startPointerEffects } from '@/lib/pointer-effects';
 import { bindContactClickGoals } from '@/lib/analytics';
+import { setLanguage } from '@/i18n';
 import { useAuthFlag } from '@/hooks/useAuthFlag';
 import { isPlatformPath } from '@/lib/platform-paths';
 import { UserIcon } from './social-icons';
@@ -118,9 +119,9 @@ export function SiteHeader() {
     return () => { document.removeEventListener('pointerdown', onOutside); document.removeEventListener('focusin', onOutside); };
   }, [moreOpen]);
 
-  const switchLang = (next: Lang) => {
+  const switchLang = async (next: Lang) => {
     if (next === lang) return;
-    i18n.changeLanguage(next);
+    await setLanguage(next);
     const rest = location.pathname.replace(/^\/(ru|de|en)(?=\/|$)/, '');
     navigate(`/${next}${rest || ''}${location.hash}`);
   };

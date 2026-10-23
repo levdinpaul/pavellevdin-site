@@ -10,6 +10,7 @@ import { PlatformRedirect } from '@/components/PlatformRedirect';
 import { CookiePreloader } from '@/components/CookiePreloader';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
 import { loadAnalytics } from '@/lib/analytics';
+import { setLanguage } from '@/i18n';
 import './App.css';
 
 function ScrollToTop() {
@@ -38,7 +39,7 @@ function LangLayout() {
 
   useEffect(() => {
     if (lang && ['de', 'en', 'ru'].includes(lang) && i18n.language !== lang) {
-      i18n.changeLanguage(lang);
+      void setLanguage(lang);
     }
   }, [i18n, lang]);
   
