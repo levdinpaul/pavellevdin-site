@@ -744,7 +744,9 @@
       "retry": "Erneut versuchen",
       "telegram": "Per Telegram schreiben",
       "briefHint": "Größeres Projekt? Dann ist das Briefing praktischer.",
-      "briefLink": "Zum Briefing"
+      "briefLink": "Zum Briefing",
+      "cardTitle": "Digitale Visitenkarte",
+      "cardHint": "QR-Code, Telefon und „Kontakt speichern“"
     },
     "cardPage": {
       "title": "Digitale Visitenkarte | Pavel Levdin",

@@ -202,6 +202,14 @@ export function ContactPage() {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <Link to={`/${lang}/business-card`} data-social="card">
+                    <span className="pl-contact__icon">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1" /></svg>
+                    </span>
+                    <span><span className="pl-contact__ch-label">{c('cardHint')}</span><span className="pl-contact__ch-value">{c('cardTitle')}</span></span>
+                  </Link>
+                </li>
               </ul>
               <p className="pl-contact__meta"><span className="pl-contact__dot" aria-hidden="true" /><span>{c('reply')} ·</span><span>{c('city')}</span></p>
             </div>

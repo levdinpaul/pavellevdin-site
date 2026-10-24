@@ -746,7 +746,9 @@
       "retry": "Повторить",
       "telegram": "Написать в Telegram",
       "briefHint": "Большой проект? Удобнее заполнить бриф.",
-      "briefLink": "Открыть бриф"
+      "briefLink": "Открыть бриф",
+      "cardTitle": "Цифровая визитка",
+      "cardHint": "QR-код, телефон и «Сохранить контакт»"
     },
     "cardPage": {
       "title": "Цифровая визитка | Pavel Levdin",

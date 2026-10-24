@@ -744,7 +744,9 @@
       "retry": "Try again",
       "telegram": "Message on Telegram",
       "briefHint": "Bigger project? The brief is more convenient.",
-      "briefLink": "Open the brief"
+      "briefLink": "Open the brief",
+      "cardTitle": "Digital business card",
+      "cardHint": "QR code, phone and “Save contact”"
     },
     "cardPage": {
       "title": "Digital business card | Pavel Levdin",
