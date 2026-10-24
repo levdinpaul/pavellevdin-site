@@ -1,6 +1,12 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
-## Сессия 2026-10-24 — промпт 12 «форма контактов + цифровая визитка» (ветка contact-card-12 → main, тег v13-contact-card), НЕ выкачено
+## Сессия 2026-10-24 — промпт 12 «форма контактов + цифровая визитка» (ветка contact-card-12 → main, тег v13-contact-card), ВЫКАЧЕНО 2026-10-24 вечером
+- **ДЕПЛОЙ 2026-10-24** (по «деплой» Pavel): main @ c55a331 (+ de «Hannover, Deutschland»), build:static в контейнере claude.ai
+  (`PUPPETEER_SKIP_DOWNLOAD=1 PUPPETEER_EXECUTABLE_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome`), 90/90 маршрутов,
+  доставка tar → временная ветка → VPS → russh. Бэкап прода: `dist.bak-2026-10-24-v13`. Файлы верификации Яндекс/Google/Bing сохранены.
+  Проверено curl: все /ru,/de,/en из sitemap = 200, /business-card noindex и вне sitemap, tel: только на визитке, POST /api/lead → 400 (валидация согласия).
+  Не проверено (нужен телефон): импорт .vcf iOS/Android, tel:, QR камерой, «Поделиться», реальная доставка заявки в Telegram.
+  Временные ветки deploy-* удалены. Из песочницы russh-MCP нельзя `chown`/`cp -p`/docker — рестарт сервиса только через `ssh russh` с VPS.
 - **A. /contact** переписан на классы PL (`.pl-contact*` в pl-extra.css, блок «12»), строки — `pl.contactPage` (3 локали).
   RHF + Zod v4 (`mode: onTouched`), ошибки — ключи `pl.contactPage.errors.*`; поле «контакт» = почта / @ник ≥5 / t.me·wa.me·vk.com /
   номер ≥7 цифр. Бюджет — `pricing.json → budgets.ru [100000, 300000]` + `budgetBounds()` (de/en → € по курсу ЦБ), уходит в лид строкой.
