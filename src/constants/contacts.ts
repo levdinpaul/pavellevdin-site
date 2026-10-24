@@ -1,5 +1,6 @@
 // Единый источник контактов для шапки, футера, страниц и JSON-LD.
-// Телефон текстом не публикуется нигде: WhatsApp — только ссылкой-кнопкой.
+// Телефон текстом не публикуется нигде, кроме /business-card (решение Pavel 2026-10-24):
+// на остальных страницах WhatsApp — только ссылкой-кнопкой.
 // Пустая строка = канала нет, иконка/ссылка не выводится.
 
 /** Почта .de включается флагом VITE_DE_MAIL_READY=true после регистрации домена pavellevdin.de. */
@@ -15,12 +16,24 @@ export function getEmail(lang: string): string {
   return lang !== 'ru' && DE_MAIL_READY ? EMAILS.eu : EMAILS.ru;
 }
 
+/** Номер в международном формате без «+» — единственное место, где он записан (wa.me и PHONE строятся из него). */
+const MOBILE = '4917643141306';
+
+/**
+ * Телефон текстом — ТОЛЬКО для /business-card и файла контакта (.vcf) с неё.
+ * Не выводить в шапке, футере, «Контактах», выходных данных, JSON-LD, брифах.
+ */
+export const PHONE = {
+  display: `+${MOBILE.slice(0, 2)} ${MOBILE.slice(2, 5)} ${MOBILE.slice(5)}`,
+  tel: `+${MOBILE}`,
+} as const;
+
 const CHANNELS = {
   telegram: { url: 'https://t.me/PavelLevdin', handle: '@PavelLevdin' },
-  whatsapp: { url: 'https://wa.me/4917643141306' },
+  whatsapp: { url: `https://wa.me/${MOBILE}` },
   instagram: '',
   youtube: 'https://www.youtube.com/@PaulLevdin',
-  vk: '',
+  vk: 'https://vk.com/pavellevdin',
   dzen: '',
   github: '',
   rutube: '',

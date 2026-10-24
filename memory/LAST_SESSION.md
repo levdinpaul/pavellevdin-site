@@ -1,5 +1,24 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-24 — промпт 12 «форма контактов + цифровая визитка» (ветка contact-card-12 → main, тег v13-contact-card), НЕ выкачено
+- **A. /contact** переписан на классы PL (`.pl-contact*` в pl-extra.css, блок «12»), строки — `pl.contactPage` (3 локали).
+  RHF + Zod v4 (`mode: onTouched`), ошибки — ключи `pl.contactPage.errors.*`; поле «контакт» = почта / @ник ≥5 / t.me·wa.me·vk.com /
+  номер ≥7 цифр. Бюджет — `pricing.json → budgets.ru [100000, 300000]` + `budgetBounds()` (de/en → € по курсу ЦБ), уходит в лид строкой.
+  Экран успеха (фокус на заголовок, «Написать ещё» → фокус в «Имя»), ошибка сети — «Повторить» + Telegram. Согласие ПДн,
+  honeypot, `contact_submit`, `/api/lead` — как были. Фото — `/about/photo-480` 4:5. Мобильный порядок: заголовок → форма → контакты.
+- **B. /business-card**: телефон показан ТОЛЬКО здесь — `PHONE` в contacts.ts строится из единственной `MOBILE` (из неё же wa.me).
+  `noindex` (PageMeta), убрана из sitemap (88 URL), JSON-LD Person без телефона, sameAs = сайт + Telegram + YouTube + VK.
+  `vk: https://vk.com/pavellevdin` заполнен → иконка VK появилась и в SocialRail. QR — `qrcode` (ленивый чанк), `src/lib/qr.ts`,
+  уровень H, тихая зона 4, знак в центре 9×9 модулей; декодирован jsQR со страницы и с PNG. .vcf — `src/lib/vcard.ts` (CRLF,
+  X-SOCIALPROFILE + itemN.URL для Android, PHOTO base64 из нового `public/about/photo-vcard.jpg` 256², 7 КБ — его делает `npm run photo`).
+  PNG 1080×1920 — `src/lib/card-image.ts` (canvas, иконки/знак сняты с DOM карточки; строки WhatsApp на картинке нет, чтобы не дублировать номер).
+  Share → navigator.share, иначе «Скопировать ссылку»; печать — @media print, A4 на одну страницу, светлая.
+  `@types/qrcode` НЕ ставить: тянет Node-типы и ломает `setTimeout` (SceneSection) — свои типы в `src/types/qrcode.d.ts`.
+- **Фото**: в git лежало старое ч/б, на проде — новый цветной портрет; `public/about/photo-{480,720}.{avif,webp}` взяты с прода побайтно и закоммичены.
+- Проверено: npm ci, build, build:static 90/90, lint; puppeteer 1440/768/390 (ошибки, успех, сбой сети, de-бюджет), PDF печати,
+  .vcf (структура), QR. Ревью (reviewer) — блокеров нет, находки исправлены; de-строки вычитаны. **Не проверено на реальных
+  iOS/Android** (импорт .vcf, tel:, камера) и доставка лида в CRM/Telegram — нужен прод/телефон.
+
 ## Сессия 2026-10-24 — промпт 11 «соц-панель, FAQ оплаты, SEO-хвосты» (ветка social-faq-11 → main, тег v12-social), НЕ выкачено
 - **A. Соц-панель** `components/pl/SocialRail.tsx` + `.pl-rail` (pl.css; мёртвый `.pl-social` удалён): fixed справа по центру, ≥1024 px;
   на 1024–1279 поле `.pl-container` 68 px, чтобы панель не наезжала. ContactFab теперь только <1024 px. Каналы — `CHANNELS` в

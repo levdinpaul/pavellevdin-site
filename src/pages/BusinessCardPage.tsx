@@ -1,184 +1,203 @@
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PageMeta } from '@/components/pl/PageMeta';
-import { motion } from 'framer-motion';
-import { ArrowRight, Download, Globe2, Mail, MapPin, MessageCircle, Send, Share2, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { getContacts } from '@/constants/contacts';
+import { PageMeta } from '@/components/pl/PageMeta';
+import { SITE } from '@/components/pl/seo';
+import { QrCode } from '@/components/pl/QrCode';
+import { BrandMark } from '@/components/layout/BrandMark';
+import { GlobeIcon, MailIcon, PhoneIcon, PinIcon, TelegramIcon, VkIcon, WhatsAppIcon, YouTubeIcon } from '@/components/layout/social-icons';
+import { PHONE, getContacts, getSameAs, getSocialLinks, type SocialNetwork } from '@/constants/contacts';
+import { useQrMatrix } from '@/lib/qr';
+import { buildVcard, downloadBlob, fetchBase64 } from '@/lib/vcard';
 
-const copy = {
-  de: {
-    title: 'Online-Visitenkarte | Pavel Levdin',
-    desc: 'Online-Visitenkarte von Pavel Levdin: Webentwicklung, SEO, Google Business, Social Media und Automation.',
-    role: 'Web Coding, SEO, AI Search und digitale Business-Systeme',
-    h1: 'Pavel Levdin',
-    sub: 'Ich baue schnelle Websites, Web-Apps und komplette Online-Infrastrukturen für Unternehmen: Google Business, Social Media, Analytics, APIs, CRM und Automatisierung.',
-    project: 'Projekt starten',
-    brief: 'Konfigurator',
-    save: 'Kontakt speichern',
-    location: 'Hannover, Deutschland',
-    whatsapp: 'Nachricht in WhatsApp',
-  },
-  en: {
-    title: 'Online Business Card | Pavel Levdin',
-    desc: 'Online business card of Pavel Levdin: web development, SEO, Google Business, social media and automation.',
-    role: 'Web coding, SEO, AI Search and digital business systems',
-    h1: 'Pavel Levdin',
-    sub: 'I build fast websites, web apps and complete online infrastructure for businesses: Google Business, social media, analytics, APIs, CRM and automation.',
-    project: 'Start project',
-    brief: 'Configurator',
-    save: 'Save contact',
-    location: 'Hannover, Germany',
-    whatsapp: 'Message on WhatsApp',
-  },
-  ru: {
-    title: 'Онлайн-визитка | Павел Левдин',
-    desc: 'Онлайн-визитка Павла Левдина: веб-разработка, SEO, Google Business, соцсети и автоматизация.',
-    role: 'Веб-кодинг, SEO, AI Search и цифровые системы для бизнеса',
-    h1: 'Павел Левдин',
-    sub: 'Создаю быстрые сайты, веб-приложения и полную онлайн-инфраструктуру для бизнеса: Google Business, соцсети, аналитику, API, CRM и автоматизацию.',
-    project: 'Запустить проект',
-    brief: 'Конфигуратор',
-    save: 'Сохранить контакт',
-    location: 'Ганновер, Германия',
-    whatsapp: 'Написать в WhatsApp',
-  },
+const SOCIAL_ICONS: Partial<Record<SocialNetwork, ReactNode>> = {
+  telegram: <TelegramIcon size={20} />,
+  whatsapp: <WhatsAppIcon size={20} />,
+  youtube: <YouTubeIcon size={20} />,
+  vk: <VkIcon size={20} />,
 };
+// Тип профиля для X-SOCIALPROFILE в .vcf
+const VCARD_TYPES: Partial<Record<SocialNetwork, string>> = { telegram: 'telegram', youtube: 'youtube', vk: 'vkontakte' };
 
-// vCard без телефона: связь — почта, Telegram и сайт.
-const vcardFor = (lang: string, email: string, telegram: string) => `BEGIN:VCARD
-VERSION:3.0
-N:Levdin;Pavel;;;
-FN:Pavel Levdin
-ORG:Innovativ Digitalbau
-TITLE:Web Developer / Digital Business Systems
-EMAIL:${email}
-URL:https://pavellevdin.ru/${lang}
-X-SOCIALPROFILE;TYPE=telegram:${telegram}
-ADR;TYPE=WORK:;;;Hannover;;;Germany
-END:VCARD`;
+const noopSubscribe = () => () => {};
 
+/**
+ * Цифровая визитка. Единственная страница, где телефон показан текстом (решение Pavel 2026-10-24),
+ * поэтому noindex, нет в sitemap, в JSON-LD телефона нет. QR, .vcf и PNG собираются в браузере.
+ */
 export function BusinessCardPage() {
-  const { i18n } = useTranslation();
-  const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'de') as keyof typeof copy;
-  const text = copy[lang];
+  const { t, i18n } = useTranslation();
+  const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
+  const c = (key: string) => t(`pl.cardPage.${key}`);
   const contacts = getContacts(lang);
-  const contactRows: [LucideIcon, string, string, string | null][] = [
-    [Send, 'Telegram', contacts.telegram.handle, contacts.telegram.url],
-    [MessageCircle, 'WhatsApp', text.whatsapp, contacts.whatsapp.url],
-    [Mail, 'Email', contacts.email, contacts.mailto],
-    [Globe2, 'Website', 'pavellevdin.ru', null],
-    [MapPin, 'Location', '', null],
-  ];
+  const pageUrl = `${SITE}/${lang}/business-card`;
+  const siteUrl = `${SITE}/${lang}`;
+  const social = getSocialLinks(lang).filter((s) => SOCIAL_ICONS[s.network]);
+  const qr = useQrMatrix(pageUrl);
+  const cardRef = useRef<HTMLElement>(null);
+  const canShare = useSyncExternalStore(noopSubscribe, () => typeof navigator.share === 'function', () => false);
+  const [notice, setNotice] = useState('');
+  const [busy, setBusy] = useState<'' | 'vcf' | 'image'>('');
+  // фото для .vcf грузим заранее: клик → скачивание без долгого await (iOS не теряет жест пользователя)
+  const photo = useRef<Promise<string | undefined> | null>(null);
+  useEffect(() => { photo.current = fetchBase64('/about/photo-vcard.jpg'); }, []);
 
-  const downloadVcard = () => {
-    const blob = new Blob([vcardFor(lang, contacts.email, contacts.telegram.url)], { type: 'text/vcard;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'pavel-levdin.vcf';
-    link.click();
-    URL.revokeObjectURL(url);
+  const flash = (text: string) => {
+    setNotice(text);
+    setTimeout(() => setNotice(''), 3000);
   };
 
-  const shareCard = async () => {
-    const shareData = {
-      title: text.title,
-      text: text.sub,
-      url: `https://pavellevdin.ru/${lang}/business-card`,
-    };
-    if (navigator.share) {
-      await navigator.share(shareData);
-    } else {
-      await navigator.clipboard.writeText(shareData.url);
+  const rows = [
+    { key: 'phone', icon: <PhoneIcon />, label: c('phone'), value: PHONE.display, href: `tel:${PHONE.tel}` },
+    { key: 'whatsapp', icon: <WhatsAppIcon />, label: 'WhatsApp', value: c('whatsappValue'), href: contacts.whatsapp.url },
+    { key: 'telegram', icon: <TelegramIcon />, label: 'Telegram', value: contacts.telegram.handle, href: contacts.telegram.url },
+    { key: 'email', icon: <MailIcon />, label: c('email'), value: contacts.email, href: contacts.mailto },
+    { key: 'site', icon: <GlobeIcon />, label: c('site'), value: 'pavellevdin.ru', href: siteUrl },
+    { key: 'city', icon: <PinIcon />, label: c('city'), value: c('cityValue'), href: null },
+  ];
+
+  const saveContact = async () => {
+    if (busy) return;
+    setBusy('vcf');
+    const vcf = buildVcard({
+      title: c('role'),
+      tel: PHONE.tel,
+      email: contacts.email,
+      site: siteUrl,
+      social: social.filter((s) => VCARD_TYPES[s.network]).map((s) => ({ label: s.label, type: VCARD_TYPES[s.network]!, url: s.url })),
+      photoBase64: await (photo.current ?? fetchBase64('/about/photo-vcard.jpg')),
+    });
+    downloadBlob(new Blob([vcf], { type: 'text/vcard;charset=utf-8' }), 'pavel-levdin.vcf');
+    setBusy('');
+  };
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+      flash(c('copied'));
+    } catch {
+      flash(c('copyError'));
     }
+  };
+
+  const share = async () => {
+    if (!canShare) return copyLink();
+    try {
+      await navigator.share({ title: c('title'), text: c('shareText'), url: pageUrl });
+    } catch (e) {
+      // закрытое окно «Поделиться» — не ошибка; остальные сбои → копируем ссылку
+      if ((e as Error).name !== 'AbortError') await copyLink();
+    }
+  };
+
+  const downloadImage = async () => {
+    const card = cardRef.current;
+    if (!card || busy) return;
+    setBusy('image');
+    try {
+      const svg = (sel: string) => card.querySelector(`${sel} svg`)?.outerHTML ?? '';
+      const { renderCardImage } = await import('@/lib/card-image');
+      const blob = await renderCardImage({
+        name: 'Pavel Levdin',
+        company: 'Innovativ Digitalbau',
+        role: c('role'),
+        mark: svg('.pl-vcard__mark'),
+        // на картинке ссылок нет: строка WhatsApp повторила бы номер — WhatsApp остаётся иконкой в ряду соцсетей
+        rows: rows.filter((r) => r.key !== 'whatsapp').map((r) => ({ icon: svg(`[data-row="${r.key}"] .pl-vcard__icon`), label: r.label, value: r.value })),
+        social: social.map((s) => svg(`[data-social="${s.network}"]`)),
+        photo: '/about/photo-720.webp',
+        qr,
+        qrHint: c('qrHint'),
+        qrUrl: pageUrl.replace('https://', ''),
+      });
+      downloadBlob(blob, 'pavel-levdin-card.png');
+    } catch {
+      flash(c('imageError'));
+    } finally {
+      setBusy('');
+    }
+  };
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Pavel Levdin',
+    jobTitle: c('role'),
+    url: siteUrl,
+    image: `${SITE}/about/photo-720.webp`,
+    worksFor: { '@type': 'Organization', name: 'Innovativ Digitalbau', url: SITE },
+    address: { '@type': 'PostalAddress', addressLocality: 'Hannover', addressCountry: 'DE' },
+    sameAs: [SITE, ...getSameAs()],
   };
 
   return (
     <>
-      <PageMeta lang={lang} path="/business-card" title={text.title} description={text.desc} />
+      <PageMeta lang={lang} path="/business-card" title={c('title')} description={c('desc')} image="/og/about.jpg" jsonLd={jsonLd} noindex />
 
-      <div className="min-h-screen bg-slate-950 pt-28 text-white">
-        <section className="relative overflow-hidden px-4 pb-20 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-dot-grid opacity-25" />
+      <div className="pl-page pl-vcard-page">
+        <section className="pl-container pl-vcard">
+          <p className="pl-eyebrow pl-vcard__eyebrow">{c('eyebrow')}</p>
 
-          <div className="relative mx-auto grid max-w-6xl gap-8 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
-            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}>
-              <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-bold text-cyan-100">
+          <article ref={cardRef} className="pl-vcard__card" aria-labelledby="vc-name">
+            <div className="pl-vcard__top">
+              <picture className="pl-vcard__photo">
+                <source type="image/avif" srcSet="/about/photo-480.avif" />
+                <img src="/about/photo-480.webp" width={480} height={666} alt={c('photoAlt')} decoding="async" />
+              </picture>
+              <span className="pl-vcard__mark"><BrandMark size={44} /></span>
+            </div>
+            <h1 id="vc-name" className="pl-vcard__name">Pavel Levdin</h1>
+            <p className="pl-vcard__company">Innovativ Digitalbau</p>
+            <p className="pl-vcard__role">{c('role')}</p>
 
-                Innovativ Digitalbau
-              </span>
-              <h1 className="text-5xl font-black leading-none md:text-7xl">{text.h1}</h1>
-              <p className="mt-4 text-xl font-semibold text-cyan-100/82">{text.role}</p>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/64">{text.sub}</p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button asChild className="h-12 w-full rounded-xl bg-cyan-300 px-6 font-black text-slate-950 hover:bg-cyan-200 sm:w-auto">
-                  <Link to={`/${lang}/contact`}>
-                    {text.project}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="h-12 w-full rounded-xl border-white/18 bg-white/[0.06] px-6 font-bold text-white hover:bg-white hover:text-slate-950 sm:w-auto">
-                  <Link to={`/${lang}/brief`}>
-                    {text.brief}
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 18 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-5 shadow-2xl backdrop-blur-2xl"
-            >
-              <div className="rounded-[1.5rem] border border-cyan-300/16 bg-slate-950/70 p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="grid h-16 w-16 place-items-center rounded-2xl border border-cyan-300/25 bg-cyan-300/12 text-2xl font-black text-cyan-100">
-                      PL
-                    </div>
-                    <h2 className="mt-5 text-3xl font-black">Pavel Levdin</h2>
-                    <p className="mt-1 text-cyan-100/70">Innovativ Digitalbau</p>
-                  </div>
-                  <button onClick={shareCard} className="rounded-xl border border-white/10 bg-white/[0.08] p-3 text-white/70 transition hover:bg-white/[0.12] hover:text-white" aria-label="Share">
-                    <Share2 className="h-5 w-5" />
-                  </button>
-                </div>
-
-                <div className="mt-7 grid gap-3">
-                  {contactRows.map(([Icon, label, rawValue, rawHref]) => {
-                    const value = label === 'Location' ? text.location : rawValue;
-                    const href = label === 'Website' ? `https://pavellevdin.ru/${lang}` : rawHref;
-                    const content = (
-                      <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.045] p-4 transition hover:bg-white/[0.07]">
-                        <span className="grid h-11 w-11 place-items-center rounded-xl bg-cyan-300/10 text-cyan-100">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        <span>
-                          <span className="block text-xs uppercase tracking-wide text-white/38">{String(label)}</span>
-                          <span className="block font-semibold text-white/82">{String(value)}</span>
-                        </span>
-                      </div>
-                    );
-                    return href ? (
-                      <a key={String(label)} href={String(href)} target={String(href).startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
-                        {content}
-                      </a>
+            <ul className="pl-vcard__rows">
+              {rows.map((r) => {
+                const body = (
+                  <>
+                    <span className="pl-vcard__icon">{r.icon}</span>
+                    <span className="pl-vcard__label">{r.label}</span>
+                    <span className="pl-vcard__value">{r.value}</span>
+                  </>
+                );
+                return (
+                  <li key={r.key} data-row={r.key}>
+                    {r.href ? (
+                      <a href={r.href} {...(r.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{body}</a>
                     ) : (
-                      <div key={String(label)}>{content}</div>
-                    );
-                  })}
-                </div>
+                      <div>{body}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
 
-                <Button onClick={downloadVcard} className="mt-5 h-12 w-full rounded-xl bg-white font-black text-slate-950 hover:bg-cyan-100">
-                  <Download className="mr-2 h-5 w-5" />
-                  {text.save}
-                </Button>
-              </div>
-            </motion.div>
-          </div>
+            <ul className="pl-vcard__social" aria-label={c('social')}>
+              {social.map((s) => (
+                <li key={s.network}>
+                  <a href={s.url} data-social={s.network} aria-label={s.label} title={s.label} target="_blank" rel="noopener noreferrer">
+                    {SOCIAL_ICONS[s.network]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <aside className="pl-vcard__side">
+            <figure className="pl-vcard__qr">
+              <div className="pl-vcard__qr-box">{qr && <QrCode matrix={qr} label={c('qrAlt')} />}</div>
+              <figcaption>{c('qrHint')}</figcaption>
+            </figure>
+            <div className="pl-vcard__actions">
+              <button type="button" className="pl-btn pl-btn--primary" onClick={saveContact} disabled={busy === 'vcf'}>{c('save')}</button>
+              <button type="button" className="pl-btn pl-btn--ghost" onClick={share}>{canShare ? c('share') : c('copy')}</button>
+              {canShare && <button type="button" className="pl-btn pl-btn--ghost" onClick={copyLink}>{c('copy')}</button>}
+              <button type="button" className="pl-btn pl-btn--ghost" onClick={downloadImage} disabled={busy === 'image' || !qr} aria-busy={busy === 'image'}>
+                {busy === 'image' ? c('imageBusy') : c('image')}
+              </button>
+              <p className="pl-vcard__copied" role="status" aria-live="polite">{notice}</p>
+            </div>
+            <Link to={`/${lang}/contact`} className="pl-link pl-vcard__project">{c('project')} →</Link>
+          </aside>
         </section>
       </div>
     </>

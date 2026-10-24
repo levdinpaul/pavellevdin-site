@@ -165,5 +165,6 @@
       "extraScreens": { "ru": "Дополнительные экраны", "de": "Zusätzliche Screens", "en": "Additional screens" }
     }
   },
+  "budgets": { "_comment": "Границы бюджета в форме /contact, ₽: «до 100 000», «100 000–300 000», «от 300 000» + «пока не знаю». de/en — пересчёт в € (rubToEur).", "ru": [100000, 300000] },
   "de_market": { "_todo": "Отдельный прайс для pavellevdin.de (рынок DE) — позже" }
 }

@@ -6,6 +6,7 @@
  * Чтобы заменить фото: положить новый файл как _design/photo-source.<ext> и запустить `npm run photo`.
  * Результат: public/about/photo-{480,720}.{avif,webp}, каждый файл ≤ 90 КБ
  * (качество подбирается автоматически). Ч/б исходник кодируется в оттенках серого (вид тот же, вес меньше).
+ * Плюс public/about/photo-vcard.jpg — квадрат 256×256 ≤ 30 КБ для PHOTO в .vcf визитки (/business-card).
  */
 const fs = require('fs');
 const path = require('path');
@@ -16,6 +17,7 @@ const srcDir = path.join(root, '_design');
 const outDir = path.join(root, 'public', 'about');
 const MAX_BYTES = 90 * 1024;
 const WIDTHS = [480, 720];
+const VCARD_MAX = 30 * 1024;
 
 const src = fs.readdirSync(srcDir).find((f) => /^photo-source\.(jpe?g|png|webp|avif)$/i.test(f));
 if (!src) {
@@ -45,6 +47,18 @@ async function encode(width, format, gray) {
       const file = path.join(outDir, `photo-${w}.${fmt}`);
       fs.writeFileSync(file, buf);
       console.log(`  ✓ ${path.relative(root, file)}  q=${q}  ${(buf.length / 1024).toFixed(0)} КБ`);
+    }
+  }
+  // vCard: квадрат по верхнему краю (лицо), JPEG — его понимают все телефоны
+  for (let q = 82; q >= 30; q -= 8) {
+    let img = sharp(path.join(srcDir, src)).resize({ width: 256, height: 256, fit: 'cover', position: 'top' });
+    if (gray) img = img.grayscale();
+    const buf = await img.jpeg({ quality: q, mozjpeg: true }).toBuffer();
+    if (buf.length <= VCARD_MAX || q - 8 < 30) {
+      const file = path.join(outDir, 'photo-vcard.jpg');
+      fs.writeFileSync(file, buf);
+      console.log(`  ✓ ${path.relative(root, file)}  q=${q}  ${(buf.length / 1024).toFixed(0)} КБ`);
+      break;
     }
   }
 })().catch((e) => { console.error('❌', e.message); process.exit(1); });

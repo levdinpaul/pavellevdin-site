@@ -6,8 +6,14 @@
 ---
 
 ## 0. Ждут решения / действий Pavel (НЕ выдумывать)
-- [ ] **Ссылки соцсетей** VK / Дзен / GitHub / RuTube — прислать; вписать в `CHANNELS` (`src/constants/contacts.ts`), панель
-  и `sameAs` подхватят сами. Сейчас в панели: Telegram, WhatsApp, YouTube, почта.
+- [ ] **Ссылки соцсетей** Дзен / GitHub / RuTube — прислать; вписать в `CHANNELS` (`src/constants/contacts.ts`), панель
+  и `sameAs` подхватят сами. Сейчас в панели: Telegram, WhatsApp, YouTube, VK, почта.
+- [ ] **Визитка (12) после деплоя — проверить с телефона**: импорт .vcf на iOS и Android (имя, компания, телефон, почта, сайт,
+  ссылки соцсетей), tel:/mailto:, QR камерой, «Поделиться»; `curl -s https://pavellevdin.ru/ru/business-card | grep robots` → noindex;
+  тестовая заявка с /contact доходит в CRM и Telegram.
+- [ ] Визитка: номер в пререндеренном HTML /business-card (noindex защищает от поиска, не от парсеров). Если станет проблемой —
+  выводить номер только на клиенте (после гидрации). Решение Pavel.
+- [ ] de-локаль: город на /contact и визитке — «Hannover, Germany» (дословно по промпту 12); лектор советует «Hannover, Deutschland».
 - [ ] FAQ de: «die nächste Phase zahlen Sie erst, wenn Sie mit der vorherigen zufrieden sind» — лектор советует для DE (фаза 2)
   юридически безопаснее «…erst nach Abnahme der vorherigen» (UWG: «zufrieden» читается как гарантия). Решить до запуска .de.
 - [ ] Фаза 2 (DE): Impressum ссылается на § 5 DDG, а он требует ladungsfähige Anschrift — с решением «адрес инкогнито»

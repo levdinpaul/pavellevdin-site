@@ -19,7 +19,7 @@ const pages = [
   ['/calculator', 'monthly', '0.85'],
   ['/contact', 'monthly', '0.85'],
   ['/blog', 'weekly', '0.75'],
-  ['/business-card', 'monthly', '0.6'],
+  // /business-card намеренно не в sitemap: на ней телефон, страница noindex (только для ссылки и QR)
 ];
 const projects = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'portfolio.json'), 'utf8'));
 for (const p of projects) pages.push([`/portfolio/${p.slug}`, 'monthly', '0.8']);

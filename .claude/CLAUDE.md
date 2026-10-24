@@ -22,7 +22,8 @@ Project-brief. Читается при работе в этом репозито
     Архитектуру держать мульти-рынок / мульти-домен ready (домен — через env-константу, а не хардкод).
 
 - Контакты: Telegram + email по локали — `getContacts(lang)` в `src/constants/contacts.ts` (ru → info@pavellevdin.ru,
-  de/en → info@pavellevdin.de при `VITE_DE_MAIL_READY=true` в `env/.env`). **Телефон нигде не публикуется** (WhatsApp — только кнопкой wa.me). Город: **Hannover** (с 2026-10-18; прежний город больше не используется).
+  de/en → info@pavellevdin.de при `VITE_DE_MAIL_READY=true` в `env/.env`). **Телефон нигде не публикуется** (WhatsApp — только кнопкой wa.me), кроме цифровой визитки `/business-card`
+  и её .vcf (решение Pavel 2026-10-24; `PHONE` в contacts.ts, страница noindex и вне sitemap, в JSON-LD телефона нет). Город: **Hannover** (с 2026-10-18; прежний город больше не используется).
   Адрес — ИНКОГНИТО (решение Pavel 2026-10-18): улицу/индекс не публиковать нигде, только «Hannover, Germany».
 
 ## Стек
