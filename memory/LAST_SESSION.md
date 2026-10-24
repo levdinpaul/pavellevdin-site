@@ -1,5 +1,36 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-24 — промпты 13 + 13b «упростить админку pl-platform, письма на бланке PL» (pl-platform, ветка admin-simplify-13, НЕ смержено, образ НЕ собран)
+- **Меню (7):** Обзор, Заявки, КП, Письма, Блог, Отзывы, Настройки (`AdminShell.tsx`). Проекты / CRM-задачи / Пользователи / Команда
+  остались по прямой ссылке (данные и маршруты не тронуты), `/admin/seo` → редирект на `/admin`. Колокольчик убран — уведомления
+  шли только по проектам; о новых заявках говорит счётчик у «Заявок». `CRMTasksBlock` нигде не подключён — скрывать было нечего.
+- **Заявки:** колонки Имя / Контакт / Сообщение (80 симв.) / Источник / Дата / Статус; 3 статуса поверх enum без миграции
+  (new · contacted+qualified = «В работе» · closed_won+closed_lost = «Закрыта»; пишется new/contacted/closed_won); API понимает
+  группы `status=new|in_work|closed` и `id=`. Корзина в каждой строке + AlertDialog «Удалить заявку навсегда?» (DELETE /api/admin/leads),
+  фильтр по умолчанию «Все» (раньше меню добавляло `?status=new`). Кнопка «Сделать КП» → `/admin/angebot/new?lead=<id>`
+  (есть проект у заявки → выбирается он, нет → клиент из заявки с `lead_id`).
+- **Отзывы:** вкладки Ожидают/Опубликованы/Отклонены, «Скопировать ссылку для клиента» → `https://pavellevdin.ru/{lang}/review`
+  (открытая форма сайта, без токена), импорт свёрнут в «Добавить отзыв вручную». UI токенов убран, API/cron токенов не тронуты.
+- **Обзор:** `/api/admin/overview` (новые заявки, заявки за 30 дн., отзывы на модерации — с сайта, КП в работе draft/ready/sent/viewed;
+  график по дням, источники) + `/api/admin/traffic` (`src/lib/traffic`, кэш 10 мин): Метрика (YANDEX_METRIKA_TOKEN + _COUNTER_ID,
+  визиты/посетители/цели), Вебмастер (YANDEX_WEBMASTER_TOKEN), GSC (сервисный аккаунт), Bing (BING_WEBMASTER_API_KEY).
+  На проде ни одного ключа нет (проверено по именам в .env) → везде «не подключено» + памятка «Как подключить ключи». GA4/Buffer/GBP скрыты, код цел.
+- **КП:** колонки №/клиент/предмет/итого/статус/дата, подсказка «КП создаётся из заявки…». Терминов Holzbau/MP в КП не было.
+- **Письма (13b):** бланк «Pavel Levdin · Innovativ Digitalbau» (`BriefPdfTemplate`, стили `.lt-*` в `angebot/pdf/document.ts`,
+  Onest + JetBrains Mono base64), только «Hannover, Germany», телефон — только при «Показывать телефон на бланке» в Настройках
+  (studio-setting `letter_show_phone` + `letter_phone`), реквизиты в подвале только заполненные (новое поле `inn` + прежние),
+  «1 / N». Язык письма ru/de/en (поле `language` у brief-document): дата «Ганновер, 24 октября 2026» / «Hannover, 24. Oktober 2026» /
+  «Hannover, 24 October 2026», должность, прощание; прощание из текста распознаётся на 3 языках. «Из шаблона»: 4 × 3
+  (`lib/brief/templates.ts`, de вычитан pl-lektor-de), суммы/сроки — поля формы, пусто → «______». MP_TOKENS/gold удалены,
+  `COMPANY.ceo` → `owner`, `legalName` и «Inhaber» убраны.
+- **SMTP:** без `SMTP_HOST` Strapi раньше «отправлял» письмо в никуда и помечал его отправленным — теперь `sendBriefEmail` отвечает 503
+  `SMTP_NOT_CONFIGURED`, админка пишет «Почта не подключена: скачайте PDF и отправьте сами». Из резервного тела письма в cms убраны «Tel. ·» и «Inhaber».
+- **cms-схемы:** только новые необязательные поля (brief-document.language; studio-setting.inn / letter_show_phone / letter_phone) —
+  Strapi добавит колонки при старте, данные не трогаются. Нужен новый образ cms.
+- Проверено: `tsc --noEmit` web и cms — 0; vitest web 79/79 (тесты бланка переписаны); eslint web — 0 ошибок; ключи ru/de/en синхронны;
+  PDF писем ru/de/en сгенерированы локально (системный Chrome) и осмотрены. **Не сделано:** сборка образов на VPS (авто-режим
+  блокирует удалённую запись) и скриншоты админки 1440/390 (нужен живой Strapi + вход администратора; локально 1 ГБ свободной RAM).
+
 ## Сессия 2026-10-24 — промпт 12 «форма контактов + цифровая визитка» (ветка contact-card-12 → main, тег v13-contact-card), ВЫКАЧЕНО 2026-10-24 вечером
 - **ДЕПЛОЙ 2026-10-24** (по «деплой» Pavel): main @ c55a331 (+ de «Hannover, Deutschland»), build:static в контейнере claude.ai
   (`PUPPETEER_SKIP_DOWNLOAD=1 PUPPETEER_EXECUTABLE_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome`), 90/90 маршрутов,
