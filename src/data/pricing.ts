@@ -77,3 +77,9 @@ export function formatFxDate(lang: string, isoDate: string) {
   if (asLang(lang) === 'en') return `${Number(d)} ${MONTHS_EN[Number(m) - 1] ?? m} ${y}`;
   return `${d}.${m}.${y}`;
 }
+
+/** Границы бюджета для формы /contact (pricing.json → budgets.ru), в валюте локали. */
+export function budgetBounds(lang: string, fx: FxRate = BUILD_FX): [number, number] {
+  const [lo, hi] = data.budgets.ru;
+  return [priceFor(lang, lo, fx), priceFor(lang, hi, fx)];
+}
