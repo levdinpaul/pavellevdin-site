@@ -11,7 +11,7 @@
   `vk: https://vk.com/pavellevdin` заполнен → иконка VK появилась и в SocialRail. QR — `qrcode` (ленивый чанк), `src/lib/qr.ts`,
   уровень H, тихая зона 4, знак в центре 9×9 модулей; декодирован jsQR со страницы и с PNG. .vcf — `src/lib/vcard.ts` (CRLF,
   X-SOCIALPROFILE + itemN.URL для Android, PHOTO base64 из нового `public/about/photo-vcard.jpg` 256², 7 КБ — его делает `npm run photo`).
-  PNG 1080×1920 — `src/lib/card-image.ts` (canvas, иконки/знак сняты с DOM карточки; строки WhatsApp на картинке нет, чтобы не дублировать номер).
+  PNG 1080×1920 — `src/lib/card-image.ts` (canvas, иконки/знак сняты с DOM карточки; набор строк как на странице по 12b, у WhatsApp — номер).
   Share → navigator.share, иначе «Скопировать ссылку»; печать — @media print, A4 на одну страницу, светлая.
   `@types/qrcode` НЕ ставить: тянет Node-типы и ломает `setTimeout` (SceneSection) — свои типы в `src/types/qrcode.d.ts`.
 - **Фото**: в git лежало старое ч/б, на проде — новый цветной портрет; `public/about/photo-{480,720}.{avif,webp}` взяты с прода побайтно и закоммичены.

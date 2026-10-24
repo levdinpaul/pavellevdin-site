@@ -17,7 +17,7 @@ const SOCIAL_ICONS: Partial<Record<SocialNetwork, ReactNode>> = {
   vk: <VkIcon size={20} />,
 };
 // Тип профиля для X-SOCIALPROFILE в .vcf
-const VCARD_TYPES: Partial<Record<SocialNetwork, string>> = { telegram: 'telegram', youtube: 'youtube', vk: 'vkontakte' };
+const VCARD_TYPES: Partial<Record<SocialNetwork, string>> = { telegram: 'telegram', whatsapp: 'whatsapp', youtube: 'youtube', vk: 'vkontakte' };
 
 const noopSubscribe = () => () => {};
 
@@ -102,8 +102,8 @@ export function BusinessCardPage() {
         company: 'Innovativ Digitalbau',
         role: c('role'),
         mark: svg('.pl-vcard__mark'),
-        // на картинке ссылок нет: строка WhatsApp повторила бы номер — WhatsApp остаётся иконкой в ряду соцсетей
-        rows: rows.filter((r) => r.key !== 'whatsapp').map((r) => ({ icon: svg(`[data-row="${r.key}"] .pl-vcard__icon`), label: r.label, value: r.value })),
+        // тот же набор, что на странице (промпт 12b); на картинке ссылок нет — у WhatsApp показываем сам номер
+        rows: rows.map((r) => ({ icon: svg(`[data-row="${r.key}"] .pl-vcard__icon`), label: r.label, value: r.key === 'whatsapp' ? PHONE.display : r.value })),
         social: social.map((s) => svg(`[data-social="${s.network}"]`)),
         photo: '/about/photo-720.webp',
         qr,
