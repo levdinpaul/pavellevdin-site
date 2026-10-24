@@ -11,7 +11,7 @@
   overflow: clip;
   isolation: isolate;
 }
-:root[data-scene='live'] .pl-scene { height: calc(var(--scene-frame-height) + 405svh); }
+:root[data-scene='live'] .pl-scene { height: calc(var(--scene-frame-height) + 270svh); }
 :root[data-scene='live'] .pl-scene .pl-stage {
   position: sticky;
   top: min(0px, calc(100svh - var(--scene-frame-height)));
@@ -273,7 +273,7 @@
   .pl-scene .pl-tech-fallback { gap: 8px 14px; font-size: 9px; }
 }
 @media (max-width: 767px) {
-  :root[data-scene='live'] .pl-scene { height: calc(var(--scene-frame-height) + 320svh); }
+  :root[data-scene='live'] .pl-scene { height: calc(var(--scene-frame-height) + 215svh); }
   .pl-scene .pl-hero {
     justify-content: flex-start;
     padding: clamp(132px, 20svh, 180px) 24px 138px;
