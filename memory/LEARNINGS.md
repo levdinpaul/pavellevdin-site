@@ -222,3 +222,14 @@
 - Если строка рендерится из React (peristeen), убирать в HTML и в JS-чанке одновременно, иначе hydration mismatch; чанки immutable — страховочное CSS-правило.
 - Lighthouse score при параллельных агентах скачет на ±0.05 — сравнивать CLS и main-thread breakdown, а не score.
 
+## Промпт 20 (2026-10-26)
+- **Telegram не скачивает файлы с russh по URL** (`sendPhoto` → «Bad Request: failed to get HTTP URL content»), хотя из ЕС картинка 200:
+  блокировка в обе стороны, как и api.telegram.org с russh. Фото/видео в Bot API — только загрузкой файла (multipart) через ретранслятор
+  (`telegramFetchForm`, client_max_body_size ретранслятора 20m). `sendVideo` по URL (telegram-publisher) — та же проблема, не исправлялась.
+- Старый publisher при «фото не ушло» молча слал текст без фото — success=true. Проверять результат глазами: `curl https://t.me/s/<канал>`
+  (публичный веб-просмотр видит фото/кнопки).
+- Подпись к фото — 1024 видимых символа; длинный AI-текст раньше разбивался на 2 сообщения (фото + текст с кнопками). Теперь сокращение по абзацам.
+- Бот-не-админ канала: `getChatMember`/`getChatAdministrators` → «member list is inaccessible» (а не status=left). Права могут появиться в ходе
+  сессии — проверять прямо перед отправкой (backfill делает это сам).
+- Пост бота в канале удаляется `deleteMessage` (бот-админ); записи журнала в `published-contents` с title «[telegram] …» удалять вместе с постом.
+

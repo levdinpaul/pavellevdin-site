@@ -1,5 +1,20 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-26 — промпт 20 «YouTube @pvellevdin + Telegram-канал блога» (ВСЁ НА ПРОДЕ)
+- **YouTube** @PaulLevdin → @pvellevdin (тот же канал UCcGySRAK4LS5UJ7aZum2TVA): `src/constants/contacts.ts`, `index.html` (sameAs), `public/llms.txt`.
+  peristeenplussystem.ru — sed по www (8 HTML + 14 JS-чанков), бэкап `backups-p20-20261027-005427.tgz`.
+- **Ссылка на канал** https://t.me/levdin_blog («Telegram-канал / Telegram-Kanal / Telegram channel», ключ `pl.rail.tgChannel`): SocialRail,
+  Footer, ContactPage, BusinessCardPage (+ .vcf), JSON-LD sameAs. Клик по каналу — только `social_click`, не цель `click_telegram`.
+  Сайт: ветка fix-20-youtube-tg → main, тег v20-telegram; dist выкачен, бэкап `dist.bak-2026-10-26-pre20`.
+- **Платформа pl-web:p17** (pl-platform main c1eb544, тег v20-telegram; откат TAG=p16): `AUTO_PUBLISH_TELEGRAM=true` → автопост ru-статьи
+  в канал @levdin_blog (-1003835251621) после реальной публикации; обложка — **файлом** (multipart) через ретранслятор; одно сообщение
+  (подпись ≤1024 по абзацам); кнопки «Читать статью» (utm_source=telegram), «Обсудить проект», «Написать Павлу» (t.me/pavellevdin), «Сайт».
+  Журнал постов (защита от дублей) — Strapi `published-contents` (`lib/publishing/telegram-ledger.ts`), схема CMS не менялась.
+  `POST /api/cron/telegram-backfill` (CRON_SECRET; dry-run по умолчанию, `?send=1`, `?id=`, `?limit=`; предпроверка прав бота → 409).
+- **Backfill:** 7 ru-статей отправлены в канал, message_id 30–36 (пробные 17–25 удалены вместе с записями журнала).
+- .env платформы: добавлены TELEGRAM_CHANNEL_BOT_TOKEN/ID/LINK, AUTO_PUBLISH_TELEGRAM (бэкап `.env.bak-2026-10-26-pre-p17`).
+- Отчёт: `/home/claudeuser/cc-runs/prompt-20-REPORT.md` (VPS).
+
 ## Сессия 2026-10-26 — промпт 17 «полоса разработчика под футером» (ВСЁ НА ПРОДЕ)
 - Серая подпись p16 заменена на отдельную полосу `<aside class="pl-devband">` сразу после `</footer>` на 5 RU-сайтах: anapa, kub, domusman, delimes, peristeen.
   В каждой: знак «Кладка PL» (inline SVG, currentColor) + «Сайт разработал Павел Левдин — сайты, SEO и автоматизация» + кнопка «pavellevdin.ru →» (/ru/).
