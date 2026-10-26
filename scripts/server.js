@@ -8,6 +8,8 @@ const { reloadEnv, getEnv } = require('./lib/env');
 reloadEnv();
 
 const app = express();
+// Не раскрываем стек в заголовках (аудит): без X-Powered-By: Express
+app.disable('x-powered-by');
 const isProd = getEnv('NODE_ENV', 'development') === 'production';
 
 // sha256 — инлайн-скрипт сцены в index.html (data-scene); при правке скрипта пересчитать.
@@ -119,6 +121,9 @@ if (isProd) {
       if (file.startsWith(staticDir + path.sep) && fs.existsSync(file)) return res.sendFile(file);
       next();
     });
+    // RFC 8615: /.well-known/* (security.txt). Общий static игнорирует dot-папки (dotfiles: 'ignore') —
+    // монтируем только эту папку; внутри неё dot-файлы по-прежнему скрыты, остальные dot-файлы dist не открываются.
+    app.use('/.well-known', express.static(path.join(staticDir, '.well-known'), { redirect: false }));
     app.use(express.static(staticDir, { redirect: false }));
     // SPA fallback. Известные маршруты SPA — 200, остальное — 404 (SPA покажет страницу «не найдено», без soft-404).
     const SPA_ROUTE = /^\/(?:review\/[^/]+|(?:ru|de|en)(?:\/(?:about|portfolio|services|brief|calculator|business-card|contact|imprint|privacy|review(?:\/[^/]+)?))?)?\/?$/;

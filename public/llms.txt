@@ -1,0 +1,41 @@
+# Pavel Levdin — Innovativ Digitalbau
+
+> Pavel Levdin (Innovativ Digitalbau) is a web developer based in Hannover, Germany. He builds websites and web platforms for small and medium businesses: landing pages, business websites on Next.js with a headless CMS, online shops, web apps and client portals, CRM/Telegram integrations, AI automation, SEO and AI search optimisation. The site is available in Russian (primary), German and English.
+
+Projects are fixed-price per brief; the final price is agreed after the brief. Typical starting prices: landing page from 45 000 ₽, small website (5–7 pages) from 80 000 ₽, business website on Next.js + CMS from 120 000 ₽. German and English pages show the same prices in EUR, converted at the Central Bank of Russia rate.
+
+## Services
+
+- [Services and prices (RU)](https://pavellevdin.ru/ru/services#prices): all services, packages and starting prices
+- [Leistungen und Preise (DE)](https://pavellevdin.ru/de/services#prices)
+- [Services and prices (EN)](https://pavellevdin.ru/en/services#prices)
+- [Landing page](https://pavellevdin.ru/ru/services/landing)
+- [Business website on Next.js + CMS](https://pavellevdin.ru/ru/services/nextjs-website)
+- [Online shop](https://pavellevdin.ru/ru/services/online-shop)
+- [Web app and client portal](https://pavellevdin.ru/ru/services/web-app)
+- [Telegram bot](https://pavellevdin.ru/ru/services/telegram-bot)
+- [CRM integration](https://pavellevdin.ru/ru/services/crm-integration)
+- [AI automation and MCP servers](https://pavellevdin.ru/ru/services/ai-automation)
+- [SEO and AI search](https://pavellevdin.ru/ru/services/seo)
+- [Maintenance and hosting](https://pavellevdin.ru/ru/services/support)
+- [Price calculator](https://pavellevdin.ru/ru/calculator): estimate a project budget online
+
+## Key pages
+
+- [Home (RU)](https://pavellevdin.ru/ru) · [DE](https://pavellevdin.ru/de) · [EN](https://pavellevdin.ru/en)
+- [Portfolio and case studies (RU)](https://pavellevdin.ru/ru/portfolio) · [DE](https://pavellevdin.ru/de/portfolio) · [EN](https://pavellevdin.ru/en/portfolio)
+- [Calculator (RU)](https://pavellevdin.ru/ru/calculator) · [DE](https://pavellevdin.ru/de/calculator) · [EN](https://pavellevdin.ru/en/calculator)
+- [About (RU)](https://pavellevdin.ru/ru/about) · [DE](https://pavellevdin.ru/de/about) · [EN](https://pavellevdin.ru/en/about)
+- [Project brief (RU)](https://pavellevdin.ru/ru/brief) · [DE](https://pavellevdin.ru/de/brief) · [EN](https://pavellevdin.ru/en/brief)
+- [Contact (RU)](https://pavellevdin.ru/ru/contact) · [DE](https://pavellevdin.ru/de/contact) · [EN](https://pavellevdin.ru/en/contact)
+- [Blog (RU)](https://pavellevdin.ru/ru/blog) · [DE](https://pavellevdin.ru/de/blog) · [EN](https://pavellevdin.ru/en/blog): articles on web development, performance and SEO
+
+## Contact
+
+- [E-mail](mailto:info@pavellevdin.ru): info@pavellevdin.ru
+- [Telegram](https://t.me/PavelLevdin): @PavelLevdin
+- [Contact form](https://pavellevdin.ru/ru/contact)
+
+## Optional
+
+- [Sitemap](https://pavellevdin.ru/sitemap.xml)

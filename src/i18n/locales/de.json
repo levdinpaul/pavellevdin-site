@@ -516,6 +516,7 @@
         "was ich mache."
       ],
       "all": "Alle Artikel →",
+      "coverAlt": "Titelbild zum Artikel „{{title}}“",
       "read_one": "{{count}} Min. Lesezeit",
       "read_other": "{{count}} Min. Lesezeit"
     },
