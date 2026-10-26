@@ -2,6 +2,22 @@
 
 Долгоживущие технические уроки проекта. Пополняется по сессиям.
 
+## Аудит-фиксы 14 (2026-10-26)
+
+- **Перед деплоем платформы сверять main с образом прода**: `docker exec pl-web tar c -C /app src …` → `diff -r --strip-trailing-cr`
+  (образы собирались из Windows-копии, CRLF). Так нашлись незакоммиченные хотфиксы p10/p11.
+- **Google Gemini API из РФ закрыт** (`400 FAILED_PRECONDITION: User location is not supported`, даже ListModels). Ошибка
+  «model … no longer available» пришла раньше гео-проверки и маскировала её. Проверять модели — с VPS в ЕС.
+  Ключ API передавать заголовком `x-goog-api-key`, не `?key=` (не попадает в логи прокси).
+- **Модели Gemini снимают для новых пользователей** (2.5-flash → 404). Имя модели — только из env с дефолтом, цепочка запасных;
+  404 модели → следующая модель, а не следующий ключ.
+- **Express `static` скрывает dot-папки** (`dotfiles: 'ignore'`) → `/.well-known/security.txt` = 404. Монтировать отдельный
+  `express.static(dist/.well-known)` до общего.
+- **Next standalone трассирует `serverExternalPackages` неполно** (puppeteer-core без debug/chromium-bidi) — раньше это скрывал
+  `npm install` в runner, который ставил ВСЕ зависимости (+1,18 ГБ). Ставить пакет отдельно в builder и проверять `require`/`import` при сборке.
+- **Chromium на Alpine ≈ 800 МБ** (llvm/mesa/gtk) — образ Next с PDF через Chromium < 500 МБ не ужать; путь — отдельный сервис рендера.
+- **Метаданные `robots` в `layout` наследуются дочерними страницами** — noindex ленты держать в `page.tsx`.
+
 ## Админка pl-platform (13/13b, 2026-10-24)
 
 - **mail-guard без SMTP делает `email.send` no-op** — всё, что после send помечает «отправлено», врёт. Проверять `SMTP_HOST`

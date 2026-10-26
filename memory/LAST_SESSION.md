@@ -1,5 +1,24 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-26 — промпт 14 «аудит-фиксы» (ветки fix-audit-14 в обоих репо; сайт → main, тег v14-audit-fixes, ВЫКАЧЕН; платформа НЕ выкачена)
+- **Предпроверка:** исходники из работающих образов russh сравнены с main pl-platform (`diff -r --strip-trailing-cr`, в образах CRLF).
+  В `pl-web:p11` есть хотфикс, которого не было в main (`api/admin/leads/route.ts` — фолбэк `STRAPI_INTERNAL_URL`), в `pl-cms:p10` —
+  зависимости `react/react-dom/react-router-dom/styled-components` в cms/package.json. **main отставал от прода → по правилу промпта
+  платформа НЕ деплоилась и в main НЕ сливалась.** Хотфиксы перенесены первым коммитом ветки (683cf98).
+- **Сайт (выкачено 2026-10-26):** `app.disable('x-powered-by')`; `/.well-known` — отдельный `express.static` (общий скрывает
+  dot-папки → было бы 404); alt обложек статей в блоке «Блог» на главной (`pl.blog.coverAlt`, ru/de/en); `public/llms.txt`;
+  `public/.well-known/security.txt` (Expires 2027-10-26). Сборка `PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome npm run build:static`
+  на VPS (90/90). Бэкап: `dist.bak-2026-10-26-pre14`, `scripts/server.js.bak-2026-10-26-pre14`; файлы верификации
+  Bing/Google/Яндекс перенесены в новый dist. Проверено: 88/88 URL sitemap = 200, нет x-powered-by, оба файла 200 text/plain, все img с alt.
+- **Платформа (ветка fix-audit-14 @ c7be532, образ `pl-web:p12` 1,51 ГБ на VPS, на russh НЕ перенесён):**
+  `GEMINI_MODEL` (дефолт gemini-3.8-flash, сверено ListModels), `GEMINI_FALLBACK_MODELS`, `GEMINI_IMAGE_MODEL`, `GEMINI_API_BASE`
+  + X-Relay-Key; failover при снятой модели / запрете региона / сбое сети → NVIDIA → Claude (если ключи есть); блог: уникальные
+  title лент, noindex пустой ленты, title статей ≤ 65; Dockerfile без `npm install` в runner (3,08 → 1,51 ГБ), без poppler; poweredByHeader:false.
+- **Главное открытие:** с russh Gemini API отвечает `400 User location is not supported` — агенты не заработают от одной смены модели,
+  нужен ретранслятор Gemini через VPS (как tg-relay). NVIDIA_API_KEY/ANTHROPIC_API_KEY на проде не заданы. Подробности и команды —
+  `/home/claudeuser/cc-runs/prompt-14-REPORT.md` на VPS.
+- hreflang на блоге уже был (аудит ошибся); title статьи sozdanie-sovremennogo-sayta-2026 лучше поправить в Strapi (предложения в отчёте).
+
 ## Сессия 2026-10-24 — промпты 13 + 13b «упростить админку pl-platform, письма на бланке PL» (pl-platform, ветка admin-simplify-13, НЕ смержено, образ НЕ собран)
 - **Меню (7):** Обзор, Заявки, КП, Письма, Блог, Отзывы, Настройки (`AdminShell.tsx`). Проекты / CRM-задачи / Пользователи / Команда
   остались по прямой ссылке (данные и маршруты не тронуты), `/admin/seo` → редирект на `/admin`. Колокольчик убран — уведомления
