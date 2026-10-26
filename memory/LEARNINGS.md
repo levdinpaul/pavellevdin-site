@@ -215,3 +215,10 @@
 - Снаружи pavellevdin.ru не проксирует `/api/cron/*` (404) — cron-роуты проверять изнутри `docker exec pl-web node -e fetch(localhost:3000…)`.
 - Обложки: Chromium в pl-web + шрифты woff2 data-URL дают кириллицу Onest без системных шрифтов; sharp/librsvg — запасной вариант (Liberation).
 - Клиентские EJS-сайты (anapa, kub) в production кешируют шаблоны → после правки `docker restart stack-<site>-1`. В kub `server.js` CRLF — не нормализовать.
+
+## Промпт 17 (2026-10-26) — полоса разработчика на чужих сайтах
+- Павлу нужна ЗАМЕТНАЯ подпись: отдельная полоса под футером в фирменном цвете сайта, не серая строка в ©. Не fixed/sticky.
+- SPA/SSG с гидрацией (Vite, Vike): вставлять ВНЕ `#root`, после него. Для пустого до JS `#root` — `#root:empty + .pl-devband{display:none}`, иначе CLS (было 0.148 на delimes).
+- Если строка рендерится из React (peristeen), убирать в HTML и в JS-чанке одновременно, иначе hydration mismatch; чанки immutable — страховочное CSS-правило.
+- Lighthouse score при параллельных агентах скачет на ±0.05 — сравнивать CLS и main-thread breakdown, а не score.
+

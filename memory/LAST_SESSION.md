@@ -1,5 +1,13 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-26 — промпт 17 «полоса разработчика под футером» (ВСЁ НА ПРОДЕ)
+- Серая подпись p16 заменена на отдельную полосу `<aside class="pl-devband">` сразу после `</footer>` на 5 RU-сайтах: anapa, kub, domusman, delimes, peristeen.
+  В каждой: знак «Кладка PL» (inline SVG, currentColor) + «Сайт разработал Павел Левдин — сайты, SEO и автоматизация» + кнопка «pavellevdin.ru →» (/ru/).
+- Цвета: anapa — янтарь #ff8a1f, kub — золотой градиент, domusman — дуб #8A6236, delimes — золото #D4A017, peristeen — #0077B6. Контраст ≥ 4.87:1, CLS 0.
+- peristeen: старая ссылка убрана из HTML и 4 JS-чанков. delimes/peristeen: исходников на сервере нет — при пересборке перенести полосу вручную (сниппет в ~/cc-runs/work-17/scripts/).
+- Не сделано (вне рамок): kub `.site-header::before right:-200px` → страница шире экрана на 200px, cookie-баннер на мобильном недоступен; фикс `.site-header{overflow-x:clip}`.
+- Отчёт: `/home/claudeuser/cc-runs/prompt-17-REPORT.md` (VPS).
+
 ## Сессия 2026-10-26 — промпт 16 «автопубликация блога + безопасность /api + подписи + Метрика kub» (ВСЁ НА ПРОДЕ)
 - **Платформа на russh `pl-web:p16`** (main 8b1e4a9, тег v16-p16); откат — TAG=p14 (есть p11/p13/p14/p15). `.env`: `AUTO_PUBLISH=true` (бэкап `.env.bak-2026-10-26-pre-p15`).
 - **Автопубликация:** пайплайны agents-weekly после `ready` → только Strapi, если review ≥ 70 (`AUTO_PUBLISH_MIN_SCORE`), compliance без critical,
