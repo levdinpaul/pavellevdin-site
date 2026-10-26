@@ -1,5 +1,17 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-26 — промпт 16 «автопубликация блога + безопасность /api + подписи + Метрика kub» (ВСЁ НА ПРОДЕ)
+- **Платформа на russh `pl-web:p16`** (main 8b1e4a9, тег v16-p16); откат — TAG=p14 (есть p11/p13/p14/p15). `.env`: `AUTO_PUBLISH=true` (бэкап `.env.bak-2026-10-26-pre-p15`).
+- **Автопубликация:** пайплайны agents-weekly после `ready` → только Strapi, если review ≥ 70 (`AUTO_PUBLISH_MIN_SCORE`), compliance без critical,
+  есть ru+de+en и обложка (`lib/pipeline/quality-gate.ts`); иначе ready + причина в Telegram. О каждой опубликованной статье — Telegram со ссылками.
+  `POST /api/cron/autopublish` (CRON_SECRET): догнать ready (`?id=N`), `?run=N` — продолжить застрявший пайплайн, `?translatePost=ID` — перевести ru-статью и добавить de/en.
+- **Обложка:** `lib/images/branded-cover.ts` — 1200×630, Chromium + Onest, логотип «Кладка PL» (`web/public/_pl/brand/logo-horizontal.svg`), запасной рендер sharp.
+- **Баг найден и исправлен:** de/en-локализации создавались с тем же slug → Strapi «must be unique» → публиковалась только ru. Теперь slug локали из её заголовка.
+- **Опубликованы:** №2 «Заявка с сайта потерялась…» (id 16 + de/en, переводы сделаны заново) и №1 «Как не терять заявки… вечером и в выходные» (id 19, review 82, compliance 92).
+- **Безопасность:** `/api/pipeline/[id]/retry` и GET `/api/cron/sys-admin-check` закрыты; аудит 148 route.ts — прочие уже защищены. Скрипт: `~/cc-runs/work-16/curl-auth-check.sh`.
+- **Подписи «Разработка сайта — Павел Левдин»:** anapa, kub, domusman (новая строка ©), peristeen (уже была). **kub:** второй счётчик Метрики 113808027.
+- Отчёт: `/home/claudeuser/cc-runs/prompt-16-REPORT.md` (VPS).
+
 ## Сессия 2026-10-26 — промпт 15 «выкатка + ретранслятор Gemini + FitHilf» (ВСЁ НА ПРОДЕ)
 - **Новое правило Павла:** сделано и проверено → сразу на прод (см. LEARNINGS).
 - **Платформа:** fix-audit-14 → main, тег v14-audit-fixes; затем p13 (152-ФЗ-политика ретранслятора, 5xx → следующая модель)

@@ -205,3 +205,13 @@
   Проверка из контейнера: `docker exec -w /home/host1731061/pavellevdin.ru/projects/app stack-pavellevdin-1 node -e …getMe…`.
 - Python-heredoc в Git Bash: `\n` внутри `"""…"""` легко превращается в реальный перевод строки в JS-строке —
   многострочный код писать Write/Edit, не через heredoc-replace.
+
+## Промпт 16 (2026-10-26)
+- Strapi v4: поле `uid` (slug) уникально по ВСЕМ локалям, даже с `i18n.localized: true` → у локализаций должен быть свой slug,
+  иначе `POST /localizations` падает «This attribute must be unique», а публикатор молча оставляет только базовую локаль.
+- Cleanup после публикации удаляет пайплайн вместе с переводами (content_de/en) — восстановить нечего (логи обрезаны до 2000 символов,
+  дамп БД ночной). Перед ручными экспериментами с публикацией — снимать JSON пайплайна.
+- `NEXT_PUBLIC_*` в server-коде инлайнится при сборке (`https://pavellevdin.ru`) — файлы своего Strapi качать изнутри через `STRAPI_INTERNAL_URL`.
+- Снаружи pavellevdin.ru не проксирует `/api/cron/*` (404) — cron-роуты проверять изнутри `docker exec pl-web node -e fetch(localhost:3000…)`.
+- Обложки: Chromium в pl-web + шрифты woff2 data-URL дают кириллицу Onest без системных шрифтов; sharp/librsvg — запасной вариант (Liberation).
+- Клиентские EJS-сайты (anapa, kub) в production кешируют шаблоны → после правки `docker restart stack-<site>-1`. В kub `server.js` CRLF — не нормализовать.
