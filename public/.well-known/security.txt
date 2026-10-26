@@ -1,0 +1,4 @@
+Contact: mailto:info@pavellevdin.ru
+Expires: 2027-10-26T00:00:00.000Z
+Preferred-Languages: ru, de, en
+Canonical: https://pavellevdin.ru/.well-known/security.txt

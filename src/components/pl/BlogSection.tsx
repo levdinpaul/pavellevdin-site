@@ -30,7 +30,7 @@ export function BlogSection({ lang }: { lang: string }) {
             <a href={`/${lang}/blog/${p.slug}`} className="pl-blog__card">
               <div className="pl-blog__media">
                 {p.image
-                  ? <img src={p.image} alt="" width={750} height={422} loading="lazy" decoding="async" />
+                  ? <img src={p.image} alt={t('pl.blog.coverAlt', { title: p.title })} width={750} height={422} loading="lazy" decoding="async" />
                   : (
                     // Обложки нет — рисуем кодом в стиле OG: знак + заголовок
                     <div className="pl-blog__cover" aria-hidden="true">

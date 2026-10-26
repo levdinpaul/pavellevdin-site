@@ -516,6 +516,7 @@
         "what I do."
       ],
       "all": "All articles →",
+      "coverAlt": "Cover image for the article “{{title}}”",
       "read_one": "{{count}} min read",
       "read_other": "{{count}} min read"
     },
