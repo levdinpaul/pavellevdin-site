@@ -88,6 +88,8 @@ export function bindContactClickGoals() {
     const network = a.dataset.social
       || (/^https:\/\/(www\.)?youtube\.com\//.test(href) ? 'youtube' : /^https:\/\/(www\.)?vk\.com\//.test(href) ? 'vk' : '');
     if (network) track('social_click', { network });
+    // Telegram-канал блога — не канал связи: только social_click, без цели click_telegram
+    if (network === 'tgchannel') return;
     if (/^https:\/\/t\.me\//.test(href)) track('click_telegram');
     else if (/^https:\/\/wa\.me\//.test(href)) track('click_whatsapp');
     else if (href.startsWith('mailto:')) track('click_email');

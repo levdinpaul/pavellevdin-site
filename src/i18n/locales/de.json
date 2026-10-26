@@ -664,7 +664,8 @@
       }
     },
     "rail": {
-      "label": "Soziale Netzwerke"
+      "label": "Soziale Netzwerke",
+      "tgChannel": "Telegram-Kanal"
     },
     "fab": {
       "open": "Kontakt",
