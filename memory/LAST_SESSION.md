@@ -1,5 +1,23 @@
 # LAST_SESSION — PL – Innovativ Digitalbau (портфолио)
 
+## Сессия 2026-10-26 — промпт 15 «выкатка + ретранслятор Gemini + FitHilf» (ВСЁ НА ПРОДЕ)
+- **Новое правило Павла:** сделано и проверено → сразу на прод (см. LEARNINGS).
+- **Платформа:** fix-audit-14 → main, тег v14-audit-fixes; затем p13 (152-ФЗ-политика ретранслятора, 5xx → следующая модель)
+  и p14 (таймаут Gemini 180 с, таймаут → следующая модель). **На russh `pl-web:p14`** (main e953477 + docs c2819a9, тег v15-p14);
+  для отката `pl-web:p11` и p13. Первая выкатка p13 дала 500 на всех статьях блога (excludes `src/**` выкинул
+  node_modules/*/src → jsdom) — откат на p11 за ~3 мин, исправлено, smoke статей с реальным Strapi до выкатки.
+- **Ретранслятор Gemini:** VPS `~/pl-tg-relay/relay.conf` + `location /gemini/` (X-Relay-Key, SNI, 300 с); на russh
+  `GEMINI_MODEL=gemini-3.8-flash`, `GEMINI_API_BASE=http://tg-relay:18081/gemini/v1beta`. Агенты с ПДн через него не ходят
+  (`GEMINI_RELAY_ALLOWED_AGENTS`, дефолт в `web/src/lib/ai/relay-policy.ts`).
+- **Проверки:** 88/88 sitemap 200, /ru/admin 307, /api/health 200, PDF письма через API 200 (%PDF, тестовое письмо удалено),
+  agents-weekly?force=1 → 202 started, пайплайн №2 → `ready` (черновик ru/de/en, без картинки — visual fallback), №1 failed (таймаут, до p14).
+- **Strapi:** title статей 13/14/15 сокращены через REST (slug не менялся), видны в `<title>`.
+- **russh уборка:** dist.bak-* — остался только dist.bak-2026-10-26-pre14.
+- **FitHilf:** данные старого fithilf.ru перенесены в новый (VL), база host1731061_fithilf на russh удалена (дампы в /srv/archive);
+  nginx fithilf-web — resolver 127.0.0.11 + `$php_upstream`.
+- Параллельно в тот же день другая сессия правила SMTP/метрику в `.env` платформы и пересоздавала стек — учитывать.
+- Отчёт: `/home/claudeuser/cc-runs/prompt-15-REPORT.md` (VPS).
+
 ## Сессия 2026-10-26 — промпт 14 «аудит-фиксы» (ветки fix-audit-14 в обоих репо; сайт → main, тег v14-audit-fixes, ВЫКАЧЕН; платформа НЕ выкачена)
 - **Предпроверка:** исходники из работающих образов russh сравнены с main pl-platform (`diff -r --strip-trailing-cr`, в образах CRLF).
   В `pl-web:p11` есть хотфикс, которого не было в main (`api/admin/leads/route.ts` — фолбэк `STRAPI_INTERNAL_URL`), в `pl-cms:p10` —
