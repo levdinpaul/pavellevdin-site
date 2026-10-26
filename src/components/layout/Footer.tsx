@@ -52,6 +52,7 @@ export function Footer() {
             <ul className="pl-footer__list">
               <li><a href={contacts.telegram.url} target="_blank" rel="noopener noreferrer">Telegram {contacts.telegram.handle}</a></li>
               <li><a href={contacts.whatsapp.url} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+              <li><a href={contacts.telegramChannel} data-social="tgchannel" target="_blank" rel="noopener noreferrer">{t('pl.rail.tgChannel')}</a></li>
               <li><a href={contacts.mailto}>{contacts.email}</a></li>
             </ul>
           </div>

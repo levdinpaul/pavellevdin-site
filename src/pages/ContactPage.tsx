@@ -111,6 +111,7 @@ export function ContactPage() {
     { key: 'telegram', icon: <TelegramIcon size={18} />, label: 'Telegram', value: contacts.telegram.handle, href: contacts.telegram.url },
     { key: 'whatsapp', icon: <WhatsAppIcon size={18} />, label: 'WhatsApp', value: c('whatsapp'), href: contacts.whatsapp.url },
     { key: 'email', icon: <MailIcon size={18} />, label: c('email'), value: contacts.email, href: contacts.mailto },
+    { key: 'tgchannel', icon: <TelegramIcon size={18} />, label: t('pl.rail.tgChannel'), value: '@levdin_blog', href: contacts.telegramChannel },
   ];
 
   return (

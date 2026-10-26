@@ -30,9 +30,11 @@ export const PHONE = {
 
 const CHANNELS = {
   telegram: { url: 'https://t.me/PavelLevdin', handle: '@PavelLevdin' },
+  /** Telegram-канал блога (публичный профиль, не канал связи — личный контакт выше). */
+  telegramChannel: 'https://t.me/levdin_blog',
   whatsapp: { url: `https://wa.me/${MOBILE}` },
   instagram: '',
-  youtube: 'https://www.youtube.com/@PaulLevdin',
+  youtube: 'https://www.youtube.com/@pvellevdin',
   vk: 'https://vk.com/pavellevdin',
   dzen: '',
   github: '',
@@ -44,13 +46,17 @@ export function getContacts(lang: string) {
   return { ...CHANNELS, email, mailto: `mailto:${email}` };
 }
 
-export type SocialNetwork = 'telegram' | 'whatsapp' | 'youtube' | 'vk' | 'email';
+export type SocialNetwork = 'telegram' | 'tgchannel' | 'whatsapp' | 'youtube' | 'vk' | 'email';
+
+/** Подписи, зависящие от языка, — ключ i18n (в остальных случаях label — имя сети). */
+export type SocialLink = { network: SocialNetwork; label: string; labelKey?: string; url: string };
 
 /** Каналы для соц-панели в порядке показа; пустые пропускаются. */
-export function getSocialLinks(lang: string): { network: SocialNetwork; label: string; url: string }[] {
+export function getSocialLinks(lang: string): SocialLink[] {
   const c = getContacts(lang);
-  const all: { network: SocialNetwork; label: string; url: string }[] = [
+  const all: SocialLink[] = [
     { network: 'telegram', label: 'Telegram', url: c.telegram.url },
+    { network: 'tgchannel', label: 'Telegram channel', labelKey: 'pl.rail.tgChannel', url: c.telegramChannel },
     { network: 'whatsapp', label: 'WhatsApp', url: c.whatsapp.url },
     { network: 'youtube', label: 'YouTube', url: c.youtube },
     { network: 'vk', label: 'VK', url: c.vk },
@@ -61,8 +67,8 @@ export function getSocialLinks(lang: string): { network: SocialNetwork; label: s
 
 /** Публичные профили для JSON-LD sameAs — только непустые (без мессенджера с номером и почты). */
 export function getSameAs(): string[] {
-  const { telegram, youtube, vk, dzen, github, rutube, instagram } = CHANNELS;
-  return [telegram.url, youtube, vk, dzen, github, rutube, instagram].filter(Boolean) as string[];
+  const { telegram, telegramChannel, youtube, vk, dzen, github, rutube, instagram } = CHANNELS;
+  return [telegram.url, telegramChannel, youtube, vk, dzen, github, rutube, instagram].filter(Boolean) as string[];
 }
 
 export type Contacts = ReturnType<typeof getContacts>;

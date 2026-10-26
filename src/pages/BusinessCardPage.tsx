@@ -12,12 +12,13 @@ import { buildVcard, downloadBlob, fetchBase64 } from '@/lib/vcard';
 
 const SOCIAL_ICONS: Partial<Record<SocialNetwork, ReactNode>> = {
   telegram: <TelegramIcon size={20} />,
+  tgchannel: <TelegramIcon size={20} />,
   whatsapp: <WhatsAppIcon size={20} />,
   youtube: <YouTubeIcon size={20} />,
   vk: <VkIcon size={20} />,
 };
 // Тип профиля для X-SOCIALPROFILE в .vcf
-const VCARD_TYPES: Partial<Record<SocialNetwork, string>> = { telegram: 'telegram', whatsapp: 'whatsapp', youtube: 'youtube', vk: 'vkontakte' };
+const VCARD_TYPES: Partial<Record<SocialNetwork, string>> = { telegram: 'telegram', tgchannel: 'telegram', whatsapp: 'whatsapp', youtube: 'youtube', vk: 'vkontakte' };
 
 const noopSubscribe = () => () => {};
 
@@ -32,7 +33,9 @@ export function BusinessCardPage() {
   const contacts = getContacts(lang);
   const pageUrl = `${SITE}/${lang}/business-card`;
   const siteUrl = `${SITE}/${lang}`;
-  const social = getSocialLinks(lang).filter((s) => SOCIAL_ICONS[s.network]);
+  const social = getSocialLinks(lang)
+    .filter((s) => SOCIAL_ICONS[s.network])
+    .map((s) => (s.labelKey ? { ...s, label: t(s.labelKey) } : s));
   const qr = useQrMatrix(pageUrl);
   const cardRef = useRef<HTMLElement>(null);
   const canShare = useSyncExternalStore(noopSubscribe, () => typeof navigator.share === 'function', () => false);

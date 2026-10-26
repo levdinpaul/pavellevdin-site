@@ -5,6 +5,7 @@ import { MailIcon, TelegramIcon, VkIcon, WhatsAppIcon, YouTubeIcon } from '@/com
 
 const ICONS: Record<SocialNetwork, ReactNode> = {
   telegram: <TelegramIcon size={20} />,
+  tgchannel: <TelegramIcon size={20} />,
   whatsapp: <WhatsAppIcon size={20} />,
   youtube: <YouTubeIcon size={20} />,
   vk: <VkIcon size={20} />,
@@ -20,19 +21,22 @@ export function SocialRail({ lang }: { lang: string }) {
   return (
     <nav className="pl-rail" aria-label={t('pl.rail.label')}>
       <ul>
-        {getSocialLinks(lang).map((x) => (
+        {getSocialLinks(lang).map((x) => {
+          const label = x.labelKey ? t(x.labelKey) : x.label;
+          return (
           <li key={x.network}>
             <a
               href={x.url}
               data-social={x.network}
-              aria-label={x.label}
-              title={x.label}
+              aria-label={label}
+              title={label}
               {...(x.network === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
             >
               {ICONS[x.network]}
             </a>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </nav>
   );

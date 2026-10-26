@@ -664,7 +664,8 @@
       }
     },
     "rail": {
-      "label": "Social networks"
+      "label": "Social networks",
+      "tgChannel": "Telegram channel"
     },
     "fab": {
       "open": "Contact",
