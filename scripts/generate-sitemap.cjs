@@ -38,20 +38,8 @@ for (const [p, freq, prio] of pages) {
   }
 }
 
-// Посты блога: только опубликованные ru (пререндерятся) — slug как в prerender.cjs
-const blogDir = path.join(root, 'src', 'content', 'blog');
-if (fs.existsSync(blogDir)) {
-  for (const dir of fs.readdirSync(blogDir)) {
-    const f = path.join(blogDir, dir, 'ru.json');
-    if (!fs.existsSync(f)) continue;
-    try {
-      const a = JSON.parse(fs.readFileSync(f, 'utf8').replace(/^﻿/, ''));
-      if (a.published && (a.slug || a.id)) {
-        urls.push(`  <url>\n    <loc>${SITE}/ru/blog/${a.slug || a.id}</loc>\n    <lastmod>${(a.date || today).slice(0, 10)}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>`);
-      }
-    } catch { /* битый JSON пропускаем */ }
-  }
-}
+// Статьи блога здесь не перечисляем: их ведёт платформа в /ru/blog/sitemap.xml (Strapi, все языки, hreflang).
+// Старый список из src/content/blog расходился со Strapi — при смене слага в sitemap попал бы 404.
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
 fs.writeFileSync(path.join(root, 'public', 'sitemap.xml'), xml);

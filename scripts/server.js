@@ -114,6 +114,12 @@ if (isProd) {
       const q = req.url.slice(req.path.length);
       res.redirect(301, req.path.replace(/\/+$/, '') + q);
     });
+    // Адреса без языка (GSC 404: их давал x-default в заголовке Link платформы) → 301 на ru.
+    // /blog/<слаг> → /ru/blog/<слаг>: если слаг другого языка, платформа сделает второй 301 на ru-слаг.
+    app.get(/^\/(?:blog(?:\/[^/]+)?|login|register|forgot-password|reset-password|cabinet|portal|datenwiderruf)\/?$/, (req, res) => {
+      const q = req.url.slice(req.path.length);
+      res.redirect(301, '/ru' + req.path.replace(/\/+$/, '') + q);
+    });
     app.use((req, res, next) => {
       if (req.method !== 'GET' && req.method !== 'HEAD') return next();
       if (path.extname(req.path)) return next();

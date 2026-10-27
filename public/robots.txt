@@ -14,9 +14,6 @@ Sitemap: https://pavellevdin.ru/sitemap.xml
 # Блог (pl-platform): все статьи на ru/de/en с hreflang
 Sitemap: https://pavellevdin.ru/ru/blog/sitemap.xml
 
-# Additional sitemaps for different content types (if applicable)
-# Sitemap: https://pavellevdin.ru/sitemap-images.xml
-# Sitemap: https://pavellevdin.ru/sitemap-videos.xml
 
 # Disallow patterns (if needed in future)
 # Disallow: /admin/
@@ -49,6 +46,3 @@ Host: https://pavellevdin.ru
 
 # Clean-param for Yandex (if using URL parameters)
 # Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content /
-
-# Sitemap index (if you have multiple sitemaps)
-# Sitemap: https://pavellevdin.ru/sitemap-index.xml
