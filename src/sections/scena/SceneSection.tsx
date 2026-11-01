@@ -6,7 +6,6 @@ import { stackFor } from '@/data/stack';
 import { clamp, FINALE, FLIGHT, HERO_END, smoothstep, staticDustPaths } from './scene-model';
 import './scene.css';
 
-const MOTION_QUERY = '(prefers-reduced-motion: no-preference)';
 /** .pl-tech is set at twice its median size; scaling down keeps near labels sharp. */
 const LABEL_SCALE = 0.5;
 /** Frame interval of the quiet spin at rest: ~30 fps, phones ~24 fps (scroll-driven frames are not limited). */
@@ -17,8 +16,9 @@ const STATIC_DUST = staticDustPaths();
 
 /**
  * Native scrolling drives one shared camera for the canvas dust and HTML type.
- * The section becomes tall right after hydration once the 2D canvas is up. SSR, reduced motion
- * and canvas failures therefore retain a compact, useful hero and working links.
+ * The section becomes tall right after hydration once the 2D canvas is up. The scene runs regardless of
+ * prefers-reduced-motion (phones often force it on in power-saving mode); SSR and canvas failures retain
+ * a compact, useful hero and working links.
  */
 export function SceneSection({ lang }: { lang: string }) {
   const { t } = useTranslation();
@@ -42,7 +42,6 @@ export function SceneSection({ lang }: { lang: string }) {
     const canvas = canvasRef.current;
     if (!section || !stage || !hero || !labels || !controls || !finale || !canvas) return;
 
-    const media = window.matchMedia(MOTION_QUERY);
     const labelElements = Array.from(labels.children) as HTMLElement[];
     let graphics: Scene2D | null = null;
     let disposed = false;
@@ -181,7 +180,7 @@ export function SceneSection({ lang }: { lang: string }) {
     };
 
     const activate = () => {
-      if (disposed || graphics || initFrame || initHandle || !media.matches) return;
+      if (disposed || graphics || initFrame || initHandle) return;
       // The canvas is created after the first paint, in an idle slot (at most 300 ms later), so hydration stays short.
       initFrame = requestAnimationFrame(() => {
         initFrame = 0;
@@ -193,11 +192,11 @@ export function SceneSection({ lang }: { lang: string }) {
 
     const start = () => {
       initHandle = 0;
-      if (disposed || graphics || !media.matches) return;
+      if (disposed || graphics) return;
       graphics = createScene2D(canvas, labelCount);
       if (!graphics) return;
       // The tall scroll geometry is normally switched on by the inline script in index.html before the first
-      // paint, so going live changes no layout. Otherwise (reduced motion turned off later) the section grows here:
+      // paint, so going live changes no layout. Otherwise (inline script failed) the section grows here:
       // if the reader has already scrolled past the compact hero, keep the content they are looking at in place.
       // Scroll anchoring is off for this one jump and the jump is instant (html has smooth scrolling),
       // otherwise the browser and this code both compensate, or the compensation animates across the page.
@@ -216,10 +215,6 @@ export function SceneSection({ lang }: { lang: string }) {
       schedule();
     };
 
-    const onMotionChange = () => {
-      reset();
-      activate();
-    };
     const onVisibilityChange = () => {
       if (document.hidden) {
         if (frame) cancelAnimationFrame(frame);
@@ -246,7 +241,6 @@ export function SceneSection({ lang }: { lang: string }) {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize, { passive: true });
     document.addEventListener('visibilitychange', onVisibilityChange);
-    media.addEventListener('change', onMotionChange);
     // Starts right after hydration (next frame + idle slot ≤ 300 ms): no waiting for interaction.
     activate();
     const startIdleSpin = () => {
@@ -272,7 +266,6 @@ export function SceneSection({ lang }: { lang: string }) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       document.removeEventListener('visibilitychange', onVisibilityChange);
-      media.removeEventListener('change', onMotionChange);
       reset();
     };
   }, [labelCount]);

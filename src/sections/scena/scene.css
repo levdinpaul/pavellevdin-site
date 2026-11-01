@@ -314,13 +314,7 @@
   .pl-scene__controls { top: auto; bottom: 12px; justify-content: flex-end; }
   .pl-scene__controls p { display: none; }
 }
-@media (prefers-reduced-motion: reduce) {
-  :root[data-scene='live'] .pl-scene { height: auto; }
-  :root[data-scene='live'] .pl-scene .pl-stage { position: relative; height: auto; }
-  .pl-scene .pl-hero { opacity: 1 !important; transform: none !important; visibility: visible !important; }
-  .pl-gl, .pl-tech-cloud, .pl-scene__controls, .pl-scene__finale { display: none !important; }
-  .pl-scene__fallback { opacity: 1 !important; }
-}
+/* No prefers-reduced-motion override: the scene runs the same in every motion mode (phones force reduce in power saving). */
 
 /* German copy stays on two intentional lines, including on narrow phones. */
 .pl-scene:lang(de) .pl-hero__title { font-size: clamp(40px, 5.1vw, 74px); }
