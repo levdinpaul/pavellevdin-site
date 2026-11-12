@@ -1,0 +1,11 @@
+node_modules/
+.next/
+_next/
+dist/
+build/
+.git/
+vendor/
+coverage/
+*.log
+*.min.js
+**/assets/
