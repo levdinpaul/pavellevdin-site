@@ -572,5 +572,116 @@
         ]
       }
     }
+  },
+  {
+    "slug": "vestora-lingua",
+    "title": "Vestora Lingua",
+    "url": "https://lingua.vestoralife.de/",
+    "category": "products",
+    "status": "live",
+    "featured": false,
+    "stack": [
+      "Next.js 16",
+      "React 19",
+      "next-intl",
+      "PostgreSQL",
+      "Azure Speech",
+      "PWA",
+      "i18n ×9"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Собственный продукт: тренажёр немецкого для языковой группы, около 10 минут в день",
+        "task": "Ученикам языковой группы нужно повторять материал между занятиями, но учебник и общий чат для этого не годятся: слова забываются, а преподаватель не видит, кто занимается. Хотелось сделать тренажёр на 10 минут в день, построенный на темах самой группы, понятный ученику на его родном языке.",
+        "solution": "Разработал веб-приложение на Next.js 16, React 19 и PostgreSQL с интерфейсом на девяти языках через next-intl. В основе — карточки с интервальным повторением по темам группы: уроки, слова, предложения, объяснения грамматики и видео. Каждое слово и предложение можно прослушать в обычном и медленном темпе. Ученики входят по приглашению преподавателя или по QR-коду, внутри есть групповой чат, личные сообщения и своя статистика.",
+        "done": [
+          "Карточки с интервальным повторением: материал возвращается тогда, когда его пора повторить",
+          "Темы группы: уроки, слова, предложения, объяснения и видео в одном месте",
+          "Произношение каждого слова и предложения в обычном и медленном темпе",
+          "Групповой чат, личные сообщения и личная статистика ученика",
+          "Вход по приглашению преподавателя и QR-коду; интерфейс DE / EN / RU / TR / UK / SQ / KU / AR / PRS"
+        ]
+      },
+      "en": {
+        "summary": "Own product: a German trainer for a language class, about 10 minutes a day",
+        "task": "Students in a language class need to review between lessons, but a textbook and a group chat don't do that job: words get forgotten and the teacher can't see who is practising. The goal was a 10-minute-a-day trainer built on the class's own topics and usable in each student's native language.",
+        "solution": "I built a web app on Next.js 16, React 19 and PostgreSQL with a nine-language UI via next-intl. At its core are spaced-repetition flashcards based on the class topics: lessons, words, sentences, grammar explanations and videos. Every word and sentence can be played at normal and slow speed. Students join via the teacher's invitation or a QR code; inside there is a group chat, direct messages and personal statistics.",
+        "done": [
+          "Spaced-repetition flashcards: material comes back exactly when it's due for review",
+          "Class topics: lessons, words, sentences, explanations and videos in one place",
+          "Pronunciation of every word and sentence at normal and slow speed",
+          "Group chat, direct messages and personal learner statistics",
+          "Sign-in via teacher invitation and QR code; DE / EN / RU / TR / UK / SQ / KU / AR / PRS interface"
+        ]
+      },
+      "de": {
+        "summary": "Eigenes Produkt: Deutschtrainer für eine Sprachgruppe, rund 10 Minuten am Tag",
+        "task": "Teilnehmende eines Sprachkurses müssen zwischen den Stunden wiederholen, aber Lehrbuch und Gruppenchat leisten das nicht: Wörter gehen verloren, und die Lehrkraft sieht nicht, wer übt. Ziel war ein Trainer für 10 Minuten am Tag, der auf den Themen der eigenen Gruppe aufbaut und in der Muttersprache verständlich ist.",
+        "solution": "Entwickelt als Web-App mit Next.js 16, React 19 und PostgreSQL, Oberfläche in neun Sprachen über next-intl. Im Kern stehen Karteikarten mit verteilter Wiederholung zu den Gruppenthemen: Lektionen, Wörter, Sätze, Grammatikerklärungen und Videos. Jedes Wort und jeder Satz lässt sich in normalem und langsamem Tempo anhören. Der Zugang läuft über eine Einladung der Lehrkraft oder einen QR-Code; drinnen gibt es Gruppenchat, Direktnachrichten und eine eigene Statistik.",
+        "done": [
+          "Karteikarten mit verteilter Wiederholung: Stoff kommt genau dann zurück, wenn er fällig ist",
+          "Gruppenthemen: Lektionen, Wörter, Sätze, Erklärungen und Videos an einem Ort",
+          "Aussprache jedes Wortes und Satzes in normalem und langsamem Tempo",
+          "Gruppenchat, Direktnachrichten und persönliche Lernstatistik",
+          "Zugang per Einladung der Lehrkraft und QR-Code; Oberfläche DE / EN / RU / TR / UK / SQ / KU / AR / PRS"
+        ]
+      }
+    }
+  },
+  {
+    "slug": "ki-digitalbau",
+    "title": "KI Innovativ Digitalbau",
+    "url": "https://ki-digitalbau.vestoralife.de/",
+    "category": "products",
+    "status": "preview",
+    "featured": false,
+    "stack": [
+      "Next.js 16",
+      "React 19",
+      "Python",
+      "LiveKit Agents",
+      "Azure Speech",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Docker"
+    ],
+    "copy": {
+      "ru": {
+        "summary": "Собственный продукт: ИИ-ассистент, который отвечает на телефонные звонки малого бизнеса",
+        "task": "В мастерской, автосервисе, ресторане, салоне или практике телефон звонит в самый неудобный момент, и часть клиентов просто не дозванивается. Нужен был ассистент, который берёт трубку сам, записывает на приём или принимает заявку и не теряет срочные звонки.",
+        "solution": "Разрабатываю сервис из двух частей: голосовой агент на Python с LiveKit Agents и Azure Speech и личный кабинет на Next.js 16 и PostgreSQL. Ассистент говорит по-немецки и по-русски, записывает на приём, оформляет заявку на обратный звонок, а срочные случаи переводит на человека. Подключается переадресацией с уже существующего номера, данные хранятся на серверах в ЕС. Сейчас работает демо-версия.",
+        "done": [
+          "Запись на приём и заявки на обратный звонок прямо в разговоре",
+          "Заметка по каждому звонку в личном кабинете",
+          "Перевод срочных случаев на живого сотрудника",
+          "Подключение переадресацией с существующего номера, DSGVO и серверы в ЕС",
+          "Сайт DE / RU / EN / TR, ассистент говорит по-немецки и по-русски"
+        ]
+      },
+      "en": {
+        "summary": "Own product: an AI assistant that answers phone calls for small businesses",
+        "task": "In a workshop, car repair shop, restaurant, salon or practice the phone rings at the worst moment, and some customers never get through. The goal was an assistant that picks up by itself, books an appointment or takes a request, and never loses an urgent call.",
+        "solution": "I'm building a two-part service: a Python voice agent on LiveKit Agents and Azure Speech, and a customer dashboard on Next.js 16 and PostgreSQL. The assistant speaks German and Russian, books appointments, records callback requests and hands urgent cases over to a person. It is connected by forwarding an existing number, and data is stored on servers in the EU. A demo version is currently running.",
+        "done": [
+          "Appointment booking and callback requests right during the call",
+          "A note for every call in the customer dashboard",
+          "Urgent cases handed over to a real person",
+          "Connected by forwarding an existing number; GDPR-compliant, EU servers",
+          "Website in DE / RU / EN / TR; the assistant speaks German and Russian"
+        ]
+      },
+      "de": {
+        "summary": "Eigenes Produkt: KI-Assistent, der Telefonanrufe für kleine Betriebe annimmt",
+        "task": "In Werkstatt, Autoservice, Restaurant, Salon oder Praxis klingelt das Telefon im ungünstigsten Moment, und ein Teil der Kundschaft kommt gar nicht durch. Gesucht war ein Assistent, der selbst abnimmt, Termine vergibt oder Anliegen aufnimmt und dringende Anrufe nicht verliert.",
+        "solution": "Ich entwickle einen Dienst aus zwei Teilen: einen Sprachagenten in Python mit LiveKit Agents und Azure Speech und ein Kundenkonto mit Next.js 16 und PostgreSQL. Der Assistent spricht Deutsch und Russisch, vergibt Termine, nimmt Rückrufwünsche auf und stellt dringende Fälle zu einem Menschen durch. Angebunden wird er per Rufumleitung der bestehenden Nummer, die Daten liegen auf Servern in der EU. Derzeit läuft eine Demoversion.",
+        "done": [
+          "Terminvergabe und Rückrufwünsche direkt im Gespräch",
+          "Notiz zu jedem Anruf im Kundenkonto",
+          "Durchstellen dringender Fälle an einen Menschen",
+          "Anbindung per Rufumleitung der bestehenden Nummer, DSGVO-konform, Server in der EU",
+          "Website DE / RU / EN / TR, der Assistent spricht Deutsch und Russisch"
+        ]
+      }
+    }
   }
 ]
