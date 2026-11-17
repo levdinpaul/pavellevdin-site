@@ -1,89 +1,89 @@
 {
   "ru": [
     {
-      "slug": "avtomatizatsiya-zayavok-telegram-ai",
-      "title": "Как не терять заявки с сайта вечером и в выходные: форма, Telegram и AI",
-      "excerpt": "Практическое руководство: как настроить мгновенные уведомления о заявках из формы в Telegram, подключить первичную квалификацию с помощью ИИ и не терять клиентов во внерабочее время.",
-      "publishedAt": "2026-10-26T14:48:14.407Z",
-      "updatedAt": "2026-10-26T14:48:18.530Z",
-      "readMinutes": 6,
-      "image": "https://pavellevdin.ru/uploads/medium_featured_avtomatizatsiya_zayavok_telegram_ai_5fcde6e206.jpg"
-    },
-    {
-      "slug": "website-lead-forms-telegram",
-      "title": "Заявка с сайта потерялась: как настроить уведомления в Telegram без CRM",
-      "excerpt": "Почему письма с веб-форм попадают в спам, как настроить мгновенное получение заявок с сайта в Telegram и защитить формы от спам-ботов без сложных систем.",
-      "publishedAt": "2026-10-26T14:27:10.806Z",
-      "updatedAt": "2026-10-26T14:36:51.060Z",
+      "slug": "telegram-website-lead-notifications",
+      "title": "Как не терять заявки с сайта: уведомления в Telegram с кнопками",
+      "excerpt": "Разбор маршрутизации лидов из веб-форм в Telegram. Как получать сообщения мгновенно и менять статус заявки в один клик без расходов на CRM.",
+      "publishedAt": "2026-11-09T06:38:32.191Z",
+      "updatedAt": "2026-11-09T06:38:32.765Z",
       "readMinutes": 5,
-      "image": "https://pavellevdin.ru/uploads/medium_featured_website_lead_forms_telegram_7de0a4e059.jpg"
+      "image": "https://pavellevdin.ru/uploads/medium_featured_telegram_website_lead_notifications_ceba11d840.jpg"
     },
     {
-      "slug": "tailwind-css-2026-arhitektura-stiley",
-      "title": "Tailwind CSS 2026: архитектура стилей для больших проектов",
-      "excerpt": "Полное руководство по организации, масштабированию и оптимизации Tailwind CSS в корпоративных проектах 2026 года.",
-      "publishedAt": "2026-10-24T19:45:44.602Z",
-      "updatedAt": "2026-10-24T19:45:44.639Z",
-      "readMinutes": 2,
-      "image": "https://pavellevdin.ru/uploads/medium_og_tailwind_css_2026_c61f92688c.jpg"
+      "slug": "sayt-dlya-psihologa",
+      "title": "Сайт для психолога: структура, доверие, 152-ФЗ и удобная запись",
+      "excerpt": "Разбираем, как устроен эффективный сайт для психолога: подтверждение квалификации, соблюдение 152-ФЗ, форма записи без барьеров и мгновенные уведомления в Telegram.",
+      "publishedAt": "2026-11-05T06:27:36.471Z",
+      "updatedAt": "2026-11-05T06:27:37.134Z",
+      "readMinutes": 7,
+      "image": "https://pavellevdin.ru/uploads/medium_featured_sayt_dlya_psihologa_e4c2831be0.jpg"
+    },
+    {
+      "slug": "lead-routing-telegram-crm",
+      "title": "Как настроить мгновенный проброс заявок с сайта в Telegram и CRM",
+      "excerpt": "Разбор безопасной схемы отправки лидов: почему почта больше не работает, как защитить токен бота и настроить ИИ-ассистента с контролем человеком.",
+      "publishedAt": "2026-11-02T06:47:03.321Z",
+      "updatedAt": "2026-11-02T06:47:03.957Z",
+      "readMinutes": 6,
+      "image": "https://pavellevdin.ru/uploads/medium_featured_lead_routing_telegram_crm_24378da84c.jpg"
     }
   ],
   "de": [
     {
-      "slug": "so-gehen-nachts-und-am-wochenende-keine-website-anfragen-mehr-verloren-kontaktformular-tel",
-      "title": "So gehen nachts und am Wochenende keine Website-Anfragen mehr verloren: Kontaktformular, Telegram und KI",
-      "excerpt": "Praxis-Leitfaden: So richten Sie Telegram-Benachrichtigungen für Website-Formulare ein, qualifizieren Leads per KI und gewinnen auch außerhalb der Arbeitszeiten Kunden.",
-      "publishedAt": "2026-10-26T14:48:14.407Z",
-      "updatedAt": "2026-10-26T14:48:18.540Z",
-      "readMinutes": 7,
-      "image": "https://pavellevdin.ru/uploads/medium_featured_avtomatizatsiya_zayavok_telegram_ai_5fcde6e206.jpg"
+      "slug": "wie-sie-keine-anfragen-ueber-die-website-verlieren-telegram-benachrichtigungen-mit-buttons",
+      "title": "Wie Sie keine Anfragen über die Website verlieren: Telegram-Benachrichtigungen mit Buttons",
+      "excerpt": "Anfragen über die Website direkt nach Telegram leiten: So erhalten Sie Nachrichten sofort und ändern den Status per Klick – ganz ohne Kosten für ein CRM.",
+      "publishedAt": "2026-11-09T06:38:32.191Z",
+      "updatedAt": "2026-11-09T06:38:32.770Z",
+      "readMinutes": 6,
+      "image": "https://pavellevdin.ru/uploads/medium_featured_telegram_website_lead_notifications_ceba11d840.jpg"
     },
     {
-      "slug": "keine-website-anfragen-mehr-verpassen-so-richten-sie-telegram-benachrichtigungen-ohne-crm",
-      "title": "Keine Website-Anfragen mehr verpassen: So richten Sie Telegram-Benachrichtigungen ohne CRM ein",
-      "excerpt": "Warum Kontaktformulare im Spam landen, wie Sie Anfragen direkt auf Telegram erhalten und Ihre Website ohne komplexe Tools vor Spam-Bots schützen.",
-      "publishedAt": "2026-10-26T14:27:10.806Z",
-      "updatedAt": "2026-10-26T14:36:51.072Z",
+      "slug": "website-fuer-psychologen-struktur-vertrauen-152-fz-und-einfache-terminbuchung",
+      "title": "Website für Psychologen: Struktur, Vertrauen, 152-FZ und einfache Terminbuchung",
+      "excerpt": "So gelingt die Website für Psychologen: Qualifikationsnachweise, 152-FZ-Konformität, barrierefreie Anfragen über die Website und sofortige Benachrichtigungen via Telegram.",
+      "publishedAt": "2026-11-05T06:27:36.471Z",
+      "updatedAt": "2026-11-05T06:27:37.137Z",
+      "readMinutes": 4,
+      "image": "https://pavellevdin.ru/uploads/medium_featured_sayt_dlya_psihologa_e4c2831be0.jpg"
+    },
+    {
+      "slug": "so-leiten-sie-anfragen-ueber-die-website-sofort-an-telegram-und-ihr-crm-weiter",
+      "title": "So leiten Sie Anfragen über die Website sofort an Telegram und Ihr CRM weiter",
+      "excerpt": "Sichere Anfragen über die Website: Warum E-Mail ausgedient hat, wie Sie Bot-Tokens schützen und einen KI-Assistenten mit menschlicher Kontrolle einrichten.",
+      "publishedAt": "2026-11-02T06:47:03.321Z",
+      "updatedAt": "2026-11-02T06:47:03.951Z",
       "readMinutes": 5,
-      "image": "https://pavellevdin.ru/uploads/medium_featured_website_lead_forms_telegram_7de0a4e059.jpg"
-    },
-    {
-      "slug": "tailwind-css-2026-stilarchitektur",
-      "title": "Tailwind CSS 2026: Stilarchitektur für große Projekte",
-      "excerpt": "Umfassender Leitfaden zur Organisation, Skalierung und Optimierung von Tailwind CSS in Unternehmensprojekten des Jahres 2026.",
-      "publishedAt": "2026-10-24T19:45:44.602Z",
-      "updatedAt": "2026-10-24T19:45:44.710Z",
-      "readMinutes": 2,
-      "image": null
+      "image": "https://pavellevdin.ru/uploads/medium_featured_lead_routing_telegram_crm_24378da84c.jpg"
     }
   ],
   "en": [
     {
-      "slug": "how-to-stop-losing-website-leads-in-the-evenings-and-on-weekends-forms-telegram-and-ai",
-      "title": "How to stop losing website leads in the evenings and on weekends: Forms, Telegram, and AI",
-      "excerpt": "Practical guide: set up instant Telegram lead alerts, add AI pre-qualification, and stop losing clients after hours.",
-      "publishedAt": "2026-10-26T14:48:14.407Z",
-      "updatedAt": "2026-10-26T14:48:15.930Z",
+      "slug": "how-to-avoid-losing-website-leads-telegram-notifications-with-buttons",
+      "title": "How to Avoid Losing Website Leads: Telegram Notifications with Buttons",
+      "excerpt": "A breakdown of lead routing from web forms to Telegram. How to receive messages instantly and update request status in one click without CRM expenses.",
+      "publishedAt": "2026-11-09T06:38:32.191Z",
+      "updatedAt": "2026-11-09T06:38:32.710Z",
       "readMinutes": 6,
-      "image": "https://pavellevdin.ru/uploads/medium_featured_avtomatizatsiya_zayavok_telegram_ai_5fcde6e206.jpg"
+      "image": "https://pavellevdin.ru/uploads/medium_featured_telegram_website_lead_notifications_ceba11d840.jpg"
     },
     {
-      "slug": "website-lead-went-missing-how-to-set-up-telegram-notifications-without-a-crm",
-      "title": "Website lead went missing: how to set up Telegram notifications without a CRM",
-      "excerpt": "Why web form emails go to spam, how to get instant leads in Telegram, and how to protect forms from spam bots without complex systems.",
-      "publishedAt": "2026-10-26T14:27:10.806Z",
-      "updatedAt": "2026-10-26T14:36:50.896Z",
-      "readMinutes": 6,
-      "image": "https://pavellevdin.ru/uploads/medium_featured_website_lead_forms_telegram_7de0a4e059.jpg"
+      "slug": "psychologist-website-structure-trust-152-fz-and-easy-booking",
+      "title": "Psychologist Website: Structure, Trust, 152-FZ, and Easy Booking",
+      "excerpt": "Breaking down an effective website for a psychologist: proof of qualifications, 152-FZ compliance, a seamless booking form, and instant Telegram notifications.",
+      "publishedAt": "2026-11-05T06:27:36.471Z",
+      "updatedAt": "2026-11-05T06:27:37.078Z",
+      "readMinutes": 8,
+      "image": "https://pavellevdin.ru/uploads/medium_featured_sayt_dlya_psihologa_e4c2831be0.jpg"
     },
     {
-      "slug": "tailwind-css-2026-style-architecture",
-      "title": "Tailwind CSS 2026: Style Architecture for Large Projects",
-      "excerpt": "Complete guide to organizing, scaling, and optimizing Tailwind CSS in enterprise projects of 2026.",
-      "publishedAt": "2026-10-24T19:45:44.602Z",
-      "updatedAt": "2026-10-24T19:45:44.676Z",
-      "readMinutes": 2,
-      "image": null
+      "slug": "how-to-set-up-instant-lead-forwarding-from-a-website-to-telegram-and-crm",
+      "title": "How to Set Up Instant Lead Forwarding from a Website to Telegram and CRM",
+      "excerpt": "Breakdown of a secure lead delivery setup: why email no longer works, how to protect your bot token, and how to set up an AI assistant with human oversight.",
+      "publishedAt": "2026-11-02T06:47:03.321Z",
+      "updatedAt": "2026-11-02T06:47:03.823Z",
+      "readMinutes": 7,
+      "image": "https://pavellevdin.ru/uploads/medium_featured_lead_routing_telegram_crm_24378da84c.jpg"
     }
   ]
 }
