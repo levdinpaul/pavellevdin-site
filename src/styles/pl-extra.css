@@ -447,3 +447,20 @@
   .pl-vcard__side { break-inside: avoid; }
   .pl-vcard__qr-box svg { outline: 1px solid #dde1ea; }
 }
+
+/* ── Scroll-build (prompt-9842): слой каркаса/курсоров, его создаёт src/components/BuildReveal.tsx и удаляет после сборки ── */
+.pl-build-layer { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: visible; z-index: 40; pointer-events: none; }
+.pl-build-wire, .pl-build-frame, .pl-build-cursor, .pl-build-caret { position: absolute; pointer-events: none; }
+.pl-build-wire { box-sizing: border-box; border: 1px dashed var(--line-acc); background: rgba(122,162,255,.035); overflow: visible; }
+.pl-build-wire--text { border-color: rgba(122,162,255,.32); background: rgba(122,162,255,.05); }
+.pl-build-bar { height: 7px; margin: 16px 0 0 18px; max-width: calc(100% - 36px); border-radius: 4px; background: var(--line-2); transform-origin: left center; }
+.pl-build-handle { position: absolute; width: 7px; height: 7px; border: 1px solid var(--accent); background: var(--ink-inverse); }
+.pl-build-handle--tl { left: -4px; top: -4px; } .pl-build-handle--tr { right: -4px; top: -4px; }
+.pl-build-handle--bl { left: -4px; bottom: -4px; } .pl-build-handle--br { right: -4px; bottom: -4px; }
+.pl-build-frame { overflow: visible; }
+.pl-build-frame rect { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 1; }
+.pl-build-cursor { left: 0; top: 0; width: 26px; height: 26px; will-change: transform, opacity; filter: drop-shadow(0 2px 6px rgba(0,0,0,.45)); }
+.pl-build-cursor svg { display: block; }
+.pl-build-caret { width: 2px; border-radius: 1px; background: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .pl-build-layer { display: none !important; } }
+

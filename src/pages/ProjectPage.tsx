@@ -6,7 +6,7 @@ import { PageMeta } from '@/components/pl/PageMeta';
 import pagespeed from '@/data/pagespeed.json';
 import { LANDING_INDEX, landingsForProject } from '@/data/landing-index';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
-import { useReveal } from '@/sections/scena/useReveal';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { Reviews } from '@/components/pl/Reviews';
 
 /** Страница кейса /:lang/portfolio/:slug — скриншоты реального сайта, Задача → Решение → Что сделано. */
@@ -18,7 +18,7 @@ export function ProjectPage() {
   const root = useRef<HTMLDivElement>(null);
   const shot = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  useBuildReveal(root);
 
   // Параллакс скриншота + прогресс чтения — пишем transform напрямую (без ре-рендеров)
   useEffect(() => {

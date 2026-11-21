@@ -10,7 +10,7 @@ import { Marquee } from '@/components/pl/Marquee';
 import { stackFor } from '@/data/stack';
 import { ProjectCard } from '@/components/pl/ProjectCard';
 import { TelegramIcon, WhatsAppIcon } from '@/components/layout/social-icons';
-import { useReveal } from '@/sections/scena/useReveal';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { Title } from '@/components/pl/Title';
 
 type Group = { title: string; points: string[] };
@@ -21,7 +21,7 @@ export function AboutPage() {
   const { t, i18n } = useTranslation();
   const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
   const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  useBuildReveal(root);
 
   const skills = t('pl.aboutPage.skills', { returnObjects: true }) as Group[];
   const process = t('pl.aboutPage.process', { returnObjects: true }) as Item[];

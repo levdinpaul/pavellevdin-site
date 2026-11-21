@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { Link, useParams } from 'react-router-dom';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { projects } from '@/data/projects';
@@ -14,6 +15,8 @@ const API_BASE = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_
 export function ReviewPage() {
   const { token = '' } = useParams();
   const { t, i18n } = useTranslation();
+  const buildRoot = useRef<HTMLDivElement>(null);
+  useBuildReveal(buildRoot);
   const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
   const [project, setProject] = useState<{ project: string; title: string } | null | 'invalid'>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error' | 'links'>('idle');
@@ -71,7 +74,7 @@ export function ReviewPage() {
   return (
     <>
       <PageMeta lang={lang} path={token ? `/review/${token}` : '/review'} title={t('pl.reviews.form.metaTitle')} description={t('pl.reviews.form.lead')} noindex />
-      <div className="pl-page">
+      <div ref={buildRoot} className="pl-page">
         <section className="pl-container pl-review-form">
           <div className="pl-page__head">
             <p className="pl-eyebrow">{t('pl.reviews.eyebrow')}</p>

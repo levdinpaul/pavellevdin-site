@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -43,6 +44,8 @@ const EMPTY: FormValues = { name: '', contact: '', message: '', budget: '', cons
 /** «Контакты»: обращение + прямые каналы слева, заявка справа (на мобильном — заявка сразу после заголовка). */
 export function ContactPage() {
   const { t, i18n } = useTranslation();
+  const buildRoot = useRef<HTMLDivElement>(null);
+  useBuildReveal(buildRoot);
   const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
   const c = (key: string, opts?: Record<string, string>) => t(`pl.contactPage.${key}`, opts);
   const contacts = getContacts(lang);
@@ -118,7 +121,7 @@ export function ContactPage() {
     <>
       <PageMeta lang={lang} path="/contact" title={c('title')} description={c('desc')} />
 
-      <div className="pl-page">
+      <div ref={buildRoot} className="pl-page">
         <section className="pl-container pl-contact" aria-labelledby="cf-title">
           <header className="pl-contact__intro">
             <p className="pl-eyebrow">{c('eyebrow')}</p>

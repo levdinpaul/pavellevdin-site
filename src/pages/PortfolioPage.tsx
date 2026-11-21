@@ -4,7 +4,7 @@ import { PROJECT_CATEGORIES, projects, type ProjectCategory } from '@/data/proje
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { ProjectCard } from '@/components/pl/ProjectCard';
-import { useReveal } from '@/sections/scena/useReveal';
+import { useBuildReveal } from '@/components/BuildReveal';
 
 /** Портфолио: 11 проектов с фильтром по категориям. SSR отдаёт полный список («Все»). */
 export function PortfolioPage() {
@@ -12,7 +12,7 @@ export function PortfolioPage() {
   const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
   const [cat, setCat] = useState<ProjectCategory | 'all'>('all');
   const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  useBuildReveal(root);
 
   const list = cat === 'all' ? projects : projects.filter((p) => p.category === cat);
   const filters: (ProjectCategory | 'all')[] = ['all', ...PROJECT_CATEGORIES];

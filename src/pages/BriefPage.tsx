@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { track } from '@/lib/analytics';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -77,6 +78,8 @@ const BRIEF_META = {
 
 export function BriefPage() {
   const { i18n } = useTranslation();
+  const buildRoot = useRef<HTMLDivElement>(null);
+  useBuildReveal(buildRoot);
   const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru') as 'de' | 'en' | 'ru';
 
   const [step, setStep] = useState(0);
@@ -172,7 +175,7 @@ export function BriefPage() {
     <>
       <PageMeta lang={lang} path="/brief" title={BRIEF_META[lang].title} description={BRIEF_META[lang].description} />
 
-      <div className="min-h-screen bg-slate-950 pt-28 text-white">
+      <div ref={buildRoot} className="min-h-screen bg-slate-950 pt-28 text-white">
         <section className="relative overflow-hidden px-4 pb-24 sm:px-6 lg:px-8">
 
           <div className="relative mx-auto max-w-3xl">

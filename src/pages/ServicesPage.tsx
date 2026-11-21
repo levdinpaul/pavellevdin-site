@@ -5,7 +5,7 @@ import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { ServicesGrid } from '@/components/pl/ServicesGrid';
 import { Integrations } from '@/components/pl/Integrations';
-import { useReveal } from '@/sections/scena/useReveal';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { Pricing } from '@/components/pl/Pricing';
 import { Title } from '@/components/pl/Title';
 import { PACKAGES, currencyFor, packageCopy, priceFor } from '@/data/pricing';
@@ -21,7 +21,7 @@ export function ServicesPage() {
   const { t, i18n } = useTranslation();
   const lang = ['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru';
   const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  useBuildReveal(root);
   const fx = useFxRate(lang);
   const services = t('pl.services.items', { returnObjects: true }) as Item[];
   const process = t('pl.aboutPage.process', { returnObjects: true }) as Item[];

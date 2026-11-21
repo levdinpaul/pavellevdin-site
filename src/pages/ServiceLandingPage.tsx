@@ -4,7 +4,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { PageMeta } from '@/components/pl/PageMeta';
 import { SITE, breadcrumbs } from '@/components/pl/seo';
 import { ProjectCard } from '@/components/pl/ProjectCard';
-import { useReveal } from '@/sections/scena/useReveal';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { projects } from '@/data/projects';
 import { PACKAGES, currencyFor, formatFrom, priceFor } from '@/data/pricing';
 import { useFxRate } from '@/data/fx';
@@ -31,7 +31,7 @@ export function ServiceLandingPage() {
   const { t, i18n } = useTranslation();
   const lang = (['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru') as Lang;
   const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  useBuildReveal(root);
   const fx = useFxRate(lang);
   const data = LANDINGS[slug];
   if (!data) return <Navigate to={`/${lang}/services`} replace />;

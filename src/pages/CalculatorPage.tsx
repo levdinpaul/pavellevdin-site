@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { track } from '@/lib/analytics';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PageMeta } from '@/components/pl/PageMeta';
@@ -78,6 +79,8 @@ async function isLoggedIn(): Promise<boolean> {
 
 export function CalculatorPage() {
   const { t, i18n } = useTranslation();
+  const buildRoot = useRef<HTMLDivElement>(null);
+  useBuildReveal(buildRoot);
   const lang = (['ru', 'de', 'en'].includes(i18n.language) ? i18n.language : 'ru') as Lang;
   const fx = useFxRate(lang);
   const [params] = useSearchParams();
@@ -208,7 +211,7 @@ export function CalculatorPage() {
   return (
     <>
       <PageMeta lang={lang} path="/calculator" title={t('pl.calc.metaTitle')} description={t('pl.calc.metaDescription')} jsonLd={jsonLd} />
-      <div className="pl-page pl-calc">
+      <div ref={buildRoot} className="pl-page pl-calc">
         <section className="pl-container pl-page__head">
           <p className="pl-eyebrow">{t('pl.calc.eyebrow')}</p>
           <h1 className="pl-page__title">{t('pl.calc.title')}</h1>

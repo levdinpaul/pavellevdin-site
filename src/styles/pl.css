@@ -102,7 +102,9 @@
 
 /* Соц-панель справа по центру — только desktop (на мобильном — ContactFab). z-index: выше секций, ниже шапки/⌘K/модалок. */
 .pl-rail { position: fixed; right: 12px; top: 50%; transform: translateY(-50%); z-index: 45; display: none; }
-@media (min-width: 1024px) { .pl-rail { display: block; } }
+@media (min-width: 1024px) { .pl-rail { display: flex; flex-direction: column; align-items: center; gap: 18px; } }
+/* два раздельных блока одного стиля: «Для связи» (сверху) и соцсети — prompt-9842 */
+.pl-rail__group { margin: 0; }
 .pl-rail ul {
   display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 6px; list-style: none; max-width: 48px;
   background: rgba(10,14,26,.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);

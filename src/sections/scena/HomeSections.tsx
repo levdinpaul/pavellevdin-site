@@ -13,7 +13,7 @@ import { Reviews } from '@/components/pl/Reviews';
 import { BlogSection } from '@/components/pl/BlogSection';
 import { ProcessSection, FaqSection, ClientsSection } from '@/components/pl/TrustSections';
 import { AuditForm } from '@/components/pl/AuditForm';
-import { useReveal } from './useReveal';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { WorkSection } from './WorkSection';
 
 type Service = { title: string; text: string };
@@ -22,7 +22,7 @@ type Service = { title: string; text: string };
 export function HomeSections({ lang }: { lang: string }) {
   const { t } = useTranslation();
   const root = useRef<HTMLDivElement>(null);
-  useReveal(root);
+  useBuildReveal(root);
 
   const contacts = getContacts(lang);
   const work = projects.filter((p) => p.featured).slice(0, 6);

@@ -667,7 +667,8 @@
     },
     "rail": {
       "label": "Социальные сети",
-      "tgChannel": "Telegram-канал"
+      "tgChannel": "Telegram-канал",
+      "contactLabel": "Для связи"
     },
     "fab": {
       "open": "Связаться",
