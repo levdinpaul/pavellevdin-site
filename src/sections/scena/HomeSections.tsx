@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
 import { getContacts } from '@/constants/contacts';
-import { ProjectCard } from '@/components/pl/ProjectCard';
 import { Integrations } from '@/components/pl/Integrations';
 import { PriceLine } from '@/components/pl/Pricing';
 import { Counter } from '@/components/pl/Counter';
@@ -15,6 +14,7 @@ import { BlogSection } from '@/components/pl/BlogSection';
 import { ProcessSection, FaqSection, ClientsSection } from '@/components/pl/TrustSections';
 import { AuditForm } from '@/components/pl/AuditForm';
 import { useReveal } from './useReveal';
+import { WorkSection } from './WorkSection';
 
 type Service = { title: string; text: string };
 
@@ -31,15 +31,7 @@ export function HomeSections({ lang }: { lang: string }) {
   return (
     <div ref={root} className="pl-main">
       <div className="pl-container">
-        <section id="work" className="pl-section" aria-labelledby="pl-work-title">
-          <div className="pl-section__head">
-            <Title id="pl-work-title" lines={[t('pl.work.title')]} />
-            <Link to={`/${lang}/portfolio`} viewTransition className="pl-link" data-reveal="">{t('pl.work.all')}</Link>
-          </div>
-          <ul className="pl-work__grid">
-            {work.map((p) => <li key={p.slug} data-reveal=""><ProjectCard project={p} lang={lang} /></li>)}
-          </ul>
-        </section>
+        <WorkSection lang={lang} work={work} />
 
         <Reviews lang={lang} fallback={<ClientsSection lang={lang} />} />
 
