@@ -104,7 +104,10 @@
         "de": { "title": "Stundensatz", "points": ["Anpassungen und Aufgaben außerhalb der Pakete"] },
         "en": { "title": "Hourly rate", "points": ["Changes and tasks outside the packages"] }
       }
-    }
+    },
+    {"id": "pwa", "price": {"ru": 90000}, "copy": {"ru": {"title": "PWA-приложение", "duration": "3–6 недель"}, "de": {"title": "Progressive Web App (PWA)"}, "en": {"title": "Progressive Web App (PWA)"}}},
+    {"id": "mobile-app", "price": {"ru": 250000}, "copy": {"ru": {"title": "Мобильное приложение (React Native)", "duration": "8–16 недель"}, "de": {"title": "Mobile App (React Native)"}, "en": {"title": "Mobile App (React Native)"}}},
+    {"id": "marketplace", "price": {"ru": 200000}, "copy": {"ru": {"title": "Маркетплейс / каталог с кабинетом", "duration": "10–20 недель"}, "de": {"title": "Marktplatz / Katalog mit Kundenportal"}, "en": {"title": "Marketplace / catalog with portal"}}}
   ],
   "calculator": {
     "_comment": "Калькулятор /{lang}/calculator. База по типу проекта = цена пакета выше (packages[].price.ru), опции crm/ai — тоже из пакетов (integrations/ai). «от» = цена позиции, «до» = цена × spread; всё округляется до roundTo ₽. Срочность — надбавка urgent.factor к сумме и сжатие срока urgent.weeksFactor. Сроки — недели. Расчёт: src/lib/calculator.ts (копия — pl-platform web/src/lib/calculator.ts + этот же файл в web/src/data/pricing.json, держать в синхроне).",
@@ -116,7 +119,10 @@
       { "id": "small-site", "package": "small-site", "pagesIncluded": 7, "pagesMax": 20, "extraPage": 4000, "weeks": [2, 3], "includes": [] },
       { "id": "business-site", "package": "business-site", "pagesIncluded": 10, "pagesMax": 40, "extraPage": 4000, "weeks": [4, 6], "includes": ["cms", "blog"] },
       { "id": "shop", "package": "shop", "pagesIncluded": 10, "pagesMax": 40, "extraPage": 5000, "weeks": [6, 8], "includes": ["cms"] },
-      { "id": "web-app", "package": "web-app", "pagesIncluded": 5, "pagesMax": 30, "extraPage": 10000, "weeks": [6, 10], "includes": [] }
+      { "id": "web-app", "package": "web-app", "pagesIncluded": 5, "pagesMax": 30, "extraPage": 10000, "weeks": [6, 10], "includes": [] },
+      {"id": "pwa", "package": "pwa", "pagesIncluded": 5, "pagesMax": 20, "extraPage": 6000, "weeks": [3, 6], "includes": ["cms"]},
+      {"id": "mobile-app", "package": "mobile-app", "pagesIncluded": 5, "pagesMax": 25, "extraPage": 15000, "weeks": [8, 16], "includes": []},
+      {"id": "marketplace", "package": "marketplace", "pagesIncluded": 15, "pagesMax": 60, "extraPage": 6000, "weeks": [10, 20], "includes": ["cms", "blog"]}
     ],
     "options": [
       {
@@ -153,7 +159,13 @@
         "id": "seo", "price": 20000, "weeks": 0.5,
         "label": { "ru": "SEO-старт", "de": "SEO-Start", "en": "SEO start" },
         "hint": { "ru": "Семантика, структура, метатеги, Яндекс Вебмастер и Метрика, Search Console.", "de": "Keywords, Struktur, Meta-Tags, Search Console und Analytics.", "en": "Keywords, structure, meta tags, Search Console and analytics." }
-      }
+      },
+      {"id": "auth", "unit": "flat", "price": 25000, "weeks": 1, "label": {"ru": "Личный кабинет / авторизация", "de": "Kundenportal / Login", "en": "User account / auth"}},
+      {"id": "analytics", "unit": "flat", "price": 8000, "weeks": 0.5, "label": {"ru": "Аналитика (GA4 + Yandex.Metrica)", "de": "Analytics (GA4)", "en": "Analytics (GA4)"}},
+      {"id": "ai-chat", "unit": "flat", "price": 20000, "weeks": 0.5, "label": {"ru": "AI-чат на сайте", "de": "KI-Chat auf der Website", "en": "AI chat widget"}},
+      {"id": "email-marketing", "unit": "flat", "price": 12000, "weeks": 0.5, "label": {"ru": "Email-рассылка (Brevo/Mailchimp)", "de": "E-Mail-Marketing (Brevo)", "en": "Email marketing (Brevo)"}},
+      {"id": "maps", "unit": "flat", "price": 8000, "weeks": 0.25, "label": {"ru": "Интеграция карт (Google Maps / Yandex)", "de": "Kartenintegration (Google Maps)", "en": "Map integration (Google Maps)"}},
+      {"id": "push", "unit": "flat", "price": 10000, "weeks": 0.5, "label": {"ru": "Push-уведомления", "de": "Push-Benachrichtigungen", "en": "Push notifications"}}
     ],
     "urgent": {
       "factor": 1.3, "weeksFactor": 0.7,

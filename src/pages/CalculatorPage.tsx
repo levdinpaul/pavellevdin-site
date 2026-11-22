@@ -121,7 +121,7 @@ export function CalculatorPage() {
   const money = (v: number) => formatAmount(lang, v);
   const weeks = (a: number, b: number) => (a === b ? t('pl.calc.weeksOne', { n: a }) : t('pl.calc.weeks', { min: a, max: b }));
   const pagesFixed = project.pagesMax <= project.pagesIncluded;
-  const isApp = project.id === 'web-app';
+  const isApp = project.id === 'web-app' || project.id === 'mobile-app' || project.id === 'pwa';
   const extraPagePrice = calculateFor(lang, { ...input, pages: project.pagesIncluded + 1 }, fx);
   const extraLine = extraPagePrice?.breakdown.find((l) => l.key === 'pages');
 

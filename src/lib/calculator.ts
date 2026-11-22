@@ -215,7 +215,7 @@ export function calculate(rawInput: unknown): CalcResult | null {
 
   const extraPages = Math.max(0, input.pages - project.pagesIncluded);
   if (extraPages > 0 && project.extraPage > 0) {
-    const label = project.id === 'web-app' ? CFG.labels.extraScreens : CFG.labels.extraPages;
+    const label = (project.id === 'web-app' || project.id === 'mobile-app' || project.id === 'pwa') ? CFG.labels.extraScreens : CFG.labels.extraPages;
     line('pages', label, extraPages, 'page', extraPages * project.extraPage);
     const w = Math.ceil(extraPages / Math.max(1, CFG.extraPagesPerWeek));
     weeksMin += w;
