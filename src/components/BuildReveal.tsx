@@ -162,11 +162,22 @@ function isPattern(v: string | null | undefined): v is BuildPattern {
 
 type Meta = { p: BuildPattern; unit: number; gi: number; group: number };
 
-function assignPatterns(root: HTMLElement, blocks: HTMLElement[], noTiles: boolean): Map<HTMLElement, Meta> {
+function assignPatterns(root: HTMLElement, blocks: HTMLElement[], rects: DOMRect[], noTiles: boolean): Map<HTMLElement, Meta> {
   const ordered = [...blocks].sort((a, c) => (a === c ? 0 : a.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
   const isHead = (b: HTMLElement) => b.matches('h1,h2');
+  // сетка = ≥3 соседа одного родителя, разложенных минимум в 2 колонки (вертикальная стопка — это одиночные блоки)
+  const cols = new Map<Element, Set<number>>();
+  blocks.forEach((b, i) => {
+    if (isHead(b) || !b.parentElement) return;
+    const set = cols.get(b.parentElement) ?? new Set<number>();
+    set.add(Math.round(rects[i].left / 8));
+    cols.set(b.parentElement, set);
+  });
   const siblings = new Map<Element, number>();
-  for (const b of ordered) if (!isHead(b) && b.parentElement) siblings.set(b.parentElement, (siblings.get(b.parentElement) ?? 0) + 1);
+  for (const b of ordered) {
+    const par = b.parentElement;
+    if (!isHead(b) && par && (cols.get(par)?.size ?? 0) >= 2) siblings.set(par, (siblings.get(par) ?? 0) + 1);
+  }
 
   type Unit = { bs: HTMLElement[]; kind: 'head' | 'single' | 'group' };
   const units: Unit[] = [];
@@ -204,9 +215,20 @@ function assignPatterns(root: HTMLElement, blocks: HTMLElement[], noTiles: boole
       counters[key] = c + 1;
     }
     if (noTiles && p === 'tiles') p = prev === 'unfold-up' ? 'outline-draw' : 'unfold-up';
-    prev = p;
-    const pat = p;
-    u.bs.forEach((b, gi) => out.set(b, { p: pat, unit: ui, gi, group: u.kind === 'group' ? ui : -1 }));
+    const pat: BuildPattern = p;
+    // в сетке (кроме grid-stagger, который собирает её целиком по диагонали) карточки чередуют два паттерна шахматно
+    const mate = u.kind === 'group' && pat !== 'grid-stagger'
+      ? GROUP_ROT.find((x) => x !== pat && x !== 'grid-stagger' && x !== prev && !(noTiles && x === 'tiles')) ?? pat
+      : pat;
+    const rectOf = (b: HTMLElement) => rects[blocks.indexOf(b)];
+    const xs = [...new Set(u.bs.map((b) => Math.round(rectOf(b).left / 8)))].sort((a, c) => a - c);
+    const ys = [...new Set(u.bs.map((b) => Math.round(rectOf(b).top / 8)))].sort((a, c) => a - c);
+    u.bs.forEach((b, gi) => {
+      const r = rectOf(b);
+      const own = (xs.indexOf(Math.round(r.left / 8)) + ys.indexOf(Math.round(r.top / 8))) % 2 ? mate : pat;
+      out.set(b, { p: own, unit: ui, gi, group: u.kind === 'group' ? ui : -1 });
+      prev = own;
+    });
   });
   return out;
 }
@@ -269,7 +291,7 @@ function startBuild(root: HTMLElement, nav: boolean): () => void {
   const rects = blocks.map((b) => b.getBoundingClientRect());
   const toHold = blocks.filter((_, i) => (nav ? rects[i].bottom > 0 : rects[i].top > vh));
   if (!toHold.length) return () => {};
-  const meta = assignPatterns(root, blocks, weak);
+  const meta = assignPatterns(root, blocks, rects, weak);
 
   for (const b of toHold) held.set(b, b.animate([{ opacity: 0 }, { opacity: 0 }], { duration: 1, fill: 'forwards' }));
 
