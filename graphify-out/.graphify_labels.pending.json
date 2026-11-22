@@ -1,0 +1,20 @@
+{
+  "2": "ServiceLandingPage.tsx",
+  "5": "dependencies",
+  "13": "BusinessCardPage.tsx",
+  "15": "package.json",
+  "16": "class-variance-authority",
+  "31": "react",
+  "35": "BuildReveal.tsx",
+  "37": "AboutPage.tsx",
+  "48": "utils.ts",
+  "56": "useCookieConsent",
+  "57": "eslint.config.js",
+  "64": "fetch-posts.cjs",
+  "77": "ensure-build-data.cjs",
+  "92": "12b — дополнение к промту 12: телефон и полный набор данных на визитке",
+  "95": "@radix-ui/react-accordion",
+  "114": "@radix-ui/react-alert-dialog",
+  "115": "@radix-ui/react-hover-card",
+  "116": "react-resizable-panels"
+}
