@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { PageMeta } from '@/components/pl/PageMeta';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { getEmail } from '@/constants/contacts';
 import {
   Shield, Building2, Database, Target, Scale, Server,
@@ -353,26 +354,23 @@ export function PrivacyPage() {
   const lang = (['de', 'en', 'ru'].includes(i18n.language) ? i18n.language : 'ru') as 'de' | 'en' | 'ru';
   const OPERATOR_EMAIL = getEmail(lang);
   const text = buildPolicy(OPERATOR_EMAIL)[lang];
+  const root = useRef<HTMLDivElement>(null);
+  useBuildReveal(root);
 
   return (
     <>
       <PageMeta lang={lang} path="/privacy" title={text.seoTitle} description={text.seoDesc} />
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-background pt-28 pb-24"
-      >
+      <div ref={root} className="bg-background pt-28 pb-24" data-build-flat="">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h1 className="mb-4 text-center text-4xl font-bold md:text-5xl">{text.title}</h1>
-          <p className="mx-auto mb-12 max-w-2xl text-center leading-relaxed text-muted-foreground">{text.intro}</p>
+          <h1 className="mb-4 text-center text-4xl font-bold md:text-5xl" data-build="">{text.title}</h1>
+          <p className="mx-auto mb-12 max-w-2xl text-center leading-relaxed text-muted-foreground" data-build="">{text.intro}</p>
 
-          <div className="space-y-6 rounded-3xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm md:p-10">
+          <div className="space-y-6 rounded-3xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm md:p-10" data-pl-build="slide-columns">
             {text.sections.map((section, index) => {
               const Icon = sectionIcons[index % sectionIcons.length];
               return (
-                <section key={section.heading} className="flex items-start gap-4">
+                <section key={section.heading} className="flex items-start gap-4" data-build="">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
@@ -393,7 +391,7 @@ export function PrivacyPage() {
               );
             })}
 
-            <div className="mt-4 border-t border-border/50 pt-6">
+            <div className="mt-4 border-t border-border/50 pt-6" data-build="">
               <p className="text-sm text-muted-foreground">
                 {text.contactLabel}:{' '}
                 <a href={`mailto:${OPERATOR_EMAIL}`} className="text-primary underline underline-offset-2">{OPERATOR_EMAIL}</a>
@@ -401,11 +399,11 @@ export function PrivacyPage() {
             </div>
           </div>
 
-          <p className="mt-8 text-center text-sm text-muted-foreground">
+          <p className="mt-8 text-center text-sm text-muted-foreground" data-build="">
             {text.updatedLabel}: {text.updated}
           </p>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }

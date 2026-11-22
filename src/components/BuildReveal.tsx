@@ -17,6 +17,7 @@ import { useEffect, useLayoutEffect, type RefObject } from 'react';
  * (заголовок h1/h2 · одиночный блок · группа ≥3 соседей одного родителя = сетка карточек). Заголовки → typewriter,
  * одиночные и группы — по своей ротации со сдвигом от хэша пути (без языкового префикса, т.е. одинаково для ru/en/de);
  * соседние юниты никогда не получают один паттерн. Переопределение: `data-pl-build="<паттерн>"` на блоке или на секции.
+ * `data-build-flat` на корне — не делить на юниты по <section> (PrivacyPage: секции политики — это блоки-маркеры).
  *
  * МУЛЬТИ-КУРСОРЫ: пул «агентов» (цвет + подпись роли). На пачку блоков — по задаче на видимый блок (её тип зависит
  * от паттерна: обводит, печатает, тянет линию, двигает карточку, толкает колонку, кладёт плитки) + вспомогательные
@@ -48,14 +49,19 @@ let booted = false; // первый монтаж = загрузка страни
 
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
-export function useBuildReveal(root: RefObject<HTMLElement | null>) {
+/**
+ * `firstScreen: true` — собирать и первый экран при первой загрузке. Только для страниц, которые НЕ пререндерятся
+ * (рендер createRoot, а не гидрация: эффект успевает до первой отрисовки, мигания нет) — NotFoundPage.
+ */
+export function useBuildReveal(root: RefObject<HTMLElement | null>, opts?: { firstScreen?: boolean }) {
+  const firstScreen = !!opts?.firstScreen;
   useIsoLayoutEffect(() => {
     const nav = booted;
     booted = true;
     const el = root.current;
     if (!el || !canAnimate()) return;
-    return startBuild(el, nav);
-  }, [root]);
+    return startBuild(el, nav || firstScreen);
+  }, [root, firstScreen]);
 }
 
 function canAnimate(): boolean {
@@ -84,7 +90,8 @@ function skip(el: Element): boolean {
 }
 
 function collectBlocks(root: HTMLElement): HTMLElement[] {
-  const sections = topmost(Array.from(root.querySelectorAll<HTMLElement>('section')));
+  // data-build-flat на корне: <section> внутри — смысловые части текста (политика), а не юниты; блоки = data-build-маркеры корня
+  const sections = root.hasAttribute('data-build-flat') ? [] : topmost(Array.from(root.querySelectorAll<HTMLElement>('section')));
   const out: HTMLElement[] = [];
   for (const unit of sections.length ? sections : [root]) {
     const marked = topmost(Array.from(unit.querySelectorAll<HTMLElement>('[data-reveal],[data-build]')));
@@ -225,7 +232,9 @@ function assignPatterns(root: HTMLElement, blocks: HTMLElement[], rects: DOMRect
     const ys = [...new Set(u.bs.map((b) => Math.round(rectOf(b).top / 8)))].sort((a, c) => a - c);
     u.bs.forEach((b, gi) => {
       const r = rectOf(b);
-      const own = (xs.indexOf(Math.round(r.left / 8)) + ys.indexOf(Math.round(r.top / 8))) % 2 ? mate : pat;
+      // свой data-pl-build у блока сильнее паттерна группы (визитка: карточка и блок QR рядом с подписью)
+      const own = (b.hasAttribute('data-pl-build') ? override(b) : null)
+        ?? ((xs.indexOf(Math.round(r.left / 8)) + ys.indexOf(Math.round(r.top / 8))) % 2 ? mate : pat);
       out.set(b, { p: own, unit: ui, gi, group: u.kind === 'group' ? ui : -1 });
       prev = own;
     });

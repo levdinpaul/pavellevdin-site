@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { PageMeta } from '@/components/pl/PageMeta';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { useBuildReveal } from '@/components/BuildReveal';
 import { 
   User, 
   MapPin, 
@@ -20,19 +21,16 @@ export function ImprintPage() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'de' | 'en' | 'ru';
   const contacts = getContacts(lang);
+  const root = useRef<HTMLDivElement>(null);
+  useBuildReveal(root);
 
   return (
     <>
       <PageMeta lang={lang} path="/imprint" title={t('imprint.seo.title')} description={t('imprint.seo.description')} />
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="py-24 md:py-32"
-      >
+      <div ref={root} className="py-24 md:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-muted-foreground mb-4">
+          <p className="text-center text-sm text-muted-foreground mb-4" data-build="">
             {t('imprint.legalNotice')}
           </p>
           
@@ -40,9 +38,9 @@ export function ImprintPage() {
             {t('imprint.title')}
           </h1>
           
-          <div className="bg-card/80 backdrop-blur-sm p-8 md:p-10 rounded-3xl shadow-lg border border-border/50 space-y-8">
+          <div className="bg-card/80 backdrop-blur-sm p-8 md:p-10 rounded-3xl shadow-lg border border-border/50 space-y-8" data-pl-build="unfold-up">
             {/* Owner */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4" data-build="">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <User className="w-5 h-5 text-primary" />
               </div>
@@ -55,7 +53,7 @@ export function ImprintPage() {
             </div>
 
             {/* Address */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4" data-build="">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <MapPin className="w-5 h-5 text-primary" />
               </div>
@@ -70,7 +68,7 @@ export function ImprintPage() {
             </div>
 
             {/* Email */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4" data-build="">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <Mail className="w-5 h-5 text-primary" />
               </div>
@@ -88,7 +86,7 @@ export function ImprintPage() {
             </div>
 
             {/* VAT ID */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4" data-build="">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <FileText className="w-5 h-5 text-primary" />
               </div>
@@ -101,7 +99,7 @@ export function ImprintPage() {
             </div>
 
             {/* Responsible Person */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4" data-build="">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <Shield className="w-5 h-5 text-primary" />
               </div>
@@ -116,7 +114,7 @@ export function ImprintPage() {
             {/* Legal Sections - только для немецкого */}
             {lang === 'de' && (
               <>
-                <div className="mt-8 pt-6 border-t border-border/50">
+                <div className="mt-8 pt-6 border-t border-border/50" data-build="">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                       <Scale className="w-5 h-5 text-primary" />
@@ -132,7 +130,7 @@ export function ImprintPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-border/50">
+                <div className="mt-8 pt-6 border-t border-border/50" data-build="">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                       <Copyright className="w-5 h-5 text-primary" />
@@ -148,7 +146,7 @@ export function ImprintPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-border/50">
+                <div className="mt-8 pt-6 border-t border-border/50" data-build="">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                       <Gavel className="w-5 h-5 text-primary" />
@@ -167,14 +165,14 @@ export function ImprintPage() {
             )}
           </div>
 
-          <p className="text-center text-sm text-muted-foreground mt-8">
+          <p className="text-center text-sm text-muted-foreground mt-8" data-build="">
             {t('imprint.lastUpdated')}: {LAST_UPDATED.toLocaleDateString(
               lang === 'de' ? 'de-DE' : lang === 'ru' ? 'ru-RU' : 'en-US', 
               { year: 'numeric', month: 'long', day: 'numeric' }
             )}
           </p>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }

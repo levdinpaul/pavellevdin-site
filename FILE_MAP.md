@@ -8,7 +8,7 @@
 - Конфигуратор -> нет в проекте; калькулятор цены -> `src/pages/CalculatorPage.tsx`, `src/lib/calculator.ts`, `src/data/pricing.json`
 - Дизайн-токены/стили -> `tailwind.config.js`, `src/index.css`, `src/styles/`, сцена `src/sections/scena/scene.css`
 - Главная («PL Сцена») -> `src/sections/scena/` (HomeScena.tsx, HomeSections.tsx)
-- Scroll-build анимация «сборки» (каркас → курсоры → блоки) для главной и страниц -> `src/components/BuildReveal.tsx` (хук `useBuildReveal`), стили `.pl-build-*` в `src/styles/pl-extra.css`; маркеры блоков `data-reveal`/`data-build`
+- Scroll-build анимация «сборки» (каркас → курсоры → блоки) для главной и страниц -> `src/components/BuildReveal.tsx` (хук `useBuildReveal`), стили `.pl-build-*` в `src/styles/pl-extra.css`; маркеры блоков `data-reveal`/`data-build`; паттерн блока/секции `data-pl-build`, корень без деления по section `data-build-flat` (Privacy), `useBuildReveal(ref, { firstScreen: true })` — только непререндеренные (404)
 - Секция «Проекты» на главной (эталон scroll-build) -> `src/sections/scena/WorkSection.tsx`
 - Боковая панель справа (desktop): «Для связи» + соцсети -> `src/components/pl/SocialRail.tsx`, стили `.pl-rail` в `src/styles/pl.css`
 - UI-компоненты -> `src/components/ui/` (shadcn), `src/components/pl/`, шапка/подвал `src/components/layout/`

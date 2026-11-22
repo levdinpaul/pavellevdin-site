@@ -9,6 +9,7 @@ import { GlobeIcon, MailIcon, PhoneIcon, PinIcon, TelegramIcon, VkIcon, WhatsApp
 import { PHONE, getContacts, getSameAs, getSocialLinks, type SocialNetwork } from '@/constants/contacts';
 import { useQrMatrix } from '@/lib/qr';
 import { buildVcard, downloadBlob, fetchBase64 } from '@/lib/vcard';
+import { useBuildReveal } from '@/components/BuildReveal';
 
 const SOCIAL_ICONS: Partial<Record<SocialNetwork, ReactNode>> = {
   telegram: <TelegramIcon size={20} />,
@@ -38,6 +39,10 @@ export function BusinessCardPage() {
     .map((s) => (s.labelKey ? { ...s, label: t(s.labelKey) } : s));
   const qr = useQrMatrix(pageUrl);
   const cardRef = useRef<HTMLElement>(null);
+  // Появление (prompt-9844): слой каркаса/курсоров хук кладёт в document.body, а не в cardRef; PNG рисуется
+  // из данных (renderCardImage), .vcf — из строк, QR — из матрицы. Артефакты сборки в экспорт не попадают.
+  const buildRoot = useRef<HTMLDivElement>(null);
+  useBuildReveal(buildRoot);
   const canShare = useSyncExternalStore(noopSubscribe, () => typeof navigator.share === 'function', () => false);
   const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState<'' | 'vcf' | 'image'>('');
@@ -137,11 +142,11 @@ export function BusinessCardPage() {
     <>
       <PageMeta lang={lang} path="/business-card" title={c('title')} description={c('desc')} image="/og/about.jpg" jsonLd={jsonLd} noindex />
 
-      <div className="pl-page pl-vcard-page">
+      <div ref={buildRoot} className="pl-page pl-vcard-page">
         <section className="pl-container pl-vcard">
-          <p className="pl-eyebrow pl-vcard__eyebrow">{c('eyebrow')}</p>
+          <p className="pl-eyebrow pl-vcard__eyebrow" data-build="">{c('eyebrow')}</p>
 
-          <article ref={cardRef} className="pl-vcard__card" aria-labelledby="vc-name">
+          <article ref={cardRef} className="pl-vcard__card" aria-labelledby="vc-name" data-build="" data-pl-build="outline-draw">
             <div className="pl-vcard__top">
               <picture className="pl-vcard__photo">
                 <source type="image/avif" srcSet="/about/photo-480.avif" />
@@ -185,7 +190,7 @@ export function BusinessCardPage() {
             </ul>
           </article>
 
-          <aside className="pl-vcard__side">
+          <aside className="pl-vcard__side" data-build="" data-pl-build="typewriter">
             <figure className="pl-vcard__qr">
               <div className="pl-vcard__qr-box">{qr && <QrCode matrix={qr} label={c('qrAlt')} />}</div>
               <figcaption>{c('qrHint')}</figcaption>
