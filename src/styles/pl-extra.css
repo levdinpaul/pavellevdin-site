@@ -449,7 +449,7 @@
 }
 
 /* ── Scroll-build (prompt-9842): слой каркаса/курсоров, его создаёт src/components/BuildReveal.tsx и удаляет после сборки ── */
-.pl-build-layer { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: visible; z-index: 40; pointer-events: none; }
+.pl-build-layer { position: absolute; left: 0; top: 0; width: 100%; height: 0; overflow: hidden; overflow: clip; z-index: 40; pointer-events: none; } /* высоту = высоте документа ставит JS: курсоры у края не дают горизонтального скролла */
 .pl-build-wire, .pl-build-frame, .pl-build-cursor, .pl-build-caret, .pl-build-edge, .pl-build-sel, .pl-build-ghost, .pl-build-tiles, .pl-build-layer > .pl-build-handle { position: absolute; pointer-events: none; }
 .pl-build-wire { box-sizing: border-box; border: 1px dashed var(--line-acc); background: rgba(122,162,255,.035); overflow: visible; }
 .pl-build-wire--text { border-color: rgba(122,162,255,.32); background: rgba(122,162,255,.05); }

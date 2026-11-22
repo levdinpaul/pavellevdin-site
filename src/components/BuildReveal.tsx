@@ -331,6 +331,7 @@ function startBuild(root: HTMLElement, nav: boolean): () => void {
 
   function playBatch(batch: HTMLElement[]) {
     const sx = window.scrollX, sy = window.scrollY, vw = window.innerWidth, vhNow = window.innerHeight;
+    const docH = document.documentElement.scrollHeight;
     const mobile = vw < 768;
     const maxCursors = weak ? 0 : mobile ? 3 : 5;
 
@@ -418,6 +419,7 @@ function startBuild(root: HTMLElement, nav: boolean): () => void {
 
     const layer = div('pl-build-layer', document.body);
     layer.setAttribute('aria-hidden', 'true');
+    layer.style.height = `${docH}px`;
     layers.push(layer);
     let end = 0;
     const X = (x: number) => x + sx;
