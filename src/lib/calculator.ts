@@ -117,7 +117,7 @@ export const CALC_URGENT = CFG.urgent;
 export const CALC_SPREAD = CFG.spread;
 
 export const calcLang = (lang: unknown): CalcLang => (lang === 'de' || lang === 'en' ? lang : 'ru');
-export const calcText = (label: CalcLabel, lang: unknown) => label[calcLang(lang)] || label.ru;
+export const calcText = (label: CalcLabel | undefined, lang: unknown) => label?.[calcLang(lang)] || label?.ru || '';
 export const getCalcProject = (id: string) => CALC_PROJECTS.find((p) => p.id === id);
 
 /** Вход калькулятора (то, что выбирает клиент). Цифр нет — только выбор. */

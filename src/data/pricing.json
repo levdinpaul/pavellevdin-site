@@ -4,110 +4,409 @@
     {
       "id": "landing",
       "group": "project",
-      "price": { "ru": 45000 },
+      "price": {
+        "ru": 45000
+      },
       "copy": {
-        "ru": { "title": "Лендинг", "duration": "1–2 недели", "points": ["Одна страница под рекламу или запуск", "Адаптив, скорость, базовое SEO", "Форма заявок → Telegram и почта", "Аналитика и цели"] },
-        "de": { "title": "Landingpage", "duration": "1–2 Wochen", "points": ["Eine Seite für Kampagne oder Launch", "Responsive, schnell, SEO-Basis", "Anfrageformular → Telegram und E-Mail", "Analytics und Conversions"] },
-        "en": { "title": "Landing page", "duration": "1–2 weeks", "points": ["One page for a campaign or launch", "Responsive, fast, SEO basics", "Lead form → Telegram and email", "Analytics and goals"] }
+        "ru": {
+          "title": "Лендинг",
+          "duration": "1–2 недели",
+          "points": [
+            "Одна страница под рекламу или запуск",
+            "Адаптив, скорость, базовое SEO",
+            "Форма заявок → Telegram и почта",
+            "Аналитика и цели"
+          ]
+        },
+        "de": {
+          "title": "Landingpage",
+          "duration": "1–2 Wochen",
+          "points": [
+            "Eine Seite für Kampagne oder Launch",
+            "Responsive, schnell, SEO-Basis",
+            "Anfrageformular → Telegram und E-Mail",
+            "Analytics und Conversions"
+          ]
+        },
+        "en": {
+          "title": "Landing page",
+          "duration": "1–2 weeks",
+          "points": [
+            "One page for a campaign or launch",
+            "Responsive, fast, SEO basics",
+            "Lead form → Telegram and email",
+            "Analytics and goals"
+          ]
+        }
       }
     },
     {
       "id": "small-site",
       "group": "project",
-      "price": { "ru": 80000 },
+      "price": {
+        "ru": 80000
+      },
       "copy": {
-        "ru": { "title": "Сайт 5–7 страниц", "duration": "2–3 недели", "points": ["Услуги, о компании, контакты, портфолио", "Мультиязычность по запросу", "Техническое SEO и schema.org", "Политика и согласие по 152-ФЗ"] },
-        "de": { "title": "Kleine Website", "duration": "2–3 Wochen", "points": ["5–7 Seiten: Leistungen, Über uns, Kontakt", "Mehrsprachig auf Wunsch", "Technisches SEO und schema.org", "Impressum und Datenschutz (DSGVO)"] },
-        "en": { "title": "Small website", "duration": "2–3 weeks", "points": ["5–7 pages: services, about, contact", "Multilingual on request", "Technical SEO and schema.org", "Legal pages included"] }
+        "ru": {
+          "title": "Сайт 5–7 страниц",
+          "duration": "2–3 недели",
+          "points": [
+            "Услуги, о компании, контакты, портфолио",
+            "Мультиязычность по запросу",
+            "Техническое SEO и schema.org",
+            "Политика и согласие по 152-ФЗ"
+          ]
+        },
+        "de": {
+          "title": "Kleine Website",
+          "duration": "2–3 Wochen",
+          "points": [
+            "5–7 Seiten: Leistungen, Über uns, Kontakt",
+            "Mehrsprachig auf Wunsch",
+            "Technisches SEO und schema.org",
+            "Impressum und Datenschutz (DSGVO)"
+          ]
+        },
+        "en": {
+          "title": "Small website",
+          "duration": "2–3 weeks",
+          "points": [
+            "5–7 pages: services, about, contact",
+            "Multilingual on request",
+            "Technical SEO and schema.org",
+            "Legal pages included"
+          ]
+        }
       }
     },
     {
       "id": "business-site",
       "group": "project",
       "featured": true,
-      "price": { "ru": 120000 },
+      "price": {
+        "ru": 120000
+      },
       "copy": {
-        "ru": { "title": "Корпоративный сайт на Next.js + CMS", "duration": "4–6 недель", "points": ["Next.js + headless CMS: тексты меняете сами", "Блог, кейсы, мультиязычность", "SEO, AI-поиск, Яндекс Бизнес и Google Business", "Формы, CRM, аналитика"] },
-        "de": { "title": "Unternehmenswebsite mit Next.js + CMS", "duration": "4–6 Wochen", "points": ["Next.js + Headless CMS: Inhalte selbst pflegen", "Blog, Referenzen, Mehrsprachigkeit", "SEO, AI Search, Google Business Profile", "Formulare, CRM, Analytics"] },
-        "en": { "title": "Business website with Next.js + CMS", "duration": "4–6 weeks", "points": ["Next.js + headless CMS: edit content yourself", "Blog, case studies, multilingual", "SEO, AI search, Google Business Profile", "Forms, CRM, analytics"] }
+        "ru": {
+          "title": "Корпоративный сайт на Next.js + CMS",
+          "duration": "4–6 недель",
+          "points": [
+            "Next.js + headless CMS: тексты меняете сами",
+            "Блог, кейсы, мультиязычность",
+            "SEO, AI-поиск, Яндекс Бизнес и Google Business",
+            "Формы, CRM, аналитика"
+          ]
+        },
+        "de": {
+          "title": "Unternehmenswebsite mit Next.js + CMS",
+          "duration": "4–6 Wochen",
+          "points": [
+            "Next.js + Headless CMS: Inhalte selbst pflegen",
+            "Blog, Referenzen, Mehrsprachigkeit",
+            "SEO, AI Search, Google Business Profile",
+            "Formulare, CRM, Analytics"
+          ]
+        },
+        "en": {
+          "title": "Business website with Next.js + CMS",
+          "duration": "4–6 weeks",
+          "points": [
+            "Next.js + headless CMS: edit content yourself",
+            "Blog, case studies, multilingual",
+            "SEO, AI search, Google Business Profile",
+            "Forms, CRM, analytics"
+          ]
+        }
       }
     },
     {
       "id": "shop",
       "group": "project",
-      "price": { "ru": 100000 },
+      "price": {
+        "ru": 100000
+      },
       "copy": {
-        "ru": { "title": "Интернет-магазин", "duration": "от 6 недель", "points": ["Каталог, корзина, оплата, доставка", "Импорт товаров и остатков", "SEO-структура категорий", "Уведомления о заказах"] },
-        "de": { "title": "Online-Shop", "duration": "ab 6 Wochen", "points": ["Katalog, Warenkorb, Zahlung, Versand", "Import von Produkten und Beständen", "SEO-Struktur der Kategorien", "Bestellbenachrichtigungen"] },
-        "en": { "title": "Online shop", "duration": "from 6 weeks", "points": ["Catalogue, cart, payment, shipping", "Product and stock import", "SEO category structure", "Order notifications"] }
+        "ru": {
+          "title": "Интернет-магазин",
+          "duration": "от 6 недель",
+          "points": [
+            "Каталог, корзина, оплата, доставка",
+            "Импорт товаров и остатков",
+            "SEO-структура категорий",
+            "Уведомления о заказах"
+          ]
+        },
+        "de": {
+          "title": "Online-Shop",
+          "duration": "ab 6 Wochen",
+          "points": [
+            "Katalog, Warenkorb, Zahlung, Versand",
+            "Import von Produkten und Beständen",
+            "SEO-Struktur der Kategorien",
+            "Bestellbenachrichtigungen"
+          ]
+        },
+        "en": {
+          "title": "Online shop",
+          "duration": "from 6 weeks",
+          "points": [
+            "Catalogue, cart, payment, shipping",
+            "Product and stock import",
+            "SEO category structure",
+            "Order notifications"
+          ]
+        }
       }
     },
     {
       "id": "web-app",
       "group": "project",
-      "price": { "ru": 180000 },
+      "price": {
+        "ru": 180000
+      },
       "copy": {
-        "ru": { "title": "Веб-приложение, личный кабинет", "duration": "индивидуально", "points": ["Кабинет клиента, роли, авторизация", "PostgreSQL, API, интеграции", "Админка и отчёты", "Деплой на свой сервер"] },
-        "de": { "title": "Web-App, Kundenportal", "duration": "individuell", "points": ["Kundenportal, Rollen, Login", "PostgreSQL, API, Integrationen", "Admin-Bereich und Reports", "Deployment auf eigenem Server"] },
-        "en": { "title": "Web app, client portal", "duration": "individual", "points": ["Client portal, roles, login", "PostgreSQL, API, integrations", "Admin area and reports", "Deployment to your own server"] }
+        "ru": {
+          "title": "Веб-приложение, личный кабинет",
+          "duration": "индивидуально",
+          "points": [
+            "Кабинет клиента, роли, авторизация",
+            "PostgreSQL, API, интеграции",
+            "Админка и отчёты",
+            "Деплой на свой сервер"
+          ]
+        },
+        "de": {
+          "title": "Web-App, Kundenportal",
+          "duration": "individuell",
+          "points": [
+            "Kundenportal, Rollen, Login",
+            "PostgreSQL, API, Integrationen",
+            "Admin-Bereich und Reports",
+            "Deployment auf eigenem Server"
+          ]
+        },
+        "en": {
+          "title": "Web app, client portal",
+          "duration": "individual",
+          "points": [
+            "Client portal, roles, login",
+            "PostgreSQL, API, integrations",
+            "Admin area and reports",
+            "Deployment to your own server"
+          ]
+        }
       }
     },
     {
       "id": "integrations",
       "group": "project",
-      "price": { "ru": 25000 },
+      "price": {
+        "ru": 25000
+      },
       "copy": {
-        "ru": { "title": "Интеграции: CRM, Telegram-бот, API", "duration": "от 3 дней", "points": ["Заявки с сайта → CRM и мессенджеры", "Telegram-бот для уведомлений", "Связка сервисов через API"] },
-        "de": { "title": "Integrationen: CRM, Telegram-Bot, API", "duration": "ab 3 Tagen", "points": ["Website-Anfragen → CRM und Messenger", "Telegram-Bot für Benachrichtigungen", "Dienste per API verbinden"] },
-        "en": { "title": "Integrations: CRM, Telegram bot, API", "duration": "from 3 days", "points": ["Website leads → CRM and messengers", "Telegram bot for notifications", "Connect services via API"] }
+        "ru": {
+          "title": "Интеграции: CRM, Telegram-бот, API",
+          "duration": "от 3 дней",
+          "points": [
+            "Заявки с сайта → CRM и мессенджеры",
+            "Telegram-бот для уведомлений",
+            "Связка сервисов через API"
+          ]
+        },
+        "de": {
+          "title": "Integrationen: CRM, Telegram-Bot, API",
+          "duration": "ab 3 Tagen",
+          "points": [
+            "Website-Anfragen → CRM und Messenger",
+            "Telegram-Bot für Benachrichtigungen",
+            "Dienste per API verbinden"
+          ]
+        },
+        "en": {
+          "title": "Integrations: CRM, Telegram bot, API",
+          "duration": "from 3 days",
+          "points": [
+            "Website leads → CRM and messengers",
+            "Telegram bot for notifications",
+            "Connect services via API"
+          ]
+        }
       }
     },
     {
       "id": "ai",
       "group": "project",
-      "price": { "ru": 50000 },
+      "price": {
+        "ru": 50000
+      },
       "copy": {
-        "ru": { "title": "AI-автоматизация, MCP", "duration": "от 1 недели", "points": ["AI-пайплайны: тексты, документы, отчёты", "Собственный MCP-сервер для данных бизнеса", "Контроль расходов на модели"] },
-        "de": { "title": "KI-Automatisierung, MCP", "duration": "ab 1 Woche", "points": ["KI-Pipelines: Texte, Dokumente, Reports", "Eigener MCP-Server für Unternehmensdaten", "Kostenkontrolle für KI-Modelle"] },
-        "en": { "title": "AI automation, MCP", "duration": "from 1 week", "points": ["AI pipelines: texts, documents, reports", "Your own MCP server for business data", "Model cost control"] }
+        "ru": {
+          "title": "AI-автоматизация, MCP",
+          "duration": "от 1 недели",
+          "points": [
+            "AI-пайплайны: тексты, документы, отчёты",
+            "Собственный MCP-сервер для данных бизнеса",
+            "Контроль расходов на модели"
+          ]
+        },
+        "de": {
+          "title": "KI-Automatisierung, MCP",
+          "duration": "ab 1 Woche",
+          "points": [
+            "KI-Pipelines: Texte, Dokumente, Reports",
+            "Eigener MCP-Server für Unternehmensdaten",
+            "Kostenkontrolle für KI-Modelle"
+          ]
+        },
+        "en": {
+          "title": "AI automation, MCP",
+          "duration": "from 1 week",
+          "points": [
+            "AI pipelines: texts, documents, reports",
+            "Your own MCP server for business data",
+            "Model cost control"
+          ]
+        }
       }
     },
     {
       "id": "seo-care",
       "group": "ongoing",
       "period": "month",
-      "price": { "ru": 25000 },
+      "price": {
+        "ru": 25000
+      },
       "copy": {
-        "ru": { "title": "SEO-сопровождение", "points": ["Контент, технический аудит, отчёт раз в месяц"] },
-        "de": { "title": "SEO-Betreuung", "points": ["Inhalte, technisches Audit, monatlicher Report"] },
-        "en": { "title": "SEO care", "points": ["Content, technical audit, monthly report"] }
+        "ru": {
+          "title": "SEO-сопровождение",
+          "points": [
+            "Контент, технический аудит, отчёт раз в месяц"
+          ]
+        },
+        "de": {
+          "title": "SEO-Betreuung",
+          "points": [
+            "Inhalte, technisches Audit, monatlicher Report"
+          ]
+        },
+        "en": {
+          "title": "SEO care",
+          "points": [
+            "Content, technical audit, monthly report"
+          ]
+        }
       }
     },
     {
       "id": "care",
       "group": "ongoing",
       "period": "month",
-      "price": { "ru": 10000 },
+      "price": {
+        "ru": 10000
+      },
       "copy": {
-        "ru": { "title": "Поддержка и хостинг", "points": ["Обновления, бэкапы, мониторинг, SSL"] },
-        "de": { "title": "Wartung & Hosting", "points": ["Updates, Backups, Monitoring, SSL"] },
-        "en": { "title": "Maintenance & hosting", "points": ["Updates, backups, monitoring, SSL"] }
+        "ru": {
+          "title": "Поддержка и хостинг",
+          "points": [
+            "Обновления, бэкапы, мониторинг, SSL"
+          ]
+        },
+        "de": {
+          "title": "Wartung & Hosting",
+          "points": [
+            "Updates, Backups, Monitoring, SSL"
+          ]
+        },
+        "en": {
+          "title": "Maintenance & hosting",
+          "points": [
+            "Updates, backups, monitoring, SSL"
+          ]
+        }
       }
     },
     {
       "id": "hour",
       "group": "ongoing",
       "period": "hour",
-      "price": { "ru": 2000 },
+      "price": {
+        "ru": 2000
+      },
       "copy": {
-        "ru": { "title": "Час работы", "points": ["Доработки и задачи вне пакетов"] },
-        "de": { "title": "Stundensatz", "points": ["Anpassungen und Aufgaben außerhalb der Pakete"] },
-        "en": { "title": "Hourly rate", "points": ["Changes and tasks outside the packages"] }
+        "ru": {
+          "title": "Час работы",
+          "points": [
+            "Доработки и задачи вне пакетов"
+          ]
+        },
+        "de": {
+          "title": "Stundensatz",
+          "points": [
+            "Anpassungen und Aufgaben außerhalb der Pakete"
+          ]
+        },
+        "en": {
+          "title": "Hourly rate",
+          "points": [
+            "Changes and tasks outside the packages"
+          ]
+        }
       }
     },
-    {"id": "pwa", "price": {"ru": 90000}, "copy": {"ru": {"title": "PWA-приложение", "duration": "3–6 недель"}, "de": {"title": "Progressive Web App (PWA)"}, "en": {"title": "Progressive Web App (PWA)"}}},
-    {"id": "mobile-app", "price": {"ru": 250000}, "copy": {"ru": {"title": "Мобильное приложение (React Native)", "duration": "8–16 недель"}, "de": {"title": "Mobile App (React Native)"}, "en": {"title": "Mobile App (React Native)"}}},
-    {"id": "marketplace", "price": {"ru": 200000}, "copy": {"ru": {"title": "Маркетплейс / каталог с кабинетом", "duration": "10–20 недель"}, "de": {"title": "Marktplatz / Katalog mit Kundenportal"}, "en": {"title": "Marketplace / catalog with portal"}}}
+    {
+      "id": "pwa",
+      "price": {
+        "ru": 90000
+      },
+      "copy": {
+        "ru": {
+          "title": "PWA-приложение",
+          "duration": "3–6 недель"
+        },
+        "de": {
+          "title": "Progressive Web App (PWA)"
+        },
+        "en": {
+          "title": "Progressive Web App (PWA)"
+        }
+      }
+    },
+    {
+      "id": "mobile-app",
+      "price": {
+        "ru": 250000
+      },
+      "copy": {
+        "ru": {
+          "title": "Мобильное приложение (React Native)",
+          "duration": "8–16 недель"
+        },
+        "de": {
+          "title": "Mobile App (React Native)"
+        },
+        "en": {
+          "title": "Mobile App (React Native)"
+        }
+      }
+    },
+    {
+      "id": "marketplace",
+      "price": {
+        "ru": 200000
+      },
+      "copy": {
+        "ru": {
+          "title": "Маркетплейс / каталог с кабинетом",
+          "duration": "10–20 недель"
+        },
+        "de": {
+          "title": "Marktplatz / Katalog mit Kundenportal"
+        },
+        "en": {
+          "title": "Marketplace / catalog with portal"
+        }
+      }
+    }
   ],
   "calculator": {
     "_comment": "Калькулятор /{lang}/calculator. База по типу проекта = цена пакета выше (packages[].price.ru), опции crm/ai — тоже из пакетов (integrations/ai). «от» = цена позиции, «до» = цена × spread; всё округляется до roundTo ₽. Срочность — надбавка urgent.factor к сумме и сжатие срока urgent.weeksFactor. Сроки — недели. Расчёт: src/lib/calculator.ts (копия — pl-platform web/src/lib/calculator.ts + этот же файл в web/src/data/pricing.json, держать в синхроне).",
@@ -115,68 +414,355 @@
     "roundTo": 1000,
     "extraPagesPerWeek": 8,
     "projects": [
-      { "id": "landing", "package": "landing", "pagesIncluded": 1, "pagesMax": 1, "extraPage": 0, "weeks": [1, 2], "includes": [] },
-      { "id": "small-site", "package": "small-site", "pagesIncluded": 7, "pagesMax": 20, "extraPage": 4000, "weeks": [2, 3], "includes": [] },
-      { "id": "business-site", "package": "business-site", "pagesIncluded": 10, "pagesMax": 40, "extraPage": 4000, "weeks": [4, 6], "includes": ["cms", "blog"] },
-      { "id": "shop", "package": "shop", "pagesIncluded": 10, "pagesMax": 40, "extraPage": 5000, "weeks": [6, 8], "includes": ["cms"] },
-      { "id": "web-app", "package": "web-app", "pagesIncluded": 5, "pagesMax": 30, "extraPage": 10000, "weeks": [6, 10], "includes": [] },
-      {"id": "pwa", "package": "pwa", "pagesIncluded": 5, "pagesMax": 20, "extraPage": 6000, "weeks": [3, 6], "includes": ["cms"]},
-      {"id": "mobile-app", "package": "mobile-app", "pagesIncluded": 5, "pagesMax": 25, "extraPage": 15000, "weeks": [8, 16], "includes": []},
-      {"id": "marketplace", "package": "marketplace", "pagesIncluded": 15, "pagesMax": 60, "extraPage": 6000, "weeks": [10, 20], "includes": ["cms", "blog"]}
+      {
+        "id": "landing",
+        "package": "landing",
+        "pagesIncluded": 1,
+        "pagesMax": 1,
+        "extraPage": 0,
+        "weeks": [
+          1,
+          2
+        ],
+        "includes": []
+      },
+      {
+        "id": "small-site",
+        "package": "small-site",
+        "pagesIncluded": 7,
+        "pagesMax": 20,
+        "extraPage": 4000,
+        "weeks": [
+          2,
+          3
+        ],
+        "includes": []
+      },
+      {
+        "id": "business-site",
+        "package": "business-site",
+        "pagesIncluded": 10,
+        "pagesMax": 40,
+        "extraPage": 4000,
+        "weeks": [
+          4,
+          6
+        ],
+        "includes": [
+          "cms",
+          "blog"
+        ]
+      },
+      {
+        "id": "shop",
+        "package": "shop",
+        "pagesIncluded": 10,
+        "pagesMax": 40,
+        "extraPage": 5000,
+        "weeks": [
+          6,
+          8
+        ],
+        "includes": [
+          "cms"
+        ]
+      },
+      {
+        "id": "web-app",
+        "package": "web-app",
+        "pagesIncluded": 5,
+        "pagesMax": 30,
+        "extraPage": 10000,
+        "weeks": [
+          6,
+          10
+        ],
+        "includes": []
+      },
+      {
+        "id": "pwa",
+        "package": "pwa",
+        "pagesIncluded": 5,
+        "pagesMax": 20,
+        "extraPage": 6000,
+        "weeks": [
+          3,
+          6
+        ],
+        "includes": [
+          "cms"
+        ]
+      },
+      {
+        "id": "mobile-app",
+        "package": "mobile-app",
+        "pagesIncluded": 5,
+        "pagesMax": 25,
+        "extraPage": 15000,
+        "weeks": [
+          8,
+          16
+        ],
+        "includes": []
+      },
+      {
+        "id": "marketplace",
+        "package": "marketplace",
+        "pagesIncluded": 15,
+        "pagesMax": 60,
+        "extraPage": 6000,
+        "weeks": [
+          10,
+          20
+        ],
+        "includes": [
+          "cms",
+          "blog"
+        ]
+      }
     ],
     "options": [
       {
-        "id": "languages", "unit": "language", "price": 15000, "max": 4, "weeks": 0.5,
-        "label": { "ru": "Дополнительный язык", "de": "Zusätzliche Sprache", "en": "Additional language" },
-        "hint": { "ru": "Мультиязычность: переключатель, hreflang, SEO по каждому языку. Перевод текстов — ваш или отдельно.", "de": "Mehrsprachigkeit: Umschalter, hreflang, SEO je Sprache. Übersetzung — Ihre oder separat.", "en": "Multilingual: switcher, hreflang, SEO per language. Translation is yours or quoted separately." }
+        "id": "languages",
+        "unit": "language",
+        "price": 15000,
+        "max": 4,
+        "weeks": 0.5,
+        "label": {
+          "ru": "Дополнительный язык",
+          "de": "Zusätzliche Sprache",
+          "en": "Additional language"
+        },
+        "hint": {
+          "ru": "Мультиязычность: переключатель, hreflang, SEO по каждому языку. Перевод текстов — ваш или отдельно.",
+          "de": "Mehrsprachigkeit: Umschalter, hreflang, SEO je Sprache. Übersetzung — Ihre oder separat.",
+          "en": "Multilingual: switcher, hreflang, SEO per language. Translation is yours or quoted separately."
+        }
       },
       {
-        "id": "cms", "price": 25000, "weeks": 1,
-        "label": { "ru": "CMS — тексты меняете сами", "de": "CMS — Inhalte selbst pflegen", "en": "CMS — edit content yourself" },
-        "hint": { "ru": "Headless CMS (Strapi): страницы, услуги, кейсы, картинки.", "de": "Headless CMS (Strapi): Seiten, Leistungen, Referenzen, Bilder.", "en": "Headless CMS (Strapi): pages, services, case studies, images." }
+        "id": "cms",
+        "price": 25000,
+        "weeks": 1,
+        "label": {
+          "ru": "CMS — тексты меняете сами",
+          "de": "CMS — Inhalte selbst pflegen",
+          "en": "CMS — edit content yourself"
+        },
+        "hint": {
+          "ru": "Headless CMS (Strapi): страницы, услуги, кейсы, картинки.",
+          "de": "Headless CMS (Strapi): Seiten, Leistungen, Referenzen, Bilder.",
+          "en": "Headless CMS (Strapi): pages, services, case studies, images."
+        }
       },
       {
-        "id": "blog", "price": 15000, "weeks": 0.5,
-        "label": { "ru": "Блог / новости", "de": "Blog / News", "en": "Blog / news" },
-        "hint": { "ru": "Список и страница статьи, рубрики, разметка Article для поиска.", "de": "Übersicht und Artikelseite, Kategorien, Article-Markup.", "en": "List and article page, categories, Article markup for search." }
+        "id": "blog",
+        "price": 15000,
+        "weeks": 0.5,
+        "label": {
+          "ru": "Блог / новости",
+          "de": "Blog / News",
+          "en": "Blog / news"
+        },
+        "hint": {
+          "ru": "Список и страница статьи, рубрики, разметка Article для поиска.",
+          "de": "Übersicht und Artikelseite, Kategorien, Article-Markup.",
+          "en": "List and article page, categories, Article markup for search."
+        }
       },
       {
-        "id": "crm", "package": "integrations", "price": 25000, "weeks": 1,
-        "label": { "ru": "Интеграция с CRM", "de": "CRM-Integration", "en": "CRM integration" },
-        "hint": { "ru": "Заявки с сайта → amoCRM, Bitrix24 или другая CRM по API.", "de": "Website-Anfragen → CRM per API (HubSpot, Pipedrive u. a.).", "en": "Website leads → your CRM via API (HubSpot, Pipedrive, etc.)." }
+        "id": "crm",
+        "package": "integrations",
+        "price": 25000,
+        "weeks": 1,
+        "label": {
+          "ru": "Интеграция с CRM",
+          "de": "CRM-Integration",
+          "en": "CRM integration"
+        },
+        "hint": {
+          "ru": "Заявки с сайта → amoCRM, Bitrix24 или другая CRM по API.",
+          "de": "Website-Anfragen → CRM per API (HubSpot, Pipedrive u. a.).",
+          "en": "Website leads → your CRM via API (HubSpot, Pipedrive, etc.)."
+        }
       },
       {
-        "id": "telegram", "price": 15000, "weeks": 0.5,
-        "label": { "ru": "Telegram-бот", "de": "Telegram-Bot", "en": "Telegram bot" },
-        "hint": { "ru": "Бот для заявок и уведомлений: статусы, ответы, команды.", "de": "Bot für Anfragen und Benachrichtigungen: Status, Antworten, Befehle.", "en": "Bot for leads and notifications: statuses, replies, commands." }
+        "id": "telegram",
+        "price": 15000,
+        "weeks": 0.5,
+        "label": {
+          "ru": "Telegram-бот",
+          "de": "Telegram-Bot",
+          "en": "Telegram bot"
+        },
+        "hint": {
+          "ru": "Бот для заявок и уведомлений: статусы, ответы, команды.",
+          "de": "Bot für Anfragen und Benachrichtigungen: Status, Antworten, Befehle.",
+          "en": "Bot for leads and notifications: statuses, replies, commands."
+        }
       },
       {
-        "id": "ai", "package": "ai", "price": 50000, "weeks": 1,
-        "label": { "ru": "AI-автоматизация", "de": "KI-Automatisierung", "en": "AI automation" },
-        "hint": { "ru": "AI-пайплайн под задачу: тексты, документы, ответы клиентам, отчёты.", "de": "KI-Pipeline für Ihre Aufgabe: Texte, Dokumente, Kundenantworten, Reports.", "en": "AI pipeline for your task: texts, documents, client replies, reports." }
+        "id": "ai",
+        "package": "ai",
+        "price": 50000,
+        "weeks": 1,
+        "label": {
+          "ru": "AI-автоматизация",
+          "de": "KI-Automatisierung",
+          "en": "AI automation"
+        },
+        "hint": {
+          "ru": "AI-пайплайн под задачу: тексты, документы, ответы клиентам, отчёты.",
+          "de": "KI-Pipeline für Ihre Aufgabe: Texte, Dokumente, Kundenantworten, Reports.",
+          "en": "AI pipeline for your task: texts, documents, client replies, reports."
+        }
       },
       {
-        "id": "seo", "price": 20000, "weeks": 0.5,
-        "label": { "ru": "SEO-старт", "de": "SEO-Start", "en": "SEO start" },
-        "hint": { "ru": "Семантика, структура, метатеги, Яндекс Вебмастер и Метрика, Search Console.", "de": "Keywords, Struktur, Meta-Tags, Search Console und Analytics.", "en": "Keywords, structure, meta tags, Search Console and analytics." }
+        "id": "seo",
+        "price": 20000,
+        "weeks": 0.5,
+        "label": {
+          "ru": "SEO-старт",
+          "de": "SEO-Start",
+          "en": "SEO start"
+        },
+        "hint": {
+          "ru": "Семантика, структура, метатеги, Яндекс Вебмастер и Метрика, Search Console.",
+          "de": "Keywords, Struktur, Meta-Tags, Search Console und Analytics.",
+          "en": "Keywords, structure, meta tags, Search Console and analytics."
+        }
       },
-      {"id": "auth", "unit": "flat", "price": 25000, "weeks": 1, "label": {"ru": "Личный кабинет / авторизация", "de": "Kundenportal / Login", "en": "User account / auth"}},
-      {"id": "analytics", "unit": "flat", "price": 8000, "weeks": 0.5, "label": {"ru": "Аналитика (GA4 + Yandex.Metrica)", "de": "Analytics (GA4)", "en": "Analytics (GA4)"}},
-      {"id": "ai-chat", "unit": "flat", "price": 20000, "weeks": 0.5, "label": {"ru": "AI-чат на сайте", "de": "KI-Chat auf der Website", "en": "AI chat widget"}},
-      {"id": "email-marketing", "unit": "flat", "price": 12000, "weeks": 0.5, "label": {"ru": "Email-рассылка (Brevo/Mailchimp)", "de": "E-Mail-Marketing (Brevo)", "en": "Email marketing (Brevo)"}},
-      {"id": "maps", "unit": "flat", "price": 8000, "weeks": 0.25, "label": {"ru": "Интеграция карт (Google Maps / Yandex)", "de": "Kartenintegration (Google Maps)", "en": "Map integration (Google Maps)"}},
-      {"id": "push", "unit": "flat", "price": 10000, "weeks": 0.5, "label": {"ru": "Push-уведомления", "de": "Push-Benachrichtigungen", "en": "Push notifications"}}
+      {
+        "id": "auth",
+        "unit": "flat",
+        "price": 25000,
+        "weeks": 1,
+        "label": {
+          "ru": "Личный кабинет / авторизация",
+          "de": "Kundenportal / Login",
+          "en": "User account / auth"
+        },
+        "hint": {
+          "ru": "JWT-авторизация, роли, личный кабинет клиента на PostgreSQL.",
+          "de": "JWT-Login, Rollen und Kundenportal mit PostgreSQL.",
+          "en": "JWT auth, roles, and client portal with PostgreSQL."
+        }
+      },
+      {
+        "id": "analytics",
+        "unit": "flat",
+        "price": 8000,
+        "weeks": 0.5,
+        "label": {
+          "ru": "Аналитика (GA4 + Yandex.Metrica)",
+          "de": "Analytics (GA4)",
+          "en": "Analytics (GA4)"
+        },
+        "hint": {
+          "ru": "Google Analytics 4 и Яндекс.Метрика: события, цели, конверсии.",
+          "de": "Google Analytics 4: Events, Ziele, Konversionen.",
+          "en": "Google Analytics 4: events, goals, conversions."
+        }
+      },
+      {
+        "id": "ai-chat",
+        "unit": "flat",
+        "price": 20000,
+        "weeks": 0.5,
+        "label": {
+          "ru": "AI-чат на сайте",
+          "de": "KI-Chat auf der Website",
+          "en": "AI chat widget"
+        },
+        "hint": {
+          "ru": "AI-чат-виджет для ответов на вопросы посетителей на базе модели LLM.",
+          "de": "KI-Chat-Widget für Besucheranfragen auf LLM-Basis.",
+          "en": "AI chat widget for visitor questions, powered by LLM."
+        }
+      },
+      {
+        "id": "email-marketing",
+        "unit": "flat",
+        "price": 12000,
+        "weeks": 0.5,
+        "label": {
+          "ru": "Email-рассылка (Brevo/Mailchimp)",
+          "de": "E-Mail-Marketing (Brevo)",
+          "en": "Email marketing (Brevo)"
+        },
+        "hint": {
+          "ru": "Интеграция с Brevo или Mailchimp: подписка, сегменты, авторассылки.",
+          "de": "Brevo- oder Mailchimp-Integration: Anmeldung, Segmente, Automationen.",
+          "en": "Brevo or Mailchimp integration: sign-up, segments, automations."
+        }
+      },
+      {
+        "id": "maps",
+        "unit": "flat",
+        "price": 8000,
+        "weeks": 0.25,
+        "label": {
+          "ru": "Интеграция карт (Google Maps / Yandex)",
+          "de": "Kartenintegration (Google Maps)",
+          "en": "Map integration (Google Maps)"
+        },
+        "hint": {
+          "ru": "Встроенная карта с маршрутом, метками и геолокацией пользователя.",
+          "de": "Eingebettete Karte mit Route, Markierungen und Nutzerstandort.",
+          "en": "Embedded map with route, markers, and user geolocation."
+        }
+      },
+      {
+        "id": "push",
+        "unit": "flat",
+        "price": 10000,
+        "weeks": 0.5,
+        "label": {
+          "ru": "Push-уведомления",
+          "de": "Push-Benachrichtigungen",
+          "en": "Push notifications"
+        },
+        "hint": {
+          "ru": "Web Push через Service Worker: уведомления о новинках и акциях.",
+          "de": "Web Push via Service Worker: Benachrichtigungen über Neuheiten und Angebote.",
+          "en": "Web push via Service Worker: notifications for news and offers."
+        }
+      }
     ],
     "urgent": {
-      "factor": 1.3, "weeksFactor": 0.7,
-      "label": { "ru": "Срочность (+30 %, срок ×0,7)", "de": "Express (+30 %, Zeit ×0,7)", "en": "Rush (+30 %, time ×0.7)" },
-      "hint": { "ru": "Работа в приоритете и в выходные — срок короче примерно на треть.", "de": "Priorisiert, auch am Wochenende — etwa ein Drittel schneller.", "en": "Prioritised, weekends included — roughly a third faster." }
+      "factor": 1.3,
+      "weeksFactor": 0.7,
+      "label": {
+        "ru": "Срочность (+30 %, срок ×0,7)",
+        "de": "Express (+30 %, Zeit ×0,7)",
+        "en": "Rush (+30 %, time ×0.7)"
+      },
+      "hint": {
+        "ru": "Работа в приоритете и в выходные — срок короче примерно на треть.",
+        "de": "Priorisiert, auch am Wochenende — etwa ein Drittel schneller.",
+        "en": "Prioritised, weekends included — roughly a third faster."
+      }
     },
     "labels": {
-      "extraPages": { "ru": "Дополнительные страницы", "de": "Zusätzliche Seiten", "en": "Additional pages" },
-      "extraScreens": { "ru": "Дополнительные экраны", "de": "Zusätzliche Screens", "en": "Additional screens" }
+      "extraPages": {
+        "ru": "Дополнительные страницы",
+        "de": "Zusätzliche Seiten",
+        "en": "Additional pages"
+      },
+      "extraScreens": {
+        "ru": "Дополнительные экраны",
+        "de": "Zusätzliche Screens",
+        "en": "Additional screens"
+      }
     }
   },
-  "budgets": { "_comment": "Границы бюджета в форме /contact, ₽: «до 100 000», «100 000–300 000», «от 300 000» + «пока не знаю». de/en — пересчёт в € (rubToEur).", "ru": [100000, 300000] },
-  "de_market": { "_todo": "Отдельный прайс для pavellevdin.de (рынок DE) — позже" }
+  "budgets": {
+    "_comment": "Границы бюджета в форме /contact, ₽: «до 100 000», «100 000–300 000», «от 300 000» + «пока не знаю». de/en — пересчёт в € (rubToEur).",
+    "ru": [
+      100000,
+      300000
+    ]
+  },
+  "de_market": {
+    "_todo": "Отдельный прайс для pavellevdin.de (рынок DE) — позже"
+  }
 }
