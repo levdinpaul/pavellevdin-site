@@ -87,3 +87,7 @@ Project-brief. Читается при работе в этом репозито
 build / lint зелёные; для UI — глазами через playwright-mcp; для форм/лидов (фаза 1) — согласие на
 обработку ПДн по 152-ФЗ; a11y + DSGVO — критичны для фазы 2 (DE). i18n — три локали синхронны.
 Не рапортовать «готово» без проверки.
+
+# graphify
+- **graphify** (`.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
+When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
