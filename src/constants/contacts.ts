@@ -17,7 +17,7 @@ export function getEmail(lang: string): string {
 }
 
 /** Номер в международном формате без «+» — единственное место, где он записан (wa.me и PHONE строятся из него). */
-const MOBILE = '4917643141306';
+const MOBILE = import.meta.env.VITE_MOBILE ?? '';
 
 /**
  * Телефон текстом — ТОЛЬКО для /business-card и файла контакта (.vcf) с неё.
